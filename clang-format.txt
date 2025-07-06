@@ -1,0 +1,9 @@
+﻿---
+BasedOnStyle: Chromium
+AlignAfterOpenBracket: Align
+AlignConsecutiveDeclarations: 'false'
+AlignEscapedNewlines: Left
+AllowAllConstructorInitializersOnNextLine: 'true'
+Language: Cpp
+
+...
