@@ -1,3 +1,6 @@
+/// GPLv3 LICENSE, Copyright (©) 2025, Maksim Shchavelev <maksimshchavelev@gmail.com>
+/// See LICENSE for details
+
 #include "version.hpp"
 #include <cxxopts.hpp>
 #include <format>
