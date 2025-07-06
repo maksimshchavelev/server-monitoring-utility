@@ -4,6 +4,13 @@ project(smu-server VERSION 0.1.0 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 23)
 
 
+configure_file(
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/version.hpp.in
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/version.hpp
+  @ONLY
+)
+
+
 include(FetchContent)
 
 message(STATUS "${PROJECT_NAME}: finding source files...")
@@ -12,8 +19,8 @@ message(STATUS "${PROJECT_NAME}: finding source files...")
 
 file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS
     ${CMAKE_CURRENT_LIST_DIR}/src/*.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/include/*.hpp
-    ${CMAKE_CURRENT_LIST_DIR}/include/*.tpp)
+    ${CMAKE_CURRENT_LIST_DIR}/include/*.hpp*
+    ${CMAKE_CURRENT_LIST_DIR}/include/*.tpp*)
 
 
 
@@ -47,6 +54,21 @@ add_subdirectory(${drogon_SOURCE_DIR} ${drogon_BINARY_DIR} EXCLUDE_FROM_ALL)
 
 
 message(STATUS "${PROJECT_NAME}: Configuration of Drogon is complete")
+message(STATUS "${PROJECT_NAME}: Configuring cxxopts...")
+
+
+
+FetchContent_Declare(
+  cxxopts
+  GIT_REPOSITORY https://github.com/jarro2783/cxxopts.git
+  GIT_TAG v3.3.1
+)
+FetchContent_Populate(cxxopts)
+add_subdirectory(${cxxopts_SOURCE_DIR} ${cxxopts_BINARY_DIR} EXCLUDE_FROM_ALL)
+
+
+
+message(STATUS "${PROJECT_NAME}: Configuration of cxxopts is complete")
 message(STATUS "${PROJECT_NAME}: Configuring target and includes...")
 
 
@@ -57,6 +79,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE include)
 target_link_libraries(${PROJECT_NAME} PRIVATE
     drogon
     jsoncpp_static
+    cxxopts
 )
 
 
