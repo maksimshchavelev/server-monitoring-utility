@@ -33,7 +33,7 @@ std::optional<Json::Value> RAM::get_data() {
 
     Json::Value root;
     root["type"] = "value";
-    root["value"] = 4.7;
+    root["value"] = "4.7";
     root["unit"] = "GB";
 
     return root;
