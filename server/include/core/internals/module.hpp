@@ -104,6 +104,15 @@ class IModule {
      */
     virtual void disable();
 
+
+
+
+    /**
+     * @brief Is module enabled?
+     * @return `true` if module is enabled, otherwise `false`
+     */
+    virtual bool is_enabled() const;
+
   protected:
     Json::Value m_configuration;
     bool        m_running{false};

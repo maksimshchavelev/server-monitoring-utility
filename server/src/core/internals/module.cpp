@@ -29,3 +29,11 @@ void smu_server::IModule::enable() {
 void smu_server::IModule::disable() {
     m_running = false;
 }
+
+
+
+
+// Public method
+bool smu_server::IModule::is_enabled() const {
+    return m_running;
+}
