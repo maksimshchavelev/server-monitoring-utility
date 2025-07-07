@@ -20,6 +20,7 @@ namespace smu_server {
  * @details Manages the entire application
  */
 class Application {
+  public:
     /**
      * @brief Get `Application` instance
      * @return `Application&`
