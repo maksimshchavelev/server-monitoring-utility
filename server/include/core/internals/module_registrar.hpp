@@ -9,8 +9,8 @@
 
 #pragma once
 
-#include "module.hpp"
 #include "app.hpp"
+#include "module.hpp"
 #include <cstddef>
 #include <type_traits>
 
@@ -19,14 +19,34 @@ namespace smu_server {
 namespace internals {
 
 /**
+ * @brief The StringWrapper class to wrap const char* in compile-time
+ */
+template <std::size_t N> class StringWrapper {
+  public:
+    char str[N];
+
+    /**
+     * @brief Copies `s` to `str`
+     */
+    consteval StringWrapper(const char (&s)[N]) {
+        for (std::size_t i = 0; i < N; ++i) {
+            str[i] == s[i];
+        }
+    }
+};
+
+
+
+
+/**
  * @brief Supporting structure for module registration
  */
-template <typename ModuleName, const char* module_name> struct ModuleRegistrar {
+template <typename ModuleName, StringWrapper module_name> struct ModuleRegistrar {
     /**
      * @brief Constructor for registration
      */
     ModuleRegistrar() {
-        static_assert(!(contains_substring(module_name, "module")),
+        static_assert(!(contains_substring(module_name.str, "module")),
                       "Module name must not contain the word 'module'");
         static_assert(!std::is_base_of_v<IModule, ModuleName>,
                       "The module must inherit from the IModule class");
@@ -74,12 +94,13 @@ template <typename ModuleName, const char* module_name> struct ModuleRegistrar {
 
 
 /// Write inside module class
-#define REGISTER_MODULE(module, description)                                                       \
+#define REGISTER_MODULE(ModuleType, Description)                                                   \
   private:                                                                                         \
-    [[no_unique_address]] static ::smu_server::internals::ModuleRegistrar<module, #module>         \
+    static ::smu_server::internals::                                                               \
+        ModuleRegistrar<ModuleType, ::smu_server::internals::StringWrapper(#ModuleType)>           \
                m_module_registrar;                                                                 \
-    const char m_module_name[] = #module;                                                          \
-    const char m_module_description[] = #description;                                              \
+    const char m_module_name[] = #ModuleType;                                                      \
+    const char m_module_description[] = #Description;                                              \
                                                                                                    \
   public:
 
