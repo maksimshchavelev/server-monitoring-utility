@@ -1,12 +1,13 @@
 /// GPLv3 LICENSE, Copyright (©) 2025, Maksim Shchavelev <maksimshchavelev@gmail.com>
 /// See LICENSE for details
 
+#include "core/core.hpp"
 #include "version.hpp"
 #include <cxxopts.hpp>
 #include <format>
 #include <iostream>
 
-int main(int argc, char **argv) {
+int main(int argc, char** argv) {
     cxxopts::Options options("smu-server", "Server part included in server-monitoring-utility");
 
     options.add_options()("version", "Show smu-server version")("h,help", "Show help information");
@@ -15,7 +16,7 @@ int main(int argc, char **argv) {
 
     try {
         result = options.parse(argc, argv);
-    } catch (std::exception &e) {
+    } catch (std::exception& e) {
         std::cout << "Argument parsing error: " << e.what() << std::endl;
         return EXIT_FAILURE;
     }
@@ -29,6 +30,11 @@ int main(int argc, char **argv) {
     } else if (result.contains("help") || result.contains("h")) {
         std::cout << options.help();
     }
+
+
+    // Running application
+    smu_server::Application::instance().run();
+
 
     return EXIT_SUCCESS;
 }
