@@ -96,7 +96,7 @@ template <typename ModuleName, StringWrapper module_name> struct ModuleRegistrar
 /// Write inside module class
 #define REGISTER_MODULE(ModuleType, Description)                                                   \
   private:                                                                                         \
-    static ::smu_server::internals::                                                               \
+    inline static ::smu_server::internals::                                                        \
         ModuleRegistrar<ModuleType, ::smu_server::internals::StringWrapper{#ModuleType}>           \
                                               m_module_registrar;                                  \
     static constexpr internals::StringWrapper m_module_name{#ModuleType};                          \
