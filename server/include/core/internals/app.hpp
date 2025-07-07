@@ -42,8 +42,13 @@ class Application {
             requires { ModuleType(Json::Value()); },
             "Module must be constructible from const Json::Value&");
 
+        ModuleType* module = new ModuleType(Json::Value());
+        std::cout << std::format("Registered module with name {} (description: {})",
+                                module->module_name(),
+                                 module->module_description()) << std::endl;
+
         std::lock_guard<std::mutex> lock(m_modules_mutex);
-        m_modules.emplace_back(new ModuleType(Json::Value()));
+        m_modules.emplace_back(module);
     }
 
 
