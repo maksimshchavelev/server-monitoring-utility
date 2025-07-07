@@ -10,7 +10,15 @@
 
 namespace smu_server {
 
+
+
+
 // Public method
+RAM::RAM(const Json::Value& config) : IModule(config) {}
+
+
+
+
 const Json::Value& RAM::get_configuration() const {
     return m_configuration;
 }

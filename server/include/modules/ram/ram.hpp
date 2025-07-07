@@ -24,6 +24,11 @@ class RAM : public IModule {
 
 
 
+    RAM(const Json::Value& config);
+
+
+
+
     const Json::Value& get_configuration() const override;
 
 
