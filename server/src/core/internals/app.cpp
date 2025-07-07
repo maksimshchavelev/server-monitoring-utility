@@ -20,17 +20,6 @@ smu_server::Application& smu_server::Application::instance() {
 
 
 // Public method
-template <typename ModuleType>
-void smu_server::Application::register_module()
-    requires std::is_base_of_v<IModule, ModuleType>
-{
-    std::lock_guard<std::mutex> lock(m_modules_mutex);
-    m_modules.emplace_back(new ModuleType(Json::Value()));
-}
-
-
-
-// Public method
 void smu_server::Application::run() {
     {
         std::lock_guard<std::mutex> lock(m_modules_mutex);
@@ -39,8 +28,8 @@ void smu_server::Application::run() {
         LOG_INFO << std::format("Found {} modules", m_modules.size());
         for (const auto& module : m_modules) {
             LOG_INFO << std::format("Found module with name {} (description: {})",
-                                     module->module_name(),
-                                     module->module_description());
+                                    module->module_name(),
+                                    module->module_description());
         }
     }
 

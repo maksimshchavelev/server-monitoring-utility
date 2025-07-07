@@ -38,6 +38,46 @@ template <std::size_t N> class StringWrapper {
 
 
 
+
+/**
+     * @brief Searches for a substring in a string regardless of case
+     * @param str String
+     * @param substr Substring
+     * @return `true` if found, otherwise `false`
+     */
+consteval bool contains_substring(const char* str, const char* substr) {
+    for (std::size_t i = 0; str[i]; ++i) {
+        bool match = true;
+        for (std::size_t j = 0; substr[j]; ++j) {
+            char char_str = str[i + j];
+            char char_substr = str[j];
+
+            if (static_cast<int>(char_str) >= 65 && static_cast<int>(char_str) <= 90) {
+                // make lower
+                char_str += 32;
+            }
+
+            if (static_cast<int>(char_substr) >= 65 && static_cast<int>(char_substr) <= 90) {
+                // make lower
+                char_substr += 32;
+            }
+
+            if (str[i + j] != substr[j]) {
+                match = false;
+                break;
+            }
+        }
+        if (match) {
+            return true;
+        }
+    }
+    return false;
+}
+
+
+
+
+
 /**
  * @brief Supporting structure for module registration
  */
@@ -48,44 +88,9 @@ template <typename ModuleName, StringWrapper module_name> struct ModuleRegistrar
     ModuleRegistrar() {
         static_assert(!(contains_substring(module_name.str, "module")),
                       "Module name must not contain the word 'module'");
-        static_assert(!std::is_base_of_v<IModule, ModuleName>,
+        static_assert(std::is_base_of_v<IModule, ModuleName>,
                       "The module must inherit from the IModule class");
         Application::instance().register_module<ModuleName>();
-    }
-
-  private:
-    /**
-     * @brief Searches for a substring in a string regardless of case
-     * @param str String
-     * @param substr Substring
-     * @return `true` if found, otherwise `false`
-     */
-    consteval bool contains_substring(const char* str, const char* substr) {
-        for (std::size_t i = 0; str[i]; ++i) {
-            bool match = true;
-            for (std::size_t j = 0; substr[j]; ++j) {
-                char char_str = str[i + j];
-                char char_substr = str[j];
-
-                if (static_cast<int>(char_str) >= 65 && static_cast<int>(char_str) <= 90) {
-                    // make lower
-                    char_str += 32;
-                }
-
-                if (static_cast<int>(char_substr) >= 65 && static_cast<int>(char_substr) <= 90) {
-                    // make lower
-                    char_substr += 32;
-                }
-
-                if (str[i + j] != substr[j]) {
-                    match = false;
-                    break;
-                }
-            }
-            if (match) {
-                return true;
-            }
-        };
     }
 };
 

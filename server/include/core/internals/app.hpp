@@ -36,7 +36,15 @@ class Application {
      */
     template <typename ModuleType>
     void register_module()
-        requires std::is_base_of_v<IModule, ModuleType>;
+        requires std::is_base_of_v<IModule, ModuleType>
+    {
+        static_assert(
+            requires { ModuleType(Json::Value()); },
+            "Module must be constructible from const Json::Value&");
+
+        std::lock_guard<std::mutex> lock(m_modules_mutex);
+        m_modules.emplace_back(new ModuleType(Json::Value()));
+    }
 
 
 
