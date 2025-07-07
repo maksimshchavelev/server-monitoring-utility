@@ -8,7 +8,15 @@
 
 #pragma once
 
+// We need this to remove compilation warnings inside Drogon
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wold-style-cast"
+#pragma GCC diagnostic ignored "-Wsign-conversion"
+#pragma GCC diagnostic ignored "-Wuseless-cast"
 #include <drogon/WebSocketController.h>
+#pragma GCC diagnostic pop
+
+
 #include <set>
 
 namespace smu_server {

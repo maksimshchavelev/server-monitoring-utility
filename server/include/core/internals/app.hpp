@@ -10,10 +10,17 @@
 
 #include "module.hpp"
 #include "core/controllers/websocket_main_controller.hpp"
-#include <drogon/drogon.h>
 #include <memory>
 #include <mutex>
 #include <vector>
+
+// We need this to remove compilation warnings inside Drogon
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wold-style-cast"
+#pragma GCC diagnostic ignored "-Wsign-conversion"
+#pragma GCC diagnostic ignored "-Wuseless-cast"
+#include <drogon/drogon.h>
+#pragma GCC diagnostic pop
 
 namespace smu_server {
 
