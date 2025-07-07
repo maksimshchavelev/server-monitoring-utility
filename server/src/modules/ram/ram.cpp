@@ -14,7 +14,7 @@ namespace smu_server {
 
 
 // Public method
-RAM::RAM(const Json::Value& config) : IModule(config) {}
+RAM::RAM(const Json::Value& config) : IModule(config) { enable(); }
 
 
 
