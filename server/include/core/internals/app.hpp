@@ -44,7 +44,7 @@ class Application {
             "Module must be constructible from const Json::Value&");
 
         ModuleType* module = new ModuleType(Json::Value());
-        std::cout << std::format("Registered module with name \"{}\" (description: \"{}\")",
+        std::cout << std::format("Registering module with name \"{}\" (description: \"{}\")",
                                  module->module_name(),
                                  module->module_description())
                   << std::endl;
