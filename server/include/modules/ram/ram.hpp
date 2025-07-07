@@ -15,10 +15,21 @@ namespace smu_server {
 
 /**
  * @brief A module that allows you to get information about RAM
+ * @see `IModule` for methods
  */
 class RAM : public IModule {
-public:
+  public:
     REGISTER_MODULE(RAM, "A module that allows you to get information about RAM")
+
+
+
+
+    const Json::Value& get_configuration() const override;
+
+
+
+
+    std::optional<Json::Value> get_data() override;
 };
 
 

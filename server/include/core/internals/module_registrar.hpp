@@ -99,14 +99,17 @@ template <typename ModuleName, StringWrapper module_name> struct ModuleRegistrar
     static ::smu_server::internals::                                                               \
         ModuleRegistrar<ModuleType, ::smu_server::internals::StringWrapper{#ModuleType}>           \
                                               m_module_registrar;                                  \
-    static constexpr internals::StringWrapper m_module_name = #ModuleType;                         \
-    static constexpr internals::StringWrapper m_module_description = #Description;                 \
+    static constexpr internals::StringWrapper m_module_name{#ModuleType};                          \
+    static constexpr internals::StringWrapper m_module_description{#Description};                  \
                                                                                                    \
   public:                                                                                          \
     const std::string_view module_name() const override {                                          \
         return m_module_name.str;                                                                  \
+    }                                                                                              \
+                                                                                                   \
+    const std::string_view module_description() const override {                                   \
+        return m_module_description.str;                                                           \
     }
-
 
 
 
