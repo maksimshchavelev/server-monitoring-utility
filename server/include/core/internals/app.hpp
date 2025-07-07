@@ -9,6 +9,7 @@
 #pragma once
 
 #include "module.hpp"
+#include "core/controllers/websocket_main_controller.hpp"
 #include <drogon/drogon.h>
 #include <memory>
 #include <mutex>
@@ -62,11 +63,29 @@ class Application {
     void run();
 
 
-  private:
-    Application() = default;
 
-    std::mutex                            m_modules_mutex;
-    std::vector<std::unique_ptr<IModule>> m_modules;
+
+    /**
+     * @brief Collects all metrics from all modules
+     * @return `Json::Value` with collected metrics
+     */
+    Json::Value collect_metrics();
+
+
+
+
+    /**
+     * @brief Runs asynchronous collection and sending of metrics to all connected users
+     */
+    void run_sending_metrics_async();
+
+
+  private:
+    Application();
+
+    std::mutex                               m_modules_mutex;
+    std::vector<std::unique_ptr<IModule>>    m_modules;
+    std::shared_ptr<MainWebsocketController> m_main_ws_controller_ptr;
 };
 
 } // end of namespace smu_server
