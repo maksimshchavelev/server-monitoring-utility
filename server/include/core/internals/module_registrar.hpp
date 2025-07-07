@@ -10,6 +10,7 @@
 #pragma once
 
 #include "module.hpp"
+#include "app.hpp"
 #include <cstddef>
 #include <type_traits>
 
@@ -29,7 +30,7 @@ template <typename ModuleName, const char* module_name> struct ModuleRegistrar {
                       "Module name must not contain the word 'module'");
         static_assert(!std::is_base_of_v<IModule, ModuleName>,
                       "The module must inherit from the IModule class");
-        /// TODO: make ::smu_server::app().register_module(...)
+        Application::instance().register_module<ModuleName>();
     }
 
   private:
