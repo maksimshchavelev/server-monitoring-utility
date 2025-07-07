@@ -9,6 +9,7 @@
 #pragma once
 
 #include "module.hpp"
+#include <drogon/drogon.h>
 #include <memory>
 #include <mutex>
 #include <vector>
@@ -36,6 +37,15 @@ class Application {
     template <typename ModuleType>
     void register_module()
         requires std::is_base_of_v<IModule, ModuleType>;
+
+
+
+
+    /**
+     * @brief Run the application.
+     * @note Blocks main thread
+     */
+    void run();
 
 
   private:

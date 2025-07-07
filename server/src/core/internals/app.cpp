@@ -27,3 +27,8 @@ void smu_server::Application::register_module()
     std::lock_guard<std::mutex> lock(m_modules_mutex);
     m_modules.emplace_back(new ModuleType(Json::Value()));
 }
+
+void smu_server::Application::run()
+{
+
+}
