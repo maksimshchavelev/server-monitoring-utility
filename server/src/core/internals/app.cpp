@@ -25,17 +25,25 @@ void smu_server::Application::register_module()
     requires std::is_base_of_v<IModule, ModuleType>
 {
     std::lock_guard<std::mutex> lock(m_modules_mutex);
-
-    ModuleType* module = new ModuleType(Json::Value());
-    LOG_INFO << std::format("Registering module with name {} (description: {})", module->module_name(),
-                            module->module_description());
-
-    m_modules.emplace_back(module);
+    m_modules.emplace_back(new ModuleType(Json::Value()));
 }
 
 
 
 // Public method
 void smu_server::Application::run() {
+    {
+        std::lock_guard<std::mutex> lock(m_modules_mutex);
+
+        // Print info about modules
+        LOG_INFO << std::format("Found {} modules", m_modules.size());
+        for (const auto& module : m_modules) {
+            LOG_INFO << std::format("Found module with name {} (description: {})",
+                                     module->module_name(),
+                                     module->module_description());
+        }
+    }
+
+
     drogon::app().addListener("0.0.0.0", 5050).run();
 }
