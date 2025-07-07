@@ -113,6 +113,28 @@ class IModule {
      */
     virtual bool is_enabled() const;
 
+
+
+
+    /**
+     * @brief Get module name
+     * @note You do not need to implement this method because the REGISTER_MODULE macro implements it
+     * @return `const std::string_view` with module name
+     */
+    virtual const std::string_view module_name() const = 0;
+
+
+
+
+    /**
+     * @brief Get module description
+     * @note You do not need to implement this method because the REGISTER_MODULE macro implements it
+     * @return `const std::string_view` with module description
+     */
+    virtual const std::string_view module_description() const = 0;
+
+
+
   protected:
     Json::Value m_configuration;
     bool        m_enabled{false};
