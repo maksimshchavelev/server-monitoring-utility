@@ -115,7 +115,7 @@ class IModule {
 
   protected:
     Json::Value m_configuration;
-    bool        m_running{false};
+    bool        m_enabled{false};
 };
 
 } // end of namespace smu_server

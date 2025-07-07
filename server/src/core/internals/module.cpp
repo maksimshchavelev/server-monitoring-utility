@@ -19,7 +19,7 @@ smu_server::IModule::IModule(const Json::Value& configuration) : m_configuration
 
 // Public method
 void smu_server::IModule::enable() {
-    m_running = true;
+    m_enabled = true;
 }
 
 
@@ -27,7 +27,7 @@ void smu_server::IModule::enable() {
 
 // Public method
 void smu_server::IModule::disable() {
-    m_running = false;
+    m_enabled = false;
 }
 
 
@@ -35,5 +35,5 @@ void smu_server::IModule::disable() {
 
 // Public method
 bool smu_server::IModule::is_enabled() const {
-    return m_running;
+    return m_enabled;
 }
