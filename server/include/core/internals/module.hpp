@@ -3,7 +3,7 @@
 
 /**
  * @file core/internals/module.hpp
- * @brief File with Module class
+ * @brief File with IModule class
  */
 
 #pragma once
@@ -17,10 +17,10 @@ namespace smu_server {
  * @brief The Interface Module class
  * @details Used to obtain information about a specific hardware part of the device
  */
-class Module {
+class IModule {
   public:
     /**
-     * @brief Module
+     * @brief IModule
      *
      * @param configuration Json::Value with module configuration. See details
      *
@@ -35,7 +35,7 @@ class Module {
      *
      * @see `get_configuration()`
      */
-    Module(const Json::Value& configuration);
+    IModule(const Json::Value& configuration);
 
 
 
@@ -43,7 +43,7 @@ class Module {
     /**
      * @brief Does nothing
      */
-    virtual ~Module() = default;
+    virtual ~IModule() = default;
 
 
 

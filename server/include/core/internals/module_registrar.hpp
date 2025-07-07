@@ -27,7 +27,7 @@ template <typename ModuleName, const char* module_name> struct ModuleRegistrar {
     ModuleRegistrar() {
         static_assert(!(contains_substring(module_name, "module")),
                       "Module name must not contain the word 'module'");
-        static_assert(!std::is_base_of_v<Module, ModuleName>,
+        static_assert(!std::is_base_of_v<IModule, ModuleName>,
                       "The module must inherit from the IModule class");
         /// TODO: make ::smu_server::app().register_module(...)
     }

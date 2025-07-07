@@ -12,13 +12,13 @@
 
 
 // Public constructor
-smu_server::Module::Module(const Json::Value& configuration) : m_configuration(configuration) {}
+smu_server::IModule::IModule(const Json::Value& configuration) : m_configuration(configuration) {}
 
 
 
 
 // Public method
-void smu_server::Module::enable() {
+void smu_server::IModule::enable() {
     m_running = true;
 }
 
@@ -26,6 +26,6 @@ void smu_server::Module::enable() {
 
 
 // Public method
-void smu_server::Module::disable() {
+void smu_server::IModule::disable() {
     m_running = false;
 }
