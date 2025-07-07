@@ -38,19 +38,18 @@ template <std::size_t N> class StringWrapper {
 
 
 
-
 /**
-     * @brief Searches for a substring in a string regardless of case
-     * @param str String
-     * @param substr Substring
-     * @return `true` if found, otherwise `false`
-     */
+ * @brief Searches for a substring in a string regardless of case
+ * @param str String
+ * @param substr Substring
+ * @return `true` if found, otherwise `false`
+ */
 consteval bool contains_substring(const char* str, const char* substr) {
     for (std::size_t i = 0; str[i]; ++i) {
         bool match = true;
         for (std::size_t j = 0; substr[j]; ++j) {
             char char_str = str[i + j];
-            char char_substr = str[j];
+            char char_substr = substr[j];
 
             if (static_cast<int>(char_str) >= 65 && static_cast<int>(char_str) <= 90) {
                 // make lower
@@ -62,7 +61,7 @@ consteval bool contains_substring(const char* str, const char* substr) {
                 char_substr += 32;
             }
 
-            if (str[i + j] != substr[j]) {
+            if (char_str != char_substr) {
                 match = false;
                 break;
             }
@@ -73,7 +72,6 @@ consteval bool contains_substring(const char* str, const char* substr) {
     }
     return false;
 }
-
 
 
 
@@ -105,7 +103,7 @@ template <typename ModuleName, StringWrapper module_name> struct ModuleRegistrar
         ModuleRegistrar<ModuleType, ::smu_server::internals::StringWrapper{#ModuleType}>           \
                                               m_module_registrar;                                  \
     static constexpr internals::StringWrapper m_module_name{#ModuleType};                          \
-    static constexpr internals::StringWrapper m_module_description{#Description};                  \
+    static constexpr internals::StringWrapper m_module_description{Description};                   \
                                                                                                    \
   public:                                                                                          \
     const std::string_view module_name() const override {                                          \
