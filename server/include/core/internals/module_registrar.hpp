@@ -30,7 +30,7 @@ template <std::size_t N> class StringWrapper {
      */
     consteval StringWrapper(const char (&s)[N]) {
         for (std::size_t i = 0; i < N; ++i) {
-            str[i] == s[i];
+            str[i] = s[i];
         }
     }
 };
@@ -97,10 +97,10 @@ template <typename ModuleName, StringWrapper module_name> struct ModuleRegistrar
 #define REGISTER_MODULE(ModuleType, Description)                                                   \
   private:                                                                                         \
     static ::smu_server::internals::                                                               \
-        ModuleRegistrar<ModuleType, ::smu_server::internals::StringWrapper(#ModuleType)>           \
-               m_module_registrar;                                                                 \
-    const char m_module_name[] = #ModuleType;                                                      \
-    const char m_module_description[] = #Description;                                              \
+        ModuleRegistrar<ModuleType, ::smu_server::internals::StringWrapper{#ModuleType}>           \
+                                              m_module_registrar;                                  \
+    static constexpr internals::StringWrapper m_module_name = #ModuleType;                         \
+    static constexpr internals::StringWrapper m_module_description = #Description;                 \
                                                                                                    \
   public:
 

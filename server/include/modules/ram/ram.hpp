@@ -18,7 +18,7 @@ namespace smu_server {
  */
 class RAM : public IModule {
 public:
-    REGISTER_MODULE(RAM, "A module that allows you to get information about RAM");
+    REGISTER_MODULE(RAM, "A module that allows you to get information about RAM")
 };
 
 
