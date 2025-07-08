@@ -11,3 +11,4 @@
 #include "internals/module.hpp"
 #include "internals/module_registrar.hpp"
 #include "internals/app.hpp"
+#include "internals/metric_constructor.hpp"
