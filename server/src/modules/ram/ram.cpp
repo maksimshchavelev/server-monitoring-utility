@@ -43,47 +43,21 @@ std::optional<Json::Value> RAM::get_data() {
     } // else
 
 
-    Json::Value root;
+    auto root = make_root_node(
+        make_container_node("RAM info",
+            make_value_node("Total RAM", info.totalram / 1024 / 1024, "MB"),
+            make_value_node("Used RAM", (info.totalram - info.freeram) / 1024 / 1024, "MB"),
+            make_value_node("Used RAM (%)", (info.totalram - info.freeram) * 100 / info.totalram, "%")
+        ),
 
-    // TOTAL RAM
-    Json::Value total_ram;
-    total_ram["type"] = "value";
-    total_ram["value"] = std::to_string(info.totalram / 1024 / 1024);
-    total_ram["units"] = "MB";
+        make_container_node("SWAP info",
+            make_value_node("Total SWAP", info.totalswap / 1024 / 1024, "MB"),
+            make_value_node("SWAP usage", (info.totalswap - info.freeswap) / 1024 / 1024, "MB"),
+            make_value_node("SWAP usage (%)", (info.totalswap - info.freeswap) * 100 / info.totalswap, "%")
+        )
+    );
 
-    // USED RAM
-    Json::Value used_ram;
-    used_ram["type"] = "value";
-    used_ram["value"] = std::to_string((info.totalram - info.freeram) / 1024 / 1024);
-    used_ram["units"] = "MB";
-
-    // USED RAM IN PERCENT
-    Json::Value used_ram_in_percent;
-    used_ram_in_percent["type"] = "value";
-    used_ram_in_percent["value"] =
-        std::to_string((info.totalram - info.freeram) * 100 / info.totalram);
-    used_ram_in_percent["units"] = "%";
-
-    // SWAP TOTAL
-    Json::Value swap_total;
-    swap_total["type"] = "value";
-    swap_total["value"] = std::to_string(info.totalswap / 1024 / 1024);
-    swap_total["units"] = "MB";
-
-    // SWAP USAGE
-    Json::Value swap_usage;
-    swap_usage["type"] = "value";
-    swap_usage["value"] = std::to_string((info.totalswap - info.freeswap) / 1024 / 1024);
-    swap_usage["units"] = "MB";
-
-
-    root["RAM size"] = total_ram;
-    root["RAM used"] = used_ram;
-    root["Used RAM in percent"] = used_ram_in_percent;
-    root["SWAP total"] = swap_total;
-    root["SWAP usage"] = swap_usage;
-
-    return root;
+    return root->to_json();
 }
 
 } // namespace smu_server
