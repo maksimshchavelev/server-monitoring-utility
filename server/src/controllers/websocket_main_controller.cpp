@@ -48,4 +48,12 @@ void MainWebsocketController::send_everyone(const Json::Value& data) {
 
 
 
+
+// Public method
+std::size_t MainWebsocketController::get_connections_count() const noexcept {
+    return m_connections.size();
+}
+
+
+
 } // namespace smu_server

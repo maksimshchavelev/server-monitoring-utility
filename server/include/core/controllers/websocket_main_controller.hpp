@@ -81,6 +81,15 @@ class MainWebsocketController : public drogon::WebSocketController<MainWebsocket
     void send_everyone(const Json::Value& data);
 
 
+
+
+    /**
+     * @brief Returns count of connections
+     * @return `std::size_t` with count of connections
+     */
+    std::size_t get_connections_count() const noexcept;
+
+
   private:
     std::set<drogon::WebSocketConnectionPtr> m_connections{};
 };
