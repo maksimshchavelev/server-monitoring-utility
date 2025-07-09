@@ -24,6 +24,7 @@ void MainWebsocketController::handleNewMessage(const drogon::WebSocketConnection
 // Public method
 void MainWebsocketController::handleNewConnection(
     const drogon::HttpRequestPtr&, const drogon::WebSocketConnectionPtr& connection) {
+    std::lock_guard<std::mutex> lock(m_connections_mutex);
     m_connections.insert(connection);
 }
 
@@ -33,6 +34,7 @@ void MainWebsocketController::handleNewConnection(
 // Public method
 void MainWebsocketController::handleConnectionClosed(
     const drogon::WebSocketConnectionPtr& connection) {
+    std::lock_guard<std::mutex> lock(m_connections_mutex);
     m_connections.erase(connection);
 }
 
@@ -51,6 +53,7 @@ void MainWebsocketController::send_everyone(const Json::Value& data) {
 
 // Public method
 std::size_t MainWebsocketController::get_connections_count() const noexcept {
+    std::lock_guard<std::mutex> lock(m_connections_mutex);
     return m_connections.size();
 }
 

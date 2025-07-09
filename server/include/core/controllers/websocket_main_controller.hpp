@@ -92,6 +92,7 @@ class MainWebsocketController : public drogon::WebSocketController<MainWebsocket
 
   private:
     std::set<drogon::WebSocketConnectionPtr> m_connections{};
+    mutable std::mutex m_connections_mutex{};
 };
 
 } // namespace smu_server
