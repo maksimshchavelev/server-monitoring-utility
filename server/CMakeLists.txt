@@ -4,9 +4,19 @@ project(smu-server VERSION 0.1.0 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 23)
 
 
+# This is where the program configuration will be
+set(SERVER_CONFIG_PATH "/etc/${PROJECT_NAME}/config.json")
+
+
 configure_file(
   ${CMAKE_CURRENT_SOURCE_DIR}/include/version.hpp.in
   ${CMAKE_CURRENT_SOURCE_DIR}/include/version.hpp
+  @ONLY
+)
+
+configure_file(
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/compile-time_config.hpp.in
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/compile-time_config.hpp
   @ONLY
 )
 
