@@ -21,8 +21,9 @@ smu_server::Application& smu_server::Application::instance() {
 
 // Public method
 void smu_server::Application::run() {
-    run_sending_metrics_async();
-    drogon::app().addListener("0.0.0.0", 5050).registerController(m_main_ws_controller_ptr).run();
+    drogon::app().addListener("0.0.0.0", 5050).registerController(m_main_ws_controller_ptr);
+    drogon::app().getLoop()->runAfter(0.0, [this](){ run_sending_metrics_async(); });
+    drogon::app().run();
 }
 
 
