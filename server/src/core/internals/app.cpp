@@ -69,7 +69,10 @@ void smu_server::Application::run_sending_metrics_async() {
 
             if (m_main_ws_controller_ptr->get_connections_count() > 0) {
                 auto metrics = collect_metrics();
-                m_main_ws_controller_ptr->send_everyone(metrics);
+                if(!metrics.empty()) {
+                    // If metrics are empty
+                    m_main_ws_controller_ptr->send_everyone(metrics);
+                }
             }
         }
     });
