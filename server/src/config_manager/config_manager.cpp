@@ -64,7 +64,7 @@ Json::Value ConfigManager::get_module_config(std::string_view module_name) const
 // Public method
 std::expected<void, std::string> ConfigManager::save_module_config(
     std::string_view module_name, const Json::Value& config) const {
-    return save_config(std::format("{}/{}", MODULES_CONFIGS_DIR, module_name), config);
+    return save_config(std::format("{}/{}.json", MODULES_CONFIGS_DIR, module_name), config);
 }
 
 
