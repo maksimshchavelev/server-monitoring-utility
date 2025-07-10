@@ -66,7 +66,7 @@ void smu_server::Application::run_sending_metrics_async() {
     std::thread  runner([this, send_interval]() {
         while (true) {
             std::this_thread::sleep_for(
-                std::chrono::seconds(send_interval)); // sleep for `sleep_interval_ms` milliseconds
+                std::chrono::milliseconds(send_interval)); // sleep for `sleep_interval_ms` milliseconds
 
             if (m_main_ws_controller_ptr->get_connections_count() > 0) {
                 auto metrics = collect_metrics();
