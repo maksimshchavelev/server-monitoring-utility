@@ -1,0 +1,17 @@
+[Unit]
+Description=Server part of the Server Monitoring Utility (SMU)
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=@INSTALLED_BINARY_PATH@
+Restart=on-failure
+RestartSec=3
+User=root
+Group=root
+WorkingDirectory=@CONFIGS_DIR@
+ReadWritePaths=@CONFIGS_DIR@
+
+[Install]
+WantedBy=multi-user.target
+
