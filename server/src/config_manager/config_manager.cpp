@@ -57,8 +57,9 @@ std::expected<Json::Value, std::string> ConfigManager::read_config(
     json_file.open(path.data());
 
     if (!json_file.is_open()) {
-        return std::unexpected(
-            std::format("error reading config file with path {}", path)); // error
+        return std::unexpected(std::format("error reading config file with path {} (cause: {})",
+                                           path,
+                                           std::strerror(errno))); // error
     }
 
     // string representation of json
