@@ -8,8 +8,8 @@
 
 #pragma once
 
-#include "module.hpp"
 #include "core/controllers/websocket_main_controller.hpp"
+#include "module.hpp"
 #include <memory>
 #include <mutex>
 #include <vector>
@@ -93,6 +93,7 @@ class Application {
     std::mutex                               m_modules_mutex;
     std::vector<std::unique_ptr<IModule>>    m_modules;
     std::shared_ptr<MainWebsocketController> m_main_ws_controller_ptr;
+    Json::Value&                             m_server_config;
 };
 
 } // end of namespace smu_server

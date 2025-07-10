@@ -8,6 +8,7 @@
 
 
 #include "core/internals/app.hpp"
+#include "config_manager/config_manager.hpp"
 
 
 // Public constructor
@@ -21,8 +22,11 @@ smu_server::Application& smu_server::Application::instance() {
 
 // Public method
 void smu_server::Application::run() {
-    drogon::app().addListener("0.0.0.0", 5050).registerController(m_main_ws_controller_ptr);
-    drogon::app().getLoop()->runAfter(0.0, [this](){ run_sending_metrics_async(); });
+    // Get port from config
+    uint16_t port = static_cast<uint16_t>(m_server_config["port"].asUInt());
+
+    drogon::app().addListener("0.0.0.0", port).registerController(m_main_ws_controller_ptr);
+    drogon::app().getLoop()->runAfter(0.0, [this]() { run_sending_metrics_async(); });
     drogon::app().run();
 }
 
@@ -57,9 +61,12 @@ void smu_server::Application::run_sending_metrics_async() {
     }
 
     running = true;
-    std::thread runner([this]() {
+
+    unsigned int send_interval = m_server_config["send_interval_ms"].asUInt();
+    std::thread  runner([this, send_interval]() {
         while (true) {
-            std::this_thread::sleep_for(std::chrono::seconds(1)); // sleep for 1 second
+            std::this_thread::sleep_for(
+                std::chrono::seconds(send_interval)); // sleep for `sleep_interval_ms` milliseconds
 
             if (m_main_ws_controller_ptr->get_connections_count() > 0) {
                 auto metrics = collect_metrics();
@@ -76,4 +83,5 @@ void smu_server::Application::run_sending_metrics_async() {
 
 // Private constructor
 smu_server::Application::Application() :
-    m_main_ws_controller_ptr(std::make_shared<MainWebsocketController>()) {}
+    m_main_ws_controller_ptr(std::make_shared<MainWebsocketController>()),
+    m_server_config(ConfigManager::instance().get_server_config()) {}
