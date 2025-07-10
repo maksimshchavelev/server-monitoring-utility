@@ -106,11 +106,11 @@ template <typename ModuleName, StringWrapper module_name> struct ModuleRegistrar
     static constexpr internals::StringWrapper m_module_description{Description};                   \
                                                                                                    \
   public:                                                                                          \
-    const std::string_view module_name() const override {                                          \
+    constexpr std::string_view module_name() const override {                                      \
         return m_module_name.str;                                                                  \
     }                                                                                              \
                                                                                                    \
-    const std::string_view module_description() const override {                                   \
+    constexpr std::string_view module_description() const override {                               \
         return m_module_description.str;                                                           \
     }                                                                                              \
                                                                                                    \

@@ -122,7 +122,7 @@ class IModule {
      * it
      * @return `const std::string_view` with module name
      */
-    virtual const std::string_view module_name() const = 0;
+    virtual constexpr std::string_view module_name() const = 0;
 
 
 
@@ -133,7 +133,7 @@ class IModule {
      * it
      * @return `const std::string_view` with module description
      */
-    virtual const std::string_view module_description() const = 0;
+    virtual constexpr std::string_view module_description() const = 0;
 
 
 
