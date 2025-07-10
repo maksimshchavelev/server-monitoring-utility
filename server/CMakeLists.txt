@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD 23)
 
 # This is where the program configuration will be
 set(SERVER_CONFIG_PATH "/etc/${PROJECT_NAME}/config.json")
+set(MODULES_CONFIGS_DIR "/etc/${PROJECT_NAME}/modules.d")
 
 
 configure_file(

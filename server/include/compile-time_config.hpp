@@ -3,4 +3,5 @@
 
 #pragma once
 
-#define CONFIG_PATH "/etc/smu-server/config.json"
+#define CONFIG_PATH         "/etc/smu-server/config.json"
+#define MODULES_CONFIGS_DIR "/etc/smu-server/modules.d"
