@@ -18,7 +18,16 @@ namespace smu_server {
 
 // Public method
 RAM::RAM(const Json::Value& config) : IModule(config) {
-    enable();
+    // If config is empty
+    if(m_configuration.empty()) {
+        // Create new configuration
+        m_configuration["enabled"] = true;
+    }
+
+    if(m_configuration["enabled"].asBool()) {
+        // Module is disabled by default. See IModule
+        enable();
+    }
 }
 
 
