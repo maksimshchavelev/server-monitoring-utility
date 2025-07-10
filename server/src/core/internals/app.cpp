@@ -8,7 +8,6 @@
 
 
 #include "core/internals/app.hpp"
-#include "config_manager/config_manager.hpp"
 
 
 // Public constructor
