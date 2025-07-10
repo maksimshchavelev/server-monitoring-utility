@@ -1,0 +1,17 @@
+[Unit]
+Description=Server part of the Server Monitoring Utility (SMU)
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/smu-server
+Restart=on-failure
+RestartSec=3
+User=root
+Group=root
+WorkingDirectory=/var/lib/smu-server
+ReadWritePaths=/var/lib/smu-server
+
+[Install]
+WantedBy=multi-user.target
+

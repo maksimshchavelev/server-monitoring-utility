@@ -1,0 +1,6 @@
+#!/bin/sh
+set -e
+systemctl stop smu-server.service || true
+systemctl disable smu-server.service || true
+exit 0
+

@@ -3,10 +3,26 @@ cmake_minimum_required(VERSION 3.28 FATAL_ERROR)
 project(smu-server VERSION 0.1.0 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 23)
 
+set(CMAKE_INSTALL_PREFIX /usr)
+
+
+# This is where the program configuration will be
+set(CONFIGS_DIR "/var/lib/${PROJECT_NAME}")
+set(SERVER_CONFIG_PATH "${CONFIGS_DIR}/config.json")
+set(MODULES_CONFIGS_DIR "${CONFIGS_DIR}/modules.d")
+set(INSTALLED_BINARY_PATH "${CMAKE_INSTALL_PREFIX}/bin/${PROJECT_NAME}")
+set(SMU_UPLOAD_PATH ${CONFIGS_DIR}/uploads/tmp)
+
 
 configure_file(
   ${CMAKE_CURRENT_SOURCE_DIR}/include/version.hpp.in
   ${CMAKE_CURRENT_SOURCE_DIR}/include/version.hpp
+  @ONLY
+)
+
+configure_file(
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/compile-time_config.hpp.in
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/compile-time_config.hpp
   @ONLY
 )
 
@@ -40,7 +56,15 @@ message(STATUS "${PROJECT_NAME}: configuring Drogon...")
 set(BUILD_CTL OFF)
 set(BUILD_EXAMPLES OFF)
 set(BUILD_SHARED_LIBS OFF)
+set(BUILD_ORM FALSE)
 set(DROGON_BUILD_STATIC ON)
+set(USE_STATIC_LIBS_ONLY TRUE)
+set(BUILD_POSTGRESQL FALSE)
+set(LIBPQ_BATCH_MODE FALSE)
+set(BUILD_MYSQL FALSE)
+set(BUILD_SQLITE FALSE)
+set(BUILD_REDIS FALSE)
+set(USE_SPDLOG FALSE)
 
 FetchContent_Declare(drogon
     GIT_REPOSITORY https://github.com/drogonframework/drogon.git
@@ -100,6 +124,57 @@ target_compile_options(${PROJECT_NAME} PRIVATE
   -Wuseless-cast
 )
 
+
+if(CMAKE_BUILD_TYPE EQUAL "Release")
+  message(STATUS "Setting O3 optimization")
+  target_compile_options(${PROJECT_NAME} PRIVATE $<$<CONFIG:Release>:-O3>)
+endif()
+
+
+
+
+# Configuring systemd
+configure_file(
+  ${CMAKE_CURRENT_SOURCE_DIR}/systemd/smu-server.service.in
+  ${CMAKE_CURRENT_SOURCE_DIR}/systemd/smu-server.service
+  @ONLY
+)
+
+
+# Installation rules
+install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION bin)
+install(DIRECTORY config/ DESTINATION ${CONFIGS_DIR} FILES_MATCHING PATTERN "*")
+install(FILES systemd/smu-server.service DESTINATION "/etc/systemd/system")
+
+# For drogon tmp files
+install(DIRECTORY DESTINATION ${SMU_UPLOAD_PATH}
+         DIRECTORY_PERMISSIONS OWNER_WRITE OWNER_READ OWNER_EXECUTE
+                               GROUP_READ GROUP_EXECUTE
+                               WORLD_READ WORLD_EXECUTE)
+
+
+
+# Configuring CPack
+include(InstallRequiredSystemLibraries)
+set(CPACK_GENERATOR "DEB")
+
+set(CPACK_PACKAGE_VENDOR "maksimshchavelev")
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Server part (1 of 3 components) of server monitoring utility")
+set(CPACK_PACKAGE_VERSION "${PROJECT_VERSION}")
+set(CPACK_PACKAGE_NAME ${PROJECT_NAME})
+set(CPACK_PACKAGE_CONTACT "Maksim Shchavelev <maksimshchavelev@gmail.com>")
+
+set(CPACK_DEBIAN_PACKAGE_MAINTAINER "${CPACK_PACKAGE_CONTACT}")
+set(CPACK_DEBIAN_PACKAGE_SECTION "utils")
+set(CPACK_DEBIAN_ARCHITECTURE "amd64")
+set(CPACK_DEBIAN_PACKAGE_PRIORITY "optional")
+set(CPACK_DEBIAN_PACKAGE_HOMEPAGE "https://github.com/maksimshchavelev/server-monitoring-utility")
+set(CPACK_DEBIAN_PACKAGE_CONTROL_EXTRA
+    "${CMAKE_CURRENT_SOURCE_DIR}/packaging/postinst;${CMAKE_CURRENT_SOURCE_DIR}/packaging/prerm"
+)
+set(CPACK_PACKAGE_FILE_NAME "${PROJECT_NAME}-${PROJECT_VERSION}-linux-${CPACK_DEBIAN_ARCHITECTURE}")
+
+include(CPack)
 
 
 
