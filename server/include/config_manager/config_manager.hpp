@@ -49,6 +49,28 @@ class ConfigManager {
 
 
 
+    /**
+     * @brief Reads config for specified module
+     * @param module_name Name of module
+     * @return filled `Json::Value` if success, empty `Json::Value` if error
+     */
+    Json::Value get_module_config(std::string_view module_name) const noexcept;
+
+
+
+
+    /**
+     * @brief Saves config of specified module
+     * @param module_name Name of module
+     * @param config Config of module
+     * @return `std::expected` with void if success, otherwise `std::string` with error
+     */
+    std::expected<void, std::string> save_module_config(std::string_view   module_name,
+                                                        const Json::Value& config) const;
+
+
+
+
   private:
     ConfigManager() = default;
     ~ConfigManager() = default;
