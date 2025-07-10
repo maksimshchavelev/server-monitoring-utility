@@ -51,7 +51,7 @@ std::expected<void, std::string> ConfigManager::save_server_config() const noexc
 
 // Public method
 Json::Value ConfigManager::get_module_config(std::string_view module_name) const noexcept {
-    if (auto config = read_config(std::format("{}/{}", MODULES_CONFIGS_DIR, module_name));
+    if (auto config = read_config(std::format("{}/{}.json", MODULES_CONFIGS_DIR, module_name));
         config.has_value()) {
         return config.value();
     }
