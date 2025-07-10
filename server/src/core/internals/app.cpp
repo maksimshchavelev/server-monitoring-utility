@@ -64,8 +64,8 @@ void smu_server::Application::run_sending_metrics_async() {
     unsigned int send_interval = m_server_config["send_interval_ms"].asUInt();
     std::thread  runner([this, send_interval]() {
         while (true) {
-            std::this_thread::sleep_for(
-                std::chrono::milliseconds(send_interval)); // sleep for `sleep_interval_ms` milliseconds
+            std::this_thread::sleep_for(std::chrono::milliseconds(
+                send_interval)); // sleep for `sleep_interval_ms` milliseconds
 
             if (m_main_ws_controller_ptr->get_connections_count() > 0) {
                 auto metrics = collect_metrics();
@@ -80,7 +80,44 @@ void smu_server::Application::run_sending_metrics_async() {
 
 
 
+// Public method
+void smu_server::Application::save_configs() const noexcept {
+    auto& manager = ConfigManager::instance();
+
+    // Saving server configuration
+    if (auto res = manager.save_server_config(); !res.has_value()) {
+        // If error
+        LOG_ERROR << std::format("\033[31mError saving server configuration (cause: {})\033[0m", res.error());
+    }
+
+    // Saving module configurations
+    for (const auto& module : m_modules) {
+        if (auto res =
+                manager.save_module_config(module->module_name(), module->get_configuration());
+            !res.has_value()) {
+            // If error
+            LOG_ERROR << std::format("\033[31mError saving configuration of module \"{}\" (cause: {}\033[0m)",
+                                     module->module_name(),
+                                     res.error());
+        }
+    }
+}
+
+
+
+
 // Private constructor
 smu_server::Application::Application() :
     m_main_ws_controller_ptr(std::make_shared<MainWebsocketController>()),
     m_server_config(ConfigManager::instance().get_server_config()) {}
+
+
+
+
+
+
+// Private destructor
+smu_server::Application::~Application()
+{
+    save_configs();
+}

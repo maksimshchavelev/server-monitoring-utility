@@ -105,8 +105,17 @@ class Application {
     void run_sending_metrics_async();
 
 
+
+
+    /**
+     * @brief Saves all configs
+     */
+    void save_configs() const noexcept;
+
+
   private:
     Application();
+    ~Application();
 
     std::mutex                               m_modules_mutex;
     std::vector<std::unique_ptr<IModule>>    m_modules;
