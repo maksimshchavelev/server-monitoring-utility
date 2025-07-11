@@ -28,7 +28,7 @@ class MainWebsocketController : public drogon::WebSocketController<MainWebsocket
   public:
     WS_PATH_LIST_BEGIN
 
-    WS_PATH_ADD("/get_metrics", drogon::Get);
+    WS_PATH_ADD("/", drogon::Get);
 
     WS_PATH_LIST_END
 
