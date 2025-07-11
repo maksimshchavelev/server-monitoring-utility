@@ -1,4 +1,3 @@
-```markdown
 # Developing Your Own Module
 This section will teach you how to develop your own module for smu-server.
 
@@ -323,4 +322,3 @@ Now you understand the code in `ram.cpp`. For reference, this module's JSON outp
 
 # Summary
 You've learned how to create your own module and can now expand the metrics collected by smu-server.
-```
