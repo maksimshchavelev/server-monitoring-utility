@@ -8,8 +8,8 @@
 
 #pragma once
 
-#include <expected>
 #include <cstdint>
+#include <expected>
 #include <string>
 
 namespace smu {
@@ -52,6 +52,15 @@ class Settings {
 
 
 
+    /**
+     * @brief Get connection IP
+     * @return `std::string_view` with IP
+     */
+    const std::string_view get_ip() const noexcept;
+
+
+
+
   private:
     /**
      * @brief Parses command line arguments and changes fields
@@ -69,7 +78,8 @@ class Settings {
 
 
     // Parameters
-    uint16_t m_port;
+    uint16_t    m_port; // connection port
+    std::string m_ip;   // connection IP
 };
 
 } // namespace smu

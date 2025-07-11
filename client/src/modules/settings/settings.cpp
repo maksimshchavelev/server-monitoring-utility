@@ -40,13 +40,26 @@ uint16_t Settings::get_port() const noexcept {
 
 
 
+// Public method
+const std::string_view Settings::get_ip() const noexcept {
+    return m_ip;
+}
+
+
+
+
 // Private method
 std::expected<void, std::string> Settings::parse(int argc, char** argv) noexcept {
     cxxopts::Options options("smu", "Client part included in server-monitoring-utility");
 
     options.add_options()("version", "Show smu version");
     options.add_options()("h,help", "Show help information");
-    options.add_options()("p,port", "Specify the port to connect to the smu-server");
+    options.add_options()(
+        "p,port", "Specify the port to connect to the smu-server", cxxopts::value<uint16_t>());
+
+    // Positional options
+    options.add_options("Positional")("ip", "Server IP address", cxxopts::value<std::string>());
+    options.parse_positional("ip");
 
     cxxopts::ParseResult result;
 
@@ -79,6 +92,14 @@ std::expected<void, std::string> Settings::parse(int argc, char** argv) noexcept
         // Set port
         m_port = result["port"].as<uint16_t>();
     }
+
+    // IP
+    if (result.contains("ip")) {
+        m_ip = result["ip"].as<std::string>();
+    } else {
+        return std::unexpected("IP address is required");
+    }
+
 
     return {};
 }
