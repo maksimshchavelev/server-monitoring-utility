@@ -1,10 +1,20 @@
 /// GPLv3 LICENSE, Copyright (©) 2025, Maksim Shchavelev <maksimshchavelev@gmail.com>
 /// See LICENSE for details
 
+#include "modules/application/application.hpp"
 #include "modules/settings/settings.hpp"
 
-#include <stdexcept>
+#include <csignal>
 #include <iostream>
+
+
+smu::Application* app_ptr{nullptr};
+
+
+void exit_handler(int) {
+    app_ptr->exit();
+}
+
 
 int main(int argc, char** argv) {
 
@@ -17,11 +27,15 @@ int main(int argc, char** argv) {
         return -1;
     }
 
-    if(settings->should_exit()) {
+    if (settings->should_exit()) {
         exit(0);
     }
 
-    // Todo:: run application
+    // Run application
+    smu::Application app(*settings);
+    app_ptr = &app;
 
-    return 0;
+    signal(SIGINT, exit_handler);
+
+    return app.run();
 }
