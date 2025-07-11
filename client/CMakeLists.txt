@@ -87,6 +87,22 @@ endif()
 
 
 
+if(NOT TARGET ftxui)
+  message(STATUS "${PROJECT_NAME}: Configuring FTXUI")
+
+  include(FetchContent)
+  FetchContent_Declare(ftxui
+    GIT_REPOSITORY https://github.com/ArthurSonzogni/ftxui
+    GIT_TAG v6.1.9
+  )
+  FetchContent_MakeAvailable(ftxui)
+
+  message(STATUS "${PROJECT_NAME}: Configuration of FTXUI is complete")
+
+endif()
+
+
+
 message(STATUS "${PROJECT_NAME}: Configuring target and includes...")
 
 
@@ -98,6 +114,9 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     jsoncpp_static
     cxxopts
     ixwebsocket
+    ftxui::component
+    ftxui::dom
+    ftxui::screen
 )
 
 
