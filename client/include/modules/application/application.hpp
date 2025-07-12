@@ -10,6 +10,7 @@
 
 #include "modules/network/network.hpp"
 #include "modules/settings/settings.hpp"
+#include "modules/ui/ui.hpp"
 #include <atomic>
 #include <json/json.h>
 
@@ -58,8 +59,10 @@ class Application {
 
 
   private:
-    Settings&               m_settings;
-    Network                 m_network;
+    Settings& m_settings;
+    Network   m_network;
+    UI        m_ui{};
+
     std::atomic_int         m_return_value{0};
     std::atomic_bool        m_exit_request{false};
     std::condition_variable cw; // for m_exit_request

@@ -7,7 +7,6 @@
  */
 
 #include "modules/application/application.hpp"
-#include <iostream>
 
 namespace smu {
 
@@ -19,12 +18,17 @@ Application::Application(Settings& settings) : m_settings(settings), m_network(m
 
 // Public method
 int Application::run() {
+    // Running network
     m_network.run([this](const std::string& msg) {
         if (auto res = json_from_string(msg); res.has_value()) {
             // If no error
-            std::cout << res.value();
+            m_ui.set_data(res.value());
         }
     });
+
+    // Running UI
+    m_ui.run_async();
+
 
     // Waiting for exit signal
     std::mutex                   mutex;
@@ -32,6 +36,7 @@ int Application::run() {
     cw.wait(lock, [this]() { return m_exit_request.load(); });
 
     m_network.stop();
+    m_ui.stop();
 
     return m_return_value.load();
 }
