@@ -49,7 +49,7 @@ void UI::run_async() {
             return text("Nothing to render");
         });
 
-        std::cout << '\033[2J';
+        std::cout << "\033[2J";
 
         m_screen.Loop(tabs_renderer);
 
