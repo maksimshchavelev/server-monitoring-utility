@@ -10,6 +10,7 @@
 #include "modules/ui/ui.hpp"
 #include "modules/ui/internals/tabs.hpp"
 #include <ftxui/component/component.hpp>
+#include <iostream>
 #include <thread>
 
 
@@ -47,6 +48,8 @@ void UI::run_async() {
 
             return text("Nothing to render");
         });
+
+        std::cout << '\033[2J';
 
         m_screen.Loop(tabs_renderer);
 
@@ -137,7 +140,7 @@ ftxui::Component UI::unwrap_module(const Json::Value& data) {
                     text(std::format("{}: {} {}", name, std::move(value), std::move(units))) |
                     color(text_color);
 
-                if(alarm_flag) {
+                if (alarm_flag) {
                     res |= inverted;
                     res |= bold;
                 }
