@@ -9,7 +9,6 @@
 #pragma once
 
 #include <ftxui/component/screen_interactive.hpp>
-
 #include <ftxui/dom/elements.hpp>
 #include <json/json.h>
 
