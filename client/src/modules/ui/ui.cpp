@@ -28,6 +28,8 @@ void UI::run_async() {
         using namespace ftxui;
 
         auto tabs_renderer = Renderer([&]() {
+            std::lock_guard<std::mutex> lock(m_data_mutex);
+
             if (!m_data.empty()) {
                 std::vector<Element> headers;
                 headers.reserve(m_data.size());
@@ -73,6 +75,7 @@ void UI::stop() {
 
 // Public method
 void UI::set_data(const Json::Value& data) {
+    std::lock_guard<std::mutex> lock(m_data_mutex);
     m_data = data;
     m_screen.PostEvent(ftxui::Event::Custom);
 }

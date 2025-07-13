@@ -51,8 +51,9 @@ class UI {
 
 
   private:
-    Json::Value                                                              m_data{};
-    ftxui::ScreenInteractive                                                 m_screen;
+    std::mutex               m_data_mutex;
+    Json::Value              m_data{};
+    ftxui::ScreenInteractive m_screen;
 
     /**
      * @brief Unwraps json representation of module to UI
