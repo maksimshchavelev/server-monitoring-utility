@@ -54,6 +54,9 @@ class Tabs : public ftxui::ComponentBase {
 
     std::size_t m_current_tab{0};
     std::size_t m_tabs_count{0};
+
+    std::size_t m_first_visible_header{0};
+    std::size_t m_last_visible_header{0};
 };
 
 
