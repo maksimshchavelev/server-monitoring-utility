@@ -61,6 +61,8 @@ std::expected<void, std::string> Settings::parse(int argc, char** argv) noexcept
     options.add_options("Positional")("ip", "Server IP address", cxxopts::value<std::string>());
     options.parse_positional("ip");
 
+    options.show_positional_help();
+
     cxxopts::ParseResult result;
 
     try {
