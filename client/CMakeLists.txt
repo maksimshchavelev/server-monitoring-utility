@@ -38,6 +38,10 @@ message(STATUS "${PROJECT_NAME}: found ${SOURCES_SIZE} sources")
 
 
 
+# To prevent building shared libs
+set(BUILD_SHARED_LIBS OFF)
+
+
 include(FetchContent)
 
 
