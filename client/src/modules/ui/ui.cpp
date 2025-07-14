@@ -57,11 +57,6 @@ void UI::run_async() {
 
         m_screen.Loop(tabs_renderer);
 
-        // auto renderer = Renderer([&] {
-        //     return unwrap_module(m_data["RAM"])->Render();
-        // });
-
-        // m_screen.Loop(renderer);
     });
     runner.detach();
 }
