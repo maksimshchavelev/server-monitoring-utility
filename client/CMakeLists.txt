@@ -40,71 +40,66 @@ message(STATUS "${PROJECT_NAME}: found ${SOURCES_SIZE} sources")
 
 include(FetchContent)
 
-if(NOT TARGET cxxopts)
-  message(STATUS "${PROJECT_NAME}: Configuring cxxopts...")
 
-  FetchContent_Declare(
-    cxxopts
-    GIT_REPOSITORY https://github.com/jarro2783/cxxopts.git
-    GIT_TAG v3.3.1
-  )
-  FetchContent_Populate(cxxopts)
-  add_subdirectory(${cxxopts_SOURCE_DIR} ${cxxopts_BINARY_DIR} EXCLUDE_FROM_ALL)
+message(STATUS "${PROJECT_NAME}: Configuring cxxopts...")
 
-  message(STATUS "${PROJECT_NAME}: Configuration of cxxopts is complete")
-  endif()
+FetchContent_Declare(
+  cxxopts
+  GIT_REPOSITORY https://github.com/jarro2783/cxxopts.git
+  GIT_TAG v3.3.1
+)
+FetchContent_Populate(cxxopts)
+add_subdirectory(${cxxopts_SOURCE_DIR} ${cxxopts_BINARY_DIR} EXCLUDE_FROM_ALL)
 
-
-
-if(NOT TARGET jsoncpp)
-  message(STATUS "${PROJECT_NAME}: Configuring jsoncpp")
-  FetchContent_Declare(
-    jsoncpp
-    GIT_REPOSITORY https://github.com/open-source-parsers/jsoncpp.git
-    GIT_TAG 1.9.6
-  )
-  FetchContent_Populate(jsoncpp)
-  add_subdirectory(${jsoncpp_SOURCE_DIR} ${jsoncpp_BINARY_DIR} EXCLUDE_FROM_ALL)
-  message(STATUS "${PROJECT_NAME}: Configuration of jsoncpp is complete")
-endif()
+message(STATUS "${PROJECT_NAME}: Configuration of cxxopts is complete")
 
 
 
-if(NOT TARGET ixwebsocket)
-  message(STATUS "${PROJECT_NAME}: Configuring IXWebSocket")
 
-  set(USE_TLS ON)
-
-  FetchContent_Declare(
-    ixwebsocket
-    GIT_REPOSITORY https://github.com/machinezone/IXWebSocket.git
-    GIT_TAG v11.4.6
-  )
-  FetchContent_Populate(ixwebsocket)
-  add_subdirectory(${ixwebsocket_SOURCE_DIR} ${ixwebsocket_BINARY_DIR} EXCLUDE_FROM_ALL)
-  message(STATUS "${PROJECT_NAME}: Configuration of IXWebSocket is complete")
-endif()
+message(STATUS "${PROJECT_NAME}: Configuring jsoncpp")
+FetchContent_Declare(
+  jsoncpp
+  GIT_REPOSITORY https://github.com/open-source-parsers/jsoncpp.git
+  GIT_TAG 1.9.6
+)
+FetchContent_Populate(jsoncpp)
+add_subdirectory(${jsoncpp_SOURCE_DIR} ${jsoncpp_BINARY_DIR} EXCLUDE_FROM_ALL)
+message(STATUS "${PROJECT_NAME}: Configuration of jsoncpp is complete")
 
 
 
-if(NOT TARGET ftxui)
-  message(STATUS "${PROJECT_NAME}: Configuring FTXUI")
 
-  include(FetchContent)
-  FetchContent_Declare(ftxui
-    GIT_REPOSITORY https://github.com/ArthurSonzogni/ftxui
-    GIT_TAG v6.1.9
-  )
-  FetchContent_MakeAvailable(ftxui)
+message(STATUS "${PROJECT_NAME}: Configuring IXWebSocket")
 
-  message(STATUS "${PROJECT_NAME}: Configuration of FTXUI is complete")
+set(USE_TLS ON)
 
-endif()
+FetchContent_Declare(
+  ixwebsocket
+  GIT_REPOSITORY https://github.com/machinezone/IXWebSocket.git
+  GIT_TAG v11.4.6
+)
+FetchContent_Populate(ixwebsocket)
+add_subdirectory(${ixwebsocket_SOURCE_DIR} ${ixwebsocket_BINARY_DIR} EXCLUDE_FROM_ALL)
+message(STATUS "${PROJECT_NAME}: Configuration of IXWebSocket is complete")
+
+
+
+
+message(STATUS "${PROJECT_NAME}: Configuring FTXUI")
+
+include(FetchContent)
+FetchContent_Declare(ftxui
+  GIT_REPOSITORY https://github.com/ArthurSonzogni/ftxui
+  GIT_TAG v6.1.9
+)
+FetchContent_MakeAvailable(ftxui)
+
+message(STATUS "${PROJECT_NAME}: Configuration of FTXUI is complete")
+
 
 
 
 message(STATUS "${PROJECT_NAME}: Configuring target and includes...")
-
 
 
 
