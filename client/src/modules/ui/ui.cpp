@@ -141,7 +141,6 @@ ftxui::Component UI::unwrap_module(const Json::Value& data) {
 
                 if (alarm_flag) {
                     res |= inverted;
-                    res |= bold;
                 }
 
                 return res;
