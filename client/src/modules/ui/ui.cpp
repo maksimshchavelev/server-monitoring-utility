@@ -49,7 +49,11 @@ void UI::run_async() {
             return text("Nothing to render");
         });
 
-        std::cout << "\033[2J";
+    #if defined(__unix__)
+        std::cout << "\033[2J\033[H"; // ANSI code for clear screen in Linux
+    #elif defined(_WIN32) or defined(_WIN64)
+        std::cout << "\x1B[2J\x1B[H"; // ANSI code for clear screen in Windows
+    #endif
 
         m_screen.Loop(tabs_renderer);
 
