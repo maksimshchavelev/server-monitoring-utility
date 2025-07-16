@@ -124,6 +124,15 @@ class Application {
     Json::Value&                             m_server_config;
 
     IPC m_ipc; // For interprocess communication with CLI
+
+
+    // ================================ FOR CLI COMMANDS ================================
+
+    /**
+     * @brief Get modules name, status and description
+     * @return `std::string`
+     */
+    std::string list_modules() const;
 };
 
 } // end of namespace smu_server

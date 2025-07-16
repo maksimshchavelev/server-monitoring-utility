@@ -7,6 +7,7 @@
  */
 
 #include "ipc/ipc.hpp"
+#include "trantor/utils/Logger.h"
 #include <cxxopts.hpp>
 
 namespace smu_server {
@@ -18,8 +19,7 @@ IPC::IPC(const std::string_view abstract_socket_name) : m_ipc_io(abstract_socket
 
 
 // Public method
-void IPC::run(
-    std::function<std::string(const Command, const std::vector<std::string_view>&)> callback) {
+void IPC::run(std::function<std::string(const Command, const std::vector<std::string>&)> callback) {
     // Lambda for splitting str by ' ' like shell arguments
     auto split_like_shell = [&](const std::string_view str) {
         std::istringstream       iss(str.data());
@@ -37,28 +37,53 @@ void IPC::run(
     // Callback for IPC_IO::run_listening_async
     auto cb = [split_like_shell, callback](const std::string_view str) -> std::string {
         cxxopts::Options options("smu-server");
-        options.add_options()(
-            "list", "List sub-entities (modules/configs/etc)", cxxopts::value<std::string>());
 
+
+
+        options.add_options()
+            ("run",  "Run module(s)",  cxxopts::value<std::vector<std::string>>())
+            ("list", "List sub-entities", cxxopts::value<std::string>())
+            ("stop", "Stop module(s)", cxxopts::value<std::vector<std::string>>());
+
+
+
+        // Split string by ' ' and return vector
         auto tokens = split_like_shell(str);
 
         // `const char*` view for options.parse
         std::vector<const char*> args;
 
+        args.push_back("fake"); // add fake program name for correct parsing
+
         for (const auto& token : tokens) {
-            args.push_back(token.data());
+            args.push_back(token.c_str());
         }
 
-        options.parse_positional({ "list" });
 
+        // Parsing
         auto result = options.parse(static_cast<int>(args.size()), args.data());
 
+
+
         // If have list command
-        if(result.contains("list")) {
-            const std::vector<std::string_view> args = { result["list"].as<std::string>() };
-            return callback(Command::LIST, args);
+        if (result.contains("list")) {
+            return callback(Command::LIST, {result["list"].as<std::string>()});
         }
 
+        // If have run command
+        else if (result.contains("run")) {
+            return callback(Command::RUN, result["run"].as<std::vector<std::string>>());
+        }
+
+        // If have stop command
+        else if (result.contains("stop")) {
+            return callback(Command::STOP, result["stop"].as<std::vector<std::string>>());
+        }
+
+
+
+
+        // Default case
         return "Unknown command";
     };
 

@@ -117,8 +117,63 @@ smu_server::Application::Application() :
     m_main_ws_controller_ptr(std::make_shared<MainWebsocketController>()),
     m_server_config(ConfigManager::instance().get_server_config()), m_ipc(ABSTRACT_SOCKET_NAME) {
 
-    m_ipc.run([&](const IPC::Command, const std::vector<std::string_view>& args) -> std::string {
-        return "OK";
+
+    // Proceed commands from CLI
+    m_ipc.run([&](const IPC::Command cmd, const std::vector<std::string>& args) -> std::string {
+
+        // --list <args>
+        if(cmd == IPC::Command::LIST) {
+            // --list modules
+            if(args[0] == "modules") {
+                return list_modules();
+            }
+        }
+
+
+        // --run <args>
+        if(cmd == IPC::Command::RUN) {
+            // --run <modules>
+            for(const auto& module_name : args) {
+
+                if(auto iter = std::find_if(m_modules.begin(), m_modules.end(), [&](const auto& module) {
+                        return module->module_name() == module_name;
+                    }); iter != m_modules.end()) {
+
+                    // If found module with name `module_name`
+                    (*iter)->enable();
+                    return "\033[32mDone!\033[0m";
+
+                } else {
+                    // Return red error
+                    return std::format("\033[31mModule with name {} doesn't exists!\033[0m", module_name);
+                }
+
+            }
+        }
+
+
+        // --stop <args>
+        if(cmd == IPC::Command::STOP) {
+            // --run <modules>
+            for(const auto& module_name : args) {
+
+                if(auto iter = std::find_if(m_modules.begin(), m_modules.end(), [&](const auto& module) {
+                        return module->module_name() == module_name;
+                    }); iter != m_modules.end()) {
+
+                    // If found module with name `module_name`
+                    (*iter)->disable();
+                    return "\033[32mDone!\033[0m";
+
+                } else {
+                    // Return red error
+                    return std::format("\033[31mModule with name {} doesn't exists!\033[0m", module_name);
+                }
+
+            }
+        }
+
+        return "Invalid syntax";
     });
 }
 
@@ -128,4 +183,45 @@ smu_server::Application::Application() :
 // Private destructor
 smu_server::Application::~Application() {
     save_configs();
+}
+
+
+
+
+
+// ================================ FOR CLI COMMANDS ================================
+
+// Private method
+std::string smu_server::Application::list_modules() const
+{
+    std::string result = "NAME\t\tSTATUS\t\tDESCRIPTION\n";
+
+    for(const auto& module : m_modules) {
+        std::string current_module_info(1, '\n');
+
+        // Module name
+        current_module_info.append(module->module_name());
+
+        // Tab
+        current_module_info.append("\t\t");
+
+        // Status
+        if(module->is_enabled()) {
+            // Print green module name
+            current_module_info.append("\033[32mRUNNING\033[0m");
+        } else {
+            // Print red module name
+            current_module_info.append("\033[31mSTOPPED\033[0m");
+        }
+
+        // Tab
+        current_module_info.append("\t\t");
+
+        // Description
+        current_module_info.append(module->module_description());
+
+        result.append(current_module_info);
+    }
+
+    return result;
 }

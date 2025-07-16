@@ -20,7 +20,7 @@ class IPC {
      * @brief All kinds of command options
      * @see `run`
      */
-    enum class Command { LIST };
+    enum class Command { LIST = 0, RUN = 1, STOP = 2 };
 
 
 
@@ -40,8 +40,8 @@ class IPC {
      * list of arguments. Should return a response that is passed to the client and displayed in the
      * client's terminal
      */
-    void run(std::function<std::string(const Command command,
-                                       const std::vector<std::string_view>&)> callback);
+    void run(std::function<std::string(const Command command, const std::vector<std::string>&)>
+                 callback);
 
 
 
