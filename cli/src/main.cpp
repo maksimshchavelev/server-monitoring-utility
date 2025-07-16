@@ -40,6 +40,8 @@ int main(int argc, char** argv) {
         merged_arguments.append(argv[i]);
     }
 
+    merged_arguments.push_back('\0'); // End char for correctly reading at server
+
 
     // Creating socket
     int socket_fd = socket(AF_UNIX, SOCK_STREAM, 0);
