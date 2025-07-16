@@ -1,9 +1,12 @@
 cmake_minimum_required(VERSION 3.28 FATAL_ERROR)
 
-project(smu-server VERSION 0.1.1 LANGUAGES CXX)
+project(smu-server VERSION 0.2.0 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 23)
 
 set(CMAKE_INSTALL_PREFIX /usr)
+
+# For IPC using an abstract Unix Domain Socket
+set(ABSTRACT_SOCKET_NAME "smu.ipc.socket")
 
 
 # This is where the program configuration will be

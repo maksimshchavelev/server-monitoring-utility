@@ -10,6 +10,7 @@
 
 #include "config_manager/config_manager.hpp"
 #include "core/controllers/websocket_main_controller.hpp"
+#include "ipc/ipc.hpp"
 #include "module.hpp"
 #include <memory>
 #include <mutex>
@@ -121,6 +122,8 @@ class Application {
     std::vector<std::unique_ptr<IModule>>    m_modules;
     std::shared_ptr<MainWebsocketController> m_main_ws_controller_ptr;
     Json::Value&                             m_server_config;
+
+    IPC m_ipc; // For interprocess communication with CLI
 };
 
 } // end of namespace smu_server

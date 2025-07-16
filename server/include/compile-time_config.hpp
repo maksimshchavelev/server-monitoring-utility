@@ -3,5 +3,6 @@
 
 #pragma once
 
-#define CONFIG_PATH         "/var/lib/smu-server/config.json"
-#define MODULES_CONFIGS_DIR "/var/lib/smu-server/modules.d"
+#define CONFIG_PATH          "/var/lib/smu-server/config.json"
+#define MODULES_CONFIGS_DIR  "/var/lib/smu-server/modules.d"
+#define ABSTRACT_SOCKET_NAME "smu.ipc.socket"

@@ -8,6 +8,7 @@
 
 
 #include "core/internals/app.hpp"
+#include "compile-time_config.hpp"
 
 
 // Public constructor
@@ -69,7 +70,7 @@ void smu_server::Application::run_sending_metrics_async() {
 
             if (m_main_ws_controller_ptr->get_connections_count() > 0) {
                 auto metrics = collect_metrics();
-                if(!metrics.empty()) {
+                if (!metrics.empty()) {
                     // If metrics are empty
                     m_main_ws_controller_ptr->send_everyone(metrics);
                 }
@@ -90,7 +91,8 @@ void smu_server::Application::save_configs() const noexcept {
     // Saving server configuration
     if (auto res = manager.save_server_config(); !res.has_value()) {
         // If error
-        LOG_ERROR << std::format("\033[31mError saving server configuration (cause: {})\033[0m", res.error());
+        LOG_ERROR << std::format("\033[31mError saving server configuration (cause: {})\033[0m",
+                                 res.error());
     }
 
     // Saving module configurations
@@ -99,9 +101,10 @@ void smu_server::Application::save_configs() const noexcept {
                 manager.save_module_config(module->module_name(), module->get_configuration());
             !res.has_value()) {
             // If error
-            LOG_ERROR << std::format("\033[31mError saving configuration of module \"{}\" (cause: {}\033[0m)",
-                                     module->module_name(),
-                                     res.error());
+            LOG_ERROR << std::format(
+                "\033[31mError saving configuration of module \"{}\" (cause: {}\033[0m)",
+                module->module_name(),
+                res.error());
         }
     }
 }
@@ -112,15 +115,17 @@ void smu_server::Application::save_configs() const noexcept {
 // Private constructor
 smu_server::Application::Application() :
     m_main_ws_controller_ptr(std::make_shared<MainWebsocketController>()),
-    m_server_config(ConfigManager::instance().get_server_config()) {}
+    m_server_config(ConfigManager::instance().get_server_config()), m_ipc(ABSTRACT_SOCKET_NAME) {
 
-
+    m_ipc.run([&](const IPC::Command, const std::vector<std::string_view>& args) -> std::string {
+        return "OK";
+    });
+}
 
 
 
 
 // Private destructor
-smu_server::Application::~Application()
-{
+smu_server::Application::~Application() {
     save_configs();
 }
