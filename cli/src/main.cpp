@@ -7,6 +7,8 @@
 #include <iostream>
 #include <sys/socket.h>
 #include <sys/un.h>
+#include <netinet/in.h>
+#include <netinet/tcp.h>
 
 
 int main(int argc, char** argv) {
@@ -40,12 +42,15 @@ int main(int argc, char** argv) {
         merged_arguments.append(argv[i]);
     }
 
+    merged_arguments.push_back('\0'); // End char for correctly reading at server
+
 
     // Creating socket
     int socket_fd = socket(AF_UNIX, SOCK_STREAM, 0);
     if (socket_fd == -1) { // error
         smu_cli::handle_error("socket");
     }
+
 
     // Filling sockaddr_un
     sockaddr_un addr;
@@ -69,11 +74,16 @@ int main(int argc, char** argv) {
         // Trying to connect again...
     }
 
-
     // Sending message
     if (!smu_cli::send_message(socket_fd, merged_arguments.data())) {
         // error
         smu_cli::handle_error("send");
+    }
+
+
+    // No more data will be sent
+    if (shutdown(socket_fd, SHUT_WR) == -1) {
+        smu_cli::handle_error("shutdown");
     }
 
 

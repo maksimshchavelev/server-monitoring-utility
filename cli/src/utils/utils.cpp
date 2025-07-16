@@ -116,7 +116,7 @@ std::expected<std::string, std::string> read_message(int        socket_fd,
     }
 
     // Error
-    if (fd.revents & (POLLERR | POLLHUP | POLLNVAL)) {
+    if (fd.revents & (POLLERR | POLLNVAL)) {
         return std::unexpected("socket error during poll");
     }
 
