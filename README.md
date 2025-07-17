@@ -10,5 +10,7 @@ It uses third-party components:
 
 - [FTXUI](https://github.com/ArthurSonzogni/FTXUI) — MIT license
 - [Drogon](https://github.com/drogonframework/drogon) - MIT license
+- [jsoncpp](https://github.com/open-source-parsers/jsoncpp) - MIT license
+- [cxxopts](https://github.com/jarro2783/cxxopts) - MIT license
 
 See [third party](3dparty) for details
