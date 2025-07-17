@@ -33,6 +33,7 @@ RAM::RAM(const Json::Value& config) : IModule(config) {
 
 
 
+// Public method
 const Json::Value& RAM::get_configuration() const {
     return m_configuration;
 }
