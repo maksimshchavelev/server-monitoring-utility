@@ -19,20 +19,18 @@ namespace smu_server {
 // Public method
 RAM::RAM(const Json::Value& config) : IModule(config) {
     // If config is empty
-    if(m_configuration.empty()) {
+    if (m_configuration.empty()) {
         // Create new configuration
         m_configuration["enabled"] = true;
-    }
-
-    if(m_configuration["enabled"].asBool()) {
-        // Module is disabled by default. See IModule
-        enable();
+    } else {
+        m_enabled = m_configuration["enabled"].asBool();
     }
 }
 
 
 
 
+// Public method
 const Json::Value& RAM::get_configuration() const {
     return m_configuration;
 }
@@ -53,20 +51,37 @@ std::optional<Json::Value> RAM::get_data() {
 
 
     auto root = make_root_node(
-        make_container_node("RAM info",
+        make_container_node(
+            "RAM info",
             make_value_node("Total RAM", info.totalram / 1024 / 1024, "MB"),
             make_value_node("Used RAM", (info.totalram - info.freeram) / 1024 / 1024, "MB"),
-            make_value_node("Used RAM (%)", (info.totalram - info.freeram) * 100 / info.totalram, "%")
-        ),
+            make_value_node(
+                "Used RAM (%)", (info.totalram - info.freeram) * 100 / info.totalram, "%")),
 
-        make_container_node("SWAP info",
+        make_container_node(
+            "SWAP info",
             make_value_node("Total SWAP", info.totalswap / 1024 / 1024, "MB"),
             make_value_node("SWAP usage", (info.totalswap - info.freeswap) / 1024 / 1024, "MB"),
-            make_value_node("SWAP usage (%)", (info.totalswap - info.freeswap) * 100 / info.totalswap, "%")
-        )
-    );
+            make_value_node(
+                "SWAP usage (%)", (info.totalswap - info.freeswap) * 100 / info.totalswap, "%")));
 
     return root->to_json();
+}
+
+
+
+
+// Public method
+void RAM::enable() {
+    m_configuration["enabled"] = true;
+}
+
+
+
+
+// Public method
+void RAM::disable() {
+    m_configuration["enabled"] = false;
 }
 
 } // namespace smu_server

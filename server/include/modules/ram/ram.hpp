@@ -35,6 +35,16 @@ class RAM : public IModule {
 
 
     std::optional<Json::Value> get_data() override;
+
+
+
+
+    void enable() override;
+
+
+
+
+    void disable() override;
 };
 
 
