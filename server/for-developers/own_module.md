@@ -136,14 +136,11 @@ namespace smu_server {
 // Public method
 RAM::RAM(const Json::Value& config) : IModule(config) {
     // If config is empty
-    if(m_configuration.empty()) {
+    if (m_configuration.empty()) {
         // Create new configuration
         m_configuration["enabled"] = true;
-    }
-
-    if(m_configuration["enabled"].asBool()) {
-        // Module is disabled by default. See IModule
-        enable();
+    } else {
+        m_enabled = m_configuration["enabled"].asBool();
     }
 }
 
@@ -190,14 +187,16 @@ Besides including `ram.hpp`, we include `<sys/sysinfo.h>` which contains the `sy
 In the constructor, we read the config and apply settings (here only the `enabled` setting controls module status). If we get an empty config, we configure from scratch. Note:
 
 ```cpp
-if(m_configuration["enabled"].asBool()) {
-    // Module is disabled by default. See IModule
-    enable();
+// Some of the code above
+else {
+	m_enabled = m_configuration["enabled"].asBool();
 }
 ```
-By default, the module is disabled (`m_enabled` is `false`, see [IModule](#imodule---where-it-all-begins)), so we enable it.
+We read the module state and assign it to m_modules[“enabled”]
 
-Next: The implementation of `get_configuration` is straightforward. Let's focus on `get_data`.
+> ⚠️ Never call `enable()` and `disable()` from the constructor if you override them in your module, otherwise the base class implementation will be called instead of your implementation!
+
+The implementation of `get_configuration` is straightforward. Let's focus on `get_data`.
 
 First, return `std::nullopt` if the module is disabled (also return `std::nullopt` on `sysinfo` error):
 
