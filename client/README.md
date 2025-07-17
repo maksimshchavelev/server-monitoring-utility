@@ -1,0 +1,31 @@
+
+## What is smu?
+smu is a client for smu-server that runs in a terminal and displays smu-server readings via a graphical terminal interface
+
+## Installation
+To install, download the release package and install it via your package manager. After that, the tool will be accessible through the `smu` command.
+
+> Note that smu-server must also be installed and running
+
+## Building from Source
+To build, download the source code of the desired release, navigate to the `client` folder, create a `build` directory, and navigate into it. The following commands will be executed from the `build` directory:
+
+ - Run `cmake ..`. Wait for configuration to complete.
+ - Run `cmake --build . --parallel`
+ - Run `cmake --build . --target package` to build the package
+ - A built package will appear in the `build` directory. Install it using your package manager.
+
+## Command Reference
+smu supports several commands, here are some of them:
+- `--version` displays the version of smu-cli
+- `--help` or `-h` shows help
+- `--port` or `-p` allows you to specify the port on which to connect to the smu-server. This is an optional option, the default connection is to port 5050. However, if you changed the port on the server, you need to specify it
+- `--ip` Mandatory positional parameter. Server IP address
+
+## Example usage
+`smu localhost` will connect you to the server running on your local machine on port 5050.
+`smu 144.4.68.4 --port 8888` will connect you to a server with IP address 144.4.68.4 (fictitious IP address) running on a remote machine on port 8888.
+
+
+## Conclusion
+In this guide, you learned how to install, build, and use smu-cli to work with smu-server.
