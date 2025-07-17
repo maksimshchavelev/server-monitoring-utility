@@ -22,11 +22,8 @@ RAM::RAM(const Json::Value& config) : IModule(config) {
     if (m_configuration.empty()) {
         // Create new configuration
         m_configuration["enabled"] = true;
-    }
-
-    if (m_configuration["enabled"].asBool()) {
-        // Module is disabled by default. See IModule
-        enable();
+    } else {
+        m_enabled = m_configuration["enabled"].asBool();
     }
 }
 
