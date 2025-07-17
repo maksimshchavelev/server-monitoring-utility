@@ -192,7 +192,7 @@ else {
 	m_enabled = m_configuration["enabled"].asBool();
 }
 ```
-We read the module state and assign it to m_modules[“enabled”]
+We read the module state and assign it to `m_modules["enabled"]`
 
 > ⚠️ Never call `enable()` and `disable()` from the constructor if you override them in your module, otherwise the base class implementation will be called instead of your implementation!
 

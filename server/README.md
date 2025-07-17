@@ -2,7 +2,7 @@
 
 This component is one of the three parts of **smu** — the server monitoring system. You can install it by downloading the `.deb` package from the releases or by building it manually (explained below).
 
-Check the usage guide [here](##Usage). If you'd like to contribute to the development of smu-server, head over [here](for-developers/beginning.md).
+Check the usage guide [here](#Usage). If you'd like to contribute to the development of smu-server, head over [here](for-developers/beginning.md).
 
 ## How to build smu-server?
 
