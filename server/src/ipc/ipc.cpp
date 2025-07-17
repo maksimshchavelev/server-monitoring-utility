@@ -36,14 +36,14 @@ void IPC::run(std::function<std::string(const Command, const std::vector<std::st
 
     // Callback for IPC_IO::run_listening_async
     auto cb = [split_like_shell, callback](const std::string_view str) -> std::string {
-        cxxopts::Options options("smu-server");
+        cxxopts::Options options("smu-cli");
 
 
 
         options.add_options()
-            ("run",  "Run module(s)",  cxxopts::value<std::vector<std::string>>())
-            ("list", "List sub-entities", cxxopts::value<std::string>())
-            ("stop", "Stop module(s)", cxxopts::value<std::vector<std::string>>());
+            ("run",  "Run module(s). For example: --run RAM CPU",  cxxopts::value<std::vector<std::string>>())
+            ("list", "List sub-entities (--list modules, --list commands)", cxxopts::value<std::string>())
+            ("stop", "Stop module(s). For example: --stop CPU", cxxopts::value<std::vector<std::string>>());
 
 
 
@@ -67,6 +67,11 @@ void IPC::run(std::function<std::string(const Command, const std::vector<std::st
 
         // If have list command
         if (result.contains("list")) {
+            // If --list commands
+            if(result["list"].as<std::string>() == "commands") {
+                return options.help();
+            }
+            // else
             return callback(Command::LIST, {result["list"].as<std::string>()});
         }
 
