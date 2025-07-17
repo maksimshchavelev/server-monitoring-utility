@@ -49,8 +49,6 @@ function(add_subproject_package_target name)
 
   add_custom_command(
     TARGET ${name}-package POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different ${build_dir}/*.tar.gz ${PACKAGE_OUTPUT_DIR}
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different ${build_dir}/*.zip ${PACKAGE_OUTPUT_DIR}
     COMMAND ${CMAKE_COMMAND} -E copy_if_different ${build_dir}/*.deb ${PACKAGE_OUTPUT_DIR}
     COMMENT "Copying ${name} package to ${PACKAGE_OUTPUT_DIR}"
   )
