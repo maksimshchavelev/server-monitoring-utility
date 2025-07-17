@@ -1,9 +1,22 @@
-﻿---
-BasedOnStyle: Chromium
+﻿BasedOnStyle: LLVM
+IndentWidth: 4
+ContinuationIndentWidth: 4
+ColumnLimit: 100
+PointerAlignment: Left
+AllowAllConstructorInitializersOnNextLine: true
+BinPackArguments: false
+BinPackParameters: false
+MaxEmptyLinesToKeep: 4
+BreakBeforeBraces: Attach
+BreakConstructorInitializers: AfterColon
+AlignConsecutiveDeclarations: true
+AllowShortFunctionsOnASingleLine: Empty
+PenaltyBreakBeforeFirstCallParameter: 1
+PenaltyReturnTypeOnItsOwnLine: 200
+PenaltyBreakString: 1000
+PenaltyBreakTemplateDeclaration: 0
 AlignAfterOpenBracket: Align
-AlignConsecutiveDeclarations: 'false'
-AlignEscapedNewlines: Left
-AllowAllConstructorInitializersOnNextLine: 'true'
-Language: Cpp
+AlignOperands: true
+AlignConsecutiveAssignments: false
+AllowAllArgumentsOnNextLine: true
 
-...

@@ -1,5 +1,33 @@
+
 ## What is the SMU?
 SMU is a Server Monitoring Utility that transmits over a secure websocket connection various server data such as CPU utilization, RAM and swap file usage, component temperature, fan speed, etc.
+
+## Guides
+SMU is represented by three components - [smu-server](server/README.md) (server part), [smu-cli](cli/README.md) (CLI for controlling the server via terminal) and [smu](client/README.md) (client for visualizing and viewing information from the server). The links will take you to the manual for each component
+
+## Installation
+Download the 3 packages from the releases - `smu`, `smu-server` and `smu-cli` to install. Install them using the package manager. `smu-server` and `smu-cli` should be installed on one machine, and `smu` (client) should be installed on another machine
+
+## Building from source
+First, you need `libjsoncpp-dev` installed. On Debian-based systems, install this library with the command:
+
+```bash
+sudo apt install libjsoncpp-dev
+```
+
+You can uninstall it after the build, it is not needed for smu to work.
+
+Download the source code from the releases, unzip it somewhere. In the directory with sources create `build` directory and go to it. From now on, all commands will be executed from the build directory. Execute the following commands:
+
+- `cmake ..`
+
+- `cmake --build . --parallel`
+
+- `cmake --build . --target package-all`.
+
+  
+
+In the `package` directory, you will see the built packages that you can install using your package manager
 
 
 ## License
@@ -10,5 +38,7 @@ It uses third-party components:
 
 - [FTXUI](https://github.com/ArthurSonzogni/FTXUI) — MIT license
 - [Drogon](https://github.com/drogonframework/drogon) - MIT license
+- [jsoncpp](https://github.com/open-source-parsers/jsoncpp) - MIT license
+- [cxxopts](https://github.com/jarro2783/cxxopts) - MIT license
 
 See [third party](3dparty) for details
