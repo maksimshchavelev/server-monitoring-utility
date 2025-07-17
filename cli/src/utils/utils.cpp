@@ -22,7 +22,11 @@ bool parse_own_arguments(int argc, char** argv) noexcept {
 
     options.add_options()("version", "Show smu-cli version");
     options.add_options()("h,help", "Show help information");
-    options.add_options()("commands", "Show the commands available to query the smu-server");
+
+    // Add a fake command name (should be "-list commands"), since cxxopts does not support spaces
+    // in the command name. When outputting help, "--list-commands" will be replaced by "--list
+    // commands"
+    options.add_options()("list-commands", "Show the commands available to query the smu-server");
 
     cxxopts::ParseResult result;
 
@@ -42,7 +46,18 @@ bool parse_own_arguments(int argc, char** argv) noexcept {
     }
 
     if (result.contains("help")) {
-        std::cout << options.help();
+        std::ostringstream oss;
+        oss << options.help();
+        std::string help = oss.str();
+
+        // Replace "--list-commands" to "--list commands". See cause upper
+        size_t pos = help.find("--list-commands");
+        if (pos != std::string::npos) {
+            help.replace(pos, std::string("--list-commands").size(), "--list commands");
+        }
+
+        std::cout << help;
+
         return true; // parsed
     }
 
