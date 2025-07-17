@@ -1,2 +1,3 @@
-cppcheck --enable=warning,style,performance,portability,unusedFunction --inconclusive -q client/ cli/ server/
-
+./analyze_cli.sh
+./analyze_client.sh
+./analyze_server.sh
