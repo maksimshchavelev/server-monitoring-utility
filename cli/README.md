@@ -24,7 +24,7 @@ smu-cli supports several commands, here are some of them:
 
 NAME		STATUS		DESCRIPTION
 
-RAM			<span style="color:green">RUNNING</span>		A module that allows you to get information about RAM
+RAM			RUNNING		A module that allows you to get information about RAM
 
 ```
 - `--run <modules>` starts the specified module(s). Just list the modules in place of `<modules>`, for example: `--run RAM` or `--run RAM TEMP`.
