@@ -31,9 +31,12 @@ int Application::run() {
 
 
     // Waiting for exit signal
-    std::mutex                   mutex;
-    std::unique_lock<std::mutex> lock(mutex);
-    cw.wait(lock, [this]() { return m_exit_request.load(); });
+    std::mutex mutex;
+
+    {
+        std::unique_lock<std::mutex> lock(mutex);
+        cw.wait(lock, [this]() { return m_exit_request.load(); });
+    }
 
     m_network.stop();
     m_ui.stop();
