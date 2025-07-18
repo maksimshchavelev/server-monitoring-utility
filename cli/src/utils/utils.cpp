@@ -32,7 +32,7 @@ bool parse_own_arguments(int argc, char** argv) noexcept {
 
     try {
         result = options.parse(argc, argv);
-    } catch (std::exception& e) {
+    } catch (const std::exception& e) {
         return false; // not parsed
     }
 
