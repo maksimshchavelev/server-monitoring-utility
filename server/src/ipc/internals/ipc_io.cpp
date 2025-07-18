@@ -181,10 +181,8 @@ std::expected<std::string, std::string> IPC_IO::receive_message(int        conne
     std::string result;
     char        buffer[256];
 
-    ssize_t rd_res{0};
-
     while (true) {
-        rd_res = recv(connected_socket_fd, buffer, sizeof(buffer), 0);
+        ssize_t rd_res = recv(connected_socket_fd, buffer, sizeof(buffer), 0);
 
         // Error occured
         if (rd_res == -1) {
