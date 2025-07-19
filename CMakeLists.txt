@@ -6,27 +6,56 @@ set(CMAKE_CXX_STANDARD 23)
 project(${PROJECT_NAME} NONE)
 
 
+option(BUILD_SERVER "Need to build server part?" ON)
+option(BUILD_CLIENT "Need to build client part?" ON)
+option(BUILD_CLI "Need to build CLI part?" ON)
+
+
 include(ExternalProject)
 
-ExternalProject_Add(server
-  SOURCE_DIR ${CMAKE_SOURCE_DIR}/server
-  BINARY_DIR ${CMAKE_BINARY_DIR}/server-build
-  INSTALL_COMMAND ""
-)
 
+if(BUILD_SERVER)
+  ExternalProject_Add(server
+    SOURCE_DIR ${CMAKE_SOURCE_DIR}/server
+    BINARY_DIR ${CMAKE_BINARY_DIR}/server-build
+    INSTALL_COMMAND ""
+  )
+endif()
+
+
+if(BUILD_CLI)
 ExternalProject_Add(cli
   SOURCE_DIR ${CMAKE_SOURCE_DIR}/cli
   BINARY_DIR ${CMAKE_BINARY_DIR}/cli-build
   INSTALL_COMMAND ""
 )
+endif()
 
+
+if(BUILD_CLIENT)
 ExternalProject_Add(client
   SOURCE_DIR ${CMAKE_SOURCE_DIR}/client
   BINARY_DIR ${CMAKE_BINARY_DIR}/client-build
   INSTALL_COMMAND ""
 )
+endif()
 
-add_custom_target(build-all DEPENDS server cli client)
+
+add_custom_target(build-all)
+
+
+if(BUILD_SERVER)
+    add_dependencies(build-all server)
+endif()
+
+if(BUILD_CLI)
+    add_dependencies(build-all cli)
+endif()
+
+if(BUILD_CLIENT)
+    add_dependencies(build-all client)
+endif()
+
 
 
 # Packaging settings
@@ -61,8 +90,20 @@ function(add_subproject_package_target name)
 endfunction()
 
 
-add_subproject_package_target(server)
-add_subproject_package_target(cli)
-add_subproject_package_target(client)
+
+
+if(BUILD_SERVER)
+  add_subproject_package_target(server)
+endif()
+
+
+if(BUILD_CLIENT)
+  add_subproject_package_target(client)
+endif()
+
+
+if(BUILD_CLI)
+  add_subproject_package_target(cli)
+endif()
 
 
