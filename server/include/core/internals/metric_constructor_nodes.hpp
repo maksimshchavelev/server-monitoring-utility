@@ -18,7 +18,7 @@ namespace smu_server::internals {
  * @brief The Base IMetricNode class to make it easier to use. See details
  * @details First, you can create a smart pointer to `IMetricNodeBase` if you create nodes
  * via factory methods in the module constructor, in which case you can get json by calling
- * IMetricNodeBase::get_json(). This greatly improves performance when working with static
+ * IMetricNodeBase::to_json(). This greatly improves performance when working with static
  * data, since you don't have to recreate nodes.
  * Second, it simplifies the requires clause in `IMetricNode` (implementation detail)
  * @see IMetricNode
