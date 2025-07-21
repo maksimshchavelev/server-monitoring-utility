@@ -147,8 +147,13 @@ std::expected<void, std::string> IPC_IO::init() noexcept {
     addr.sun_family = AF_UNIX;
     addr.sun_path[0] = '\0'; // for abstract socket
 
+    // Avoid sun_path overflow
+    if(m_abstract_socket_name.size() > sizeof(addr.sun_path) - 1) {
+        return std::unexpected("Socket name too long");
+    }
+
     // Subtract 1 because the first byte is occupied by the character ‘\0’.
-    strncpy(addr.sun_path + 1, m_abstract_socket_name.data(), sizeof(addr.sun_path) - 1);
+    memcpy(addr.sun_path + 1, m_abstract_socket_name.data(), sizeof(addr.sun_path) - 1);
 
     // We add 1 because the first byte is occupied by the character ‘\0’.
     // We count the socket length as the size of sun_family plus the length of the name along with
