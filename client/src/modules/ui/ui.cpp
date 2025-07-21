@@ -45,8 +45,10 @@ void UI::run_async() {
 void UI::stop() {
     m_screen.ExitLoopClosure()();
     m_screen.Exit();
-    m_screen.RequestAnimationFrame();
-    m_screen.PostEvent(ftxui::Event::Custom);
+
+    while (m_screen.Active()) {
+        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+    }
 }
 
 
