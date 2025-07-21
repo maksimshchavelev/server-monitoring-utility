@@ -7,11 +7,16 @@
  */
 
 #include "ipc/internals/ipc_io.hpp"
-#include "trantor/utils/Logger.h"
 #include <format>
 #include <sys/socket.h>
 #include <sys/un.h>
 #include <thread>
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wsign-conversion"
+#pragma GCC diagnostic ignored "-Wold-style-cast"
+#include "trantor/utils/Logger.h"
+#pragma GCC diagnostic pop
 
 namespace smu_server {
 
