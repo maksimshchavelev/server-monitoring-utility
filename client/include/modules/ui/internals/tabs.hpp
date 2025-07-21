@@ -30,6 +30,14 @@ class Tabs : public ftxui::ComponentBase {
 
 
     /**
+     * @brief Default tabs constructor
+     */
+    Tabs() = default;
+
+
+
+
+    /**
      * @brief OnRender Draw the component. Build a ftxui::Element to be drawn on the ftxi::Screen
      * representing this ftxui::ComponentBase
      * @return `ftxui::Element`
@@ -45,6 +53,18 @@ class Tabs : public ftxui::ComponentBase {
      * @return `true` if event is catched, else `false`
      */
     bool OnEvent(ftxui::Event e) override;
+
+
+
+
+    /**
+     * @brief Sets new tabs and their contents
+     * @param headers Tab headers
+     * @param content Tab contents
+     * @throw Throws an exception if the number of headers is not equal to the number of tabs
+     * @note Use via `dynamic_cast`
+     */
+    void set_data(std::vector<ftxui::Element>&& headers, std::vector<ftxui::Component>&& content);
 
 
 
