@@ -131,4 +131,12 @@ ftxui::Component make_tabs(const std::vector<ftxui::Element>&   headers,
 
 
 
+// External method
+ftxui::Component make_tabs() {
+    return std::make_shared<Tabs>();
+}
+
+
+
+
 } // namespace smu
