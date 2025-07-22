@@ -44,6 +44,9 @@ class Application {
 
     /**
      * @brief Register module with type `ModuleType`
+     * @note Used only in `ModuleRegistrar`. Do not use directly. Instead, use `add_module_to_queue`
+     * for lazy initialization
+     * @see `add_module_to_queue`
      */
     template <typename ModuleType>
     void register_module()
@@ -66,7 +69,7 @@ class Application {
         auto config = ConfigManager::instance().get_module_config(ModuleType::module_name_static());
 
 
-        if(config.empty()) {
+        if (config.empty()) {
             std::cout << "\033[33mGot empty config. Continuing with default values. \033[0m";
             std::cout.flush(); // For force printing
         }
@@ -83,7 +86,7 @@ class Application {
             std::cout << std::format("\033[31mFailed! Cause: {}\033[0m", e.what()) << std::endl;
         }
 
-        if(!creation_failed) {
+        if (!creation_failed) {
             // Get colorful status (RUNNING/STOPPED)
             std::string module_status =
                 module->is_enabled() ? "\033[32mRUNNING\033[0m" : "\033[31mSTOPPED\033[0m";

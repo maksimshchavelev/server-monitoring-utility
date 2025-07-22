@@ -31,8 +31,9 @@ void smu_server::Application::add_module_to_queue(
 
 // Public method
 void smu_server::Application::run() {
-
-
+    for(const auto& module_registrar : m_modules_queue) {
+        module_registrar(*this); // register each module
+    }
 
     // Get port from config
     uint16_t port = static_cast<uint16_t>(m_server_config["port"].asUInt());
