@@ -123,7 +123,7 @@ void Tabs::set_data(std::vector<ftxui::Element>&&   headers,
 
 
 // External method
-ftxui::Component make_tabs(const std::vector<ftxui::Element>&   headers,
+std::shared_ptr<Tabs> make_tabs(const std::vector<ftxui::Element>&   headers,
                            const std::vector<ftxui::Component>& tabs) {
     return std::make_shared<Tabs>(headers, tabs);
 }
@@ -132,7 +132,7 @@ ftxui::Component make_tabs(const std::vector<ftxui::Element>&   headers,
 
 
 // External method
-ftxui::Component make_tabs() {
+std::shared_ptr<Tabs> make_tabs() {
     return std::make_shared<Tabs>();
 }
 
