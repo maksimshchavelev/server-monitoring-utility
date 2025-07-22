@@ -7,6 +7,7 @@
  */
 
 #include "modules/application/application.hpp"
+#include <iostream>
 
 namespace smu {
 
@@ -19,12 +20,26 @@ Application::Application(Settings& settings) : m_settings(settings), m_network(m
 // Public method
 int Application::run() {
     // Running network
-    m_network.run([this](const std::string& msg) {
-        if (auto res = json_from_string(msg); res.has_value()) {
-            // If no error
-            m_ui.set_data(res.value());
-        }
-    });
+    m_network.run(
+        [this](const std::string& msg) {
+            if (auto res = json_from_string(msg); res.has_value()) {
+                // If no error
+                m_ui.set_data(res.value());
+            }
+        },
+        [this](const std::string& connection_error_reason) {
+// Clear screen
+#if defined(__unix__)
+            std::cout << "\033[2J\033[H"; // ANSI code for clear screen in Linux
+#elif defined(_WIN32) or defined(_WIN64)
+            std::cout << "\x1B[2J\x1B[H"; // ANSI code for clear screen in Windows
+#endif
+
+            std::cout << "Connection error, reason: " << connection_error_reason << std::endl;
+
+            m_return_value.store(1);
+            exit();
+        });
 
     // Running UI
     m_ui.run_async();
