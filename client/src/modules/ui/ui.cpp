@@ -17,7 +17,7 @@ namespace smu {
 
 
 // Public constructor
-UI::UI() : m_screen(ftxui::ScreenInteractive::TerminalOutput()), m_tabs(std::make_shared<Tabs>()) {}
+UI::UI() : m_screen(ftxui::ScreenInteractive::TerminalOutput()), m_tabs(make_tabs()) {}
 
 
 
