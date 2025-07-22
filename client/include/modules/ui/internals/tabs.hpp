@@ -86,21 +86,21 @@ class Tabs : public ftxui::ComponentBase {
  * @brief Makes `Tabs` component
  * @param headers Tabs headers
  * @param tabs Tabs content
- * @return `ftxui::Component`
+ * @return `std::shared_ptr<Tabs>`
  * @see `Tabs`
  */
-ftxui::Component make_tabs(const std::vector<ftxui::Element>&   headers,
-                           const std::vector<ftxui::Component>& tabs);
+std::shared_ptr<Tabs> make_tabs(const std::vector<ftxui::Element>&   headers,
+                                const std::vector<ftxui::Component>& tabs);
 
 
 
 
 /**
  * @brief Makes empty `Tabs` component
- * @return `ftxui::Component`
+ * @return `std::shared_ptr<Tabs>`
  * @see `Tabs`
  */
-ftxui::Component make_tabs();
+std::shared_ptr<Tabs> make_tabs();
 
 
 } // namespace smu
