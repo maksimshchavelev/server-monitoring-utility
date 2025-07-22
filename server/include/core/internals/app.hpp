@@ -157,10 +157,11 @@ class Application {
     std::mutex                                     m_modules_mutex;
     std::vector<std::unique_ptr<IModule>>          m_modules;
     std::vector<std::function<void(Application&)>> m_modules_queue; // for lazy init
-    std::shared_ptr<MainWebsocketController>       m_main_ws_controller_ptr;
     Json::Value&                                   m_server_config;
 
-    IPC m_ipc; // For interprocess communication with CLI
+    // Heavy objects (and which may throw an exception) should be created in `run`
+    std::optional<IPC> m_ipc; // For interprocess communication with CLI
+    std::optional<std::shared_ptr<MainWebsocketController>> m_main_ws_controller_ptr;
 
     // The flag is needed so that we don't save the config if we started the server with a key that
     // is not supposed to run (such as version or help output). Without this key, the error of
@@ -180,6 +181,15 @@ class Application {
 
 
     // ================================ FOR CLI COMMANDS ================================
+
+    /**
+     * @brief Receives commands from the IPC and processes them. Passed to the `IPC::run` callback
+     * @param cmd Command type
+     * @param args Command args
+     * @return The response to the command, which is then passed to smu-cli
+     */
+    std::string ipc_command_receiver(const IPC::Command cmd, const std::vector<std::string>& args);
+
 
     /**
      * @brief Get modules name, status and description

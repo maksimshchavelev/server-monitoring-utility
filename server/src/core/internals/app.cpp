@@ -42,10 +42,19 @@ void smu_server::Application::run(int argc, char** argv) {
         module_registrar(*this); // register each module
     }
 
+    // Init heavy server objects
+    m_main_ws_controller_ptr.emplace(std::make_shared<MainWebsocketController>());
+    m_ipc.emplace(IPC(ABSTRACT_SOCKET_NAME));
+
+    // Proceed commands from CLI
+    m_ipc.value().run([&](const IPC::Command cmd, const std::vector<std::string>& args) {
+        return ipc_command_receiver(cmd, args);
+    });
+
     // Get port from config
     uint16_t port = static_cast<uint16_t>(m_server_config["port"].asUInt());
 
-    drogon::app().addListener("0.0.0.0", port).registerController(m_main_ws_controller_ptr);
+    drogon::app().addListener("0.0.0.0", port).registerController(m_main_ws_controller_ptr.value());
     drogon::app().getLoop()->runAfter(0.0, [this]() { run_sending_metrics_async(); });
     drogon::app().run();
 }
@@ -88,11 +97,11 @@ void smu_server::Application::run_sending_metrics_async() {
             std::this_thread::sleep_for(std::chrono::milliseconds(
                 send_interval)); // sleep for `sleep_interval_ms` milliseconds
 
-            if (m_main_ws_controller_ptr->get_connections_count() > 0) {
+            if (m_main_ws_controller_ptr.value()->get_connections_count() > 0) {
                 auto metrics = collect_metrics();
                 if (!metrics.empty()) {
                     // If metrics are empty
-                    m_main_ws_controller_ptr->send_everyone(metrics);
+                    m_main_ws_controller_ptr.value()->send_everyone(metrics);
                 }
             }
         }
@@ -134,71 +143,7 @@ void smu_server::Application::save_configs() const noexcept {
 
 // Private constructor
 smu_server::Application::Application() :
-    m_main_ws_controller_ptr(std::make_shared<MainWebsocketController>()),
-    m_server_config(ConfigManager::instance().get_server_config()), m_ipc(ABSTRACT_SOCKET_NAME) {
-
-
-    // Proceed commands from CLI
-    m_ipc.run([&](const IPC::Command cmd, const std::vector<std::string>& args) -> std::string {
-        // --list <args>
-        if (cmd == IPC::Command::LIST) {
-            // --list modules
-            if (args[0] == "modules") {
-                return list_modules();
-            }
-        }
-
-
-        // --run <args>
-        if (cmd == IPC::Command::RUN) {
-            // --run <modules>
-            for (const auto& module_name : args) {
-
-                if (auto iter = std::find_if(
-                        m_modules.begin(),
-                        m_modules.end(),
-                        [&](const auto& module) { return module->module_name() == module_name; });
-                    iter != m_modules.end()) {
-
-                    // If found module with name `module_name`
-                    (*iter)->enable();
-                    return "\033[32mDone!\033[0m";
-
-                } else {
-                    // Return red error
-                    return std::format("\033[31mModule with name {} doesn't exists!\033[0m",
-                                       module_name);
-                }
-            }
-        }
-
-
-        // --stop <args>
-        if (cmd == IPC::Command::STOP) {
-            // --run <modules>
-            for (const auto& module_name : args) {
-
-                if (auto iter = std::find_if(
-                        m_modules.begin(),
-                        m_modules.end(),
-                        [&](const auto& module) { return module->module_name() == module_name; });
-                    iter != m_modules.end()) {
-
-                    // If found module with name `module_name`
-                    (*iter)->disable();
-                    return "\033[32mDone!\033[0m";
-
-                } else {
-                    // Return red error
-                    return std::format("\033[31mModule with name {} doesn't exists!\033[0m",
-                                       module_name);
-                }
-            }
-        }
-
-        return "Invalid syntax";
-    });
-}
+    m_server_config(ConfigManager::instance().get_server_config()) {}
 
 
 
@@ -250,6 +195,72 @@ bool smu_server::Application::parse_argv(int argc, char** argv) const noexcept {
 
 
 // ================================ FOR CLI COMMANDS ================================
+
+
+// Private method
+std::string smu_server::Application::ipc_command_receiver(const IPC::Command              cmd,
+                                                          const std::vector<std::string>& args) {
+    // --list <args>
+    if (cmd == IPC::Command::LIST) {
+        // --list modules
+        if (args[0] == "modules") {
+            return list_modules();
+        }
+    }
+
+
+    // --run <args>
+    if (cmd == IPC::Command::RUN) {
+        // --run <modules>
+        for (const auto& module_name : args) {
+
+            if (auto iter = std::find_if(
+                    m_modules.begin(),
+                    m_modules.end(),
+                    [&](const auto& module) { return module->module_name() == module_name; });
+                iter != m_modules.end()) {
+
+                // If found module with name `module_name`
+                (*iter)->enable();
+                return "\033[32mDone!\033[0m";
+
+            } else {
+                // Return red error
+                return std::format("\033[31mModule with name {} doesn't exists!\033[0m",
+                                   module_name);
+            }
+        }
+    }
+
+
+    // --stop <args>
+    if (cmd == IPC::Command::STOP) {
+        // --run <modules>
+        for (const auto& module_name : args) {
+
+            if (auto iter = std::find_if(
+                    m_modules.begin(),
+                    m_modules.end(),
+                    [&](const auto& module) { return module->module_name() == module_name; });
+                iter != m_modules.end()) {
+
+                // If found module with name `module_name`
+                (*iter)->disable();
+                return "\033[32mDone!\033[0m";
+
+            } else {
+                // Return red error
+                return std::format("\033[31mModule with name {} doesn't exists!\033[0m",
+                                   module_name);
+            }
+        }
+    }
+
+    return "Invalid syntax";
+}
+
+
+
 
 // Private method
 std::string smu_server::Application::list_modules() const {
