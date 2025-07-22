@@ -33,38 +33,25 @@ DMI::DMI(const Json::Value& configuration) : IModule(configuration) {
         make_container_node("BIOS",
                             make_value_node("BIOS date", m_bios_date, ""),
                             make_value_node("BIOS vendor", m_bios_vendor, ""),
-                            make_value_node("BIOS version", m_bios_version, "")
-                            ),
+                            make_value_node("BIOS version", m_bios_version, "")),
 
         // BOARD INFO
         make_container_node("Board",
                             make_value_node("Board name", m_board_name, ""),
                             make_value_node("Board vendor", m_board_vendor, ""),
-                            make_value_node("Board version", m_board_version, "")
-                            ),
+                            make_value_node("Board version", m_board_version, "")),
 
         // CHASSIS INFO
         make_container_node("Chassis",
                             make_value_node("Chassis type", m_chassis_type, ""),
-                            make_value_node("Chassis vendor", m_chassis_vendor, "")
-                            ),
+                            make_value_node("Chassis vendor", m_chassis_vendor, "")),
 
         // PRODUCT INFO
         make_container_node("Product",
                             make_value_node("Product name", m_product_name, ""),
                             make_value_node("Product family", m_product_family, ""),
                             make_value_node("Product serial", m_product_serial, ""),
-                            make_value_node("Product UUID", m_product_uuid, "")
-                            )
-        );
-}
-
-
-
-
-// Public method
-const Json::Value& DMI::get_configuration() const {
-    return m_configuration;
+                            make_value_node("Product UUID", m_product_uuid, "")));
 }
 
 

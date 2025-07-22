@@ -29,11 +29,6 @@ class DMI : public IModule {
 
 
 
-    const Json::Value& get_configuration() const override;
-
-
-
-
     std::optional<Json::Value> get_data() override;
 
 
