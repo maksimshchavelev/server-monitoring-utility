@@ -21,21 +21,17 @@ smu_server::Application& smu_server::Application::instance() {
 
 
 // Public method
-void smu_server::Application::run() {
-    // Foreach over modules and print log
-    for (const auto& module : m_modules) {
-        // Get colorful status (RUNNING/STOPPED)
-        std::string module_status =
-            module->is_enabled() ? "\033[32mRUNNING\033[0m" : "\033[31mSTOPPED\033[0m";
+void smu_server::Application::add_module_to_queue(
+    std::function<void(Application&)> register_function) {
+    m_modules_queue.push_back(std::move(register_function));
+}
 
-        // Print colorful log
-        std::cout << std::format("\033[32mRegistered\033[0m a module with name "
-                                 "\"\033[36m{}\033[0m\" and description \"\033[36m{}\033[0m\" ({})",
-                                 module->module_name(),
-                                 module->module_description(),
-                                 module_status)
-                  << std::endl;
-    }
+
+
+
+// Public method
+void smu_server::Application::run() {
+
 
 
     // Get port from config
