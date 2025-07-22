@@ -52,31 +52,11 @@ class Application {
             requires { ModuleType(Json::Value()); },
             "Module must be constructible from const Json::Value&");
 
-
-        std::cout << std::format("[INFO] Registering module with name \"{}\" (description: \"{}\")",
-                                 ModuleType::module_name_static(),
-                                 ModuleType::module_description_static())
-                  << std::endl;
-
         auto config = ConfigManager::instance().get_module_config(ModuleType::module_name_static());
-
-        if (config.empty()) {
-            // Print yellow warning
-            std::cout << std::format(
-                             "\033[33m[WARNING] Config of module with name \"{}\" is empty!\033[0m",
-                             ModuleType::module_name_static())
-                      << std::endl;
-        }
 
         auto                        module = std::make_unique<ModuleType>(config);
         std::lock_guard<std::mutex> lock(m_modules_mutex);
         m_modules.push_back(std::move(module));
-
-        // Print green success
-        std::cout << std::format(
-                         "\033[32m[INFO] Successfully registered a module with name \"{}\"\033[0m",
-                         ModuleType::module_name_static())
-                  << std::endl;
     }
 
 

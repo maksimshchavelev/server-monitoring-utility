@@ -22,6 +22,22 @@ smu_server::Application& smu_server::Application::instance() {
 
 // Public method
 void smu_server::Application::run() {
+    // Foreach over modules and print log
+    for (const auto& module : m_modules) {
+        // Get colorful status (RUNNING/STOPPED)
+        std::string module_status =
+            module->is_enabled() ? "\033[32mRUNNING\033[0m" : "\033[31mSTOPPED\033[0m";
+
+        // Print colorful log
+        std::cout << std::format("\033[32mRegistered\033[0m a module with name "
+                                 "\"\033[36m{}\033[0m\" and description \"\033[36m{}\033[0m\" ({})",
+                                 module->module_name(),
+                                 module->module_description(),
+                                 module_status)
+                  << std::endl;
+    }
+
+
     // Get port from config
     uint16_t port = static_cast<uint16_t>(m_server_config["port"].asUInt());
 
@@ -120,24 +136,25 @@ smu_server::Application::Application() :
 
     // Proceed commands from CLI
     m_ipc.run([&](const IPC::Command cmd, const std::vector<std::string>& args) -> std::string {
-
         // --list <args>
-        if(cmd == IPC::Command::LIST) {
+        if (cmd == IPC::Command::LIST) {
             // --list modules
-            if(args[0] == "modules") {
+            if (args[0] == "modules") {
                 return list_modules();
             }
         }
 
 
         // --run <args>
-        if(cmd == IPC::Command::RUN) {
+        if (cmd == IPC::Command::RUN) {
             // --run <modules>
-            for(const auto& module_name : args) {
+            for (const auto& module_name : args) {
 
-                if(auto iter = std::find_if(m_modules.begin(), m_modules.end(), [&](const auto& module) {
-                        return module->module_name() == module_name;
-                    }); iter != m_modules.end()) {
+                if (auto iter = std::find_if(
+                        m_modules.begin(),
+                        m_modules.end(),
+                        [&](const auto& module) { return module->module_name() == module_name; });
+                    iter != m_modules.end()) {
 
                     // If found module with name `module_name`
                     (*iter)->enable();
@@ -145,21 +162,23 @@ smu_server::Application::Application() :
 
                 } else {
                     // Return red error
-                    return std::format("\033[31mModule with name {} doesn't exists!\033[0m", module_name);
+                    return std::format("\033[31mModule with name {} doesn't exists!\033[0m",
+                                       module_name);
                 }
-
             }
         }
 
 
         // --stop <args>
-        if(cmd == IPC::Command::STOP) {
+        if (cmd == IPC::Command::STOP) {
             // --run <modules>
-            for(const auto& module_name : args) {
+            for (const auto& module_name : args) {
 
-                if(auto iter = std::find_if(m_modules.begin(), m_modules.end(), [&](const auto& module) {
-                        return module->module_name() == module_name;
-                    }); iter != m_modules.end()) {
+                if (auto iter = std::find_if(
+                        m_modules.begin(),
+                        m_modules.end(),
+                        [&](const auto& module) { return module->module_name() == module_name; });
+                    iter != m_modules.end()) {
 
                     // If found module with name `module_name`
                     (*iter)->disable();
@@ -167,9 +186,9 @@ smu_server::Application::Application() :
 
                 } else {
                     // Return red error
-                    return std::format("\033[31mModule with name {} doesn't exists!\033[0m", module_name);
+                    return std::format("\033[31mModule with name {} doesn't exists!\033[0m",
+                                       module_name);
                 }
-
             }
         }
 
@@ -188,15 +207,13 @@ smu_server::Application::~Application() {
 
 
 
-
 // ================================ FOR CLI COMMANDS ================================
 
 // Private method
-std::string smu_server::Application::list_modules() const
-{
+std::string smu_server::Application::list_modules() const {
     std::string result = "NAME\t\tSTATUS\t\tDESCRIPTION\n";
 
-    for(const auto& module : m_modules) {
+    for (const auto& module : m_modules) {
         std::string current_module_info(1, '\n');
 
         // Module name
@@ -206,7 +223,7 @@ std::string smu_server::Application::list_modules() const
         current_module_info.append("\t\t");
 
         // Status
-        if(module->is_enabled()) {
+        if (module->is_enabled()) {
             // Print green module name
             current_module_info.append("\033[32mRUNNING\033[0m");
         } else {
