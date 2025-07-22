@@ -33,7 +33,8 @@ void smu_server::Application::add_module_to_queue(
 
 // Public method
 void smu_server::Application::run(int argc, char** argv) {
-    if(parse_argv(argc, argv)) {
+    if (parse_argv(argc, argv)) {
+        m_need_save_config_in_destructor = false;
         return; // Exit server without running
     }
 
@@ -204,7 +205,9 @@ smu_server::Application::Application() :
 
 // Private destructor
 smu_server::Application::~Application() {
-    save_configs();
+    if (m_need_save_config_in_destructor) {
+        save_configs();
+    }
 }
 
 

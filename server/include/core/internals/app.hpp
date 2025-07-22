@@ -162,6 +162,11 @@ class Application {
 
     IPC m_ipc; // For interprocess communication with CLI
 
+    // The flag is needed so that we don't save the config if we started the server with a key that
+    // is not supposed to run (such as version or help output). Without this key, the error of
+    // saving the config is output in the destructor (because we run without superuser rights).
+    bool m_need_save_config_in_destructor{true};
+
 
     /**
      * @brief Parses command line arguments
