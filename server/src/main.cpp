@@ -27,7 +27,9 @@ int main(int argc, char** argv) {
                                  PROJECT_VERSION_MINOR,
                                  PROJECT_VERSION_PATCH)
                   << std::endl;
+        return EXIT_SUCCESS;
     } else if (result.contains("help") || result.contains("h")) {
+        return EXIT_SUCCESS;
         std::cout << options.help();
     }
 
