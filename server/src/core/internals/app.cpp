@@ -9,6 +9,8 @@
 
 #include "core/internals/app.hpp"
 #include "compile-time_config.hpp"
+#include "version.hpp"
+#include <cxxopts.hpp>
 
 
 // Public constructor
@@ -30,8 +32,12 @@ void smu_server::Application::add_module_to_queue(
 
 
 // Public method
-void smu_server::Application::run() {
-    for(const auto& module_registrar : m_modules_queue) {
+void smu_server::Application::run(int argc, char** argv) {
+    if(parse_argv(argc, argv)) {
+        return; // Exit server without running
+    }
+
+    for (const auto& module_registrar : m_modules_queue) {
         module_registrar(*this); // register each module
     }
 
@@ -199,6 +205,42 @@ smu_server::Application::Application() :
 // Private destructor
 smu_server::Application::~Application() {
     save_configs();
+}
+
+
+
+
+// Private method
+bool smu_server::Application::parse_argv(int argc, char** argv) const noexcept {
+    cxxopts::Options options("smu-server", "Server part included in server-monitoring-utility");
+
+    options.add_options()("version", "Show smu-server version")("h,help", "Show help information");
+
+    cxxopts::ParseResult result;
+
+    try {
+        result = options.parse(argc, argv);
+    } catch (std::exception& e) {
+        std::cout << "Argument parsing error: " << e.what() << std::endl;
+        return true; // exit
+    }
+
+    // --version
+    if (result.contains("version")) {
+        std::cout << std::format("smu-server version is {}.{}.{}",
+                                 PROJECT_VERSION_MAJOR,
+                                 PROJECT_VERSION_MINOR,
+                                 PROJECT_VERSION_PATCH)
+                  << std::endl;
+        return true; // exit
+    }
+    // --help
+    else if (result.contains("help") || result.contains("h")) {
+        std::cout << options.help();
+        return true; // exit
+    }
+
+    return false;
 }
 
 

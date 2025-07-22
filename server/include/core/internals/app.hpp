@@ -117,9 +117,12 @@ class Application {
 
     /**
      * @brief Run the application.
-     * @note Blocks main thread
+     * @note Blocks main thread. May exit depending on argv (e.g. `--version` or `--help` key
+     * received)
+     * @param argc Count of command line arguments
+     * @param argv Values of command line arguments
      */
-    void run();
+    void run(int argc, char** argv);
 
 
 
@@ -158,6 +161,17 @@ class Application {
     Json::Value&                                   m_server_config;
 
     IPC m_ipc; // For interprocess communication with CLI
+
+
+    /**
+     * @brief Parses command line arguments
+     * @param argc Count of command line arguments
+     * @param argv Values of command line arguments
+     * @return `true` if arguments that imply server termination are parsed, such as `--version` or
+     * `--help`, otherwise (or when parsing error) false
+     * @note Can print text (help, version or error...)
+     */
+    bool parse_argv(int argc, char** argv) const noexcept;
 
 
     // ================================ FOR CLI COMMANDS ================================
