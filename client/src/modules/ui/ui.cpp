@@ -43,7 +43,6 @@ void UI::run_async() {
 
 // Public method
 void UI::stop() {
-    m_screen.ExitLoopClosure()();
     m_screen.Exit();
 
     while (m_screen.Active()) {
