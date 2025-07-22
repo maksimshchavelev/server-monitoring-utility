@@ -51,9 +51,11 @@ class IModule {
     /**
      * @brief Method for obtaining module configuration
      * @return `Json::Value&`
-     * @note Implement this method in the inheritor class
      */
-    virtual const Json::Value& get_configuration() const = 0;
+    virtual const Json::Value& get_configuration() const noexcept;
+
+
+
 
     /**
      * @brief Get module data to send to the client

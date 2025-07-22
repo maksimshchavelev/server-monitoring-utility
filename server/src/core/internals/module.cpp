@@ -18,6 +18,14 @@ smu_server::IModule::IModule(const Json::Value& configuration) : m_configuration
 
 
 // Public method
+const Json::Value& smu_server::IModule::get_configuration() const noexcept {
+    return m_configuration;
+}
+
+
+
+
+// Public method
 void smu_server::IModule::enable() {
     m_enabled = true;
 }
