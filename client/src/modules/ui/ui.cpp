@@ -102,6 +102,11 @@ ftxui::Component UI::unwrap_module(const Json::Value& data) {
             std::string value = inner_node["value"].asString();
             std::string units = inner_node["units"].asString();
 
+            // Display N/A if value is empty
+            if(value.empty()) {
+                value = "N/A";
+            }
+
             Color text_color(Color::RGB(255, 255, 255));
             bool  alarm_flag{false};
 
