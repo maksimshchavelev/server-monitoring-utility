@@ -30,14 +30,6 @@ RAM::RAM(const Json::Value& config) : IModule(config) {
 
 
 // Public method
-const Json::Value& RAM::get_configuration() const {
-    return m_configuration;
-}
-
-
-
-
-// Public method
 std::optional<Json::Value> RAM::get_data() {
     if (!is_enabled())
         return std::nullopt;
