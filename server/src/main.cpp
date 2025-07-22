@@ -29,8 +29,8 @@ int main(int argc, char** argv) {
                   << std::endl;
         return EXIT_SUCCESS;
     } else if (result.contains("help") || result.contains("h")) {
-        return EXIT_SUCCESS;
         std::cout << options.help();
+        return EXIT_SUCCESS;
     }
 
 
