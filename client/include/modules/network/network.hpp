@@ -32,8 +32,11 @@ class Network {
      * @brief Runs module
      * @param on_message Callback that is called when data is received from
      * the server and has the signature `void (const std::string&)`
+     * @param on_connection_error Callback that is called when a connection error occurs. The reason
+     * message is passed to it
      */
-    void run(std::function<void(const std::string&)> on_message);
+    void run(std::function<void(const std::string&)> on_message,
+             std::function<void(const std::string&)> on_connection_error);
 
 
 

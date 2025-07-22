@@ -31,12 +31,20 @@ Tabs::Tabs(const std::vector<ftxui::Element>& headers, const std::vector<ftxui::
 ftxui::Element Tabs::OnRender() {
     using namespace ftxui;
 
+    // Prevent crash. We can't get a reference to a non-existent element if m_tabs.size() == 0
+    if (m_tabs.empty())
+        return text("Nothing to render");
+
+    // else
+
     int screen_size_y = Terminal::Size().dimy;
 
     const auto& selected_content = m_tabs[m_current_tab];
 
     std::vector<Element> visible_headers;
-    for(std::size_t i = m_first_visible_header; i < std::min(m_last_visible_header + 1, m_tabs_count); ++i) {
+    for (std::size_t i = m_first_visible_header;
+         i < std::min(m_last_visible_header + 1, m_tabs_count);
+         ++i) {
         visible_headers.push_back(m_headers[i]);
     }
 
@@ -62,7 +70,7 @@ bool Tabs::OnEvent(ftxui::Event e) {
             ++m_current_tab;
             m_headers[m_current_tab] |= inverted;
 
-            if(screen_height - 2 < m_headers.size()) {
+            if (screen_height - 2 < m_headers.size()) {
                 ++m_first_visible_header;
                 ++m_last_visible_header;
             }
@@ -76,11 +84,11 @@ bool Tabs::OnEvent(ftxui::Event e) {
             --m_current_tab;
             m_headers[m_current_tab] |= inverted;
 
-            if(screen_height - 2 < m_headers.size()) {
+            if (screen_height - 2 < m_headers.size()) {
                 --m_first_visible_header;
                 --m_last_visible_header;
             } else {
-                if(m_first_visible_header > 0) {
+                if (m_first_visible_header > 0) {
                     --m_first_visible_header;
                 }
             }
@@ -94,10 +102,38 @@ bool Tabs::OnEvent(ftxui::Event e) {
 
 
 
+// Public method
+void Tabs::set_data(std::vector<ftxui::Element>&&   headers,
+                    std::vector<ftxui::Component>&& content) {
+    if (headers.size() != content.size()) {
+        throw std::runtime_error("Headers count must be equal tabs count");
+    }
+
+    m_headers = std::move(headers);
+    m_tabs = std::move(content);
+
+    m_tabs_count = m_headers.size();
+    m_headers[m_current_tab] |= ftxui::inverted;
+
+    m_last_visible_header =
+        std::min({m_tabs_count, static_cast<std::size_t>(ftxui::Terminal::Size().dimy - 2)});
+}
+
+
+
+
 // External method
-ftxui::Component make_tabs(const std::vector<ftxui::Element>&   headers,
+std::shared_ptr<Tabs> make_tabs(const std::vector<ftxui::Element>&   headers,
                            const std::vector<ftxui::Component>& tabs) {
-    return ftxui::Make<Tabs>(headers, tabs);
+    return std::make_shared<Tabs>(headers, tabs);
+}
+
+
+
+
+// External method
+std::shared_ptr<Tabs> make_tabs() {
+    return std::make_shared<Tabs>();
 }
 
 

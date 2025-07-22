@@ -1,7 +1,8 @@
 cmake_minimum_required(VERSION 3.28 FATAL_ERROR)
 
-project(smu VERSION 0.1.0 LANGUAGES CXX)
+project(smu VERSION 0.1.2 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 set(CMAKE_INSTALL_PREFIX /usr/local)
 
@@ -19,6 +20,27 @@ configure_file(
   ${CMAKE_CURRENT_SOURCE_DIR}/include/compile-time_config.hpp
   @ONLY
 )
+
+
+
+# Enable sanitizers if Debug
+if(CMAKE_CXX_COMPILER_ID MATCHES "Clang|GNU" AND ${CMAKE_BUILD_TYPE} STREQUAL "Debug")
+    message(STATUS "${PROJECT_NAME}: Using GCC/Clang sanitizer configuration")
+
+    # Base Debug flags
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -Wextra -Wpedantic -g")
+
+    # _GLIBCXX_DEBUG
+    message(STATUS "${PROJECT_NAME}: Enabling _GLIBCXX_DEBUG")
+    add_compile_definitions(_GLIBCXX_DEBUG)
+
+    # Sanitizers
+    message(STATUS "${PROJECT_NAME}: Enabling ASan and UBSan")
+    set(SANITIZER_FLAGS "-fsanitize=address,undefined,leak -fno-omit-frame-pointer")
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} ${SANITIZER_FLAGS}")
+    set(CMAKE_LINKER_FLAGS_DEBUG "${CMAKE_LINKER_FLAGS_DEBUG} ${SANITIZER_FLAGS}")
+endif()
+
 
 
 
