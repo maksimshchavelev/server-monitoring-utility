@@ -31,9 +31,6 @@ RAM::RAM(const Json::Value& config) : IModule(config) {
 
 // Public method
 std::optional<Json::Value> RAM::get_data() {
-    if (!is_enabled())
-        return std::nullopt;
-
     struct sysinfo info;
 
     if (sysinfo(&info) == -1) { // error
