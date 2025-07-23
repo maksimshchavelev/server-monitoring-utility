@@ -53,9 +53,8 @@ class DMI : public IModule {
     std::string m_product_serial;
     std::string m_product_uuid;
 
-
-    // To avoid regular construction of an object from static data
-    std::unique_ptr<IMetricNodeBase> m_root;
+    // Root json
+    Json::Value m_root;
 
 
 

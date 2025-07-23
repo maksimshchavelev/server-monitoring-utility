@@ -29,29 +29,30 @@ DMI::DMI(const Json::Value& configuration) : IModule(configuration) {
 
 
     m_root = make_root_node(
-        // BIOS INFO
-        make_container_node("BIOS",
-                            make_value_node("BIOS date", m_bios_date, ""),
-                            make_value_node("BIOS vendor", m_bios_vendor, ""),
-                            make_value_node("BIOS version", m_bios_version, "")),
+                 // BIOS INFO
+                 make_container_node("BIOS",
+                                     make_value_node("BIOS date", m_bios_date, ""),
+                                     make_value_node("BIOS vendor", m_bios_vendor, ""),
+                                     make_value_node("BIOS version", m_bios_version, "")),
 
-        // BOARD INFO
-        make_container_node("Board",
-                            make_value_node("Board name", m_board_name, ""),
-                            make_value_node("Board vendor", m_board_vendor, ""),
-                            make_value_node("Board version", m_board_version, "")),
+                 // BOARD INFO
+                 make_container_node("Board",
+                                     make_value_node("Board name", m_board_name, ""),
+                                     make_value_node("Board vendor", m_board_vendor, ""),
+                                     make_value_node("Board version", m_board_version, "")),
 
-        // CHASSIS INFO
-        make_container_node("Chassis",
-                            make_value_node("Chassis type", m_chassis_type, ""),
-                            make_value_node("Chassis vendor", m_chassis_vendor, "")),
+                 // CHASSIS INFO
+                 make_container_node("Chassis",
+                                     make_value_node("Chassis type", m_chassis_type, ""),
+                                     make_value_node("Chassis vendor", m_chassis_vendor, "")),
 
-        // PRODUCT INFO
-        make_container_node("Product",
-                            make_value_node("Product name", m_product_name, ""),
-                            make_value_node("Product family", m_product_family, ""),
-                            make_value_node("Product serial", m_product_serial, ""),
-                            make_value_node("Product UUID", m_product_uuid, "")));
+                 // PRODUCT INFO
+                 make_container_node("Product",
+                                     make_value_node("Product name", m_product_name, ""),
+                                     make_value_node("Product family", m_product_family, ""),
+                                     make_value_node("Product serial", m_product_serial, ""),
+                                     make_value_node("Product UUID", m_product_uuid, "")))
+                 ->to_json();
 }
 
 
@@ -59,7 +60,7 @@ DMI::DMI(const Json::Value& configuration) : IModule(configuration) {
 
 // Public method
 std::optional<Json::Value> DMI::get_data() {
-    return m_root->to_json();
+    return m_root;
 }
 
 
