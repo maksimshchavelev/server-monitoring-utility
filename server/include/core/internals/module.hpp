@@ -30,8 +30,7 @@ class IModule {
      * via the `get_configuration()` method
      *
      * @warning When the program is first run, an empty Json::Value is passed, in which
-     * case it must be filled in by yourself. Below are the requirements for json:
-     * - Must contain a `name` field that clearly reflects the purpose of the module.
+     * case it must be filled in by yourself.
      *
      * @see `get_configuration()`
      */
