@@ -32,7 +32,7 @@ bool parse_own_arguments(int argc, char** argv) noexcept {
 
     try {
         result = options.parse(argc, argv);
-    } catch (std::exception& e) {
+    } catch (const std::exception& e) {
         return false; // not parsed
     }
 
@@ -138,10 +138,8 @@ std::expected<std::string, std::string> read_message(int        socket_fd,
     std::string result;
     char        buffer[256];
 
-    ssize_t rd_res{0};
-
     while (true) {
-        rd_res = recv(socket_fd, buffer, sizeof(buffer), 0);
+        ssize_t rd_res = recv(socket_fd, buffer, sizeof(buffer), 0);
 
         // Error occured
         if (rd_res == -1) {

@@ -18,21 +18,12 @@ namespace smu_server {
 
 // Public method
 RAM::RAM(const Json::Value& config) : IModule(config) {
-    // If config is empty
+    // Create new configuration
     if (m_configuration.empty()) {
-        // Create new configuration
         m_configuration["enabled"] = true;
-    } else {
-        m_enabled = m_configuration["enabled"].asBool();
     }
-}
 
-
-
-
-// Public method
-const Json::Value& RAM::get_configuration() const {
-    return m_configuration;
+    m_enabled = m_configuration["enabled"].asBool();
 }
 
 
@@ -40,9 +31,6 @@ const Json::Value& RAM::get_configuration() const {
 
 // Public method
 std::optional<Json::Value> RAM::get_data() {
-    if (!is_enabled())
-        return std::nullopt;
-
     struct sysinfo info;
 
     if (sysinfo(&info) == -1) { // error
