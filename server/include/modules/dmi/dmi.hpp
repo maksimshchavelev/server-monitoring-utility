@@ -55,7 +55,7 @@ class DMI : public IModule {
 
 
     // To avoid regular construction of an object from static data
-    std::unique_ptr<internals::IMetricNodeBase> m_root;
+    std::unique_ptr<IMetricNodeBase> m_root;
 
 
 
