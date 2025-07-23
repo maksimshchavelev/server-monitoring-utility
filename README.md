@@ -39,6 +39,11 @@ You can change the following flags during the configuration phase:
 | -DBUILD_CLIENT | Does the client part need to be built | ON |
 | -DBUILD_CLI | Does the CLI part need to be built | ON |
 
+For example:
+```bash
+cmake .. -DBUILD_SERVER=OFF
+```
+
 ## License
 
 This project is licensed under the [GPLv3 License](./LICENSE).
