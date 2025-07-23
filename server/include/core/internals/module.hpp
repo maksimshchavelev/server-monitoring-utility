@@ -162,7 +162,7 @@ class IModule {
      * @param message Message to log
      * @note Prints white message if `log_type` is incorrect
      */
-    void log(LogType log_type, std::string_view message);
+    void log(LogType log_type, const std::string_view message);
 };
 
 } // end of namespace smu_server
