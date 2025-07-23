@@ -32,7 +32,7 @@ class IModule {
      * @warning When the program is first run, an empty Json::Value is passed, in which
      * case it must be filled in by yourself.
      *
-     * @see `get_configuration()`
+     * @see get_configuration()
      */
     IModule(const Json::Value& configuration);
 
@@ -49,7 +49,7 @@ class IModule {
 
     /**
      * @brief Method for obtaining module configuration
-     * @return `Json::Value&`
+     * @return Json::Value&
      */
     virtual const Json::Value& get_configuration() const noexcept;
 
