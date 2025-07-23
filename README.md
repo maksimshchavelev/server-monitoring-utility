@@ -30,6 +30,15 @@ Download the source code from the releases, unzip it somewhere. In the directory
 In the `package` directory, you will see the built packages that you can install using your package manager
 
 
+## Building of individual parts
+You can change the following flags during the configuration phase:
+
+| Flag | Effect | Default |
+|-|-|-|
+| -DBUILD_SERVER | Does the server part need to be built | ON |
+| -DBUILD_CLIENT | Does the client part need to be built | ON |
+| -DBUILD_CLI | Does the CLI part need to be built | ON |
+
 ## License
 
 This project is licensed under the [GPLv3 License](./LICENSE).

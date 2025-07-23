@@ -12,16 +12,29 @@
 #include <tuple>
 #include <utils/for_each_tuple.hpp>
 
-namespace smu_server::internals {
+namespace smu_server {
 
 /**
- * @brief The Base IMetricNode class to simplification
- * requires clause in IMetricNode
+ * @brief The Base IMetricNode class to make it easier to use. See details
+ * @details First, you can create a smart pointer to `IMetricNodeBase` if you create nodes
+ * via factory methods in the module constructor, in which case you can get json by calling
+ * IMetricNodeBase::to_json(). This greatly improves performance when working with static
+ * data, since you don't have to recreate nodes.
+ * Second, it simplifies the requires clause in `IMetricNode` (implementation detail)
  * @see IMetricNode
  */
-struct IMetricNodeBase {};
+struct IMetricNodeBase {
+    /**
+     * @brief Get json
+     * @return The generated json
+     */
+    virtual Json::Value to_json() const = 0;
+
+    virtual ~IMetricNodeBase() = default;
+};
 
 
+namespace internals {
 
 
 // ===================================================================
@@ -192,4 +205,6 @@ template <typename... Children> class MetricContainerNode : public IMetricNode<C
     }
 };
 
-} // namespace smu_server::internals
+} // namespace internals
+
+} // namespace smu_server

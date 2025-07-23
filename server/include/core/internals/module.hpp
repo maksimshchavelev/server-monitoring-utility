@@ -30,10 +30,9 @@ class IModule {
      * via the `get_configuration()` method
      *
      * @warning When the program is first run, an empty Json::Value is passed, in which
-     * case it must be filled in by yourself. Below are the requirements for json:
-     * - Must contain a `name` field that clearly reflects the purpose of the module.
+     * case it must be filled in by yourself.
      *
-     * @see `get_configuration()`
+     * @see get_configuration()
      */
     IModule(const Json::Value& configuration);
 
@@ -50,41 +49,21 @@ class IModule {
 
     /**
      * @brief Method for obtaining module configuration
-     * @return `Json::Value&`
-     * @note Implement this method in the inheritor class
+     * @return Json::Value&
      */
-    virtual const Json::Value& get_configuration() const = 0;
+    virtual const Json::Value& get_configuration() const noexcept;
+
+
+
 
     /**
      * @brief Get module data to send to the client
-     *
-     * @details Suppose the module monitors CPU load, then it should render json like this:
-     *
-     * ```
-     * {
-     *  "core1": {
-     *      "type": "value"
-     *      "displayed_name": "Core 1",
-     *      "value": 50,
-     *      "unit": "percents"
-     *  },
-     *  "core2": {
-     *      "type": "value"
-     *      "displayed_name": "Core 2",
-     *      "value": 2,
-     *      "unit": "percents"
-     *  }
-     * }
-     *
-     * ```
-     * Keep in mind that json consists of nested objects that are either containers
-     * (into other objects) or values (this is done for ease of parsing and building
-     * client-side UI). * Either way, they must have fields `displayed_name`
-     * (name displayed on the client side) and `type` (type of object - `container`
-     * or `value`).
-     *
-     * @return std::optional<Json::Value> with Json::Value inside *if module is
-     * running*
+     * @note Use `make_root_node`, `make_container_node` or `make_value_node` to form correct json.
+     * See documentation or [this
+     * guide](https://github.com/maksimshchavelev/server-monitoring-utility/blob/master/server/for-developers/own_module.md)
+     * @see make_root_node
+     * @see make_container_node
+     * @see make_value_node
      */
     virtual std::optional<Json::Value> get_data() = 0;
 
@@ -140,6 +119,27 @@ class IModule {
   protected:
     Json::Value m_configuration;
     bool        m_enabled{false};
+
+    // =============================== LOGGER ===============================
+
+    /**
+     * @brief Describes log type. Affects the color of messages
+     */
+    enum class LogType { INFO, WARNING, ERROR };
+
+
+
+
+    /**
+     * @brief Outputs the log
+     * @param log_type Log type. Takes the following values:
+     * LogType::INFO - white log
+     * LogType::INFO - yellow log
+     * LogType::ERROR - red log
+     * @param message Message to log
+     * @note Prints white message if `log_type` is incorrect
+     */
+    void log(LogType log_type, const std::string_view message);
 };
 
 } // end of namespace smu_server

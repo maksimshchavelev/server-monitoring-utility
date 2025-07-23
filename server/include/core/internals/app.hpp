@@ -12,6 +12,7 @@
 #include "core/controllers/websocket_main_controller.hpp"
 #include "ipc/ipc.hpp"
 #include "module.hpp"
+#include <functional>
 #include <memory>
 #include <mutex>
 #include <vector>
@@ -43,6 +44,9 @@ class Application {
 
     /**
      * @brief Register module with type `ModuleType`
+     * @note Used only in `ModuleRegistrar`. Do not use directly. Instead, use `add_module_to_queue`
+     * for lazy initialization
+     * @see `add_module_to_queue`
      */
     template <typename ModuleType>
     void register_module()
@@ -53,40 +57,79 @@ class Application {
             "Module must be constructible from const Json::Value&");
 
 
-        std::cout << std::format("[INFO] Registering module with name \"{}\" (description: \"{}\")",
+        // Print log
+        std::cout << std::format("Registering a module with name "
+                                 "\"\033[36m{}\033[0m\" and description \"\033[36m{}\033[0m\"...",
                                  ModuleType::module_name_static(),
                                  ModuleType::module_description_static())
                   << std::endl;
 
+
+        // Getting config
         auto config = ConfigManager::instance().get_module_config(ModuleType::module_name_static());
 
+        // For example, [MODULE RAM]
+        const std::string module_log_prefix =
+            std::format("[MODULE \033[36m{}\033[0m] ", ModuleType::module_name_static());
+
         if (config.empty()) {
-            // Print yellow warning
-            std::cout << std::format(
-                             "\033[33m[WARNING] Config of module with name \"{}\" is empty!\033[0m",
-                             ModuleType::module_name_static())
+            std::cout << module_log_prefix
+                      << "\033[33mGot empty config. Continuing with default values. \033[0m"
                       << std::endl;
         }
 
-        auto                        module = std::make_unique<ModuleType>(config);
-        std::lock_guard<std::mutex> lock(m_modules_mutex);
-        m_modules.push_back(std::move(module));
 
-        // Print green success
-        std::cout << std::format(
-                         "\033[32m[INFO] Successfully registered a module with name \"{}\"\033[0m",
-                         ModuleType::module_name_static())
-                  << std::endl;
+        // Creating module
+        std::unique_ptr<ModuleType> module;
+        bool                        creation_failed{false};
+
+        try {
+            module = std::make_unique<ModuleType>(config);
+        } catch (const std::exception& e) {
+            creation_failed = true;
+            std::cout << module_log_prefix
+                      << std::format("\033[31mRegistration failed! Cause: {}\033[0m\n", e.what())
+                      << std::endl;
+        }
+
+        if (!creation_failed) {
+            // Get colorful status (RUNNING/STOPPED)
+            std::string module_status =
+                module->is_enabled() ? "\033[32mRUNNING\033[0m" : "\033[31mSTOPPED\033[0m";
+
+            // Print colorful log
+            std::cout << module_log_prefix
+                      << std::format("\033[32mRegistered\033[0m ({})\n", module_status) << std::endl;
+
+            std::lock_guard<std::mutex> lock(m_modules_mutex);
+            m_modules.push_back(std::move(module));
+        }
     }
 
 
 
 
     /**
-     * @brief Run the application.
-     * @note Blocks main thread
+     * @brief Adds module to queue. For lazy module initialization. See details
+     * @details Adds `register_function` to the internal vector. When it is time
+     * to register a module, each function in the vector that registers the module
+     * is called. Thus, `register_function` must call `Application::register_module`
+     * *by accepted reference*.
+     * @param register_function Registration callback
      */
-    void run();
+    void add_module_to_queue(std::function<void(Application&)> register_function);
+
+
+
+
+    /**
+     * @brief Run the application.
+     * @note Blocks main thread. May exit depending on argv (e.g. `--version` or `--help` key
+     * received)
+     * @param argc Count of command line arguments
+     * @param argv Values of command line arguments
+     */
+    void run(int argc, char** argv);
 
 
 
@@ -118,15 +161,42 @@ class Application {
     Application();
     ~Application();
 
-    std::mutex                               m_modules_mutex;
-    std::vector<std::unique_ptr<IModule>>    m_modules;
-    std::shared_ptr<MainWebsocketController> m_main_ws_controller_ptr;
-    Json::Value&                             m_server_config;
+    std::mutex                                     m_modules_mutex;
+    std::vector<std::unique_ptr<IModule>>          m_modules;
+    std::vector<std::function<void(Application&)>> m_modules_queue; // for lazy init
+    Json::Value&                                   m_server_config;
 
-    IPC m_ipc; // For interprocess communication with CLI
+    // Heavy objects (and which may throw an exception) should be created in `run`
+    std::optional<IPC> m_ipc; // For interprocess communication with CLI
+    std::optional<std::shared_ptr<MainWebsocketController>> m_main_ws_controller_ptr;
+
+    // The flag is needed so that we don't save the config if we started the server with a key that
+    // is not supposed to run (such as version or help output). Without this key, the error of
+    // saving the config is output in the destructor (because we run without superuser rights).
+    bool m_need_save_config_in_destructor{true};
+
+
+    /**
+     * @brief Parses command line arguments
+     * @param argc Count of command line arguments
+     * @param argv Values of command line arguments
+     * @return `true` if arguments that imply server termination are parsed, such as `--version` or
+     * `--help`, otherwise (or when parsing error) false
+     * @note Can print text (help, version or error...)
+     */
+    bool parse_argv(int argc, char** argv) const noexcept;
 
 
     // ================================ FOR CLI COMMANDS ================================
+
+    /**
+     * @brief Receives commands from the IPC and processes them. Passed to the `IPC::run` callback
+     * @param cmd Command type
+     * @param args Command args
+     * @return The response to the command, which is then passed to smu-cli
+     */
+    std::string ipc_command_receiver(const IPC::Command cmd, const std::vector<std::string>& args);
+
 
     /**
      * @brief Get modules name, status and description
