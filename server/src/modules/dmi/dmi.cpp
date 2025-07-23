@@ -93,19 +93,19 @@ void DMI::fill_bios_info() {
     if (auto data = read_file(path + "bios_date"); data.has_value()) {
         m_bios_date = std::move(data.value());
     } else {
-        std::cout << "DMI: " << data.error() << std::endl;
+        log(LogType::WARNING, data.error());
     }
 
     if (auto data = read_file(path + "bios_vendor"); data.has_value()) {
         m_bios_vendor = std::move(data.value());
     } else {
-        std::cout << "DMI: " << data.error() << std::endl;
+        log(LogType::WARNING, data.error());
     }
 
     if (auto data = read_file(path + "bios_version"); data.has_value()) {
         m_bios_version = std::move(data.value());
     } else {
-        std::cout << "DMI: " << data.error() << std::endl;
+        log(LogType::WARNING, data.error());
     }
 }
 
@@ -119,19 +119,19 @@ void DMI::fill_board_info() {
     if (auto data = read_file(path + "board_name"); data.has_value()) {
         m_board_name = std::move(data.value());
     } else {
-        std::cout << "DMI: " << data.error() << std::endl;
+        log(LogType::WARNING, data.error());
     }
 
     if (auto data = read_file(path + "board_vendor"); data.has_value()) {
         m_board_vendor = std::move(data.value());
     } else {
-        std::cout << "DMI: " << data.error() << std::endl;
+        log(LogType::WARNING, data.error());
     }
 
     if (auto data = read_file(path + "board_version"); data.has_value()) {
         m_board_version = std::move(data.value());
     } else {
-        std::cout << "DMI: " << data.error() << std::endl;
+        log(LogType::WARNING, data.error());
     }
 }
 
@@ -145,13 +145,13 @@ void DMI::fill_chassis_info() {
     if (auto data = read_file(path + "chassis_type"); data.has_value()) {
         m_chassis_type = std::move(data.value());
     } else {
-        std::cout << "DMI: " << data.error() << std::endl;
+        log(LogType::WARNING, data.error());
     }
 
     if (auto data = read_file(path + "chassis_vendor"); data.has_value()) {
         m_chassis_vendor = std::move(data.value());
     } else {
-        std::cout << "DMI: " << data.error() << std::endl;
+        log(LogType::WARNING, data.error());
     }
 }
 
@@ -165,25 +165,25 @@ void DMI::fill_product_info() {
     if (auto data = read_file(path + "product_family"); data.has_value()) {
         m_product_family = std::move(data.value());
     } else {
-        std::cout << "DMI: " << data.error() << std::endl;
+        log(LogType::WARNING, data.error());
     }
 
     if (auto data = read_file(path + "product_name"); data.has_value()) {
         m_product_name = std::move(data.value());
     } else {
-        std::cout << "DMI: " << data.error() << std::endl;
+        log(LogType::WARNING, data.error());
     }
 
     if (auto data = read_file(path + "product_serial"); data.has_value()) {
         m_product_serial = std::move(data.value());
     } else {
-        std::cout << "DMI: " << data.error() << std::endl;
+        log(LogType::WARNING, data.error());
     }
 
     if (auto data = read_file(path + "product_uuid"); data.has_value()) {
         m_product_uuid = std::move(data.value());
     } else {
-        std::cout << "DMI: " << data.error() << std::endl;
+        log(LogType::WARNING, data.error());
     }
 }
 
