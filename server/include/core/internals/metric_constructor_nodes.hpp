@@ -12,7 +12,7 @@
 #include <tuple>
 #include <utils/for_each_tuple.hpp>
 
-namespace smu_server::internals {
+namespace smu_server {
 
 /**
  * @brief The Base IMetricNode class to make it easier to use. See details
@@ -34,6 +34,7 @@ struct IMetricNodeBase {
 };
 
 
+namespace internals {
 
 
 // ===================================================================
@@ -204,4 +205,6 @@ template <typename... Children> class MetricContainerNode : public IMetricNode<C
     }
 };
 
-} // namespace smu_server::internals
+} // namespace internals
+
+} // namespace smu_server
