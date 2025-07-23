@@ -59,19 +59,23 @@ class Application {
 
         // Print log
         std::cout << std::format("Registering a module with name "
-                                 "\"\033[36m{}\033[0m\" and description \"\033[36m{}\033[0m\"... ",
+                                 "\"\033[36m{}\033[0m\" and description \"\033[36m{}\033[0m\"...",
                                  ModuleType::module_name_static(),
-                                 ModuleType::module_description_static());
-        std::cout.flush(); // For force printing
+                                 ModuleType::module_description_static())
+                  << std::endl;
 
 
         // Getting config
         auto config = ConfigManager::instance().get_module_config(ModuleType::module_name_static());
 
+        // For example, [MODULE RAM]
+        const std::string module_log_prefix =
+            std::format("[MODULE \033[36m{}\033[0m] ", ModuleType::module_name_static());
 
         if (config.empty()) {
-            std::cout << "\033[33mGot empty config. Continuing with default values. \033[0m";
-            std::cout.flush(); // For force printing
+            std::cout << module_log_prefix
+                      << "\033[33mGot empty config. Continuing with default values. \033[0m"
+                      << std::endl;
         }
 
 
@@ -83,7 +87,9 @@ class Application {
             module = std::make_unique<ModuleType>(config);
         } catch (const std::exception& e) {
             creation_failed = true;
-            std::cout << std::format("\033[31mFailed! Cause: {}\033[0m", e.what()) << std::endl;
+            std::cout << module_log_prefix
+                      << std::format("\033[31mRegistration failed! Cause: {}\033[0m\n", e.what())
+                      << std::endl;
         }
 
         if (!creation_failed) {
@@ -92,7 +98,8 @@ class Application {
                 module->is_enabled() ? "\033[32mRUNNING\033[0m" : "\033[31mSTOPPED\033[0m";
 
             // Print colorful log
-            std::cout << std::format("\033[32mRegistered\033[0m ({})", module_status) << std::endl;
+            std::cout << module_log_prefix
+                      << std::format("\033[32mRegistered\033[0m ({})\n", module_status) << std::endl;
 
             std::lock_guard<std::mutex> lock(m_modules_mutex);
             m_modules.push_back(std::move(module));
