@@ -68,6 +68,11 @@ Json::Value smu_server::Application::collect_metrics() {
 
     std::lock_guard<std::mutex> lock(m_modules_mutex);
     for (const auto& module : m_modules) {
+        // Skip module if module is disabled
+        if(!module->is_enabled()) {
+            continue;
+        }
+
         if (auto module_data = module->get_data(); module_data.has_value()) {
             root[module->module_name().data()] = std::move(module_data.value());
         }
