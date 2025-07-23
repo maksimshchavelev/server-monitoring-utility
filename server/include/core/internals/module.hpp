@@ -142,6 +142,27 @@ class IModule {
   protected:
     Json::Value m_configuration;
     bool        m_enabled{false};
+
+    // =============================== LOGGER ===============================
+
+    /**
+     * @brief Describes log type. Affects the color of messages
+     */
+    enum class LogType { INFO, WARNING, ERROR };
+
+
+
+
+    /**
+     * @brief Outputs the log
+     * @param log_type Log type. Takes the following values:
+     * LogType::INFO - white log
+     * LogType::INFO - yellow log
+     * LogType::ERROR - red log
+     * @param message Message to log
+     * @note Prints white message if `log_type` is incorrect
+     */
+    void log(LogType log_type, std::string_view message);
 };
 
 } // end of namespace smu_server
