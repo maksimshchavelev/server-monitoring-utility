@@ -59,9 +59,6 @@ DMI::DMI(const Json::Value& configuration) : IModule(configuration) {
 
 // Public method
 std::optional<Json::Value> DMI::get_data() {
-    if (!is_enabled())
-        return std::nullopt;
-
     return m_root->to_json();
 }
 
