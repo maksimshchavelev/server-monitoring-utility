@@ -13,7 +13,7 @@ Modules act as an intermediary layer between the server and the operating system
 - Place the module header file in `include/modules/<module name>/` and the source file in `src/modules/<module name>/`
 - The module name (class name) must not contain `Module` in any case. The module name is displayed in the client-side UI.
 
-When designing smu-server, we envisioned functionality that would maximize simplicity and standardization for module creation. We will explore this functionality next.
+When designing smu-server, I envisioned functionality that would maximize simplicity and standardization for module creation. We will explore this functionality next.
 
 # IModule - Where It All Begins
 All modules must inherit from the `IModule` class (otherwise it will cause a compilation error). This is a base abstract class that provides essential functionality. Its structure is shown below:
@@ -24,7 +24,7 @@ class IModule {
     IModule(const Json::Value& configuration);
     virtual ~IModule() = default;
 
-    virtual const Json::Value& get_configuration() const = 0;
+    virtual const Json::Value& get_configuration();
     virtual std::optional<Json::Value> get_data() = 0;
     virtual void enable();
     virtual void disable();
@@ -36,18 +36,24 @@ class IModule {
   protected:
     Json::Value m_configuration;
     bool        m_enabled{false};
+
+    enum class LogType { INFO, WARNING, ERROR };
+
+    void log(LogType log_type, const std::string_view message);
 };
 ```
 
 Let's examine it.
 
 ### Constructor
-Accepts `const Json::Value&` with the module configuration loaded from the corresponding file (see User Guide).
+Accepts `const Json::Value&` with the module configuration loaded from the corresponding file (see User Guide). 
 
 > ⚠️ If `configuration` is empty, the module must generate its own configuration and populate `m_configuration`. This configuration will be saved to a file and loaded on subsequent launches.
 
+> ⚠️ If a fatal error occurs, the constructor **must throw an exception** and then the module **will not be registered** in the server core!
+
 ### `get_configuration`
-Returns the module's current configuration. Used for saving configuration on application exit. Implement this method yourself.
+Returns the module's current configuration. Used for saving configuration on application exit.
 
 ### `get_data`
 Forms a JSON with data and returns it. Returns `std::nullopt` in case of an error. We'll explore this in more detail in the practical section. Implement this method yourself.
@@ -60,6 +66,23 @@ Returns whether the module is enabled or not. You don't need to implement this m
 
 ### `module_name` and `module_description`
 Methods to get the module's name and description. **Never implement these yourself**, as they are properly implemented via the `REGISTER_MODULE` macro, which we'll discuss next.
+
+### `log`
+This function is needed to log information, warnings or errors.
+> ⚠️ Use it instead of `std::cout`!
+
+Accepts LogType as the message type. The following values give these colors:
+- `LogType::INFO` - white message
+- `LogType::INFO` - yellow message
+- `LogType::ERROR` - red message
+
+Example usage:
+```cpp
+log(LogType::ERROR, "Error opening file");
+```
+
+> Use `LogType::INFO` for informational messages, `LogType::WARNING` for warnings for situations that *don't affect the module much* (it can work) and `LogType::ERROR` for fatal errors.
+ 
 
 ## Practical Section
 Let's create a RAM module that provides information about RAM and swap usage. Create two files: `include/modules/ram/ram.hpp` and `src/modules/ram/ram.cpp`.
@@ -77,7 +100,7 @@ First, add the file description and copyright:
  */
 ```
 
-> ⚠️ The GPLv3 license is mandatory for all software components of smu!
+> ⚠️ The _GPLv3_ license is mandatory for all software components of smu!
 
 Then add `#pragma once` and include the file providing core functionality:
 
@@ -100,8 +123,9 @@ class RAM : public IModule {
     REGISTER_MODULE(RAM, "A module that allows you to get information about RAM")
     
     RAM(const Json::Value& config);
-    const Json::Value& get_configuration() const override;
     std::optional<Json::Value> get_data() override;
+    void enable() override;
+    void disable() override;
 };
 
 } // end of namespace smu_server
@@ -135,27 +159,17 @@ namespace smu_server {
 
 // Public method
 RAM::RAM(const Json::Value& config) : IModule(config) {
-    // If config is empty
+    // Create new configuration
     if (m_configuration.empty()) {
-        // Create new configuration
         m_configuration["enabled"] = true;
-    } else {
-        m_enabled = m_configuration["enabled"].asBool();
     }
-}
 
-
-// Public method
-const Json::Value& RAM::get_configuration() const {
-    return m_configuration;
+    m_enabled = m_configuration["enabled"].asBool();
 }
 
 
 // Public method
 std::optional<Json::Value> RAM::get_data() {
-    if (!is_enabled())
-        return std::nullopt;
-
     struct sysinfo info;
 
     if (sysinfo(&info) == -1) { // error
@@ -180,6 +194,18 @@ std::optional<Json::Value> RAM::get_data() {
     return root->to_json();
 }
 
+
+// Public method
+void RAM::enable() {
+    m_configuration["enabled"] = true;
+}
+
+
+// Public method
+void RAM::disable() {
+    m_configuration["enabled"] = false;
+}
+
 } // namespace smu_server
 ```
 
@@ -187,28 +213,20 @@ Besides including `ram.hpp`, we include `<sys/sysinfo.h>` which contains the `sy
 In the constructor, we read the config and apply settings (here only the `enabled` setting controls module status). If we get an empty config, we configure from scratch. Note:
 
 ```cpp
-// Some of the code above
-else {
-	m_enabled = m_configuration["enabled"].asBool();
-}
+m_enabled = m_configuration["enabled"].asBool();
 ```
-We read the module state and assign it to `m_modules["enabled"]`
+Do not put the assignment to the configuration variables in the code example above in the `else` block, otherwise the default settings will not be applied if the config is empty (in this case, the RAM module defaults to *enabled*, but `m_enabled` defaults to `false`)!
 
 > ⚠️ Never call `enable()` and `disable()` from the constructor if you override them in your module, otherwise the base class implementation will be called instead of your implementation!
 
-The implementation of `get_configuration` is straightforward. Let's focus on `get_data`.
+Let's focus on `get_data`.
 
-First, return `std::nullopt` if the module is disabled (also return `std::nullopt` on `sysinfo` error):
+> You do not need to do a check (and, for example, return `std::nullopt`) on the status of the module, since it will not be polled by the server kernel if it is off, and therefore `get_data` will not be called
 
-```cpp
-if (!is_enabled())
-     return std::nullopt;
-```
-
-Then we form the JSON with metric values. Let's examine this in detail.
+We form the JSON with metric values. Let's examine this in detail.
 The core idea is to group metrics (the smallest data unit in a module) using ***nodes***. A node can be:
 
-- **Value Node**: Contains a value, unit of measurement, and metric name. Type: `value`
+- **Value Node**: Contains a value, unit of measurement, and metric name. `units` can be empty. If the value is empty, the client will display *N/A*. Type: `value`
 - **Container Node**: Can contain value nodes and other containers. Has a name. Used for semantic grouping of metrics (creates a tree structure). Type: `container`
 - **Root Node**: The top-level node that can contain metrics and containers. Has no name or type. **Important: The root node must always be present. Never send containers or metrics without wrapping them in a root node!**
 
