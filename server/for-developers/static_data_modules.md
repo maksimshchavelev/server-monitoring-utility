@@ -99,9 +99,9 @@ return m_root->to_json();
 ```
 
 # A more productive approach
-Why do we need to construct a json from scratch when we can create it in the constructor and just return it from `get_data`?
-We should just store a field of type `Json::Value` in the module class and give it to `get_data`.
-The latter method is highly preferable to the former!
+Why do we need to construct a json tree from scratch by calling `m_root->to_json()` when we can create it once in the constructor and just return it from `get_data`?
+We should just store a field of type `Json::Value` in the module class and return it from `get_data`.
+This method is far preferable!
 
 # Summary
 In this chapter, two approaches to creating a module that stores static data were discussed
