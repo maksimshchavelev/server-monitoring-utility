@@ -17,6 +17,12 @@ sudo apt install libjsoncpp-dev
 
 You can uninstall it after the build, it is not needed for smu to work.
 
+You also need to install OpenSSL with the command 
+
+```bash
+sudo apt install libssl-dev
+```
+
 Download the source code from the releases, unzip it somewhere. In the directory with sources create `build` directory and go to it. From now on, all commands will be executed from the build directory. Execute the following commands:
 
 - `cmake ..`
