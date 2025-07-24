@@ -35,10 +35,7 @@ int Application::run() {
             std::cout << "\x1B[2J\x1B[H"; // ANSI code for clear screen in Windows
 #endif
 
-            std::cout << "Connection error, reason: " << connection_error_reason << std::endl;
-
-            m_return_value.store(1);
-            exit();
+            exit(std::string("Connection error, reason: " + connection_error_reason));
         });
 
     // Running UI
@@ -53,9 +50,6 @@ int Application::run() {
         cw.wait(lock, [this]() { return m_exit_request.load(); });
     }
 
-    m_network.stop();
-    m_ui.stop();
-
     return m_return_value.load();
 }
 
@@ -63,9 +57,21 @@ int Application::run() {
 
 
 // Public method
-void Application::exit() {
-    m_exit_request.store(true);
-    cw.notify_one();
+void Application::exit(std::optional<std::string> error) {
+    std::thread([this, error = std::move(error)]{
+        m_ui.stop();
+        m_network.stop();
+
+        if(error.has_value()) {
+            m_return_value.store(1); // error code
+            std::cout << error.value() << std::endl; // print error
+        } else {
+            m_return_value.store(0); // success code
+        }
+
+        m_exit_request.store(true);
+        cw.notify_one();
+    }).detach();
 }
 
 

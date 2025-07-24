@@ -53,8 +53,10 @@ class Application {
 
     /**
      * @brief Exit application
+     * @param error Error message that will be displayed if an error occurs
+     * @note Returns code `1` if an error occurred and code `0` if no error occurred.
      */
-    void exit();
+    void exit(std::optional<std::string> error);
 
 
 
