@@ -95,15 +95,13 @@ ftxui::Component UI::unwrap_module(const Json::Value& data) {
         const Json::Value& inner_node = data[key];
         const std::string  type = inner_node["type"].asString();
 
-        auto& name = key;
-
         if (type == "value") {
             // Value display component
             std::string value = inner_node["value"].asString();
             std::string units = inner_node["units"].asString();
 
             // Display N/A if value is empty
-            if(value.empty()) {
+            if (value.empty()) {
                 value = "N/A";
             }
 
@@ -125,15 +123,18 @@ ftxui::Component UI::unwrap_module(const Json::Value& data) {
                 }
             }
 
-            children.push_back(Renderer([=] {
-                static bool state{false};
-                state = !state;
+            children.push_back(Renderer([keyname_copy = std::string(key),
+                                         value_copy = std::string(value),
+                                         units_copy = std::string(units),
+                                         alarm_flag_copy = alarm_flag,
+                                         color_copy = text_color] {
 
                 auto res =
-                    text(std::format("{}: {} {}", name, std::move(value), std::move(units))) |
-                    color(text_color);
+                    text(std::format(
+                        "{}: {} {}", keyname_copy, std::move(value_copy), std::move(units_copy))) |
+                    color(color_copy);
 
-                if (alarm_flag) {
+                if (alarm_flag_copy) {
                     res |= inverted;
                 }
 
@@ -143,9 +144,9 @@ ftxui::Component UI::unwrap_module(const Json::Value& data) {
         } else {
             // If type is container or root
             Component child = unwrap_module(inner_node);
-            Component wrapped = Renderer(child, [name, child] {
+            Component wrapped = Renderer(child, [keyname_copy = std::string(key), child] {
                 return hbox(
-                    {window(text(name) | color(Color::RGB(0, 0, 255)), child->Render()), filler()});
+                    {window(text(keyname_copy) | color(Color::RGB(0, 0, 255)), child->Render()), filler()});
             });
             children.push_back(wrapped);
         }
