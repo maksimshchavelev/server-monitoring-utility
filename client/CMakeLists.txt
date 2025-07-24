@@ -146,20 +146,34 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
 
 
 
-target_compile_options(${PROJECT_NAME} PRIVATE
-  -pedantic
-  -Wall -Wextra
-  -Wnon-virtual-dtor
-  -Wold-style-cast
-  -Wcast-align
-  -Wunused
-  -Woverloaded-virtual
-  -Wpedantic
-  -Wconversion
-  -Wsign-conversion
-  -Wlogical-op
-  -Wuseless-cast
-)
+if(MSVC)
+  target_compile_options(${PROJECT_NAME} PRIVATE
+    /W4
+    /permissive-
+    /sdl
+    /w14254
+    /w14265
+    /w14287
+    /we4265
+    /w14296
+  )
+else()
+  # G++ / CLANG
+  target_compile_options(${PROJECT_NAME} PRIVATE
+    -pedantic
+    -Wall -Wextra
+    -Wnon-virtual-dtor
+    -Wold-style-cast
+    -Wcast-align
+    -Wunused
+    -Woverloaded-virtual
+    -Wpedantic
+    -Wconversion
+    -Wsign-conversion
+    -Wlogical-op
+    -Wuseless-cast
+  )
+endif()
 
 
 
