@@ -42,7 +42,7 @@ void smu_server::IModule::disable() {
 
 
 // Public method
-bool smu_server::IModule::is_enabled() const {
+bool smu_server::IModule::is_enabled() const noexcept {
     return m_enabled;
 }
 
@@ -50,7 +50,7 @@ bool smu_server::IModule::is_enabled() const {
 
 
 // Protected method
-void smu_server::IModule::log(LogType log_type, std::string_view message) {
+void smu_server::IModule::log(LogType log_type, std::string_view message) const {
     const char* color = nullptr;
 
     switch (log_type) {

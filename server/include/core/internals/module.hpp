@@ -90,7 +90,7 @@ class IModule {
      * @brief Is module enabled?
      * @return `true` if module is enabled, otherwise `false`
      */
-    virtual bool is_enabled() const;
+    virtual bool is_enabled() const noexcept;
 
 
 
@@ -101,7 +101,7 @@ class IModule {
      * it
      * @return `const std::string_view` with module name
      */
-    virtual constexpr std::string_view module_name() const = 0;
+    virtual constexpr std::string_view module_name() const noexcept = 0;
 
 
 
@@ -112,7 +112,7 @@ class IModule {
      * it
      * @return `const std::string_view` with module description
      */
-    virtual constexpr std::string_view module_description() const = 0;
+    virtual constexpr std::string_view module_description() const noexcept = 0;
 
 
 
@@ -139,7 +139,7 @@ class IModule {
      * @param message Message to log
      * @note Prints white message if `log_type` is incorrect
      */
-    void log(LogType log_type, const std::string_view message);
+    void log(LogType log_type, const std::string_view message) const;
 };
 
 } // end of namespace smu_server
