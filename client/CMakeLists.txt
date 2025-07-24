@@ -98,6 +98,9 @@ message(STATUS "${PROJECT_NAME}: Configuration of jsoncpp is complete")
 message(STATUS "${PROJECT_NAME}: Configuring IXWebSocket")
 
 set(USE_TLS ON)
+set(USE_OPEN_SSL ON)
+set(USE_MBED_TLS OFF)
+set(USE_ZLIB OFF)
 
 FetchContent_Declare(
   ixwebsocket
