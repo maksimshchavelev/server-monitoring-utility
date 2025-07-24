@@ -55,20 +55,24 @@ void UI::stop() {
 
 // Public method
 void UI::set_data(const Json::Value& data) {
-    std::lock_guard<std::mutex> lock(m_data_mutex);
-    m_data = data;
+    Json::Value data_copy = data;
 
-    std::vector<ftxui::Element>   m_tabs_headers;
-    std::vector<ftxui::Component> m_tabs_content;
+    m_screen.Post([this, data_copy = std::move(data_copy)]{
+        std::lock_guard<std::mutex> lock(m_data_mutex);
+        m_data = std::move(data_copy);
 
-    // Set headers and content
-    for (const auto& module_name : m_data.getMemberNames()) {
-        m_tabs_headers.push_back(ftxui::text(module_name));
-        m_tabs_content.push_back(unwrap_module(m_data[module_name]));
-    }
+        std::vector<ftxui::Element>   m_tabs_headers;
+        std::vector<ftxui::Component> m_tabs_content;
 
-    m_tabs->set_data(std::move(m_tabs_headers), std::move(m_tabs_content));
-    m_screen.PostEvent(ftxui::Event::Custom);
+        // Set headers and content
+        for (const auto& module_name : m_data.getMemberNames()) {
+            m_tabs_headers.push_back(ftxui::text(module_name));
+            m_tabs_content.push_back(unwrap_module(m_data[module_name]));
+        }
+
+        m_tabs->set_data(std::move(m_tabs_headers), std::move(m_tabs_content));
+        m_screen.PostEvent(ftxui::Event::Custom);
+    });
 }
 
 
