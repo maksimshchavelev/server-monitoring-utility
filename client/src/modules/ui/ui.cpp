@@ -25,14 +25,7 @@ UI::UI() : m_screen(ftxui::ScreenInteractive::TerminalOutput()), m_tabs(make_tab
 // Public method
 void UI::run_async() {
     std::thread runner([&]() {
-        using namespace ftxui;
-
-#if defined(__unix__)
-        std::cout << "\033[2J\033[H"; // ANSI code for clear screen in Linux
-#elif defined(_WIN32) or defined(_WIN64)
-        std::cout << "\x1B[2J\x1B[H"; // ANSI code for clear screen in Windows
-#endif
-
+        m_screen.Clear();
         m_screen.Loop(m_tabs);
     });
     runner.detach();
@@ -43,6 +36,7 @@ void UI::run_async() {
 
 // Public method
 void UI::stop() {
+    m_screen.Clear();
     m_screen.Exit();
 
     while (m_screen.Active()) {
