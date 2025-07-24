@@ -7,7 +7,6 @@
  */
 
 #include "ipc/ipc.hpp"
-#include "trantor/utils/Logger.h"
 #include <cxxopts.hpp>
 
 namespace smu_server {
