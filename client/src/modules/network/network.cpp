@@ -7,6 +7,7 @@
  */
 
 #include "modules/network/network.hpp"
+#include "ixwebsocket/IXNetSystem.h"
 #include <iostream>
 
 namespace smu {
@@ -20,6 +21,8 @@ Network::Network(const Settings& settings) : m_settings(settings) {}
 // Public method
 void Network::run(std::function<void(const std::string&)> on_message,
                   std::function<void(const std::string&)> on_connection_error) {
+
+    ix::initNetSystem(); // For Windows. _WIN32 macro inside
 
     m_connection = std::make_unique<ix::WebSocket>();
 
@@ -45,6 +48,7 @@ void Network::run(std::function<void(const std::string&)> on_message,
 // Public method
 void Network::stop() {
     m_connection->stop();
+    ix::uninitNetSystem(); // For Windows. _WIN32 macro inside
 }
 
 
