@@ -89,9 +89,8 @@ template <typename ModuleName, StringWrapper module_name> struct ModuleRegistrar
         static_assert(std::is_base_of_v<IModule, ModuleName>,
                       "The module must inherit from the IModule class");
         // Lazy module registering. Only adding to queue
-        Application::instance().add_module_to_queue([](Application& app){
-            app.register_module<ModuleName>();
-        });
+        Application::instance().add_module_to_queue(
+            [](Application& app) { app.register_module<ModuleName>(); });
     }
 };
 
@@ -109,19 +108,19 @@ template <typename ModuleName, StringWrapper module_name> struct ModuleRegistrar
     static constexpr internals::StringWrapper m_module_description{Description};                   \
                                                                                                    \
   public:                                                                                          \
-    constexpr std::string_view module_name() const override {                                      \
+    constexpr std::string_view module_name() const noexcept override {                             \
         return m_module_name.str;                                                                  \
     }                                                                                              \
                                                                                                    \
-    constexpr std::string_view module_description() const override {                               \
+    constexpr std::string_view module_description() const noexcept override {                      \
         return m_module_description.str;                                                           \
     }                                                                                              \
                                                                                                    \
-    constexpr static std::string_view module_name_static() {                                       \
+    constexpr static std::string_view module_name_static() noexcept {                              \
         return m_module_name.str;                                                                  \
     }                                                                                              \
                                                                                                    \
-    constexpr static std::string_view module_description_static() {                                \
+    constexpr static std::string_view module_description_static() noexcept {                       \
         return m_module_description.str;                                                           \
     }
 
