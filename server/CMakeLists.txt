@@ -128,7 +128,7 @@ target_compile_options(${PROJECT_NAME} PRIVATE
 )
 
 
-if(CMAKE_BUILD_TYPE EQUAL "Release")
+if(CMAKE_BUILD_TYPE STREQUAL "Release")
   message(STATUS "Setting O3 optimization")
   target_compile_options(${PROJECT_NAME} PRIVATE $<$<CONFIG:Release>:-O3>)
 endif()
