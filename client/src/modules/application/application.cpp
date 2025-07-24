@@ -28,7 +28,7 @@ int Application::run() {
             }
         },
         [this](const std::string& connection_error_reason) {
-            exit(std::string("Connection error, reason: " + connection_error_reason));
+            exit("Connection error, reason: " + connection_error_reason);
         });
 
     // Running UI
