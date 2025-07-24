@@ -30,20 +30,6 @@ Download the source code from the releases, unzip it somewhere. In the directory
 In the `package` directory, you will see the built packages that you can install using your package manager
 
 
-## Building of individual parts
-You can change the following flags during the configuration phase:
-
-| Flag | Effect | Default |
-|-|-|-|
-| -DBUILD_SERVER | Does the server part need to be built | ON |
-| -DBUILD_CLIENT | Does the client part need to be built | ON |
-| -DBUILD_CLI | Does the CLI part need to be built | ON |
-
-For example:
-```bash
-cmake .. -DBUILD_SERVER=OFF
-```
-
 ## License
 
 This project is licensed under the [GPLv3 License](./LICENSE).
@@ -54,5 +40,6 @@ It uses third-party components:
 - [Drogon](https://github.com/drogonframework/drogon) - MIT license
 - [jsoncpp](https://github.com/open-source-parsers/jsoncpp) - MIT license
 - [cxxopts](https://github.com/jarro2783/cxxopts) - MIT license
+- [IXWebSocket](https://github.com/machinezone/IXWebSocket) - BSD-3-Clause license
 
 See [third party](3dparty) for details
