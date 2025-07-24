@@ -163,11 +163,11 @@ target_compile_options(${PROJECT_NAME} PRIVATE
 
 
 
-if(CMAKE_BUILD_TYPE EQUAL "Release")
-  message(STATUS "Setting O3 optimization")
-  target_compile_options(${PROJECT_NAME} PRIVATE $<$<CONFIG:Release>:-O3>)
-endif()
-
+target_compile_options(${PROJECT_NAME} PRIVATE
+    $<$<AND:$<CONFIG:Release>,$<CXX_COMPILER_ID:MSVC>>:/O2>
+    $<$<AND:$<CONFIG:Release>,$<CXX_COMPILER_ID:GNU>>:-O3>
+    $<$<AND:$<CONFIG:Release>,$<CXX_COMPILER_ID:Clang>>:-O3>
+)
 
 
 
