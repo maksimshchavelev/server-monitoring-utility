@@ -84,7 +84,7 @@ class Application {
         bool                        creation_failed{false};
 
         try {
-            module = std::make_unique<ModuleType>(config);
+            module = std::make_unique<ModuleType>(config.get_json());
         } catch (const std::exception& e) {
             creation_failed = true;
             std::cout << module_log_prefix
@@ -142,7 +142,7 @@ class Application {
     std::mutex                                     m_modules_mutex;
     std::vector<std::unique_ptr<IModule>>          m_modules;
     std::vector<std::function<void(Application&)>> m_modules_queue; // for lazy init
-    Json::Value&                                   m_server_config;
+    Config                                         m_server_config;
 
     friend class CLI; // CLI has access to all Application fields and methods
     // Heavy objects (and which may throw an exception) should be created in `run`

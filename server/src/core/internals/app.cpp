@@ -49,7 +49,7 @@ void smu_server::Application::run(int argc, char** argv) {
     m_cli.run();
 
     // Get port from config
-    uint16_t port = static_cast<uint16_t>(m_server_config["port"].asUInt());
+    uint16_t port = static_cast<uint16_t>(m_server_config.get<int>("port").value());
 
     drogon::app().addListener("0.0.0.0", port).registerController(m_main_ws_controller_ptr.value());
     drogon::app().getLoop()->runAfter(0.0, [this]() { run_sending_metrics_async(); });
@@ -98,7 +98,7 @@ void smu_server::Application::run_sending_metrics_async() {
 
     running = true;
 
-    unsigned int send_interval = m_server_config["send_interval_ms"].asUInt();
+    unsigned int send_interval = m_server_config.get<unsigned int>("send_interval_ms").value();
     std::thread  runner([this, send_interval]() {
         while (true) {
             std::this_thread::sleep_for(std::chrono::milliseconds(
@@ -125,7 +125,7 @@ void smu_server::Application::save_configs() const noexcept {
     auto& manager = ConfigIO::instance();
 
     // Saving server configuration
-    if (auto res = manager.save_server_config(); !res.has_value()) {
+    if (auto res = manager.save_server_config(m_server_config); !res.has_value()) {
         // If error
         LOG_ERROR << std::format("\033[31mError saving server configuration (cause: {})\033[0m",
                                  res.error());
