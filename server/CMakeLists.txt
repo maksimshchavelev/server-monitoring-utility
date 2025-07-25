@@ -9,6 +9,9 @@ set(CMAKE_INSTALL_PREFIX /usr)
 set(ABSTRACT_SOCKET_NAME "smu.ipc.socket")
 
 
+option(BUILD_TESTS "Need to build tests?" ON)
+
+
 # This is where the program configuration will be
 set(CONFIGS_DIR "/var/lib/${PROJECT_NAME}")
 set(SERVER_CONFIG_PATH "${CONFIGS_DIR}/config.json")
@@ -151,6 +154,34 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "Clang|GNU" AND ${CMAKE_BUILD_TYPE} STREQUAL "D
     set(SANITIZER_FLAGS "-fsanitize=address,undefined,leak -fno-omit-frame-pointer")
     set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} ${SANITIZER_FLAGS}")
     set(CMAKE_LINKER_FLAGS_DEBUG "${CMAKE_LINKER_FLAGS_DEBUG} ${SANITIZER_FLAGS}")
+endif()
+
+
+
+
+# Configuring tests
+if(${BUILD_TESTS})
+  message(STATUS "${PROJECT_NAME}: Configuring tests...")
+
+  add_library(smu-server-libary STATIC ${SOURCES}) # For linking tests with smu-server
+  target_include_directories(smu-server-libary PUBLIC ${CMAKE_SOURCE_DIR}/include)
+  target_link_libraries(smu-server-libary PRIVATE
+    drogon
+    jsoncpp_static
+    cxxopts)
+
+  include(CTest)
+  enable_testing()
+  add_subdirectory(tests)
+
+  # Add custom target to run tests
+  add_custom_target(run-tests
+    COMMAND ${CMAKE_CTEST_COMMAND} "--output-on-failure"
+    DEPENDS tests
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+  )
+
+  message(STATUS "${PROJECT_NAME}: Tests configured")
 endif()
 
 
