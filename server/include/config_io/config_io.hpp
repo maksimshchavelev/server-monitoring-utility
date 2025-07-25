@@ -3,7 +3,7 @@
 
 /**
  * @file config_manager/config_manager.hpp
- * @brief Global singleton configuration manager for application and module
+ * @brief A global singleton class that helps read and write configurations in files.
  * configuration management
  */
 
@@ -15,16 +15,17 @@
 namespace smu_server {
 
 /**
- * @brief Global singleton configuration manager for application and module
- * configuration management
+ * @brief A global singleton class that helps read and write configurations in files.
+ * @details Can be used in conjunction with `Config`
+ * @see Config
  */
-class ConfigManager {
+class ConfigIO {
   public:
     /**
-     * @brief Get instance of ConfigManager
-     * @return Lvalue reference to `ConfigManager` instance
+     * @brief Get instance of ConfigIO
+     * @return Lvalue reference to `ConfigIO` instance
      */
-    static ConfigManager& instance();
+    static ConfigIO& instance();
 
 
 
@@ -72,8 +73,8 @@ class ConfigManager {
 
 
   private:
-    ConfigManager() = default;
-    ~ConfigManager() = default;
+    ConfigIO() = default;
+    ~ConfigIO() = default;
 
 
 

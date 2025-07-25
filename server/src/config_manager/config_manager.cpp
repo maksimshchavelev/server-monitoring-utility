@@ -7,15 +7,15 @@
  * configuration management
  */
 
-#include "config_manager/config_manager.hpp"
+#include "config_io/config_io.hpp"
 #include "compile-time_config.hpp"
 #include <fstream>
 
 namespace smu_server {
 
 // Public method
-ConfigManager& smu_server::ConfigManager::instance() {
-    static ConfigManager manager;
+ConfigIO& smu_server::ConfigIO::instance() {
+    static ConfigIO manager;
     return manager;
 }
 
@@ -23,7 +23,7 @@ ConfigManager& smu_server::ConfigManager::instance() {
 
 
 // Public method
-Json::Value& ConfigManager::get_server_config() {
+Json::Value& ConfigIO::get_server_config() {
     if (m_server_config.empty()) {
         auto res = read_config(CONFIG_PATH);
         if (res.has_value()) {
@@ -42,7 +42,7 @@ Json::Value& ConfigManager::get_server_config() {
 
 
 // Public method
-std::expected<void, std::string> ConfigManager::save_server_config() const noexcept {
+std::expected<void, std::string> ConfigIO::save_server_config() const noexcept {
     return save_config(CONFIG_PATH, m_server_config);
 }
 
@@ -50,7 +50,7 @@ std::expected<void, std::string> ConfigManager::save_server_config() const noexc
 
 
 // Public method
-Json::Value ConfigManager::get_module_config(std::string_view module_name) const noexcept {
+Json::Value ConfigIO::get_module_config(std::string_view module_name) const noexcept {
     if (auto config = read_config(std::format("{}/{}.json", MODULES_CONFIGS_DIR, module_name));
         config.has_value()) {
         return config.value();
@@ -62,7 +62,7 @@ Json::Value ConfigManager::get_module_config(std::string_view module_name) const
 
 
 // Public method
-std::expected<void, std::string> ConfigManager::save_module_config(
+std::expected<void, std::string> ConfigIO::save_module_config(
     std::string_view module_name, const Json::Value& config) const {
     return save_config(std::format("{}/{}.json", MODULES_CONFIGS_DIR, module_name), config);
 }
@@ -71,7 +71,7 @@ std::expected<void, std::string> ConfigManager::save_module_config(
 
 
 // Private method
-std::expected<Json::Value, std::string> ConfigManager::read_config(
+std::expected<Json::Value, std::string> ConfigIO::read_config(
     std::string_view path) const noexcept {
 
     std::ifstream json_file;
@@ -106,7 +106,7 @@ std::expected<Json::Value, std::string> ConfigManager::read_config(
 
 
 // Private method
-std::expected<void, std::string> ConfigManager::save_config(
+std::expected<void, std::string> ConfigIO::save_config(
     std::string_view path, const Json::Value& config) const noexcept {
     std::ofstream file;
     file.open(path.data());

@@ -9,7 +9,7 @@
 #pragma once
 
 #include "cli/cli.hpp"
-#include "config_manager/config_manager.hpp"
+#include "config_io/config_io.hpp"
 #include "core/controllers/websocket_main_controller.hpp"
 #include "module.hpp"
 #include <functional>
@@ -66,7 +66,7 @@ class Application {
 
 
         // Getting config
-        auto config = ConfigManager::instance().get_module_config(ModuleType::module_name_static());
+        auto config = ConfigIO::instance().get_module_config(ModuleType::module_name_static());
 
         // For example, [MODULE RAM]
         const std::string module_log_prefix =
