@@ -9,6 +9,7 @@
 
 #pragma once
 
+#include "core/internals/config.hpp"
 #include <expected>
 #include <json/json.h>
 
@@ -31,21 +32,21 @@ class ConfigIO {
 
 
     /**
-     * @brief Get *reference* to Json representation of server config
-     * @return *Lvalue reference* to `Json::Value` with server config
-     * @note Reads the configuration file on the first call
+     * @brief Get `smu_server::Config` representation of server config
+     * @return `smu_server::Config` with server config
      * @throw `std::runtime` config when error
      */
-    Json::Value& get_server_config();
+    Config get_server_config();
 
 
 
 
     /**
      * @brief Saves server config.
+     * @param config Server config
      * @return `std::expected` with void if success, otherwise `std::string` with error
      */
-    std::expected<void, std::string> save_server_config() const noexcept;
+    std::expected<void, std::string> save_server_config(const Config& config) const noexcept;
 
 
 
@@ -53,9 +54,9 @@ class ConfigIO {
     /**
      * @brief Reads config for specified module
      * @param module_name Name of module
-     * @return filled `Json::Value` if success, empty `Json::Value` if error
+     * @return filled `smu_server::Config` if success, empty `smu_server::Config` if error
      */
-    Json::Value get_module_config(std::string_view module_name) const noexcept;
+    Config get_module_config(std::string_view module_name) const noexcept;
 
 
 
@@ -66,8 +67,8 @@ class ConfigIO {
      * @param config Config of module
      * @return `std::expected` with void if success, otherwise `std::string` with error
      */
-    std::expected<void, std::string> save_module_config(std::string_view   module_name,
-                                                        const Json::Value& config) const;
+    std::expected<void, std::string> save_module_config(std::string_view module_name,
+                                                        const Config&    config) const;
 
 
 
@@ -82,10 +83,10 @@ class ConfigIO {
     /**
      * @brief Reads config from file
      * @param path Path to file with config
-     * @return `std::expected` with `Json::Value` if success and `std::string` if error
+     * @return `std::expected` with `smu_server::Config` if success and `std::string` if error
      * @private
      */
-    std::expected<Json::Value, std::string> read_config(std::string_view path) const noexcept;
+    std::expected<Config, std::string> read_config(std::string_view path) const noexcept;
 
 
 
@@ -96,11 +97,8 @@ class ConfigIO {
      * @param config Json config
      * @return `std::expected` with void if success, otherwise `std::string` with error
      */
-    std::expected<void, std::string> save_config(std::string_view   path,
-                                                 const Json::Value& config) const noexcept;
-
-
-    Json::Value m_server_config{};
+    std::expected<void, std::string> save_config(std::string_view path,
+                                                 const Config&    config) const noexcept;
 };
 
 } // namespace smu_server
