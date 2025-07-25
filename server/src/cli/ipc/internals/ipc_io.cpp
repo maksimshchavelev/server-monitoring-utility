@@ -6,7 +6,7 @@
  * @brief File with async IPC Input-Output class to send/receive_message raw messages
  */
 
-#include "ipc/internals/ipc_io.hpp"
+#include "cli/ipc/internals/ipc_io.hpp"
 #include <format>
 #include <sys/socket.h>
 #include <sys/un.h>

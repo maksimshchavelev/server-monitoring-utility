@@ -6,7 +6,7 @@
  * @brief File with smu-cli interprocessor communication tools
  */
 
-#include "ipc/ipc.hpp"
+#include "cli/ipc/ipc.hpp"
 #include <cxxopts.hpp>
 
 namespace smu_server {

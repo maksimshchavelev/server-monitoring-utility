@@ -10,8 +10,8 @@
 
 #include "config_manager/config_manager.hpp"
 #include "core/controllers/websocket_main_controller.hpp"
-#include "ipc/ipc.hpp"
 #include "module.hpp"
+#include "cli/cli.hpp"
 #include <functional>
 #include <memory>
 #include <mutex>
@@ -166,8 +166,11 @@ class Application {
     std::vector<std::function<void(Application&)>> m_modules_queue; // for lazy init
     Json::Value&                                   m_server_config;
 
+    friend class CLI; // CLI has access to all Application fields and methods
     // Heavy objects (and which may throw an exception) should be created in `run`
-    std::optional<IPC> m_ipc; // For interprocess communication with CLI
+    CLI m_cli; // For interprocess communication with CLI
+
+    // Heavy objects (and which may throw an exception) should be created in `run`
     std::optional<std::shared_ptr<MainWebsocketController>> m_main_ws_controller_ptr;
 
     // The flag is needed so that we don't save the config if we started the server with a key that
@@ -185,24 +188,6 @@ class Application {
      * @note Can print text (help, version or error...)
      */
     bool parse_argv(int argc, char** argv) const noexcept;
-
-
-    // ================================ FOR CLI COMMANDS ================================
-
-    /**
-     * @brief Receives commands from the IPC and processes them. Passed to the `IPC::run` callback
-     * @param cmd Command type
-     * @param args Command args
-     * @return The response to the command, which is then passed to smu-cli
-     */
-    std::string ipc_command_receiver(const IPC::Command cmd, const std::vector<std::string>& args);
-
-
-    /**
-     * @brief Get modules name, status and description
-     * @return `std::string`
-     */
-    std::string list_modules() const;
 };
 
 } // end of namespace smu_server
