@@ -131,4 +131,23 @@ template <> std::optional<Config> Config::get<Config>(const std::string& key) co
 }
 
 
+
+
+// Public method
+bool Config::empty() const {
+    std::lock_guard<std::mutex> lock(m_json_mutex);
+    return m_json.empty();
+}
+
+
+
+
+// Public method
+Json::Value Config::get_json() const {
+    std::lock_guard<std::mutex> lock(m_json_mutex);
+    return m_json;
+}
+
+
+
 } // namespace smu_server

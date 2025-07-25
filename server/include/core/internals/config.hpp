@@ -8,6 +8,7 @@
 
 #pragma once
 
+#include <functional>
 #include <json/json.h>
 
 namespace smu_server {
@@ -137,6 +138,60 @@ class Config {
 
 
     /**
+     * @brief Provides more efficient thread-safely access to the field by const reference
+     * @param key Key
+     * @param callback The function to which the value will be passed
+     * @note If the function throws an exception, there will be no effect.
+     * If the field is missing or an error occurred while receiving it, `std::nullopt` will be
+     * passed to the function.
+     */
+    template <typename DesiredType>
+    void get(const std::string&                                           key,
+             std::function<void(const std::optional<DesiredType>& value)> callback) const {
+        std::lock_guard<std::mutex> lock(m_json_mutex);
+
+        if (m_json.isMember(key)) {
+            try {
+                const auto& value = m_json[key].as<DesiredType>();
+                try {
+                    callback(value);
+                } catch (...) { // do nothing
+                }
+            } catch (...) { // receiving error
+                try {
+                    callback(std::nullopt);
+                } catch (...) { // do nothing
+                }
+            }
+        } else {
+            try {
+                callback(std::nullopt);
+            } catch (...) { // do nothing
+            }
+        }
+    }
+
+
+
+
+    /**
+     * @brief Allows you to obtain raw Json::Value thread-safely
+     * @param callback The function to which the `Json::Value` will be passed
+     * @note If the function throws an exception, there will be no effect.
+     */
+    void get(std::function<void(const Json::Value& json)> callback) const {
+        std::lock_guard<std::mutex> lock(m_json_mutex);
+
+        try {
+            callback(m_json);
+        } catch (...) { // do nothing
+        }
+    }
+
+
+
+
+    /**
      * @brief Get subconfig. Similar to calling `get<Json::Value>(“subconfig name”)`
      * @param subconfig_name Subconfig name
      * @return `std::optional<Config>`
@@ -148,10 +203,29 @@ class Config {
 
 
     /**
+     * @brief Allows you to obtain a copy of the internal `Json::Value`
+     * @return `Json::Value`
+     * @see get for more *efficient* use
+     */
+    Json::Value get_json() const;
+
+
+
+
+    /**
      * @brief Get config size
      * @return `std::size` with size
      */
     std::size_t size() const;
+
+
+
+
+    /**
+     * @brief Checks if `Config` is empty
+     * @return `true` if empty, otherwise `false`
+     */
+    bool empty() const;
 
 
   private:
