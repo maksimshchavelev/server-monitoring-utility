@@ -8,10 +8,10 @@
 
 #pragma once
 
+#include "cli/cli.hpp"
 #include "config_manager/config_manager.hpp"
 #include "core/controllers/websocket_main_controller.hpp"
 #include "module.hpp"
-#include "cli/cli.hpp"
 #include <functional>
 #include <memory>
 #include <mutex>
@@ -99,7 +99,8 @@ class Application {
 
             // Print colorful log
             std::cout << module_log_prefix
-                      << std::format("\033[32mRegistered\033[0m ({})\n", module_status) << std::endl;
+                      << std::format("\033[32mRegistered\033[0m ({})\n", module_status)
+                      << std::endl;
 
             std::lock_guard<std::mutex> lock(m_modules_mutex);
             m_modules.push_back(std::move(module));
@@ -134,29 +135,6 @@ class Application {
 
 
 
-    /**
-     * @brief Collects all metrics from all modules
-     * @return `Json::Value` with collected metrics
-     */
-    Json::Value collect_metrics();
-
-
-
-
-    /**
-     * @brief Runs asynchronous collection and sending of metrics to all connected users
-     */
-    void run_sending_metrics_async();
-
-
-
-
-    /**
-     * @brief Saves all configs
-     */
-    void save_configs() const noexcept;
-
-
   private:
     Application();
     ~Application();
@@ -188,6 +166,31 @@ class Application {
      * @note Can print text (help, version or error...)
      */
     bool parse_argv(int argc, char** argv) const noexcept;
+
+
+
+
+    /**
+     * @brief Collects all metrics from all modules
+     * @return `Json::Value` with collected metrics
+     */
+    Json::Value collect_metrics();
+
+
+
+
+    /**
+     * @brief Runs asynchronous collection and sending of metrics to all connected users
+     */
+    void run_sending_metrics_async();
+
+
+
+
+    /**
+     * @brief Saves all configs
+     */
+    void save_configs() const noexcept;
 };
 
 } // end of namespace smu_server
