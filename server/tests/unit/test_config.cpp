@@ -140,6 +140,20 @@ TEST(AssignOperator, AssignJson) {
 }
 
 
+TEST(AssignOperator, MoveAssignConfig) {
+    Json::Value json;
+    json["key1"] = 0;
+
+    Config config1(json);
+    Config config2;
+
+    config2 = std::move(config1);
+
+    ASSERT_EQ(config1.size(), 0);
+    ASSERT_EQ(config2.size(), 1);
+}
+
+
 
 
 // =============================== ACCESS METHODS ===============================
@@ -214,4 +228,107 @@ TEST(GetSubconfigMethod, GetExistingSubconfig) {
     // Get subconfig
     ASSERT_EQ(config.get_subconfig("subconfig").value().get<std::string>("key"), "abc");
 }
+
+
+TEST(GetLambda, GetExistingValue) {
+    Config config;
+    config.set("key", 10);
+
+    config.get<int>("key", [](const std::optional<int>& value){
+        EXPECT_TRUE(value.has_value());
+        EXPECT_EQ(value.value(), 10);
+    });
+}
+
+
+TEST(GetLambda, GetNotExistingValue) {
+    Config config;
+    config.set("key", 10);
+
+    config.get<int>("wrong key", [](const std::optional<int>& value){
+        EXPECT_FALSE(value.has_value());
+    });
+}
+
+
+TEST(GetLambda, GetValueExceptionInside) {
+    Config config;
+    config.set("key", 10);
+
+    try {
+        config.get<int>("key", [](const std::optional<int>& value){
+            throw 0;
+        });
+        SUCCEED();
+    } catch (...) {
+        FAIL();
+    }
+}
+
+
+TEST(GetLambda, GetJson) {
+    Config config;
+    config.set("value", 5);
+
+    config.get([&](const Json::Value& value){
+        Json::Value json;
+        json["value"] = 5;
+
+        EXPECT_EQ(json, value);
+    });
+}
+
+
+TEST(GetLambda, GetJsonExceptionInside) {
+    Config config;
+
+    try {
+        config.get([](const Json::Value& value){
+            throw 0;
+        });
+        SUCCEED();
+    } catch (...) {
+        FAIL();
+    }
+}
+
+
+TEST(GetJson, JsonWithValue) {
+    Config config;
+    config.set("key", 10);
+
+    Json::Value json;
+    json["key"] = 10;
+
+    EXPECT_EQ(json, config.get_json());
+}
+
+
+// =============================== OTHER ===============================
+
+TEST(Size, Empty) {
+    Config config;
+    EXPECT_EQ(config.size(), 0);
+}
+
+
+TEST(Size, One) {
+    Config config;
+    config.set("key", 10);
+    EXPECT_EQ(config.size(), 1);
+}
+
+
+TEST(Empty, True) {
+    Config config;
+    EXPECT_TRUE(config.empty());
+}
+
+
+TEST(Empty, False) {
+    Config config;
+    config.set("key", 10);
+    EXPECT_FALSE(config.empty());
+}
+
 
