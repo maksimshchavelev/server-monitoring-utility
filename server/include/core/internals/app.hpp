@@ -10,7 +10,7 @@
 
 #include "cli/cli.hpp"
 #include "config_io/config_io.hpp"
-#include "core/controllers/websocket_main_controller.hpp"
+#include "network/network.hpp"
 #include "module.hpp"
 #include <functional>
 #include <memory>
@@ -148,8 +148,7 @@ class Application {
     // Heavy objects (and which may throw an exception) should be created in `run`
     CLI m_cli; // For interprocess communication with CLI
 
-    // Heavy objects (and which may throw an exception) should be created in `run`
-    std::optional<std::shared_ptr<MainWebsocketController>> m_main_ws_controller_ptr;
+    Network m_network; // network
 
     // The flag is needed so that we don't save the config if we started the server with a key that
     // is not supposed to run (such as version or help output). Without this key, the error of

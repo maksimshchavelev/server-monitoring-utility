@@ -42,18 +42,17 @@ void smu_server::Application::run(int argc, char** argv) {
         module_registrar(*this); // register each module
     }
 
-    // Init heavy server objects
-    m_main_ws_controller_ptr.emplace(std::make_shared<MainWebsocketController>());
+    // Get port
+    auto port = m_server_config.get<int>("port");
+    if(!port.has_value()) {
+        throw std::runtime_error("Can't get port to running!");
+    }
 
     // Run CLI
     m_cli.run();
 
-    // Get port from config
-    uint16_t port = static_cast<uint16_t>(m_server_config.get<int>("port").value());
-
-    drogon::app().addListener("0.0.0.0", port).registerController(m_main_ws_controller_ptr.value());
-    drogon::app().getLoop()->runAfter(0.0, [this]() { run_sending_metrics_async(); });
-    drogon::app().run();
+    // Run network
+    m_network.run(static_cast<uint16_t>(port.value()), [this]() { run_sending_metrics_async(); });
 }
 
 
@@ -104,11 +103,11 @@ void smu_server::Application::run_sending_metrics_async() {
             std::this_thread::sleep_for(std::chrono::milliseconds(
                 send_interval)); // sleep for `sleep_interval_ms` milliseconds
 
-            if (m_main_ws_controller_ptr.value()->get_connections_count() > 0) {
+            if (m_network.get_connections_count() > 0) {
                 auto metrics = collect_metrics();
                 if (!metrics.empty()) {
                     // If metrics are empty
-                    m_main_ws_controller_ptr.value()->send_everyone(metrics);
+                    m_network.send_everyone(metrics);
                 }
             }
         }
@@ -197,4 +196,3 @@ bool smu_server::Application::parse_argv(int argc, char** argv) const noexcept {
 
     return false;
 }
-
