@@ -13,14 +13,21 @@
 namespace smu_server {
 
 // Public constructor
-DMI::DMI(const Json::Value& configuration) : IModule(configuration) {
+DMI::DMI(const Config& configuration) : IModule(configuration) {
     // Create new configuration
     if (m_configuration.empty()) {
-        m_configuration["enabled"] = true;
+        m_configuration.set("enabled", true);
     }
 
-    // Load configuration
-    m_enabled = m_configuration["enabled"].asBool();
+    // Check if the `enabled` field exists. If not, log the error and throw an exception to abort
+    // registration.
+    if (auto enabled = m_configuration.get<bool>("enabled"); enabled.has_value()) {
+        m_enabled = enabled.value();
+    } else {
+        log(LogType::ERROR, "The 'enabled' field is missing. Can't continue");
+        throw std::runtime_error("The 'enabled' field is missing");
+    }
+
 
     fill_bios_info();
     fill_board_info();

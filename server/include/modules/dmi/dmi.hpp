@@ -24,7 +24,7 @@ class DMI : public IModule {
 
 
 
-    DMI(const Json::Value& config);
+    DMI(const Config& config);
 
 
 
