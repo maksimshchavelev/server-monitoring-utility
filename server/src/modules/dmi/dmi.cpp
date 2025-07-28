@@ -73,6 +73,24 @@ std::optional<Json::Value> DMI::get_data() {
 
 
 
+// Public method
+void DMI::enable() {
+    m_configuration.set("enabled", true);
+    m_enabled = true;
+}
+
+
+
+
+// Public method
+void DMI::disable() {
+    m_configuration.set("enabled", false);
+    m_enabled = false;
+}
+
+
+
+
 // Private method
 std::expected<std::string, std::string> DMI::read_file(const std::string_view path) const noexcept {
     std::ifstream file;

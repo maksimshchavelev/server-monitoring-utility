@@ -32,6 +32,16 @@ class DMI : public IModule {
     std::optional<Json::Value> get_data() override;
 
 
+
+
+    void enable() override;
+
+
+
+
+    void disable() override;
+
+
   private:
     // BIOS
     std::string m_bios_date;
