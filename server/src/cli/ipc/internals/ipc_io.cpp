@@ -7,16 +7,11 @@
  */
 
 #include "cli/ipc/internals/ipc_io.hpp"
+#include "logger/logger.hpp"
 #include <format>
 #include <sys/socket.h>
 #include <sys/un.h>
 #include <thread>
-
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wsign-conversion"
-#pragma GCC diagnostic ignored "-Wold-style-cast"
-#include "trantor/utils/Logger.h"
-#pragma GCC diagnostic pop
 
 namespace smu_server {
 
@@ -26,10 +21,8 @@ IPC_IO::IPC_IO(const std::string_view abstract_socket_name) :
 
     // If socket initialization error
     if (auto res = init(); !res.has_value()) {
-        std::string error_string =
-            std::format("Can't init abstract socket with name, cause: {}", res.error());
-        LOG_ERROR << error_string;
-        throw std::runtime_error(error_string);
+        logger().log_error(res.error());
+        throw std::runtime_error(res.error());
     }
 }
 
@@ -59,8 +52,8 @@ void IPC_IO::run_listening_async(std::function<std::string(const std::string_vie
                 if (connection_fd == -1) {
                     // If fatal error
                     if (errno != EINTR) {
-                        LOG_WARN << "IPC_IO: error accepting connection, cause: "
-                                 << strerror(errno);
+                        logger().log_warning(std::format(
+                            "IPC_IO: error accepting connection, cause: {}", strerror(errno)));
                         break;
                     }
                 } else {
@@ -77,8 +70,9 @@ void IPC_IO::run_listening_async(std::function<std::string(const std::string_vie
             auto received_res = receive_message(connection_fd);
             if (!received_res.has_value()) {
                 // If error
-                LOG_WARN << "Can't read message from socket " << connection_fd
-                         << ", cause: " << received_res.error();
+                logger().log_warning(std::format("Can't read message from socket {}, cause: {}",
+                                                 connection_fd,
+                                                 received_res.error()));
                 close(connection_fd);
                 continue;
             }
@@ -91,14 +85,15 @@ void IPC_IO::run_listening_async(std::function<std::string(const std::string_vie
             } catch (std::exception& e) {
                 std::string error_message =
                     std::format("Error parsing arguments, cause: {}", e.what());
-                error_message.push_back('\0');
-                LOG_WARN << error_message;
+                error_message.push_back('\0'); // Flag to stop reading message in CLI
+                logger().log_warning(error_message);
 
                 auto send_res = send_message(connection_fd, error_message);
                 if (!send_res.has_value()) {
                     // If error
-                    LOG_WARN << "Can't send message to socket " << connection_fd
-                             << ", cause: " << send_res.error();
+                    logger().log_warning(std::format("Can't send message to socket {}, cause: {}",
+                                                     connection_fd,
+                                                     send_res.error()));
                     close(connection_fd);
                     continue;
                 }
@@ -107,14 +102,14 @@ void IPC_IO::run_listening_async(std::function<std::string(const std::string_vie
                 continue;
             }
 
-            msg_to_send.push_back('\0');
+            msg_to_send.push_back('\0'); // Flag to stop reading message in CLI
 
             // Sending
             auto send_res = send_message(connection_fd, msg_to_send);
             if (!send_res.has_value()) {
                 // If error
-                LOG_WARN << "Can't send message to socket " << connection_fd
-                         << ", cause: " << send_res.error();
+                logger().log_warning(std::format(
+                    "Can't send message to socket {}, cause: {}", connection_fd, send_res.error()));
                 close(connection_fd);
                 continue;
             }
@@ -148,7 +143,7 @@ std::expected<void, std::string> IPC_IO::init() noexcept {
     addr.sun_path[0] = '\0'; // for abstract socket
 
     // Avoid sun_path overflow
-    if(m_abstract_socket_name.size() > sizeof(addr.sun_path) - 1) {
+    if (m_abstract_socket_name.size() > sizeof(addr.sun_path) - 1) {
         return std::unexpected("Socket name too long");
     }
 
