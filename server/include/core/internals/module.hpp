@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include <json/json.h>
+#include "config.hpp"
 #include <optional>
 
 namespace smu_server {
@@ -22,7 +22,7 @@ class IModule {
     /**
      * @brief IModule
      *
-     * @param configuration Json::Value with module configuration. See details
+     * @param configuration `Config` with module configuration. See details
      *
      * @details The configuration of the module is stored in a common configuration file,
      * when the module is constructed, it is passed a fragment with the configuration.
@@ -34,7 +34,7 @@ class IModule {
      *
      * @see get_configuration()
      */
-    IModule(const Json::Value& configuration);
+    IModule(Config configuration);
 
 
 
@@ -51,7 +51,7 @@ class IModule {
      * @brief Method for obtaining module configuration
      * @return Json::Value&
      */
-    virtual const Json::Value& get_configuration() const noexcept;
+    virtual const Config& get_configuration() const noexcept;
 
 
 
@@ -117,8 +117,8 @@ class IModule {
 
 
   protected:
-    Json::Value m_configuration;
-    bool        m_enabled{false};
+    Config m_configuration;
+    bool   m_enabled{false};
 
     // =============================== LOGGER ===============================
 

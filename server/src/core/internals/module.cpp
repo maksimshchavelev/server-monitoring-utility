@@ -12,13 +12,13 @@
 
 
 // Public constructor
-smu_server::IModule::IModule(const Json::Value& configuration) : m_configuration(configuration) {}
+smu_server::IModule::IModule(smu_server::Config configuration) : m_configuration(configuration) {}
 
 
 
 
 // Public method
-const Json::Value& smu_server::IModule::get_configuration() const noexcept {
+const smu_server::Config& smu_server::IModule::get_configuration() const noexcept {
     return m_configuration;
 }
 
