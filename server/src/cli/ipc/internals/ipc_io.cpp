@@ -152,8 +152,7 @@ std::expected<void, std::string> IPC_IO::init() noexcept {
         return std::unexpected("Socket name too long");
     }
 
-    // Subtract 1 because the first byte is occupied by the character ‘\0’.
-    memcpy(addr.sun_path + 1, m_abstract_socket_name.data(), sizeof(addr.sun_path) - 1);
+    memcpy(addr.sun_path + 1, m_abstract_socket_name.data(), m_abstract_socket_name.size());
 
     // We add 1 because the first byte is occupied by the character ‘\0’.
     // We count the socket length as the size of sun_family plus the length of the name along with
