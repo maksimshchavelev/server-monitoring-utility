@@ -7,6 +7,7 @@
  */
 
 #include "core/internals/module.hpp"
+#include "logger/logger.hpp"
 #include <iostream>
 
 
@@ -69,6 +70,6 @@ void smu_server::IModule::log(LogType log_type, std::string_view message) const 
     }
 
     // For example: [MODULE RAM] Initialization error!
-    std::cout << "[MODULE \033[36m" << module_name() << "\033[0m] " << color << message << "\033[0m"
-              << std::endl; // `endl` for flush
+    logger().log_colorless(
+        std::format("[MODULE \033[36m{}\033[0m] {}{}\033[0m", module_name(), color, message));
 }
