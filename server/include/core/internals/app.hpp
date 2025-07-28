@@ -10,8 +10,9 @@
 
 #include "cli/cli.hpp"
 #include "config_io/config_io.hpp"
-#include "network/network.hpp"
 #include "module.hpp"
+#include "network/network.hpp"
+#include "logger/logger.hpp"
 #include <functional>
 #include <memory>
 #include <mutex>
@@ -58,12 +59,10 @@ class Application {
 
 
         // Print log
-        std::cout << std::format("Registering a module with name "
+        logger().log_colorless(std::format("Registering a module with name "
                                  "\"\033[36m{}\033[0m\" and description \"\033[36m{}\033[0m\"...",
                                  ModuleType::module_name_static(),
-                                 ModuleType::module_description_static())
-                  << std::endl;
-
+                                 ModuleType::module_description_static()));
 
         // Getting config
         auto config = ConfigIO::instance().get_module_config(ModuleType::module_name_static());
@@ -73,9 +72,7 @@ class Application {
             std::format("[MODULE \033[36m{}\033[0m] ", ModuleType::module_name_static());
 
         if (config.empty()) {
-            std::cout << module_log_prefix
-                      << "\033[33mGot empty config. Continuing with default values. \033[0m"
-                      << std::endl;
+            logger().log_colorless(std::format("{}\033[33mGot empty config. Continuing with default values\033[30m", module_log_prefix));
         }
 
 
@@ -87,9 +84,7 @@ class Application {
             module = std::make_unique<ModuleType>(config.get_json());
         } catch (const std::exception& e) {
             creation_failed = true;
-            std::cout << module_log_prefix
-                      << std::format("\033[31mRegistration failed! Cause: {}\033[0m\n", e.what())
-                      << std::endl;
+            logger().log_colorless(std::format("{}\033[31mRegistration failed! Cause: {}\033[30m\n", module_log_prefix, e.what()));
         }
 
         if (!creation_failed) {
@@ -98,9 +93,7 @@ class Application {
                 module->is_enabled() ? "\033[32mRUNNING\033[0m" : "\033[31mSTOPPED\033[0m";
 
             // Print colorful log
-            std::cout << module_log_prefix
-                      << std::format("\033[32mRegistered\033[0m ({})\n", module_status)
-                      << std::endl;
+            logger().log_colorless(std::format("{}\033[32mRegistered\033[0m ({})\n", module_log_prefix, module_status));
 
             std::lock_guard<std::mutex> lock(m_modules_mutex);
             m_modules.push_back(std::move(module));

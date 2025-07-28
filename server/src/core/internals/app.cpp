@@ -9,6 +9,7 @@
 
 #include "core/internals/app.hpp"
 #include "compile-time_config.hpp"
+#include "logger/logger.hpp"
 #include "version.hpp"
 #include <cxxopts.hpp>
 
@@ -44,7 +45,7 @@ void smu_server::Application::run(int argc, char** argv) {
 
     // Get port
     auto port = m_server_config.get<int>("port");
-    if(!port.has_value()) {
+    if (!port.has_value()) {
         throw std::runtime_error("Can't get port to running!");
     }
 
@@ -74,8 +75,8 @@ Json::Value smu_server::Application::collect_metrics() {
                 root[module->module_name().data()] = std::move(module_data.value());
             }
         } catch (const std::exception& e) {
-            LOG_ERROR << "Failed to get data from module " << module->module_name()
-                      << ", cause: " << e.what();
+            logger().log_error(std::format(
+                "Failed to get data from module {}, cause: {}", module->module_name(), e.what()));
         }
     }
 
@@ -90,8 +91,8 @@ void smu_server::Application::run_sending_metrics_async() {
     static bool running{false};
 
     if (running) {
-        LOG_WARN << "Application::run_sending_metrics_async() is already running. Skipping run "
-                    "again request";
+        logger().log_warning("Application::run_sending_metrics_async() is already running. Skipping run "
+                             "again request");
         return;
     }
 
@@ -126,8 +127,8 @@ void smu_server::Application::save_configs() const noexcept {
     // Saving server configuration
     if (auto res = manager.save_server_config(m_server_config); !res.has_value()) {
         // If error
-        LOG_ERROR << std::format("\033[31mError saving server configuration (cause: {})\033[0m",
-                                 res.error());
+        logger().log_error(std::format("\033[31mError saving server configuration (cause: {})\033[0m",
+                                 res.error()));
     }
 
     // Saving module configurations
@@ -136,10 +137,10 @@ void smu_server::Application::save_configs() const noexcept {
                 manager.save_module_config(module->module_name(), module->get_configuration());
             !res.has_value()) {
             // If error
-            LOG_ERROR << std::format(
+            logger().log_error(std::format(
                 "\033[31mError saving configuration of module \"{}\" (cause: {}\033[0m)",
                 module->module_name(),
-                res.error());
+                res.error()));
         }
     }
 }
