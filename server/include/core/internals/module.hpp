@@ -34,7 +34,7 @@ class IModule {
      *
      * @see get_configuration()
      */
-    IModule(Config configuration);
+    IModule(const Config& configuration);
 
 
 

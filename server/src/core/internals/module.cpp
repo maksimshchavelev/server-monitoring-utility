@@ -13,7 +13,8 @@
 
 
 // Public constructor
-smu_server::IModule::IModule(smu_server::Config configuration) : m_configuration(configuration) {}
+smu_server::IModule::IModule(const smu_server::Config& configuration) :
+    m_configuration(configuration) {}
 
 
 
