@@ -24,7 +24,7 @@ class RAM : public IModule {
 
 
 
-    RAM(const Json::Value& config);
+    RAM(Config config);
 
 
 
