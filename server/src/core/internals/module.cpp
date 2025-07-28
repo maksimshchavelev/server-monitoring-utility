@@ -8,7 +8,6 @@
 
 #include "core/internals/module.hpp"
 #include "logger/logger.hpp"
-#include <iostream>
 
 
 
