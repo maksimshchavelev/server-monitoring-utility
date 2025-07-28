@@ -17,7 +17,7 @@ namespace smu_server {
 
 
 // Public method
-RAM::RAM(Config config) : IModule(std::move(config)) {
+RAM::RAM(const Config& config) : IModule(config) {
     // Create new configuration
     if (m_configuration.empty()) {
         m_configuration.set("enabled", true);

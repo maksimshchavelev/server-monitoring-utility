@@ -24,7 +24,7 @@ class RAM : public IModule {
 
 
 
-    RAM(Config config);
+    RAM(const Config& config);
 
 
 
