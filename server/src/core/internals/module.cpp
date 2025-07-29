@@ -43,7 +43,7 @@ void smu_server::IModule::disable() {
 
 
 // Public method
-bool smu_server::IModule::is_enabled() const noexcept {
+bool smu_server::IModule::is_enabled() const {
     return m_enabled;
 }
 
