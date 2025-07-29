@@ -71,11 +71,44 @@ Json::Value smu_server::Application::collect_metrics() {
         }
 
         try {
+            // Need to cache
+            if (module->get_poll_ratio() == 0) {
+                // Try to cache if not cached
+                if (auto iter = m_module_cache.find(module->module_name());
+                    iter == m_module_cache.end()) {
+
+                    // Cache first call of `module->get_data()`
+                    if (auto module_data = module->get_data(); module_data.has_value()) {
+                        m_module_cache[module->module_name()] = std::move(module_data.value());
+                    } else {
+                        // Failed to cache
+                        logger().log_warning(
+                            std::format("Failed to cache data from module {} (marked as cacheable)",
+                                        module->module_name()));
+                    }
+                }
+
+                // Load cache
+                root[module->module_name().data()] =
+                    m_module_cache[module->module_name()]; // There is no `std::move`, as this would
+                                                           // otherwise invalidate the cache.
+                continue;
+            }
+
+            // Check necessity of polling uncacheable module
+            if (module->m_poll_counter < module->get_poll_ratio() - 1) {
+                continue; // skip if no necessity
+            }
+
+            // Poll uncacheable module
             if (auto module_data = module->get_data(); module_data.has_value()) {
                 root[module->module_name().data()] = std::move(module_data.value());
             }
+
+            ++module->m_poll_counter; // increase poll counter anyway
+
         } catch (const std::exception& e) {
-            logger().log_error(std::format(
+            logger().log_warning(std::format(
                 "Failed to get data from module {}, cause: {}", module->module_name(), e.what()));
         }
     }
@@ -91,8 +124,9 @@ void smu_server::Application::run_sending_metrics_async() {
     static bool running{false};
 
     if (running) {
-        logger().log_warning("Application::run_sending_metrics_async() is already running. Skipping run "
-                             "again request");
+        logger().log_warning(
+            "Application::run_sending_metrics_async() is already running. Skipping run "
+            "again request");
         return;
     }
 
@@ -127,8 +161,8 @@ void smu_server::Application::save_configs() const noexcept {
     // Saving server configuration
     if (auto res = manager.save_server_config(m_server_config); !res.has_value()) {
         // If error
-        logger().log_error(std::format("\033[31mError saving server configuration (cause: {})\033[0m",
-                                 res.error()));
+        logger().log_error(std::format(
+            "\033[31mError saving server configuration (cause: {})\033[0m", res.error()));
     }
 
     // Saving module configurations

@@ -50,6 +50,22 @@ bool smu_server::IModule::is_enabled() const noexcept {
 
 
 
+// Public method
+void smu_server::IModule::set_poll_ratio(uint32_t poll_ratio) {
+    m_poll_ratio = poll_ratio;
+}
+
+
+
+
+// Public method
+uint32_t smu_server::IModule::get_poll_ratio() const {
+    return m_poll_ratio;
+}
+
+
+
+
 // Protected method
 void smu_server::IModule::log(LogType log_type, std::string_view message) const {
     const char* color = nullptr;

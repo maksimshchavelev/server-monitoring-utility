@@ -133,6 +133,14 @@ class Application {
 
 
 
+    /**
+     * @brief Collects all metrics from all modules
+     * @return `Json::Value` with collected metrics
+     * @note Public, as it is a crutch to make the method friendly
+     */
+    Json::Value collect_metrics();
+
+
   private:
     Application();
     ~Application();
@@ -153,6 +161,15 @@ class Application {
     // saving the config is output in the destructor (because we run without superuser rights).
     bool m_need_save_config_in_destructor{true};
 
+    // If the module's `poll ratio` value is `0`, the data received during the first call to
+    // `get_data` is cached. Subsequently, the data is loaded from the cache instead of calling
+    // `get_data`
+    //
+    // Storing `std::string_view` is safe because the module name exists throughout its lifetime and
+    // the server core does not delete the module.
+    std::unordered_map<std::string_view /* module name */, Json::Value /* cached data */>
+        m_module_cache;
+
 
     /**
      * @brief Parses command line arguments
@@ -163,15 +180,6 @@ class Application {
      * @note Can print text (help, version or error...)
      */
     bool parse_argv(int argc, char** argv) const noexcept;
-
-
-
-
-    /**
-     * @brief Collects all metrics from all modules
-     * @return `Json::Value` with collected metrics
-     */
-    Json::Value collect_metrics();
 
 
 

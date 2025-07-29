@@ -96,6 +96,28 @@ class IModule {
 
 
     /**
+     * @brief Sets poll ratio
+     *
+     * For example, a value of 5 means that the module will be polled by the server core every fifth
+     * polling cycle. Thus, if the server settings specify a polling interval of 1 second, the
+     * module will be polled at intervals of 5 seconds.
+     */
+    virtual void set_poll_ratio(uint32_t poll_ratio);
+
+
+
+
+    /**
+     * @brief Get poll ratio
+     * @return Poll ratio
+     * @see set_poll_ratio
+     */
+    virtual uint32_t get_poll_ratio() const;
+
+
+
+
+    /**
      * @brief Get module name
      * @note You do not need to implement this method because the REGISTER_MODULE macro implements
      * it
@@ -120,6 +142,15 @@ class IModule {
     Config m_configuration;
     bool   m_enabled{false};
 
+    // Affects the module polling frequency. For example, a value of `5` means that the module will be
+    // polled by the server core every fifth polling cycle. Thus, if the server settings specify a
+    // polling interval of `1` second, the module will be polled at intervals of `5` seconds.
+    //
+    // If the value is `0`, the server core will cache the result of the first query (data obtained
+    // via `get_data`) and the module will no longer be queried.
+    uint32_t m_poll_ratio{1};
+
+
     // =============================== LOGGER ===============================
 
     /**
@@ -140,6 +171,16 @@ class IModule {
      * @note Prints white message if `log_type` is incorrect
      */
     void log(LogType log_type, const std::string_view message) const;
+
+
+  private:
+    // Counter of completed poll cycles. When it equals `m_poll_ratio - 1`, a poll occurs.
+    // The server core changes it itself, thanks to the mechanism of friendly functions. The field
+    // is located in the private section so that the inheriting class (implementation of a specific
+    // module) cannot see it.
+    uint32_t m_poll_counter{0};
+
+    friend class Application;
 };
 
 } // end of namespace smu_server
