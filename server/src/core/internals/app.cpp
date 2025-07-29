@@ -156,7 +156,7 @@ void smu_server::Application::run_sending_metrics_async() {
 
 // Public method
 void smu_server::Application::save_configs() const noexcept {
-    auto& manager = ConfigIO::instance();
+    auto& manager = Config_IO::instance();
 
     // Saving server configuration
     if (auto res = manager.save_server_config(m_server_config); !res.has_value()) {
@@ -184,7 +184,7 @@ void smu_server::Application::save_configs() const noexcept {
 
 // Private constructor
 smu_server::Application::Application() :
-    m_server_config(ConfigIO::instance().get_server_config()), m_cli(*this) {}
+    m_server_config(Config_IO::instance().get_server_config()), m_cli(*this) {}
 
 
 

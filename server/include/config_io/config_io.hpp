@@ -20,13 +20,13 @@ namespace smu_server {
  * @details Can be used in conjunction with `Config`
  * @see Config
  */
-class ConfigIO {
+class Config_IO {
   public:
     /**
-     * @brief Get instance of ConfigIO
-     * @return Lvalue reference to `ConfigIO` instance
+     * @brief Get instance of Config_IO
+     * @return Lvalue reference to `Config_IO` instance
      */
-    static ConfigIO& instance();
+    static Config_IO& instance();
 
 
 
@@ -74,8 +74,8 @@ class ConfigIO {
 
 
   private:
-    ConfigIO() = default;
-    ~ConfigIO() = default;
+    Config_IO() = default;
+    ~Config_IO() = default;
 
 
 

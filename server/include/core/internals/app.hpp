@@ -66,7 +66,7 @@ class Application {
                         ModuleType::module_description_static()));
 
         // Getting config
-        auto config = ConfigIO::instance().get_module_config(ModuleType::module_name_static());
+        auto config = Config_IO::instance().get_module_config(ModuleType::module_name_static());
 
         // For example, [MODULE RAM]
         const std::string module_log_prefix =

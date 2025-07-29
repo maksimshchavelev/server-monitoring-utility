@@ -14,8 +14,8 @@
 namespace smu_server {
 
 // Public method
-ConfigIO& smu_server::ConfigIO::instance() {
-    static ConfigIO manager;
+Config_IO& smu_server::Config_IO::instance() {
+    static Config_IO manager;
     return manager;
 }
 
@@ -23,7 +23,7 @@ ConfigIO& smu_server::ConfigIO::instance() {
 
 
 // Public method
-smu_server::Config ConfigIO::get_server_config() {
+smu_server::Config Config_IO::get_server_config() {
         auto res = read_config(CONFIG_PATH);
         if (res.has_value()) {
             // If success
@@ -38,7 +38,7 @@ smu_server::Config ConfigIO::get_server_config() {
 
 
 // Public method
-std::expected<void, std::string> ConfigIO::save_server_config(const Config& config) const noexcept {
+std::expected<void, std::string> Config_IO::save_server_config(const Config& config) const noexcept {
     return save_config(CONFIG_PATH, config);
 }
 
@@ -46,7 +46,7 @@ std::expected<void, std::string> ConfigIO::save_server_config(const Config& conf
 
 
 // Public method
-Config ConfigIO::get_module_config(std::string_view module_name) const noexcept {
+Config Config_IO::get_module_config(std::string_view module_name) const noexcept {
     if (auto config = read_config(std::format("{}/{}.json", MODULES_CONFIGS_DIR, module_name));
         config.has_value()) {
         return config.value();
@@ -58,7 +58,7 @@ Config ConfigIO::get_module_config(std::string_view module_name) const noexcept 
 
 
 // Public method
-std::expected<void, std::string> ConfigIO::save_module_config(
+std::expected<void, std::string> Config_IO::save_module_config(
     std::string_view module_name, const Config& config) const {
     return save_config(std::format("{}/{}.json", MODULES_CONFIGS_DIR, module_name), config);
 }
@@ -67,7 +67,7 @@ std::expected<void, std::string> ConfigIO::save_module_config(
 
 
 // Private method
-std::expected<Config, std::string> ConfigIO::read_config(
+std::expected<Config, std::string> Config_IO::read_config(
     std::string_view path) const noexcept {
 
     std::ifstream json_file;
@@ -102,7 +102,7 @@ std::expected<Config, std::string> ConfigIO::read_config(
 
 
 // Private method
-std::expected<void, std::string> ConfigIO::save_config(
+std::expected<void, std::string> Config_IO::save_config(
     std::string_view path, const Config& config) const noexcept {
     std::ofstream file;
     file.open(path.data());
