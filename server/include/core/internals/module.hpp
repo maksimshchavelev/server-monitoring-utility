@@ -90,7 +90,7 @@ class IModule {
      * @brief Is module enabled?
      * @return `true` if module is enabled, otherwise `false`
      */
-    virtual bool is_enabled() const noexcept;
+    virtual bool is_enabled() const;
 
 
 
