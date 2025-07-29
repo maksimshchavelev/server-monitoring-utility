@@ -61,7 +61,14 @@ void smu_server::Application::run(int argc, char** argv) {
 
 // Public method
 Json::Value smu_server::Application::collect_metrics() {
+    // If the module's poll ratio is greater than 1, the last get_data call must be cached,
+    // otherwise the module data will not reach the user.
+    static std::unordered_map<std::string_view /* module_name */, Json::Value /* cached_data */>
+        poll_ratio_between_get_datas_cache;
+
+
     Json::Value root;
+
 
     std::lock_guard<std::mutex> lock(m_modules_mutex);
     for (const auto& module : m_modules) {
@@ -96,16 +103,28 @@ Json::Value smu_server::Application::collect_metrics() {
             }
 
             // Check necessity of polling uncacheable module
-            if (module->m_poll_counter < module->get_poll_ratio() - 1) {
-                continue; // skip if no necessity
+            if (module->m_poll_counter >= module->get_poll_ratio() - 1) {
+                // Poll uncacheable module
+                if (auto module_data = module->get_data(); module_data.has_value()) {
+                    // Do not move to cache if poll ratio is 1
+                    if (module->get_poll_ratio() == 1) {
+                        root[module->module_name().data()] = std::move(module_data.value());
+                    } else {
+                        // Otherwise, first to the cache, then to `root`
+                        poll_ratio_between_get_datas_cache[module->module_name()] =
+                            module_data.value();
+                        root[module->module_name().data()] = std::move(module_data.value());
+                    }
+
+                    module->m_poll_counter = 0; // reset poll counter
+                    continue;
+                }
+            } else {
+                // Load from cache instead of calling `get_data` if no necessity
+                root[module->module_name().data()] = poll_ratio_between_get_datas_cache[module->module_name()];
             }
 
-            // Poll uncacheable module
-            if (auto module_data = module->get_data(); module_data.has_value()) {
-                root[module->module_name().data()] = std::move(module_data.value());
-            }
-
-            ++module->m_poll_counter; // increase poll counter anyway
+            ++module->m_poll_counter; // increase poll counter
 
         } catch (const std::exception& e) {
             logger().log_warning(std::format(

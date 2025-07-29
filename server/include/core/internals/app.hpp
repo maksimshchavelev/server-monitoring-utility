@@ -85,6 +85,9 @@ class Application {
 
         try {
             module = std::make_unique<ModuleType>(std::move(config));
+            // Force first data request. Otherwise, the core will wait until the counter reaches
+            // `poll_ratio - 1`.
+            module->m_poll_counter = module->get_poll_ratio();
         } catch (const std::exception& e) {
             creation_failed = true;
             logger().log_colorless(std::format(
