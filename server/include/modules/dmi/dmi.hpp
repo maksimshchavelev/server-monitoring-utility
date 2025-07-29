@@ -63,8 +63,6 @@ class DMI : public IModule {
     std::string m_product_serial;
     std::string m_product_uuid;
 
-    // Root json
-    Json::Value m_root;
 
 
 
