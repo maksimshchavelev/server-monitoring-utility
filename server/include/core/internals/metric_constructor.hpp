@@ -1,9 +1,10 @@
-/// GPLv3 LICENSE, Copyright (©) 2025, Maksim Shchavelev <maksimshchavelev@gmail.com>
-/// See LICENSE for details
-
 /**
- * @file core/internals/metric_constructor.hpp
+ * @file metric_constructor.hpp
+ * @headerfile core/internals/metric_constructor.hpp
  * @brief File with metric constructor
+ *
+ * @copyright Copyright (©) 2025, Maksim Shchavelev <maksimshchavelev@gmail.com>
+ * @license GPLv3 license, see LICENSE for details
  */
 
 #pragma once

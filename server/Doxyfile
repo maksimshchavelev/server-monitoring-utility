@@ -6,6 +6,7 @@ OUTPUT_DIRECTORY       = docs
 INPUT                  = src include for-developers README.md
 FILE_PATTERNS          = *.h *.hpp *.md
 RECURSIVE              = YES
+STRIP_FROM_INC_PATH    = include
 
 #--------------------------------------------------------------------------- 
 # Build related configuration options

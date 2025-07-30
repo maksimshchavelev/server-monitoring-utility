@@ -1,6 +1,6 @@
 <map id="include/utils/for_each_tuple.hpp" name="include/utils/for_each_tuple.hpp">
 <area shape="rect" id="Node000001" title="File with for_each_tuple implementation." alt="" coords="95,5,256,45"/>
-<area shape="rect" id="Node000002" href="$metric__constructor__nodes_8hpp.html" title="File with nodes classes for metric constructor." alt="" coords="64,93,287,133"/>
+<area shape="rect" id="Node000002" href="$metric__constructor__nodes_8hpp.html" title="File with metric constructor." alt="" coords="64,93,287,133"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="178,59,178,93,173,93,173,59"/>
 <area shape="rect" id="Node000003" href="$metric__constructor_8hpp.html" title="File with metric constructor." alt="" coords="88,181,263,221"/>
 <area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="178,147,178,181,173,181,173,147"/>

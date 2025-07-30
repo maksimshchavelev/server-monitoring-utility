@@ -1,9 +1,9 @@
-/// GPLv3 LICENSE, Copyright (©) 2025, Maksim Shchavelev <maksimshchavelev@gmail.com>
-/// See LICENSE for details
-
 /**
- * @file core/internals/metric_constructor_nodes.hpp
- * @brief File with nodes classes for metric constructor
+ * @file metric_constructor_nodes.hpp
+ * @brief File with metric constructor
+ *
+ * @copyright Copyright (©) 2025, Maksim Shchavelev <maksimshchavelev@gmail.com>
+ * @license GPLv3 license, see LICENSE for details
  */
 
 #pragma once
@@ -15,21 +15,40 @@
 namespace smu_server {
 
 /**
- * @brief The Base IMetricNode class to make it easier to use. See details
- * @details First, you can create a smart pointer to `IMetricNodeBase` if you create nodes
+ * @brief The Base IMetricNode class to simplify the storage of data obtained from
+ * `smu_server::make_root_node`
+ *
+ * First, you can create a smart pointer to `IMetricNodeBase` if you create nodes
  * via factory methods in the module constructor, in which case you can get json by calling
- * IMetricNodeBase::to_json(). This greatly improves performance when working with static
- * data, since you don't have to recreate nodes.
- * Second, it simplifies the requires clause in `IMetricNode` (implementation detail)
- * @see IMetricNode
+ * IMetricNodeBase::to_json().
+ *
+ * @section example_usage Example usage
+ *
+ * @code{.cpp}
+ *
+ * std::unique_ptr<IMetricNodeBase> m_root = make_root_node( ... );
+ * Json::Value m_json = m_root->to_json();
+ *
+ * @endcode
+ *
+ * @see smu_server::internals::IMetricNode (**don't use directly!**)
+ * @headerfile core/core.hpp
  */
 struct IMetricNodeBase {
     /**
-     * @brief Get json
+     * @brief Recursively generate json
+     *
+     * Recursively creates `Json::Value` and returns it
+     *
+     * @warning Do not call this function too often, as it may cause performance degradation
+     *
      * @return The generated json
      */
     virtual Json::Value to_json() const = 0;
 
+    /**
+     * @brief Does nothing
+     */
     virtual ~IMetricNodeBase() = default;
 };
 

@@ -97,16 +97,16 @@ $(document).ready(function(){initNavTree('structsmu__server_1_1IMetricNodeBase.h
 </div><!--header-->
 <div class="contents">
 
-<p>The Base IMetricNode class to make it easier to use. See details.  
+<p>The Base IMetricNode class to simplify the storage of data obtained from <code><a class="el" href="namespacesmu__server.html#a23038498ffcba3c5453a07ab861d13cf">smu_server::make_root_node</a></code>  
  <a href="structsmu__server_1_1IMetricNodeBase.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="metric__constructor__nodes_8hpp_source.html">metric_constructor_nodes.hpp</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="core_8hpp_source.html">core/core.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for smu_server::IMetricNodeBase:</div>
 <div class="dyncontent">
 <div class="center"><img src="structsmu__server_1_1IMetricNodeBase__inherit__graph.png" border="0" usemap="#asmu__server_1_1IMetricNodeBase_inherit__map" alt="Inheritance graph"/></div>
 <map name="asmu__server_1_1IMetricNodeBase_inherit__map" id="asmu__server_1_1IMetricNodeBase_inherit__map">
-<area shape="rect" title="The Base IMetricNode class to make it easier to use. See details." alt="" coords="5,91,223,116"/>
+<area shape="rect" title="The Base IMetricNode class to simplify the storage of data obtained from smu_server::make_root_node" alt="" coords="5,91,223,116"/>
 <area shape="rect" href="classsmu__server_1_1internals_1_1IMetricNode.html" title=" " alt="" coords="271,15,476,55"/>
 <area shape="poly" title=" " alt="" coords="176,84,296,53,297,58,178,90"/>
 <area shape="rect" href="classsmu__server_1_1internals_1_1IMetricNode.html" title=" " alt="" coords="292,83,455,123"/>
@@ -123,14 +123,21 @@ Inheritance diagram for smu_server::IMetricNodeBase:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a6316399c6b2518f0a7da75104396c10d" id="r_a6316399c6b2518f0a7da75104396c10d"><td class="memItemLeft" align="right" valign="top">virtual Json::Value&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsmu__server_1_1IMetricNodeBase.html#a6316399c6b2518f0a7da75104396c10d">to_json</a> () const =0</td></tr>
-<tr class="memdesc:a6316399c6b2518f0a7da75104396c10d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get json.  <br /></td></tr>
+<tr class="memdesc:a6316399c6b2518f0a7da75104396c10d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recursively generate json.  <br /></td></tr>
 <tr class="separator:a6316399c6b2518f0a7da75104396c10d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aac5b31ba7e96436333eadefe54dcbd48" id="r_aac5b31ba7e96436333eadefe54dcbd48"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsmu__server_1_1IMetricNodeBase.html#aac5b31ba7e96436333eadefe54dcbd48">~IMetricNodeBase</a> ()=default</td></tr>
+<tr class="memdesc:aac5b31ba7e96436333eadefe54dcbd48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Does nothing.  <br /></td></tr>
 <tr class="separator:aac5b31ba7e96436333eadefe54dcbd48"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The Base IMetricNode class to make it easier to use. See details. </p>
-<p>First, you can create a smart pointer to <code><a class="el" href="structsmu__server_1_1IMetricNodeBase.html" title="The Base IMetricNode class to make it easier to use. See details.">IMetricNodeBase</a></code> if you create nodes via factory methods in the module constructor, in which case you can get json by calling <a class="el" href="structsmu__server_1_1IMetricNodeBase.html#a6316399c6b2518f0a7da75104396c10d" title="Get json.">IMetricNodeBase::to_json()</a>. This greatly improves performance when working with static data, since you don't have to recreate nodes. Second, it simplifies the requires clause in <code>IMetricNode</code> (implementation detail) </p><dl class="section see"><dt>See also</dt><dd>IMetricNode </dd></dl>
+<div class="textblock"><p>The Base IMetricNode class to simplify the storage of data obtained from <code><a class="el" href="namespacesmu__server.html#a23038498ffcba3c5453a07ab861d13cf">smu_server::make_root_node</a></code> </p>
+<p>First, you can create a smart pointer to <code><a class="el" href="structsmu__server_1_1IMetricNodeBase.html" title="The Base IMetricNode class to simplify the storage of data obtained from smu_server::make_root_node">IMetricNodeBase</a></code> if you create nodes via factory methods in the module constructor, in which case you can get json by calling <a class="el" href="structsmu__server_1_1IMetricNodeBase.html#a6316399c6b2518f0a7da75104396c10d" title="Recursively generate json.">IMetricNodeBase::to_json()</a>.</p>
+<h1><a class="anchor" id="example_usage"></a>
+Example usage</h1>
+<div class="fragment"><div class="line">std::unique_ptr&lt;IMetricNodeBase&gt; m_root = <a class="code hl_function" href="namespacesmu__server.html#a23038498ffcba3c5453a07ab861d13cf">make_root_node</a>( ... );</div>
+<div class="line">Json::Value m_json = m_root-&gt;to_json();</div>
+<div class="ttc" id="anamespacesmu__server_html_a23038498ffcba3c5453a07ab861d13cf"><div class="ttname"><a href="namespacesmu__server.html#a23038498ffcba3c5453a07ab861d13cf">smu_server::make_root_node</a></div><div class="ttdeci">auto make_root_node(Children &amp;&amp;... children) -&gt; std::unique_ptr&lt; internals::MetricContainerNode&lt; Children... &gt; &gt;</div><div class="ttdef"><b>Definition</b> metric_constructor.hpp:206</div></div>
+</div><!-- fragment --><dl class="section see"><dt>See also</dt><dd><a class="el" href="classsmu__server_1_1internals_1_1IMetricNode.html" title="Interface IMetricNode class.">smu_server::internals::IMetricNode</a> (<b>don't use directly!</b>) </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aac5b31ba7e96436333eadefe54dcbd48" name="aac5b31ba7e96436333eadefe54dcbd48"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aac5b31ba7e96436333eadefe54dcbd48">&#9670;&#160;</a></span>~IMetricNodeBase()</h2>
@@ -154,6 +161,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Does nothing. </p>
 
 </div>
 </div>
@@ -181,7 +190,9 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Get json. </p>
+<p>Recursively generate json. </p>
+<p>Recursively creates <code>Json::Value</code> and returns it</p>
+<dl class="section warning"><dt>Warning</dt><dd>Do not call this function too often, as it may cause performance degradation</dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>The generated json </dd></dl>
 
 <p>Implemented in <a class="el" href="classsmu__server_1_1internals_1_1IMetricNode.html#af9ffcf89e9d9a23ae652ac967d516015">smu_server::internals::IMetricNode&lt; Children &gt;</a>, <a class="el" href="classsmu__server_1_1internals_1_1MetricValueNode.html#aa4b0cf35997500b03adca3e4597868e1">smu_server::internals::MetricValueNode</a>, <a class="el" href="classsmu__server_1_1internals_1_1MetricContainerNode.html#aeb9520298cce9afa7d55d943de2812cd">smu_server::internals::MetricContainerNode&lt; Children &gt;</a>, <a class="el" href="classsmu__server_1_1internals_1_1IMetricNode.html#af9ffcf89e9d9a23ae652ac967d516015">smu_server::internals::IMetricNode&lt; Children... &gt;</a>, and <a class="el" href="classsmu__server_1_1internals_1_1IMetricNode.html#af9ffcf89e9d9a23ae652ac967d516015">smu_server::internals::IMetricNode&lt;&gt;</a>.</p>

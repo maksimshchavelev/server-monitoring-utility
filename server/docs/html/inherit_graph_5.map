@@ -1,5 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$structsmu__server_1_1IMetricNodeBase.html" title="The Base IMetricNode class to make it easier to use. See details." alt="" coords="5,91,223,116"/>
+<area shape="rect" id="Node000000" href="$structsmu__server_1_1IMetricNodeBase.html" title="The Base IMetricNode class to simplify the storage of data obtained from smu_server::make_root_node" alt="" coords="5,91,223,116"/>
 <area shape="rect" id="Node000001" href="$classsmu__server_1_1internals_1_1IMetricNode.html" title=" " alt="" coords="271,15,476,55"/>
 <area shape="poly" id="edge2_Node000000_Node000001" title=" " alt="" coords="176,84,296,53,297,58,178,90"/>
 <area shape="rect" id="Node000003" href="$classsmu__server_1_1internals_1_1IMetricNode.html" title=" " alt="" coords="292,83,455,123"/>
