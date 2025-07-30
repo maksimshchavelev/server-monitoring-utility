@@ -8,6 +8,8 @@ Check the usage guide [here](#Usage). If you'd like to contribute to the develop
 
 First, clone the main repository and navigate to the `server` folder. For convenience, we will build it in a separate `build` directory (you'll need to create it — all commands below should be executed from the `build` directory).
 
+> Be sure to install `libjsoncpp-dev` and `libssl-dev`! Also, the cmake version must be **3.28** or **higher**.
+
 Configure `smu-server` with:
 
 ```bash
@@ -18,7 +20,7 @@ You can set the following options:
 
 | Option | Values | Description | Default Value |
 |--|--|--|--|
-| `-DCMAKE_BUILD_TYPE` | `Release` / `Debug` | Specifies the build type: Release or Debug | `Release` |
+| `-DCMAKE_BUILD_TYPE` | `Release` / `Debug` | Specifies the build type: Release or Debug. In Debug mode, the build will include sanitizers. | `Release` |
 | `-DCMAKE_INSTALL_PREFIX` | Any path | Sets the installation directory for the executable. For example, `/usr/local` will install `smu-server` to `/usr/local/bin` | `/usr/` |
 
 **Example**:
@@ -73,13 +75,19 @@ Now let’s look at an example module configuration for the `RAM` module (which 
 
 ```json
 {
-  "enabled": true
+  "enabled": true,
+  "poll_ratio": 1
 }
 ```
 
 As you can see, there's a single `"enabled"` field that determines whether the module is active. If disabled, the module won't send any data. Set it to `false` to disable the module.
 
 > Each module has its own specific settings, but the `enabled` field is always present. You can enable or disable modules individually.
+
+`poll_ratio` is responsible for the data update rate. For example, in the server configuration, `send_interval_ms` is equal to `1000`, and in the module configuration, `poll_ratio` is equal to `1`. Then the module data will be updated every second. If `poll_ratio` is equal to `5`, then every `5` seconds. If `0`, then the first response from the module will be cached.
+
+> ⚠️ You should not normally change `poll_ratio`, especially if it is set to `0`!
+
 
 Once you're done configuring, start `smu-server` with:
 
@@ -92,6 +100,15 @@ You can also check whether the server started correctly (and see logs if errors 
 ```bash
 sudo systemctl status smu-server
 ```
+
+## Problems after updating
+If you encounter a **module registration error** after updating, for example:
+```
+[30.07.25 10:00:59] [MODULE RAM] The 'poll_ratio' field is missing. Can't continue
+[30.07.25 10:00:59] [MODULE RAM] Registration failed! Cause: The 'poll_ratio' field is missing
+```
+
+Then you need to delete the module configuration and restart the server. Usually, the module configuration is located in the `/var/lib/smu-server/modules.d` directory. In the example above, you need to delete `/var/lib/smu-server/modules.d/RAM.json`
 
 ## Conclusion
 

@@ -1,0 +1,21 @@
+<map id="include/core/internals/config.hpp" name="include/core/internals/config.hpp">
+<area shape="rect" id="Node000001" title="Thread&#45;safe wrapper for storing Json configs." alt="" coords="107,5,270,45"/>
+<area shape="rect" id="Node000002" href="$config__io_8hpp.html" title=" " alt="" coords="5,93,180,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="159,57,116,95,112,91,155,53"/>
+<area shape="rect" id="Node000008" href="$module_8hpp.html" title="File with IModule class." alt="" coords="205,93,367,133"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="222,52,266,91,263,95,219,56"/>
+<area shape="rect" id="Node000003" href="$app_8hpp.html" title="File Application class." alt="" coords="17,181,179,221"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="97,147,99,181,94,181,92,147"/>
+<area shape="rect" id="Node000004" href="$core_8hpp.html" title="File with core of application." alt="" coords="111,357,272,383"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="92,235,90,272,92,291,99,308,110,324,125,336,159,355,156,360,122,341,107,327,94,311,87,292,84,272,87,235"/>
+<area shape="rect" id="Node000007" href="$module__registrar_8hpp.html" title=" " alt="" coords="109,269,273,309"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="131,229,172,267,169,271,127,233"/>
+<area shape="rect" id="Node000005" href="$dmi_8hpp.html" title="This module allows you to get data from DMI/SMBIOS tables. This is the data that the manufacturer wri..." alt="" coords="21,431,180,471"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="169,394,124,433,121,428,166,390"/>
+<area shape="rect" id="Node000006" href="$ram_8hpp.html" title="File with RAM module class." alt="" coords="204,431,363,471"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="217,390,263,428,259,433,214,394"/>
+<area shape="poly" id="edge7_Node000007_Node000004" title=" " alt="" coords="194,323,194,357,189,357,189,323"/>
+<area shape="poly" id="edge10_Node000008_Node000003" title=" " alt="" coords="234,141,140,184,138,179,231,137"/>
+<area shape="poly" id="edge9_Node000008_Node000004" title=" " alt="" coords="297,146,304,182,306,224,302,269,287,311,275,327,259,341,226,360,223,355,256,336,271,323,282,308,297,268,301,224,298,183,292,147"/>
+<area shape="poly" id="edge11_Node000008_Node000007" title=" " alt="" coords="271,147,204,270,199,268,267,144"/>
+</map>

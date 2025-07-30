@@ -1,0 +1,7 @@
+<map id="smu_server::RAM" name="smu_server::RAM">
+<area shape="rect" id="Node000001" title="A module that allows you to get information about RAM." alt="" coords="17,168,153,193"/>
+<area shape="rect" id="Node000002" href="$classsmu__server_1_1IModule.html" title="The Interface Module class." alt="" coords="5,93,164,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="87,133,87,168,82,168,82,133"/>
+<area shape="rect" id="Node000003" href="$classsmu__server_1_1Config.html" title="Thread&#45;safe wrapper for storing Json configs." alt="" coords="11,5,158,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="87,45,87,93,82,93,82,45"/>
+</map>

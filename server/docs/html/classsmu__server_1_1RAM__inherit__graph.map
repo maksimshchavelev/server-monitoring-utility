@@ -1,0 +1,5 @@
+<map id="smu_server::RAM" name="smu_server::RAM">
+<area shape="rect" id="Node000001" title="A module that allows you to get information about RAM." alt="" coords="17,79,153,104"/>
+<area shape="rect" id="Node000002" href="$classsmu__server_1_1IModule.html" title="The Interface Module class." alt="" coords="5,5,164,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="87,44,87,79,82,79,82,44"/>
+</map>

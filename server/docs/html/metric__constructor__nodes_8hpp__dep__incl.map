@@ -1,0 +1,11 @@
+<map id="include/core/internals/metric_constructor_nodes.hpp" name="include/core/internals/metric_constructor_nodes.hpp">
+<area shape="rect" id="Node000001" title="File with nodes classes for metric constructor." alt="" coords="64,5,287,45"/>
+<area shape="rect" id="Node000002" href="$metric__constructor_8hpp.html" title="File with metric constructor." alt="" coords="88,93,263,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="178,59,178,93,173,93,173,59"/>
+<area shape="rect" id="Node000003" href="$core_8hpp.html" title="File with core of application." alt="" coords="95,181,256,207"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="178,147,178,181,173,181,173,147"/>
+<area shape="rect" id="Node000004" href="$dmi_8hpp.html" title="This module allows you to get data from DMI/SMBIOS tables. This is the data that the manufacturer wri..." alt="" coords="5,255,164,295"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="153,218,108,257,105,252,150,214"/>
+<area shape="rect" id="Node000005" href="$ram_8hpp.html" title="File with RAM module class." alt="" coords="188,255,347,295"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="201,214,247,252,243,257,198,218"/>
+</map>

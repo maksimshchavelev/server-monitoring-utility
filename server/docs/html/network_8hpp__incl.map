@@ -1,0 +1,9 @@
+<map id="include/network/network.hpp" name="include/network/network.hpp">
+<area shape="rect" id="Node000001" title="File with network part of smu&#45;server." alt="" coords="86,5,297,31"/>
+<area shape="rect" id="Node000002" href="$websocket__main__controller_8hpp.html" title="Main websocket controller." alt="" coords="109,79,273,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="194,31,194,65,189,65,189,31"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,167,223,192"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="175,121,137,159,133,155,171,117"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="247,167,290,192"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="212,117,250,155,246,159,208,121"/>
+</map>

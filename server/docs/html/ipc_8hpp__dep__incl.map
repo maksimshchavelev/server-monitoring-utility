@@ -1,0 +1,16 @@
+<map id="include/cli/ipc/ipc.hpp" name="include/cli/ipc/ipc.hpp">
+<area shape="rect" id="Node000001" title="File with smu&#45;cli interprocessor communication tools." alt="" coords="94,5,257,31"/>
+<area shape="rect" id="Node000002" href="$cli_8hpp.html" title="File with smu&#45;cli command receiver." alt="" coords="108,79,243,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="178,44,178,79,173,79,173,44"/>
+<area shape="rect" id="Node000003" href="$app_8hpp.html" title="File Application class." alt="" coords="94,152,257,192"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="178,118,178,152,173,152,173,118"/>
+<area shape="rect" id="Node000004" href="$core_8hpp.html" title="File with core of application." alt="" coords="95,328,256,353"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="158,205,143,241,140,260,143,279,154,305,168,326,164,329,150,308,138,281,135,260,138,239,153,203"/>
+<area shape="rect" id="Node000007" href="$module__registrar_8hpp.html" title=" " alt="" coords="153,240,317,280"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="199,202,224,238,220,241,194,205"/>
+<area shape="rect" id="Node000005" href="$dmi_8hpp.html" title="This module allows you to get data from DMI/SMBIOS tables. This is the data that the manufacturer wri..." alt="" coords="5,401,164,441"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="153,364,108,403,105,399,150,360"/>
+<area shape="rect" id="Node000006" href="$ram_8hpp.html" title="File with RAM module class." alt="" coords="188,401,347,441"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="201,360,247,399,243,403,198,364"/>
+<area shape="poly" id="edge7_Node000007_Node000004" title=" " alt="" coords="215,293,186,329,182,326,210,289"/>
+</map>

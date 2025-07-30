@@ -1,9 +1,8 @@
-# Creating modules with static data
-The last chapter described the creation of the RAM module. This module is constantly updating its data, but what if the data is static? After all, constantly creating a json tree ruins performance! Let's look at the solution in this chapter
-We will first look at a possible **but not efficient approach** (although it is more efficient than creating a tree from scratch), and then at the **most efficient approach possible**
+# Storing the entire JSON tree when creating modules
+The [previous chapter (static data modules)](2_static_data_modules.md) described the optimization for modules with static data. In this chapter, you will learn what to do if you want to save the entire tree obtained via `make_root_node` (but you don't want to store the finished `Json::Value`)
 
-## Intuition
-It would be nice if in the module constructor you could get all the data once and save the finished json tree
+> ⚠️ If you do this in your static data modules, it's a bad idea, as the `to_json` method causes recursive formation of `Json::Value`! It's better to use the approach from [the previous chapter](2_static_data_modules.md)!
+
 
 ## Problem
 The problem is that `make_root_node` returns a ***horrible huge*** type (see the dropdown). Plus, this type changes a lot when new nodes are added
@@ -98,10 +97,5 @@ Then you call `to_json` in `get_data` as usual:
 return m_root->to_json();
 ```
 
-# A more productive approach
-Why do we need to construct a json tree from scratch by calling `m_root->to_json()` when we can create it once in the constructor and just return it from `get_data`?
-We should just store a field of type `Json::Value` in the module class and return it from `get_data`.
-This method is far preferable!
-
 # Summary
-In this chapter, two approaches to creating a module that stores static data were discussed
+This chapter discussed an approach for storing the JSON tree obtained from `make_root_node`.

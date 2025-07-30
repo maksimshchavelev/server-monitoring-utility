@@ -1,0 +1,24 @@
+var searchData=
+[
+  ['save_5fmodule_5fconfig_0',['save_module_config',['../classsmu__server_1_1Config__IO.html#a9452dd53ee1d0da4c2d5d1a63727c8b8',1,'smu_server::Config_IO']]],
+  ['save_5fserver_5fconfig_1',['save_server_config',['../classsmu__server_1_1Config__IO.html#a1b6787f583f86672ce210d79f72190c4',1,'smu_server::Config_IO']]],
+  ['section_2',['Practical Section',['../md_for-developers_2modules_21__own__module.html#autotoc_md13',1,'']]],
+  ['send_5feveryone_3',['send_everyone',['../classsmu__server_1_1MainWebsocketController.html#ab51c90ae6e3a045ccb8342be5d09e30d',1,'smu_server::MainWebsocketController::send_everyone()'],['../classsmu__server_1_1Network.html#aeaee190159a388a6b429ca98bd950fae',1,'smu_server::Network::send_everyone()']]],
+  ['server_4',['server',['../index.html#autotoc_md25',1,'How to build smu-server?'],['../index.html',1,'smu-server']]],
+  ['set_5',['set',['../classsmu__server_1_1Config.html#ab6a96866f5eb401124e17144d7eb24c7',1,'smu_server::Config']]],
+  ['set_5fpoll_5fratio_6',['set_poll_ratio',['../classsmu__server_1_1IModule.html#a844f0b53bfcb56be8ae9636012fbaa6b',1,'smu_server::IModule']]],
+  ['set_5fpoll_5fratio_20and_20get_5fpoll_5fratio_7',['set_poll_ratio and get_poll_ratio',['../md_for-developers_2modules_21__own__module.html#autotoc_md10',1,'']]],
+  ['size_8',['size',['../classsmu__server_1_1Config.html#a5687bcd35dce87a9cbb2b4a03193f061',1,'smu_server::Config']]],
+  ['smu_20server_9',['smu server',['../index.html#autotoc_md25',1,'How to build smu-server?'],['../index.html',1,'smu-server']]],
+  ['smu_5fserver_10',['smu_server',['../namespacesmu__server.html',1,'']]],
+  ['smu_5fserver_3a_3ainternals_11',['internals',['../namespacesmu__server_1_1internals.html',1,'smu_server']]],
+  ['solution_12',['Solution',['../md_for-developers_2modules_23__storing__json__tree.html#autotoc_md22',1,'']]],
+  ['started_20general_20concept_13',['Getting Started. General Concept',['../md_for-developers_2modules_21__own__module.html#autotoc_md3',1,'']]],
+  ['static_20data_14',['Creating modules with static data',['../md_for-developers_2modules_22__static__data__modules.html',1,'']]],
+  ['stop_15',['STOP',['../classsmu__server_1_1IPC.html#acb16f6685fbd659bc87d15236c72c501a615a46af313786fc4e349f34118be111',1,'smu_server::IPC']]],
+  ['storing_20the_20entire_20json_20tree_20when_20creating_20modules_16',['Storing the entire JSON tree when creating modules',['../md_for-developers_2modules_23__storing__json__tree.html',1,'']]],
+  ['str_17',['str',['../classsmu__server_1_1internals_1_1StringWrapper.html#a6ce7946f708678a5478f0af40d7bd40b',1,'smu_server::internals::StringWrapper']]],
+  ['stringwrapper_18',['stringwrapper',['../classsmu__server_1_1internals_1_1StringWrapper.html#ac100a87a07c37ea605ae92be5a08c6fa',1,'smu_server::internals::StringWrapper::StringWrapper()'],['../classsmu__server_1_1internals_1_1StringWrapper.html',1,'smu_server::internals::StringWrapper&lt; N &gt;']]],
+  ['success_19',['SUCCESS',['../classsmu__server_1_1Logger.html#a41aafc267cf295e67590b6534067a8e3ad0749aaba8b833466dfcbb0428e4f89c',1,'smu_server::Logger']]],
+  ['summary_20',['summary',['../md_for-developers_2modules_21__own__module.html#autotoc_md14',1,'Summary'],['../md_for-developers_2modules_22__static__data__modules.html#autotoc_md19',1,'Summary'],['../md_for-developers_2modules_23__storing__json__tree.html#autotoc_md23',1,'Summary']]]
+];

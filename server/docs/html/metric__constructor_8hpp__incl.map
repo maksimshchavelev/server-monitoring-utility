@@ -1,0 +1,12 @@
+<map id="include/core/internals/metric_constructor.hpp" name="include/core/internals/metric_constructor.hpp">
+<area shape="rect" id="Node000001" title="File with metric constructor." alt="" coords="48,5,223,45"/>
+<area shape="rect" id="Node000002" href="$metric__constructor__nodes_8hpp.html" title="File with nodes classes for metric constructor." alt="" coords="63,93,207,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="138,46,138,79,133,79,133,46"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,181,97,207"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="117,136,76,174,72,170,113,132"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="171,255,225,280"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="141,133,150,167,163,206,184,242,179,244,158,208,145,169,136,134"/>
+<area shape="rect" id="Node000005" href="$for__each__tuple_8hpp.html" title="File with for_each_tuple implementation." alt="" coords="173,181,351,207"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="167,131,233,172,231,176,165,136"/>
+<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="253,209,219,246,215,243,249,205"/>
+</map>
