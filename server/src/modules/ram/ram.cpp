@@ -21,6 +21,7 @@ RAM::RAM(const Config& config) : IModule(config) {
     // Create new configuration
     if (m_configuration.empty()) {
         m_configuration.set("enabled", true);
+        m_configuration.set("poll_ratio", 1);
     }
 
     // Check if the `enabled` field exists. If not, log the error and throw an exception to abort
@@ -30,6 +31,15 @@ RAM::RAM(const Config& config) : IModule(config) {
     } else {
         log(LogType::ERROR, "The 'enabled' field is missing. Can't continue");
         throw std::runtime_error("The 'enabled' field is missing");
+    }
+
+    // Check if the `poll_ratio` field exists. If not, log the error and throw an exception to abort
+    // registration.
+    if (auto poll_ratio = m_configuration.get<unsigned int>("poll_ratio"); poll_ratio.has_value()) {
+        m_poll_ratio = poll_ratio.value();
+    } else {
+        log(LogType::ERROR, "The 'poll_ratio' field is missing. Can't continue");
+        throw std::runtime_error("The 'poll_ratio' field is missing");
     }
 }
 
