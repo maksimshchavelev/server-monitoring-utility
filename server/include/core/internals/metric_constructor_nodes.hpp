@@ -64,6 +64,10 @@ namespace internals {
 
 /**
  * @brief Interface IMetricNode class
+ *
+ * Is an interface (abstract) node class. Can be a node of any type
+ *
+ * @tparam Children Child nodes. Must inherit from IMetricNode.
  */
 template <typename... Children> class IMetricNode : public IMetricNodeBase {
   public:
@@ -102,7 +106,8 @@ template <typename... Children> class IMetricNode : public IMetricNodeBase {
 
 
     /**
-     * @brief Get json
+     * @brief Recursively generates json, preserving the hierarchy 
+     * of nodes, their types, values and names
      * @return The generated json
      */
     virtual Json::Value to_json() const = 0;
@@ -120,11 +125,11 @@ template <typename... Children> class IMetricNode : public IMetricNodeBase {
 
 
   protected:
-    std::string                                   m_name;
-    std::string                                   m_value;
-    std::string                                   m_units;
-    bool                                          m_is_root;
-    [[no_unique_address]] std::tuple<Children...> m_children;
+    std::string                                   m_name;     ///< node name
+    std::string                                   m_value;    ///< node value (if node type is value)
+    std::string                                   m_units;    ///< node units (if node type is value)
+    bool                                          m_is_root;  ///< `true` if node type is root
+    [[no_unique_address]] std::tuple<Children...> m_children; ///< children (if node type is **conatiner** or **root**)
 };
 
 
