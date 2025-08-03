@@ -228,10 +228,10 @@ template&lt;typename... Children&gt; </div>
 <p><a class="el" href="classsmu__server_1_1internals_1_1IMetricNode.html" title="Interface IMetricNode class.">IMetricNode</a> constructor. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">node_name</td><td>Name of node. Used by the parent container. Not used if the node is the root node </td></tr>
-    <tr><td class="paramname">value</td><td>Value of node. Used if node is a value </td></tr>
-    <tr><td class="paramname">units</td><td>The unit of measurement of the node value. Used if the node is a value </td></tr>
-    <tr><td class="paramname">is_root_container</td><td>Must be true if the node is a root container </td></tr>
+    <tr><td class="paramname">node_name</td><td>Name of node. Used by the parent container. <b>Not used if the node type is the <code>root</code> node</b> </td></tr>
+    <tr><td class="paramname">value</td><td>Value of node. Used if <b>node type</b> is a <code>value</code> </td></tr>
+    <tr><td class="paramname">units</td><td>The unit of measurement of the <b>value node</b>. Used if the <b>node type</b> is a <code>value</code> </td></tr>
+    <tr><td class="paramname">is_root_container</td><td>Must be <code>true</code> if the node is a <b>root</b> container. <b>Root nodes do not contain a name</b> </td></tr>
     <tr><td class="paramname">children</td><td>Nested nodes</td></tr>
   </table>
   </dd>

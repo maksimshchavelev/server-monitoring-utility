@@ -73,11 +73,13 @@ template <typename... Children> class IMetricNode : public IMetricNodeBase {
   public:
     /**
      * @brief IMetricNode constructor
-     * @param node_name Name of node. Used by the parent container. Not used if the node is the root
-     * node
-     * @param value Value of node. Used if node is a value
-     * @param units The unit of measurement of the node value. Used if the node is a value
-     * @param is_root_container Must be true if the node is a root container
+     * @param node_name Name of node. Used by the parent container. **Not used if the node type is
+     * the `root` node**
+     * @param value Value of node. Used if **node type** is a `value`
+     * @param units The unit of measurement of the **value node**. Used if the **node type** is a
+     * `value`
+     * @param is_root_container Must be `true` if the node is a **root** container. **Root nodes do
+     * not contain a name**
      * @param children Nested nodes
      *
      * @note `children` must be an inheritor of IMetricNode
@@ -106,7 +108,7 @@ template <typename... Children> class IMetricNode : public IMetricNodeBase {
 
 
     /**
-     * @brief Recursively generates json, preserving the hierarchy 
+     * @brief Recursively generates json, preserving the hierarchy
      * of nodes, their types, values and names
      * @return The generated json
      */
@@ -125,11 +127,12 @@ template <typename... Children> class IMetricNode : public IMetricNodeBase {
 
 
   protected:
-    std::string                                   m_name;     ///< node name
-    std::string                                   m_value;    ///< node value (if node type is value)
-    std::string                                   m_units;    ///< node units (if node type is value)
-    bool                                          m_is_root;  ///< `true` if node type is root
-    [[no_unique_address]] std::tuple<Children...> m_children; ///< children (if node type is **conatiner** or **root**)
+    std::string m_name;    ///< node name
+    std::string m_value;   ///< node value (if node type is value)
+    std::string m_units;   ///< node units (if node type is value)
+    bool        m_is_root; ///< `true` if node type is root
+    [[no_unique_address]] std::tuple<Children...>
+        m_children; ///< children (if node type is **conatiner** or **root**)
 };
 
 
@@ -143,6 +146,8 @@ template <typename... Children> class IMetricNode : public IMetricNodeBase {
 
 /**
  * @brief Implements a value node
+ *
+ * A value node can only store a value. Such a node does not contain any nested nodes.
  */
 class MetricValueNode : public IMetricNode<> {
   public:
@@ -151,6 +156,29 @@ class MetricValueNode : public IMetricNode<> {
      * @param node_name Name of node.
      * @param node_value Value of node
      * @param value_units Units of value
+     *
+     * @section example Example
+     * For example, if we pass:
+     * - `node_name` = "RAM usage"
+     * - `node_value` = "5740"
+     * - `value_units` = "MB"
+     *
+     * Then calling the `to_json` method will return the following JSON:
+     * ```{.json}
+     * {
+     *      "type": "value",
+     *      "value": "5740",
+     *      "units": "MB"
+     * }
+     *
+     * ```
+     *
+     * **Please note that the value node does not store its name. To get the name, call
+     * `get_name`**
+     *
+     * @see get_name
+     * @see to_json
+     *
      */
     MetricValueNode(const std::string& node_name,
                     const std::string& node_value,
@@ -161,7 +189,8 @@ class MetricValueNode : public IMetricNode<> {
 
 
     /**
-     * @brief Get json
+     * @brief Recursively generates json, preserving the hierarchy
+     * of nodes, their types, values and names
      * @return The generated json
      */
     Json::Value to_json() const override {
@@ -187,6 +216,8 @@ class MetricValueNode : public IMetricNode<> {
 
 /**
  * @brief Implements container with nodes
+ *
+ * It can be either a container node or a root node.
  */
 template <typename... Children> class MetricContainerNode : public IMetricNode<Children...> {
   public:
@@ -197,6 +228,9 @@ template <typename... Children> class MetricContainerNode : public IMetricNode<C
      * @param children Nested nodes
      *
      * @note `children` must be an inheritor of IMetricNode
+     *
+     * @see get_name
+     * @see to_json
      */
     MetricContainerNode(const std::string& node_name,
                         bool               is_root_container,
@@ -208,8 +242,21 @@ template <typename... Children> class MetricContainerNode : public IMetricNode<C
 
 
     /**
-     * @brief Get json
+     * @brief Recursively generates json, preserving the hierarchy
+     * of nodes, their types, values and names
      * @return The generated json
+     *
+     * @note The name of nested nodes is added automatically. For example, the returned JSON may
+     * look like this:
+     * ```{.json}
+     * {
+     *      "RAM usage": {
+     *          "type": "value",
+     *          "value": "5740",
+     *          "units": "MB"
+     *      }
+     * }
+     * ```
      */
     Json::Value to_json() const override {
         Json::Value root;
