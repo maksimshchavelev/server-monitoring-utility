@@ -68,6 +68,10 @@ namespace internals {
  * Is an interface (abstract) node class. Can be a node of any type
  *
  * @tparam Children Child nodes. Must inherit from IMetricNode.
+ *
+ * @note This is an internal class for creating nodes. Use the factory methods
+ * `smu_server::make_root_node`, `smu_server::make_container_node`, `smu_server::make_value_node`
+ * for convenient and error-free node creation.
  */
 template <typename... Children> class IMetricNode : public IMetricNodeBase {
   public:
@@ -148,6 +152,10 @@ template <typename... Children> class IMetricNode : public IMetricNodeBase {
  * @brief Implements a value node
  *
  * A value node can only store a value. Such a node does not contain any nested nodes.
+ *
+ * @note This is an internal class for creating nodes. Use the factory methods
+ * `smu_server::make_root_node`, `smu_server::make_container_node`, `smu_server::make_value_node`
+ * for convenient and error-free node creation.
  */
 class MetricValueNode : public IMetricNode<> {
   public:
@@ -218,6 +226,10 @@ class MetricValueNode : public IMetricNode<> {
  * @brief Implements container with nodes
  *
  * It can be either a container node or a root node.
+ *
+ * @note This is an internal class for creating nodes. Use the factory methods
+ * `smu_server::make_root_node`, `smu_server::make_container_node`, `smu_server::make_value_node`
+ * for convenient and error-free node creation.
  */
 template <typename... Children> class MetricContainerNode : public IMetricNode<Children...> {
   public:
