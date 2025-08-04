@@ -15,9 +15,9 @@ namespace smu_server {
 namespace internals {
 
 /**
- * @brief Implementation of for_each_tuple.
- * @note Do not use directly
- * @param tuple std::tuple
+ * @brief Implementation of `smu_server::for_each_tuple`
+ * @note Do not use directly. Use `smu_server::for_each_tuple` instead
+ * @param tuple `std::tuple`
  * @param function Callback to which each tuple element is passed by universal reference
  * @see `for_each_tuple`
  */
