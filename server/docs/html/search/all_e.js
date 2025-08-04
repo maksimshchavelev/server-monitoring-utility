@@ -23,7 +23,7 @@ var searchData=
   ['module_5fname_20',['module_name',['../classsmu__server_1_1IModule.html#a7b88ea0d08c0b11a564b418953740d85',1,'smu_server::IModule']]],
   ['module_5fname_20and_20module_5fdescription_21',['module_name and module_description',['../md_for-developers_2modules_21__own__module.html#autotoc_md11',1,'']]],
   ['module_5fregistrar_2ehpp_22',['module_registrar.hpp',['../module__registrar_8hpp.html',1,'']]],
-  ['moduleregistrar_23',['moduleregistrar',['../structsmu__server_1_1internals_1_1ModuleRegistrar.html#abadae095c02c5320c8c561b9b5a77150',1,'smu_server::internals::ModuleRegistrar::ModuleRegistrar()'],['../structsmu__server_1_1internals_1_1ModuleRegistrar.html',1,'smu_server::internals::ModuleRegistrar&lt; ModuleName, module_name &gt;']]],
+  ['moduleregistrar_23',['moduleregistrar',['../structsmu__server_1_1internals_1_1ModuleRegistrar.html#a102c18568dc517c4f0784cbb8dbd2f9f',1,'smu_server::internals::ModuleRegistrar::ModuleRegistrar()'],['../structsmu__server_1_1internals_1_1ModuleRegistrar.html',1,'smu_server::internals::ModuleRegistrar&lt; ModuleType, module_name &gt;']]],
   ['modules_24',['Storing the entire JSON tree when creating modules',['../md_for-developers_2modules_23__storing__json__tree.html',1,'']]],
   ['modules_20with_20static_20data_25',['Creating modules with static data',['../md_for-developers_2modules_22__static__data__modules.html',1,'']]],
   ['modules_5fconfigs_5fdir_26',['MODULES_CONFIGS_DIR',['../compile-time__config_8hpp.html#aff2f960bb835131204e9087fb4270193',1,'compile-time_config.hpp']]]
