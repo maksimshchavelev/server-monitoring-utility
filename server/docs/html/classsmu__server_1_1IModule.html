@@ -149,7 +149,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a5ef057292c4a5f9b5a37155516a7b071"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disable module.  <br /></td></tr>
 <tr class="separator:a5ef057292c4a5f9b5a37155516a7b071"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a785d5aac1d0fcb853440529e25c463d0" id="r_a785d5aac1d0fcb853440529e25c463d0"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1IModule.html#a785d5aac1d0fcb853440529e25c463d0">is_enabled</a> () const</td></tr>
-<tr class="memdesc:a785d5aac1d0fcb853440529e25c463d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is module enabled?  <br /></td></tr>
+<tr class="memdesc:a785d5aac1d0fcb853440529e25c463d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is module enabled.  <br /></td></tr>
 <tr class="separator:a785d5aac1d0fcb853440529e25c463d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a844f0b53bfcb56be8ae9636012fbaa6b" id="r_a844f0b53bfcb56be8ae9636012fbaa6b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1IModule.html#a844f0b53bfcb56be8ae9636012fbaa6b">set_poll_ratio</a> (uint32_t poll_ratio)</td></tr>
 <tr class="memdesc:a844f0b53bfcb56be8ae9636012fbaa6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets poll ratio.  <br /></td></tr>
@@ -182,8 +182,10 @@ Protected Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a5a8e786218abcbd7df17ecf8b5c96d21" id="r_a5a8e786218abcbd7df17ecf8b5c96d21"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsmu__server_1_1Config.html">Config</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1IModule.html#a5a8e786218abcbd7df17ecf8b5c96d21">m_configuration</a></td></tr>
+<tr class="memdesc:a5a8e786218abcbd7df17ecf8b5c96d21"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configuration of module.  <br /></td></tr>
 <tr class="separator:a5a8e786218abcbd7df17ecf8b5c96d21"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a72dda80bbc5bfca5790ac56f1fcbc25d" id="r_a72dda80bbc5bfca5790ac56f1fcbc25d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1IModule.html#a72dda80bbc5bfca5790ac56f1fcbc25d">m_enabled</a> {false}</td></tr>
+<tr class="memdesc:a72dda80bbc5bfca5790ac56f1fcbc25d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Status of module.  <br /></td></tr>
 <tr class="separator:a72dda80bbc5bfca5790ac56f1fcbc25d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6ffc8b74681bf9e88d56da0a3c248921" id="r_a6ffc8b74681bf9e88d56da0a3c248921"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1IModule.html#a6ffc8b74681bf9e88d56da0a3c248921">m_poll_ratio</a> {1}</td></tr>
 <tr class="separator:a6ffc8b74681bf9e88d56da0a3c248921"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -219,9 +221,12 @@ Friends</h2></td></tr>
 
 <p>Describes log type. Affects the color of messages. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aa189a7c389bd96a3caa1adb0f0bdc7bda551b723eafd6a31d444fcb2f5920fbd3" name="aa189a7c389bd96a3caa1adb0f0bdc7bda551b723eafd6a31d444fcb2f5920fbd3"></a>INFO&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="aa189a7c389bd96a3caa1adb0f0bdc7bda059e9861e0400dfbe05c98a841f3f96b" name="aa189a7c389bd96a3caa1adb0f0bdc7bda059e9861e0400dfbe05c98a841f3f96b"></a>WARNING&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="aa189a7c389bd96a3caa1adb0f0bdc7bdabb1ca97ec761fc37101737ba0aa2e7c5" name="aa189a7c389bd96a3caa1adb0f0bdc7bdabb1ca97ec761fc37101737ba0aa2e7c5"></a>ERROR&#160;</td><td class="fielddoc"></td></tr>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aa189a7c389bd96a3caa1adb0f0bdc7bda551b723eafd6a31d444fcb2f5920fbd3" name="aa189a7c389bd96a3caa1adb0f0bdc7bda551b723eafd6a31d444fcb2f5920fbd3"></a>INFO&#160;</td><td class="fielddoc"><p><b>White</b> color of logs </p>
+</td></tr>
+<tr><td class="fieldname"><a id="aa189a7c389bd96a3caa1adb0f0bdc7bda059e9861e0400dfbe05c98a841f3f96b" name="aa189a7c389bd96a3caa1adb0f0bdc7bda059e9861e0400dfbe05c98a841f3f96b"></a>WARNING&#160;</td><td class="fielddoc"><p><b>Yellow</b> color of logs </p>
+</td></tr>
+<tr><td class="fieldname"><a id="aa189a7c389bd96a3caa1adb0f0bdc7bdabb1ca97ec761fc37101737ba0aa2e7c5" name="aa189a7c389bd96a3caa1adb0f0bdc7bdabb1ca97ec761fc37101737ba0aa2e7c5"></a>ERROR&#160;</td><td class="fielddoc"><p><b>Red</b> color of logs </p>
+</td></tr>
 </table>
 
 </div>
@@ -251,7 +256,7 @@ Friends</h2></td></tr>
   </dd>
 </dl>
 <p>The configuration of the module is stored in a common configuration file, when the module is constructed, it is passed a fragment with the configuration. When the configuration is saved (e.g., when the application exits), it is fetched via the <code><a class="el" href="classsmu__server_1_1IModule.html#a95e788d97c1c26e50c7c5c9b2ef78956" title="Method for obtaining module configuration.">get_configuration()</a></code> method</p>
-<dl class="section warning"><dt>Warning</dt><dd>When the program is first run, an empty Json::Value is passed, in which case it must be filled in by yourself.</dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>When the program is first run, an empty <code>Json::Value</code> is passed, in which case it must be filled in by yourself.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classsmu__server_1_1IModule.html#a95e788d97c1c26e50c7c5c9b2ef78956" title="Method for obtaining module configuration.">get_configuration()</a> </dd></dl>
 
 </div>
@@ -366,7 +371,7 @@ Friends</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Method for obtaining module configuration. </p>
-<dl class="section return"><dt>Returns</dt><dd>Json::Value&amp; </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><code>Json::Value&amp;</code> </dd></dl>
 
 </div>
 </div>
@@ -457,7 +462,7 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Is module enabled? </p>
+<p>Is module enabled. </p>
 <dl class="section return"><dt>Returns</dt><dd><code>true</code> if module is enabled, otherwise <code>false</code> </dd></dl>
 
 </div>
@@ -499,13 +504,18 @@ Friends</h2></td></tr>
 <p>Outputs the log. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">log_type</td><td>Log type. Takes the following values: <a class="el" href="classsmu__server_1_1IModule.html#aa189a7c389bd96a3caa1adb0f0bdc7bda551b723eafd6a31d444fcb2f5920fbd3">LogType::INFO</a> - white log <a class="el" href="classsmu__server_1_1IModule.html#aa189a7c389bd96a3caa1adb0f0bdc7bda551b723eafd6a31d444fcb2f5920fbd3">LogType::INFO</a> - yellow log <a class="el" href="classsmu__server_1_1IModule.html#aa189a7c389bd96a3caa1adb0f0bdc7bdabb1ca97ec761fc37101737ba0aa2e7c5">LogType::ERROR</a> - red log </td></tr>
+    <tr><td class="paramname">log_type</td><td>Log type. Takes the following values: <a class="el" href="classsmu__server_1_1IModule.html#aa189a7c389bd96a3caa1adb0f0bdc7bda551b723eafd6a31d444fcb2f5920fbd3" title="White color of logs">LogType::INFO</a> - white log <a class="el" href="classsmu__server_1_1IModule.html#aa189a7c389bd96a3caa1adb0f0bdc7bda551b723eafd6a31d444fcb2f5920fbd3" title="White color of logs">LogType::INFO</a> - yellow log <a class="el" href="classsmu__server_1_1IModule.html#aa189a7c389bd96a3caa1adb0f0bdc7bdabb1ca97ec761fc37101737ba0aa2e7c5" title="Red color of logs">LogType::ERROR</a> - red log </td></tr>
     <tr><td class="paramname">message</td><td>Message to log </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section note"><dt>Note</dt><dd>Prints white message if <code>log_type</code> is incorrect </dd></dl>
-
+<dl class="section note"><dt>Note</dt><dd>Prints white message if <code>log_type</code> is incorrect</dd></dl>
+<h1><a class="anchor" id="example_usage"></a>
+Example usage</h1>
+<p>This code is for a module named "RAM" runned at <b>04.07.2025 18:28:00</b>: </p><div class="fragment"><div class="line"><a class="code hl_function" href="classsmu__server_1_1IModule.html#af0fc5991b677607972689ee105859a71">log</a>(LogType::Warning, <span class="stringliteral">&quot;Warning log message&quot;</span>);</div>
+<div class="ttc" id="aclasssmu__server_1_1IModule_html_af0fc5991b677607972689ee105859a71"><div class="ttname"><a href="classsmu__server_1_1IModule.html#af0fc5991b677607972689ee105859a71">smu_server::IModule::log</a></div><div class="ttdeci">void log(LogType log_type, const std::string_view message) const</div><div class="ttdoc">Outputs the log.</div></div>
+</div><!-- fragment --><p>Produces the following output: </p><div style="background-color:#282c34; color:#ffffff; padding:6px 10px; border:1px solid #444;
+border-radius:4px; font-family:monospace; font-size:smaller; font-weight:normal;"> [<span style="color:#00e5ff;">04.07.25 18:28:00</span>] [MODULE <span class="no-link" style="color:#00e5ff;"><a class="el" href="classsmu__server_1_1RAM.html" title="A module that allows you to get information about RAM.">RAM</a></span>] <span style="color:#ffd700;">Warning log message</span> </div> 
 </div>
 </div>
 <a id="aaef5d08464fb3bada417fced684d44a4" name="aaef5d08464fb3bada417fced684d44a4"></a>
@@ -532,7 +542,7 @@ Friends</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Get module description. </p>
-<dl class="section note"><dt>Note</dt><dd>You do not need to implement this method because the REGISTER_MODULE macro implements it </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>You do not need to implement this method because the <code>REGISTER_MODULE</code> macro implements it </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd><code>const std::string_view</code> with module description </dd></dl>
 
 </div>
@@ -561,7 +571,7 @@ Friends</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Get module name. </p>
-<dl class="section note"><dt>Note</dt><dd>You do not need to implement this method because the REGISTER_MODULE macro implements it </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>You do not need to implement this method because the <code>REGISTER_MODULE</code> macro implements it </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd><code>const std::string_view</code> with module name </dd></dl>
 
 </div>
@@ -639,6 +649,8 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Configuration of module. </p>
+
 </div>
 </div>
 <a id="a72dda80bbc5bfca5790ac56f1fcbc25d" name="a72dda80bbc5bfca5790ac56f1fcbc25d"></a>
@@ -661,6 +673,8 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Status of module. </p>
+
 </div>
 </div>
 <a id="a6ffc8b74681bf9e88d56da0a3c248921" name="a6ffc8b74681bf9e88d56da0a3c248921"></a>
@@ -682,6 +696,8 @@ Friends</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Affects the module polling frequency. For example, a value of <code>5</code> means that the module will be polled by the server core every fifth polling cycle. Thus, if the server settings specify a polling interval of <code>1</code> second, the module will be polled at intervals of <code>5</code> seconds.</p>
+<p>If the value is <code>0</code>, the server core will cache the result of the first query (data obtained via <code>get_data</code>) and the module will no longer be queried. </p>
 
 </div>
 </div>

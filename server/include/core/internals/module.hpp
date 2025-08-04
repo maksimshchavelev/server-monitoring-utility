@@ -29,7 +29,7 @@ class IModule {
      * When the configuration is saved (e.g., when the application exits), it is fetched
      * via the `get_configuration()` method
      *
-     * @warning When the program is first run, an empty Json::Value is passed, in which
+     * @warning When the program is first run, an empty `Json::Value` is passed, in which
      * case it must be filled in by yourself.
      *
      * @see get_configuration()
@@ -49,7 +49,7 @@ class IModule {
 
     /**
      * @brief Method for obtaining module configuration
-     * @return Json::Value&
+     * @return `Json::Value&`
      */
     virtual const Config& get_configuration() const noexcept;
 
@@ -87,7 +87,7 @@ class IModule {
 
 
     /**
-     * @brief Is module enabled?
+     * @brief Is module enabled
      * @return `true` if module is enabled, otherwise `false`
      */
     virtual bool is_enabled() const;
@@ -119,7 +119,7 @@ class IModule {
 
     /**
      * @brief Get module name
-     * @note You do not need to implement this method because the REGISTER_MODULE macro implements
+     * @note You do not need to implement this method because the `REGISTER_MODULE` macro implements
      * it
      * @return `const std::string_view` with module name
      */
@@ -130,7 +130,7 @@ class IModule {
 
     /**
      * @brief Get module description
-     * @note You do not need to implement this method because the REGISTER_MODULE macro implements
+     * @note You do not need to implement this method because the `REGISTER_MODULE` macro implements
      * it
      * @return `const std::string_view` with module description
      */
@@ -139,16 +139,17 @@ class IModule {
 
 
   protected:
-    Config m_configuration;
-    bool   m_enabled{false};
+    Config m_configuration;  ///< Configuration of module
+    bool   m_enabled{false}; ///< Status of module
 
-    // Affects the module polling frequency. For example, a value of `5` means that the module will be
-    // polled by the server core every fifth polling cycle. Thus, if the server settings specify a
-    // polling interval of `1` second, the module will be polled at intervals of `5` seconds.
-    //
-    // If the value is `0`, the server core will cache the result of the first query (data obtained
-    // via `get_data`) and the module will no longer be queried.
     uint32_t m_poll_ratio{1};
+    ///< Affects the module polling frequency. For example, a value of `5` means that the module
+    ///< will be polled by the server core every fifth polling cycle. Thus, if the server settings
+    ///< specify a polling interval of `1` second, the module will be polled at intervals of `5`
+    ///< seconds.
+    ///<
+    ///< If the value is `0`, the server core will cache the result of the first query (data
+    ///< obtained via `get_data`) and the module will no longer be queried.
 
 
     // =============================== LOGGER ===============================
@@ -156,7 +157,11 @@ class IModule {
     /**
      * @brief Describes log type. Affects the color of messages
      */
-    enum class LogType { INFO, WARNING, ERROR };
+    enum class LogType {
+        INFO,    ///< **White** color of logs
+        WARNING, ///< **Yellow** color of logs
+        ERROR    ///< **Red** color of logs
+    };
 
 
 
@@ -169,6 +174,20 @@ class IModule {
      * LogType::ERROR - red log
      * @param message Message to log
      * @note Prints white message if `log_type` is incorrect
+     *
+     * @section example_usage Example usage
+     *
+     * This code is for a module named "RAM" runned at **04.07.2025 18:28:00**:
+     * @code{.cpp}
+     * log(LogType::Warning, "Warning log message");
+     * @endcode
+     *
+     * Produces the following output:
+     * <div style="background-color:#282c34; color:#ffffff; padding:6px 10px; border:1px solid #444;
+     * border-radius:4px; font-family:monospace; font-size:smaller; font-weight:normal;">
+     * [<span style="color:#00e5ff;">04.07.25 18:28:00</span>] [MODULE <span class="no-link"
+     * style="color:#00e5ff;">RAM</span>] <span style="color:#ffd700;">Warning log message</span>
+     * </div>
      */
     void log(LogType log_type, const std::string_view message) const;
 
