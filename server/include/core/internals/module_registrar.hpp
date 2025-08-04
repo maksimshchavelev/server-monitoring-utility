@@ -19,14 +19,44 @@ namespace smu_server {
 namespace internals {
 
 /**
- * @brief The StringWrapper class to wrap const char* in compile-time
+ * @brief The StringWrapper class to wrap `const char*`
+ *
+ * It is used to pass `const char*` to template parameters, as it is **not possible** to do so
+ * otherwise.
+ *
+ * @tparam N Length of string
+ *
+ * @section example_usage Example usage
+ * @code{.cpp}
+ * template <StringWrapper string>
+ * struct ExampleStruct {
+ *      ExampleStruct() {
+ *          std::cout << string.str << std::endl;
+ *      }
+ * }
+ *
+ * int main(int, char**) {
+ *      ExampleStruct<StringWrapper{"Hello world!"}> es;
+ *
+ *      return 0;
+ * }
+ * @endcode
+ *
+ * Output:
+ * ```
+ * Hello world!
+ * ```
+ *
  */
 template <std::size_t N> class StringWrapper {
   public:
-    char str[N];
+    char str[N]; ///< This is where the string is stored.
 
     /**
-     * @brief Copies `s` to `str`
+     * @brief Constructor copies `s` to `str`
+     * @param s Array of `const char`
+     *
+     * @note To access the string, refer to the `str` field.
      */
     consteval StringWrapper(const char (&s)[N]) {
         for (std::size_t i = 0; i < N; ++i) {

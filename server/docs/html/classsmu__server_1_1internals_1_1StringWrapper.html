@@ -98,7 +98,7 @@ $(document).ready(function(){initNavTree('classsmu__server_1_1internals_1_1Strin
 </div><!--header-->
 <div class="contents">
 
-<p>The <a class="el" href="classsmu__server_1_1internals_1_1StringWrapper.html" title="The StringWrapper class to wrap const char* in compile-time.">StringWrapper</a> class to wrap const char* in compile-time.  
+<p>The <a class="el" href="classsmu__server_1_1internals_1_1StringWrapper.html" title="The StringWrapper class to wrap const char*">StringWrapper</a> class to wrap <code>const char*</code>  
  <a href="classsmu__server_1_1internals_1_1StringWrapper.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="module__registrar_8hpp_source.html">core/internals/module_registrar.hpp</a>&gt;</code></p>
@@ -106,18 +106,41 @@ $(document).ready(function(){initNavTree('classsmu__server_1_1internals_1_1Strin
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ac100a87a07c37ea605ae92be5a08c6fa" id="r_ac100a87a07c37ea605ae92be5a08c6fa"><td class="memItemLeft" align="right" valign="top">consteval&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1internals_1_1StringWrapper.html#ac100a87a07c37ea605ae92be5a08c6fa">StringWrapper</a> (const char(&amp;s)[N])</td></tr>
-<tr class="memdesc:ac100a87a07c37ea605ae92be5a08c6fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copies <code>s</code> to <code>str</code>  <br /></td></tr>
+<tr class="memdesc:ac100a87a07c37ea605ae92be5a08c6fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor copies <code>s</code> to <code>str</code>  <br /></td></tr>
 <tr class="separator:ac100a87a07c37ea605ae92be5a08c6fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a6ce7946f708678a5478f0af40d7bd40b" id="r_a6ce7946f708678a5478f0af40d7bd40b"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1internals_1_1StringWrapper.html#a6ce7946f708678a5478f0af40d7bd40b">str</a> [N]</td></tr>
+<tr class="memdesc:a6ce7946f708678a5478f0af40d7bd40b"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is where the string is stored.  <br /></td></tr>
 <tr class="separator:a6ce7946f708678a5478f0af40d7bd40b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;std::size_t N&gt;<br />
-class smu_server::internals::StringWrapper&lt; N &gt;</div><p>The <a class="el" href="classsmu__server_1_1internals_1_1StringWrapper.html" title="The StringWrapper class to wrap const char* in compile-time.">StringWrapper</a> class to wrap const char* in compile-time. </p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+class smu_server::internals::StringWrapper&lt; N &gt;</div><p>The <a class="el" href="classsmu__server_1_1internals_1_1StringWrapper.html" title="The StringWrapper class to wrap const char*">StringWrapper</a> class to wrap <code>const char*</code> </p>
+<p>It is used to pass <code>const char*</code> to template parameters, as it is <b>not possible</b> to do so otherwise.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">N</td><td>Length of string</td></tr>
+  </table>
+  </dd>
+</dl>
+<h1><a class="anchor" id="example_usage"></a>
+Example usage</h1>
+<div class="fragment"><div class="line"><span class="keyword">template</span> &lt;StringWrapper <span class="keywordtype">string</span>&gt;</div>
+<div class="line"><span class="keyword">struct </span>ExampleStruct {</div>
+<div class="line">     ExampleStruct() {</div>
+<div class="line">         std::cout &lt;&lt; <span class="keywordtype">string</span>.str &lt;&lt; std::endl;</div>
+<div class="line">     }</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main(<span class="keywordtype">int</span>, <span class="keywordtype">char</span>**) {</div>
+<div class="line">     ExampleStruct&lt;StringWrapper{<span class="stringliteral">&quot;Hello world!&quot;</span>}&gt; es;</div>
+<div class="line"> </div>
+<div class="line">     <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+</div><!-- fragment --><p>Output: </p><div class="fragment"><div class="line">Hello world!</div>
+</div><!-- fragment --> </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ac100a87a07c37ea605ae92be5a08c6fa" name="ac100a87a07c37ea605ae92be5a08c6fa"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac100a87a07c37ea605ae92be5a08c6fa">&#9670;&#160;</a></span>StringWrapper()</h2>
 
@@ -144,7 +167,14 @@ template&lt;std::size_t N&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Copies <code>s</code> to <code>str</code> </p>
+<p>Constructor copies <code>s</code> to <code>str</code> </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>Array of <code>const char</code></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>To access the string, refer to the <code>str</code> field. </dd></dl>
 
 </div>
 </div>
@@ -162,6 +192,8 @@ template&lt;std::size_t N&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>This is where the string is stored. </p>
 
 </div>
 </div>

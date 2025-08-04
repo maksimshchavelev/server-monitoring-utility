@@ -188,7 +188,7 @@ This graph shows which files directly or indirectly include this file:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1internals_1_1StringWrapper.html">smu_server::internals::StringWrapper&lt; N &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classsmu__server_1_1internals_1_1StringWrapper.html" title="The StringWrapper class to wrap const char* in compile-time.">StringWrapper</a> class to wrap const char* in compile-time.  <a href="classsmu__server_1_1internals_1_1StringWrapper.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classsmu__server_1_1internals_1_1StringWrapper.html" title="The StringWrapper class to wrap const char*">StringWrapper</a> class to wrap <code>const char*</code>  <a href="classsmu__server_1_1internals_1_1StringWrapper.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsmu__server_1_1internals_1_1ModuleRegistrar.html">smu_server::internals::ModuleRegistrar&lt; ModuleType, module_name &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Supporting structure for module registration.  <a href="structsmu__server_1_1internals_1_1ModuleRegistrar.html#details">More...</a><br /></td></tr>
@@ -262,8 +262,8 @@ Functions</h2></td></tr>
 <div class="line">    <span class="keyword">constexpr</span> <span class="keyword">static</span> std::string_view module_description_static() noexcept {                       \</div>
 <div class="line">        <span class="keywordflow">return</span> m_module_description.str;                                                           \</div>
 <div class="line">    }</div>
-<div class="ttc" id="aclasssmu__server_1_1internals_1_1StringWrapper_html"><div class="ttname"><a href="classsmu__server_1_1internals_1_1StringWrapper.html">smu_server::internals::StringWrapper</a></div><div class="ttdoc">The StringWrapper class to wrap const char* in compile-time.</div><div class="ttdef"><b>Definition</b> module_registrar.hpp:24</div></div>
-<div class="ttc" id="aclasssmu__server_1_1internals_1_1StringWrapper_html_a6ce7946f708678a5478f0af40d7bd40b"><div class="ttname"><a href="classsmu__server_1_1internals_1_1StringWrapper.html#a6ce7946f708678a5478f0af40d7bd40b">smu_server::internals::StringWrapper::str</a></div><div class="ttdeci">char str[N]</div><div class="ttdef"><b>Definition</b> module_registrar.hpp:26</div></div>
+<div class="ttc" id="aclasssmu__server_1_1internals_1_1StringWrapper_html"><div class="ttname"><a href="classsmu__server_1_1internals_1_1StringWrapper.html">smu_server::internals::StringWrapper</a></div><div class="ttdoc">The StringWrapper class to wrap const char*</div><div class="ttdef"><b>Definition</b> module_registrar.hpp:51</div></div>
+<div class="ttc" id="aclasssmu__server_1_1internals_1_1StringWrapper_html_a6ce7946f708678a5478f0af40d7bd40b"><div class="ttname"><a href="classsmu__server_1_1internals_1_1StringWrapper.html#a6ce7946f708678a5478f0af40d7bd40b">smu_server::internals::StringWrapper::str</a></div><div class="ttdeci">char str[N]</div><div class="ttdoc">This is where the string is stored.</div><div class="ttdef"><b>Definition</b> module_registrar.hpp:53</div></div>
 </div><!-- fragment -->
 <p>Write inside module class. </p>
 
