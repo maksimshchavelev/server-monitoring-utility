@@ -82,10 +82,10 @@ consteval bool contains_substring(const char* str, const char* substr) {
  * Its object can be created statically, which will result in automatic registration. This is
  * implemented in the `REGISTER_MODULE` macro.
  *
- * @tparam ModuleName Raw module type
+ * @tparam ModuleType Raw module type
  * @tparam module_name Name of module
  */
-template <typename ModuleName, StringWrapper module_name> struct ModuleRegistrar {
+template <typename ModuleType, StringWrapper module_name> struct ModuleRegistrar {
     /**
      * @brief Registration constructor
      *
@@ -98,11 +98,11 @@ template <typename ModuleName, StringWrapper module_name> struct ModuleRegistrar
     ModuleRegistrar() {
         static_assert(!(contains_substring(module_name.str, "module")),
                       "Module name must not contain the word 'module'");
-        static_assert(std::is_base_of_v<IModule, ModuleName>,
+        static_assert(std::is_base_of_v<IModule, ModuleType>,
                       "The module must inherit from the IModule class");
         // Lazy module registering. Only adding to queue
         Application::instance().add_module_to_queue(
-            [](Application& app) { app.register_module<ModuleName>(); });
+            [](Application& app) { app.register_module<ModuleType>(); });
     }
 };
 
