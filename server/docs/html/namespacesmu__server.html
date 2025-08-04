@@ -124,7 +124,7 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A module to get data from DMI/SMBIOS tables.  <a href="classsmu__server_1_1DMI.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsmu__server_1_1IMetricNodeBase.html">IMetricNodeBase</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Base IMetricNode class to simplify the storage of data obtained from <code><a class="el" href="namespacesmu__server.html#a23038498ffcba3c5453a07ab861d13cf">smu_server::make_root_node</a></code>  <a href="structsmu__server_1_1IMetricNodeBase.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Base IMetricNode class to simplify the storage of data obtained from <code><a class="el" href="namespacesmu__server.html#a23038498ffcba3c5453a07ab861d13cf" title="Creates a root node.">smu_server::make_root_node</a></code>  <a href="structsmu__server_1_1IMetricNodeBase.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1IModule.html">IModule</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Interface Module class.  <a href="classsmu__server_1_1IModule.html#details">More...</a><br /></td></tr>
@@ -151,12 +151,15 @@ Classes</h2></td></tr>
 Functions</h2></td></tr>
 <tr class="memitem:a219dae7d70a890e3fb0740451fbf5dbe" id="r_a219dae7d70a890e3fb0740451fbf5dbe"><td class="memTemplParams" colspan="2">template&lt;typename ValueType &gt; </td></tr>
 <tr class="memitem:a219dae7d70a890e3fb0740451fbf5dbe"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacesmu__server.html#a219dae7d70a890e3fb0740451fbf5dbe">make_value_node</a> (const std::string &amp;metric_name, ValueType &amp;&amp;metric_value, const std::string &amp;value_units) -&gt; std::unique_ptr&lt; <a class="el" href="classsmu__server_1_1internals_1_1MetricValueNode.html">internals::MetricValueNode</a> &gt;</td></tr>
+<tr class="memdesc:a219dae7d70a890e3fb0740451fbf5dbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a node with the value.  <br /></td></tr>
 <tr class="separator:a219dae7d70a890e3fb0740451fbf5dbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0290ea5f19c20a5ad90d4837a627fb88" id="r_a0290ea5f19c20a5ad90d4837a627fb88"><td class="memTemplParams" colspan="2">template&lt;typename... Children&gt; </td></tr>
 <tr class="memitem:a0290ea5f19c20a5ad90d4837a627fb88"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacesmu__server.html#a0290ea5f19c20a5ad90d4837a627fb88">make_container_node</a> (const std::string &amp;container_name, Children &amp;&amp;... children) -&gt; std::unique_ptr&lt; <a class="el" href="classsmu__server_1_1internals_1_1MetricContainerNode.html">internals::MetricContainerNode</a>&lt; Children... &gt; &gt;</td></tr>
+<tr class="memdesc:a0290ea5f19c20a5ad90d4837a627fb88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a node that contains other nodes.  <br /></td></tr>
 <tr class="separator:a0290ea5f19c20a5ad90d4837a627fb88"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a23038498ffcba3c5453a07ab861d13cf" id="r_a23038498ffcba3c5453a07ab861d13cf"><td class="memTemplParams" colspan="2">template&lt;typename... Children&gt; </td></tr>
 <tr class="memitem:a23038498ffcba3c5453a07ab861d13cf"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacesmu__server.html#a23038498ffcba3c5453a07ab861d13cf">make_root_node</a> (Children &amp;&amp;... children) -&gt; std::unique_ptr&lt; <a class="el" href="classsmu__server_1_1internals_1_1MetricContainerNode.html">internals::MetricContainerNode</a>&lt; Children... &gt; &gt;</td></tr>
+<tr class="memdesc:a23038498ffcba3c5453a07ab861d13cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a root node.  <br /></td></tr>
 <tr class="separator:a23038498ffcba3c5453a07ab861d13cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab2324167d7d0ebb73d6f1a85d097d80b" id="r_ab2324167d7d0ebb73d6f1a85d097d80b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsmu__server_1_1Logger.html">Logger</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesmu__server.html#ab2324167d7d0ebb73d6f1a85d097d80b">logger</a> ()</td></tr>
 <tr class="separator:ab2324167d7d0ebb73d6f1a85d097d80b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -283,8 +286,42 @@ template&lt;typename... Children&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2maksim_2projects_2smu_2server_2include_2core_2internals_2metric_constructor_8hpp-example.html#a1">/home/maksim/projects/smu/server/include/core/internals/metric_constructor.hpp</a>.</dd>
+
+<p>Creates a node that contains other nodes. </p>
+<p>A container node can store other container nodes as well as values. Such nodes are assumed to be nested either in other container nodes or in the root node. If you need a <b>root</b> node, use <code><a class="el" href="namespacesmu__server.html#a23038498ffcba3c5453a07ab861d13cf" title="Creates a root node.">smu_server::make_root_node</a></code></p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">container_name</td><td>Name of container </td></tr>
+    <tr><td class="paramname">children</td><td>Nested nodes</td></tr>
+  </table>
+  </dd>
 </dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Children</td><td>Types of nested nodes. Must inherit from <code><a class="el" href="classsmu__server_1_1internals_1_1IMetricNode.html" title="Interface IMetricNode class.">internals::IMetricNode</a></code></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>std::unique_ptr</code> with <code><a class="el" href="classsmu__server_1_1internals_1_1MetricContainerNode.html" title="Implements container with nodes.">internals::MetricContainerNode</a>&lt;...&gt;</code></dd></dl>
+<dl class="section see"><dt>See also</dt><dd><code><a class="el" href="namespacesmu__server.html#a219dae7d70a890e3fb0740451fbf5dbe" title="Creates a node with the value.">make_value_node</a></code> and <code><a class="el" href="namespacesmu__server.html#a23038498ffcba3c5453a07ab861d13cf" title="Creates a root node.">make_root_node</a></code></dd></dl>
+<h1><a class="anchor" id="example_usage"></a>
+Example usage</h1>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> root = <a class="code hl_function" href="namespacesmu__server.html#a0290ea5f19c20a5ad90d4837a627fb88">make_container_node</a>(<span class="stringliteral">&quot;RAM&quot;</span>,</div>
+<div class="line">     <a class="code hl_function" href="namespacesmu__server.html#a219dae7d70a890e3fb0740451fbf5dbe">make_value_node</a>(<span class="stringliteral">&quot;RAM usage&quot;</span>, <span class="stringliteral">&quot;4217&quot;</span>, <span class="stringliteral">&quot;MB&quot;</span>)</div>
+<div class="line">);</div>
+<div class="ttc" id="anamespacesmu__server_html_a0290ea5f19c20a5ad90d4837a627fb88"><div class="ttname"><a href="namespacesmu__server.html#a0290ea5f19c20a5ad90d4837a627fb88">smu_server::make_container_node</a></div><div class="ttdeci">auto make_container_node(const std::string &amp;container_name, Children &amp;&amp;... children) -&gt; std::unique_ptr&lt; internals::MetricContainerNode&lt; Children... &gt; &gt;</div><div class="ttdoc">Creates a node that contains other nodes.</div><div class="ttdef"><b>Definition</b> metric_constructor.hpp:118</div></div>
+<div class="ttc" id="anamespacesmu__server_html_a219dae7d70a890e3fb0740451fbf5dbe"><div class="ttname"><a href="namespacesmu__server.html#a219dae7d70a890e3fb0740451fbf5dbe">smu_server::make_value_node</a></div><div class="ttdeci">auto make_value_node(const std::string &amp;metric_name, ValueType &amp;&amp;metric_value, const std::string &amp;value_units) -&gt; std::unique_ptr&lt; internals::MetricValueNode &gt;</div><div class="ttdoc">Creates a node with the value.</div><div class="ttdef"><b>Definition</b> metric_constructor.hpp:56</div></div>
+</div><!-- fragment --><p>This code gives json fragment:</p>
+<div class="fragment"><div class="line">{</div>
+<div class="line">     &quot;RAM usage&quot;: {</div>
+<div class="line">         &quot;type&quot;: &quot;value&quot;,</div>
+<div class="line">         &quot;units&quot;: &quot;MB&quot;,</div>
+<div class="line">         &quot;value&quot;: &quot;4217&quot;</div>
+<div class="line">     },</div>
+<div class="line"> </div>
+<div class="line">     &quot;type&quot;: &quot;container&quot;</div>
+<div class="line">}</div>
+</div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>The container node does not contain its name inside. The name is only used by higher-level nodes. </dd></dl>
 
 </div>
 </div>
@@ -313,9 +350,77 @@ template&lt;typename... Children&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2maksim_2projects_2smu_2server_2include_2core_2internals_2metric_constructor_8hpp-example.html#a2">/home/maksim/projects/smu/server/include/core/internals/metric_constructor.hpp</a>.</dd>
-</dl>
 
+<p>Creates a root node. </p>
+<p>Root nodes work the same way as container nodes, but they doesn't store own name</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">children</td><td>Nested nodes, like <b>container</b> node or <b>value</b> node</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Children</td><td>Types of nested nodes. Must inherit from <code><a class="el" href="classsmu__server_1_1internals_1_1IMetricNode.html" title="Interface IMetricNode class.">internals::IMetricNode</a></code></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>std::unique_ptr</code> with <code><a class="el" href="classsmu__server_1_1internals_1_1MetricContainerNode.html" title="Implements container with nodes.">internals::MetricContainerNode</a>&lt;...&gt;</code></dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Call <code>to_json</code> on the root node to get the json and, for example, then send it over a websocket connection. However, this applies to all nodes, but it is used much more often with <b>root</b> nodes.</dd></dl>
+<dl class="section see"><dt>See also</dt><dd><code><a class="el" href="namespacesmu__server.html#a219dae7d70a890e3fb0740451fbf5dbe" title="Creates a node with the value.">make_value_node</a></code> and <code><a class="el" href="namespacesmu__server.html#a0290ea5f19c20a5ad90d4837a627fb88" title="Creates a node that contains other nodes.">make_container_node</a></code></dd></dl>
+<h1><a class="anchor" id="example_usage"></a>
+Example usage</h1>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> root = <a class="code hl_function" href="namespacesmu__server.html#a23038498ffcba3c5453a07ab861d13cf">make_root_node</a>(</div>
+<div class="line">     <a class="code hl_function" href="namespacesmu__server.html#a219dae7d70a890e3fb0740451fbf5dbe">make_value_node</a>(<span class="stringliteral">&quot;RAM usage&quot;</span>, <span class="stringliteral">&quot;4217&quot;</span>, <span class="stringliteral">&quot;MB&quot;</span>)</div>
+<div class="line">);</div>
+<div class="ttc" id="anamespacesmu__server_html_a23038498ffcba3c5453a07ab861d13cf"><div class="ttname"><a href="namespacesmu__server.html#a23038498ffcba3c5453a07ab861d13cf">smu_server::make_root_node</a></div><div class="ttdeci">auto make_root_node(Children &amp;&amp;... children) -&gt; std::unique_ptr&lt; internals::MetricContainerNode&lt; Children... &gt; &gt;</div><div class="ttdoc">Creates a root node.</div><div class="ttdef"><b>Definition</b> metric_constructor.hpp:222</div></div>
+</div><!-- fragment --><p>This code will produce a json of the form:</p>
+<div class="fragment"><div class="line">{</div>
+<div class="line">     &quot;RAM usage&quot;: {</div>
+<div class="line">         &quot;type&quot;: &quot;value&quot;,</div>
+<div class="line">         &quot;units&quot;: &quot;MB&quot;,</div>
+<div class="line">         &quot;value&quot;: &quot;4217&quot;</div>
+<div class="line">     },</div>
+<div class="line"> </div>
+<div class="line">     &quot;type&quot;: &quot;container&quot;</div>
+<div class="line">}</div>
+</div><!-- fragment --><p>Consider another code:</p>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> root = <a class="code hl_function" href="namespacesmu__server.html#a23038498ffcba3c5453a07ab861d13cf">make_root_node</a>(</div>
+<div class="line">     <a class="code hl_function" href="namespacesmu__server.html#a0290ea5f19c20a5ad90d4837a627fb88">make_container_node</a>(<span class="stringliteral">&quot;Simple container&quot;</span>,</div>
+<div class="line">          <span class="comment">// The metric value can be either a number or a string, it is</span></div>
+<div class="line">          <span class="comment">// converted to a string if needed</span></div>
+<div class="line">          <a class="code hl_function" href="namespacesmu__server.html#a219dae7d70a890e3fb0740451fbf5dbe">make_value_node</a>(<span class="stringliteral">&quot;Simple value 1&quot;</span>, 12345, <span class="stringliteral">&quot;bytes&quot;</span>),</div>
+<div class="line">          <a class="code hl_function" href="namespacesmu__server.html#a219dae7d70a890e3fb0740451fbf5dbe">make_value_node</a>(<span class="stringliteral">&quot;Simple value 2&quot;</span>, <span class="stringliteral">&quot;42&quot;</span>, <span class="stringliteral">&quot;GB&quot;</span>)</div>
+<div class="line">     ),</div>
+<div class="line"> </div>
+<div class="line">     <a class="code hl_function" href="namespacesmu__server.html#a219dae7d70a890e3fb0740451fbf5dbe">make_value_node</a>(<span class="stringliteral">&quot;RAM usage&quot;</span>, <span class="stringliteral">&quot;4217&quot;</span>, <span class="stringliteral">&quot;MB&quot;</span>)</div>
+<div class="line">);</div>
+</div><!-- fragment --><p>And this code will produce a json of the form:</p>
+<div class="fragment"><div class="line">{</div>
+<div class="line">    &quot;RAM usage&quot;: {</div>
+<div class="line">        &quot;type&quot;: &quot;value&quot;,</div>
+<div class="line">            &quot;units&quot;: &quot;MB&quot;,</div>
+<div class="line">        &quot;value&quot;: &quot;4217&quot;</div>
+<div class="line">    },</div>
+<div class="line"> </div>
+<div class="line">    &quot;Simple container&quot;: {</div>
+<div class="line">        &quot;Simple value 1&quot;: {</div>
+<div class="line">            &quot;type&quot;: &quot;value&quot;,</div>
+<div class="line">            &quot;units&quot;: &quot;bytes&quot;,</div>
+<div class="line">            &quot;value&quot;: &quot;12345&quot;</div>
+<div class="line">        },</div>
+<div class="line">        &quot;Simple value 2&quot;: {</div>
+<div class="line">            &quot;type&quot;: &quot;value&quot;,</div>
+<div class="line">            &quot;units&quot;: &quot;GB&quot;,</div>
+<div class="line">            &quot;value&quot;: &quot;42&quot;</div>
+<div class="line">        },</div>
+<div class="line"> </div>
+<div class="line">        &quot;type&quot;: &quot;container&quot;</div>
+<div class="line">    },</div>
+<div class="line"> </div>
+<div class="line">     &quot;type&quot;: &quot;container&quot;</div>
+<div class="line">}</div>
+</div><!-- fragment --> 
 </div>
 </div>
 <a id="a219dae7d70a890e3fb0740451fbf5dbe" name="a219dae7d70a890e3fb0740451fbf5dbe"></a>
@@ -359,8 +464,37 @@ template&lt;typename ValueType &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2maksim_2projects_2smu_2server_2include_2core_2internals_2metric_constructor_8hpp-example.html#a0">/home/maksim/projects/smu/server/include/core/internals/metric_constructor.hpp</a>.</dd>
+
+<p>Creates a node with the value. </p>
+<p>A value node is a node that only stores a value. It cannot store other nodes.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">metric_name</td><td>Metric name </td></tr>
+    <tr><td class="paramname">metric_value</td><td>Metric value. Can be either a number or a string </td></tr>
+    <tr><td class="paramname">value_units</td><td>Metric units</td></tr>
+  </table>
+  </dd>
 </dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">ValueType</td><td>Value type. Must be convertible to <code>std::string</code>, i.e., <code>std::to_string</code> can be called on it</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>std::unique_ptr</code> with <code><a class="el" href="classsmu__server_1_1internals_1_1MetricValueNode.html" title="Implements a value node.">internals::MetricValueNode</a></code></dd></dl>
+<dl class="section see"><dt>See also</dt><dd><code><a class="el" href="namespacesmu__server.html#a0290ea5f19c20a5ad90d4837a627fb88" title="Creates a node that contains other nodes.">make_container_node</a></code> and <code><a class="el" href="namespacesmu__server.html#a23038498ffcba3c5453a07ab861d13cf" title="Creates a root node.">make_root_node</a></code></dd></dl>
+<h1><a class="anchor" id="example_usage"></a>
+Example usage</h1>
+<div class="fragment"><div class="line"><span class="comment">// The metric value can be either a number or a string, it is converted</span></div>
+<div class="line"><span class="comment">// to a string if needed</span></div>
+<div class="line"><span class="keyword">auto</span> node = <a class="code hl_function" href="namespacesmu__server.html#a219dae7d70a890e3fb0740451fbf5dbe">make_value_node</a>(<span class="stringliteral">&quot;RAM usage&quot;</span>, 4217, <span class="stringliteral">&quot;MB&quot;</span>);</div>
+</div><!-- fragment --><p>This code gives json fragment:</p>
+<div class="fragment"><div class="line">{</div>
+<div class="line">     &quot;type&quot;: &quot;value&quot;,</div>
+<div class="line">     &quot;units&quot;: &quot;MB&quot;,</div>
+<div class="line">     &quot;value&quot;: &quot;4217&quot;</div>
+<div class="line">}</div>
+</div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>The node name is only used if the node is nested in a <b>container node</b> or <b>root node</b>. <b>A value node never contains its own name!</b> </dd></dl>
 
 </div>
 </div>

@@ -144,12 +144,15 @@ Namespaces</h2></td></tr>
 Functions</h2></td></tr>
 <tr class="memitem:a219dae7d70a890e3fb0740451fbf5dbe" id="r_a219dae7d70a890e3fb0740451fbf5dbe"><td class="memTemplParams" colspan="2">template&lt;typename ValueType &gt; </td></tr>
 <tr class="memitem:a219dae7d70a890e3fb0740451fbf5dbe"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacesmu__server.html#a219dae7d70a890e3fb0740451fbf5dbe">smu_server::make_value_node</a> (const std::string &amp;metric_name, ValueType &amp;&amp;metric_value, const std::string &amp;value_units) -&gt; std::unique_ptr&lt; <a class="el" href="classsmu__server_1_1internals_1_1MetricValueNode.html">internals::MetricValueNode</a> &gt;</td></tr>
+<tr class="memdesc:a219dae7d70a890e3fb0740451fbf5dbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a node with the value.  <br /></td></tr>
 <tr class="separator:a219dae7d70a890e3fb0740451fbf5dbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0290ea5f19c20a5ad90d4837a627fb88" id="r_a0290ea5f19c20a5ad90d4837a627fb88"><td class="memTemplParams" colspan="2">template&lt;typename... Children&gt; </td></tr>
 <tr class="memitem:a0290ea5f19c20a5ad90d4837a627fb88"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacesmu__server.html#a0290ea5f19c20a5ad90d4837a627fb88">smu_server::make_container_node</a> (const std::string &amp;container_name, Children &amp;&amp;... children) -&gt; std::unique_ptr&lt; <a class="el" href="classsmu__server_1_1internals_1_1MetricContainerNode.html">internals::MetricContainerNode</a>&lt; Children... &gt; &gt;</td></tr>
+<tr class="memdesc:a0290ea5f19c20a5ad90d4837a627fb88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a node that contains other nodes.  <br /></td></tr>
 <tr class="separator:a0290ea5f19c20a5ad90d4837a627fb88"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a23038498ffcba3c5453a07ab861d13cf" id="r_a23038498ffcba3c5453a07ab861d13cf"><td class="memTemplParams" colspan="2">template&lt;typename... Children&gt; </td></tr>
 <tr class="memitem:a23038498ffcba3c5453a07ab861d13cf"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacesmu__server.html#a23038498ffcba3c5453a07ab861d13cf">smu_server::make_root_node</a> (Children &amp;&amp;... children) -&gt; std::unique_ptr&lt; <a class="el" href="classsmu__server_1_1internals_1_1MetricContainerNode.html">internals::MetricContainerNode</a>&lt; Children... &gt; &gt;</td></tr>
+<tr class="memdesc:a23038498ffcba3c5453a07ab861d13cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a root node.  <br /></td></tr>
 <tr class="separator:a23038498ffcba3c5453a07ab861d13cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
