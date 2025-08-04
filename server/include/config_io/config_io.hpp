@@ -2,7 +2,6 @@
 /// See LICENSE for details
 
 /**
- * @file config_manager/config_manager.hpp
  * @brief A global singleton class that helps read and write configurations in files.
  * configuration management
  */
@@ -16,7 +15,7 @@
 namespace smu_server {
 
 /**
- * @brief A global singleton class that helps read and write configurations in files.
+ * @brief A global singleton class that helps read and write configurations files.
  * @details Can be used in conjunction with `Config`
  * @see Config
  */
@@ -24,7 +23,7 @@ class Config_IO {
   public:
     /**
      * @brief Get instance of Config_IO
-     * @return Lvalue reference to `Config_IO` instance
+     * @return Reference to `Config_IO` instance
      */
     static Config_IO& instance();
 
@@ -34,7 +33,7 @@ class Config_IO {
     /**
      * @brief Get `smu_server::Config` representation of server config
      * @return `smu_server::Config` with server config
-     * @throw `std::runtime` config when error
+     * @throw `std::runtime_error` config if error occured
      */
     Config get_server_config();
 

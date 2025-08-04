@@ -106,7 +106,7 @@ Getting Started. General Concept</h1>
 <li>The module can run in a separate thread (e.g., when calculating average values over time), but must properly stop when <code>disable()</code> is called and start when <code>enable()</code> is called</li>
 <li>The module should not create any files (read-only operations only)</li>
 <li>The JSON response structure with data should be logical (include metric groups if metrics need semantic separation, with appropriate and correct naming)</li>
-<li>The module class must reside in the <code><a class="el" href="namespacesmu__server.html">smu_server</a></code> namespace</li>
+<li>The module class must reside in the <code><a class="el" href="namespacesmu__server.html" title="A global singleton class that helps read and write configurations in files. configuration management.">smu_server</a></code> namespace</li>
 <li>Place the module header file in <code>include/modules/&lt;module name&gt;/</code> and the source file in <code>src/modules/&lt;module name&gt;/</code></li>
 <li>The module name (class name) must not contain <code>Module</code> in any case. The module name is displayed in the client-side UI.</li>
 </ul>
@@ -229,7 +229,7 @@ Practical Section</h2>
 <div class="ttc" id="aclasssmu__server_1_1RAM_html_a7536fa78c74e0f0e78df5dabf722bcab"><div class="ttname"><a href="classsmu__server_1_1RAM.html#a7536fa78c74e0f0e78df5dabf722bcab">smu_server::RAM::enable</a></div><div class="ttdeci">void enable() override</div><div class="ttdoc">Enable module.</div></div>
 <div class="ttc" id="aclasssmu__server_1_1RAM_html_a8bb83b1235b67b3f80b9e1c079d101b6"><div class="ttname"><a href="classsmu__server_1_1RAM.html#a8bb83b1235b67b3f80b9e1c079d101b6">smu_server::RAM::get_data</a></div><div class="ttdeci">std::optional&lt; Json::Value &gt; get_data() override</div><div class="ttdoc">Get module data to send to the client.</div></div>
 <div class="ttc" id="amodule__registrar_8hpp_html_a0ae008fd11e0c412f9693acac82e0ab1"><div class="ttname"><a href="module__registrar_8hpp.html#a0ae008fd11e0c412f9693acac82e0ab1">REGISTER_MODULE</a></div><div class="ttdeci">#define REGISTER_MODULE(ModuleType, Description)</div><div class="ttdoc">Write inside module class.</div><div class="ttdef"><b>Definition</b> module_registrar.hpp:167</div></div>
-<div class="ttc" id="anamespacesmu__server_html"><div class="ttname"><a href="namespacesmu__server.html">smu_server</a></div><div class="ttdef"><b>Definition</b> cli.hpp:14</div></div>
+<div class="ttc" id="anamespacesmu__server_html"><div class="ttname"><a href="namespacesmu__server.html">smu_server</a></div><div class="ttdoc">A global singleton class that helps read and write configurations in files. configuration management.</div><div class="ttdef"><b>Definition</b> cli.hpp:14</div></div>
 </div><!-- fragment --><p>We inherit publicly from <code>IModule</code> and immediately use the <code>REGISTER_MODULE</code> macro. Let's examine this macro in detail. It registers the module in the system - without it, the module won't work! This macro eliminates the need to modify other program components to register your module. It takes the module name (must match the class name) and a description that appears in logs during startup. <code>REGISTER_MODULE</code> implements the following methods:</p>
 <ul>
 <li><code>module_name()</code> - get module name</li>

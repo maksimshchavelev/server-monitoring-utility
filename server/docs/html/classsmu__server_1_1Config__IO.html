@@ -98,7 +98,7 @@ $(document).ready(function(){initNavTree('classsmu__server_1_1Config__IO.html','
 </div><!--header-->
 <div class="contents">
 
-<p>A global singleton class that helps read and write configurations in files.  
+<p>A global singleton class that helps read and write configurations files.  
  <a href="classsmu__server_1_1Config__IO.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="config__io_8hpp_source.html">config_io/config_io.hpp</a>&gt;</code></p>
@@ -121,11 +121,11 @@ Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a2269a197863e37a0c6928a6e6ab9cf1c" id="r_a2269a197863e37a0c6928a6e6ab9cf1c"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classsmu__server_1_1Config__IO.html">Config_IO</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1Config__IO.html#a2269a197863e37a0c6928a6e6ab9cf1c">instance</a> ()</td></tr>
-<tr class="memdesc:a2269a197863e37a0c6928a6e6ab9cf1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get instance of <a class="el" href="classsmu__server_1_1Config__IO.html" title="A global singleton class that helps read and write configurations in files.">Config_IO</a>.  <br /></td></tr>
+<tr class="memdesc:a2269a197863e37a0c6928a6e6ab9cf1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get instance of <a class="el" href="classsmu__server_1_1Config__IO.html" title="A global singleton class that helps read and write configurations files.">Config_IO</a>.  <br /></td></tr>
 <tr class="separator:a2269a197863e37a0c6928a6e6ab9cf1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A global singleton class that helps read and write configurations in files. </p>
+<div class="textblock"><p>A global singleton class that helps read and write configurations files. </p>
 <p>Can be used in conjunction with <code><a class="el" href="classsmu__server_1_1Config.html" title="Thread-safe wrapper for storing Json configs.">Config</a></code> </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="classsmu__server_1_1Config.html" title="Thread-safe wrapper for storing Json configs.">Config</a> </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a68c482a5978c4ece54629e698172baf7" name="a68c482a5978c4ece54629e698172baf7"></a>
@@ -182,7 +182,7 @@ Static Public Member Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd><code><a class="el" href="classsmu__server_1_1Config.html" title="Thread-safe wrapper for storing Json configs.">smu_server::Config</a></code> with server config </dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname">`std::runtime`</td><td>config when error </td></tr>
+    <tr><td class="paramname">`std::runtime_error`</td><td>config if error occured </td></tr>
   </table>
   </dd>
 </dl>
@@ -212,8 +212,8 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Get instance of <a class="el" href="classsmu__server_1_1Config__IO.html" title="A global singleton class that helps read and write configurations in files.">Config_IO</a>. </p>
-<dl class="section return"><dt>Returns</dt><dd>Lvalue reference to <code><a class="el" href="classsmu__server_1_1Config__IO.html" title="A global singleton class that helps read and write configurations in files.">Config_IO</a></code> instance </dd></dl>
+<p>Get instance of <a class="el" href="classsmu__server_1_1Config__IO.html" title="A global singleton class that helps read and write configurations files.">Config_IO</a>. </p>
+<dl class="section return"><dt>Returns</dt><dd>Reference to <code><a class="el" href="classsmu__server_1_1Config__IO.html" title="A global singleton class that helps read and write configurations files.">Config_IO</a></code> instance </dd></dl>
 
 </div>
 </div>
