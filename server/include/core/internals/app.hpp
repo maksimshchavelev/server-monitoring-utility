@@ -125,11 +125,23 @@ class Application {
 
     /**
      * @brief Adds module to queue. For lazy module initialization. See details
-     * @details Adds `register_function` to the internal vector. When it is time
+     *
+     * Adds `register_function` to the internal vector. When it is time
      * to register a module, each function in the vector that registers the module
      * is called. Thus, `register_function` must call `Application::register_module`
-     * *by accepted reference*.
+     * **by accepted reference**.
+     *
      * @param register_function Registration callback
+     *
+     * @section example_usage Example usage
+     * @code{.cpp}
+     * Application::instance().add_module_to_queue(
+     *      // This function will be called when it is time to register the module
+     *      // (for example, inside `Application::run`). Until then, this callback
+     *      // will be stored in an internal vector.
+     *      [](Application& app) { app.register_module<RAM>(); }
+     * );
+     * @endcode
      */
     void add_module_to_queue(std::function<void(Application&)> register_function);
 

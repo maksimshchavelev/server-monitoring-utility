@@ -153,13 +153,27 @@ Friends</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Adds module to queue. For lazy module initialization. See details. </p>
-<p>Adds <code>register_function</code> to the internal vector. When it is time to register a module, each function in the vector that registers the module is called. Thus, <code>register_function</code> must call <code><a class="el" href="classsmu__server_1_1Application.html#a804ca54e0e861ff72e8ff26837953440" title="Register module with type ModuleType">Application::register_module</a></code> <em>by accepted reference</em>. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Adds <code>register_function</code> to the internal vector. When it is time to register a module, each function in the vector that registers the module is called. Thus, <code>register_function</code> must call <code><a class="el" href="classsmu__server_1_1Application.html#a804ca54e0e861ff72e8ff26837953440" title="Register module with type ModuleType">Application::register_module</a></code> <b>by accepted reference</b>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">register_function</td><td>Registration callback </td></tr>
+    <tr><td class="paramname">register_function</td><td>Registration callback</td></tr>
   </table>
   </dd>
 </dl>
-
+<h1><a class="anchor" id="example_usage"></a>
+Example usage</h1>
+<div class="fragment"><div class="line"><a class="code hl_function" href="classsmu__server_1_1Application.html#a264d4f3997b444cd74a5b67f7cc505ee">Application::instance</a>().<a class="code hl_function" href="classsmu__server_1_1Application.html#a506ae3d85f266d113791714e7e2a581a">add_module_to_queue</a>(</div>
+<div class="line">     <span class="comment">// This function will be called when it is time to register the module</span></div>
+<div class="line">     <span class="comment">// (for example, inside `Application::run`). Until then, this callback</span></div>
+<div class="line">     <span class="comment">// will be stored in an internal vector.</span></div>
+<div class="line">     [](<a class="code hl_class" href="classsmu__server_1_1Application.html">Application</a>&amp; app) { app.<a class="code hl_function" href="classsmu__server_1_1Application.html#a804ca54e0e861ff72e8ff26837953440">register_module</a>&lt;<a class="code hl_class" href="classsmu__server_1_1RAM.html">RAM</a>&gt;(); }</div>
+<div class="line">);</div>
+<div class="ttc" id="aclasssmu__server_1_1Application_html"><div class="ttname"><a href="classsmu__server_1_1Application.html">smu_server::Application</a></div><div class="ttdoc">The Singleton Application class.</div><div class="ttdef"><b>Definition</b> app.hpp:35</div></div>
+<div class="ttc" id="aclasssmu__server_1_1Application_html_a264d4f3997b444cd74a5b67f7cc505ee"><div class="ttname"><a href="classsmu__server_1_1Application.html#a264d4f3997b444cd74a5b67f7cc505ee">smu_server::Application::instance</a></div><div class="ttdeci">static Application &amp; instance()</div><div class="ttdoc">Get Application instance.</div></div>
+<div class="ttc" id="aclasssmu__server_1_1Application_html_a506ae3d85f266d113791714e7e2a581a"><div class="ttname"><a href="classsmu__server_1_1Application.html#a506ae3d85f266d113791714e7e2a581a">smu_server::Application::add_module_to_queue</a></div><div class="ttdeci">void add_module_to_queue(std::function&lt; void(Application &amp;)&gt; register_function)</div><div class="ttdoc">Adds module to queue. For lazy module initialization. See details.</div></div>
+<div class="ttc" id="aclasssmu__server_1_1Application_html_a804ca54e0e861ff72e8ff26837953440"><div class="ttname"><a href="classsmu__server_1_1Application.html#a804ca54e0e861ff72e8ff26837953440">smu_server::Application::register_module</a></div><div class="ttdeci">void register_module()</div><div class="ttdoc">Register module with type ModuleType</div><div class="ttdef"><b>Definition</b> app.hpp:65</div></div>
+<div class="ttc" id="aclasssmu__server_1_1RAM_html"><div class="ttname"><a href="classsmu__server_1_1RAM.html">smu_server::RAM</a></div><div class="ttdoc">A module that allows you to get information about RAM.</div><div class="ttdef"><b>Definition</b> ram.hpp:20</div></div>
+</div><!-- fragment --> 
 </div>
 </div>
 <a id="aa9e4dcd24d9c34201fe162fdc9a86085" name="aa9e4dcd24d9c34201fe162fdc9a86085"></a>
@@ -250,9 +264,6 @@ requires std::is_base_of_v&lt;<a class="el" href="classsmu__server_1_1IModule.ht
 <h1><a class="anchor" id="example_usage"></a>
 Example usage</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="classsmu__server_1_1Application.html#a264d4f3997b444cd74a5b67f7cc505ee">Application::instance</a>().<a class="code hl_function" href="classsmu__server_1_1Application.html#a804ca54e0e861ff72e8ff26837953440">register_module</a>&lt;<a class="code hl_class" href="classsmu__server_1_1RAM.html">RAM</a>&gt;();</div>
-<div class="ttc" id="aclasssmu__server_1_1Application_html_a264d4f3997b444cd74a5b67f7cc505ee"><div class="ttname"><a href="classsmu__server_1_1Application.html#a264d4f3997b444cd74a5b67f7cc505ee">smu_server::Application::instance</a></div><div class="ttdeci">static Application &amp; instance()</div><div class="ttdoc">Get Application instance.</div></div>
-<div class="ttc" id="aclasssmu__server_1_1Application_html_a804ca54e0e861ff72e8ff26837953440"><div class="ttname"><a href="classsmu__server_1_1Application.html#a804ca54e0e861ff72e8ff26837953440">smu_server::Application::register_module</a></div><div class="ttdeci">void register_module()</div><div class="ttdoc">Register module with type ModuleType</div><div class="ttdef"><b>Definition</b> app.hpp:65</div></div>
-<div class="ttc" id="aclasssmu__server_1_1RAM_html"><div class="ttname"><a href="classsmu__server_1_1RAM.html">smu_server::RAM</a></div><div class="ttdoc">A module that allows you to get information about RAM.</div><div class="ttdef"><b>Definition</b> ram.hpp:20</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
