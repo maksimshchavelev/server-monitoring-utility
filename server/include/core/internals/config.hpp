@@ -46,6 +46,9 @@ class Config {
 
     /**
      * @brief Move constructor
+     *
+     * Moves another `Config`. `other` becomes empty.
+     *
      * @param other Other `Config` object
      */
     Config(Config&& other);
@@ -55,7 +58,11 @@ class Config {
 
     /**
      * @brief Copy operator =
+     *
+     * Just copies another `Config`
+     *
      * @param other Other `Config` object
+     *
      * @return `Config&` (self)
      */
     Config& operator=(const Config& other);
@@ -65,7 +72,11 @@ class Config {
 
     /**
      * @brief Move operator =
+     *
+     * Moves another `Config`. `other` becomes empty.
+     *
      * @param other Other `Config` object
+     *
      * @return `Config&` (self)
      */
     Config& operator=(Config&& other);
@@ -86,9 +97,17 @@ class Config {
     /**
      * @brief Set the value associated with the key. If there is no associated value, a new one will
      * be created.
+     *
      * @param key Key
      * @param value Value
-     * @note Empty key will be ignored
+     *
+     * @note Empty `key` will be ignored
+     *
+     * @section example_usage Example usage
+     * @code{.cpp}
+     * Config config;
+     * config.set("key", 10);
+     * @endcode
      */
     template <typename T>
     void set(const std::string& key, T&& value)
@@ -114,9 +133,37 @@ class Config {
 
     /**
      * @brief Returns the value by key
+     *
      * @param key Key
+     *
      * @return The value, if it exists, otherwise `std::nullopt` (or if there was an attempt to
      * obtain an inappropriate type)
+     *
+     * @warning Always call `has_value()` on the returned value before using it, because this method
+     * may not return a value.
+     *
+     * @section example_usage Example usage
+     * For example, `config` has already been created and has the following structure:
+     * @code{.json}
+     * {
+     *      "key": 42
+     * }
+     * @endcode
+     *
+     * Then, when executing this code:
+     * @code{.cpp}
+     * if (auto value = config.get<int>("key"); value.has_value()) {
+     *      std::cout << value.value();
+     * } else {
+     *      std::cout << "Error";
+     * }
+     * @endcode
+     *
+     * The output should be as follows:
+     *
+     * ```
+     * 42
+     * ```
      */
     template <typename DesiredType> std::optional<DesiredType> get(const std::string& key) const {
         std::lock_guard<std::mutex> lock(m_json_mutex);
@@ -138,12 +185,44 @@ class Config {
 
 
     /**
-     * @brief Provides more efficient thread-safely access to the field by const reference
+     * @brief Provides **more efficient** thread-safely access to the field by const reference
+     *
      * @param key Key
      * @param callback The function to which the value will be passed
-     * @note If the function throws an exception, there will be no effect.
+     *
+     * @note If the `function` throws an exception, there will be no effect.
+     *
      * If the field is missing or an error occurred while receiving it, `std::nullopt` will be
      * passed to the function.
+     *
+     * @warning Always call `has_value()` on the returned value before using it, because this method
+     * may not return a value.
+     *
+     * @section example_usage Example usage
+     * For example, `config` has already been created and has the following structure:
+     * @code{.json}
+     * {
+     *      "key": 42
+     * }
+     * @endcode
+     *
+     * Then, when executing this code:
+     *
+     * @code{.cpp}
+     * config.get<int>("key", [](const std::optional<int>& value){
+     *      if (value.has_value()) {
+     *          std::cout << value.value() << std::endl;
+     *      } else {
+     *          std::cout << "Error" << std::endl;
+     *      }
+     * });
+     * @endcode
+     *
+     * The output should be as follows:
+     *
+     * ```
+     * 42
+     * ```
      */
     template <typename DesiredType>
     void get(const std::string&                                           key,
@@ -176,8 +255,35 @@ class Config {
 
     /**
      * @brief Allows you to obtain raw Json::Value thread-safely
+     *
      * @param callback The function to which the `Json::Value` will be passed
-     * @note If the function throws an exception, there will be no effect.
+     *
+     * @note If the `function` throws an exception, there will be no effect.
+     *
+     * @section example_usage Example usage
+     * For example, `config` has already been created and has the following structure
+     * @code{.json}
+     * {
+     *      "key1": "value",
+     *      "key2: 10
+     * }
+     * @endcode
+     *
+     * Then, when executing this code:
+     *
+     * @code{.cpp}
+     * config.get([&](const Json::Value& value){
+     *      std::cout << value["key1"].as<std::string>() << std::endl;
+     *      std::cout << value["key2"].as<int>() << std::endl;
+     * });
+     * @endcode
+     *
+     * The output should be as follows:
+     *
+     * ```
+     * value
+     * 10
+     * ```
      */
     void get(std::function<void(const Json::Value& json)> callback) const {
         std::lock_guard<std::mutex> lock(m_json_mutex);
@@ -192,9 +298,15 @@ class Config {
 
 
     /**
-     * @brief Get subconfig. Similar to calling `get<Json::Value>(“subconfig name”)`
+     * @brief Get subconfig. Similar to calling `get<Config>("subconfig name")`
+     *
      * @param subconfig_name Subconfig name
-     * @return `std::optional<Config>`
+     *
+     * @return `std::optional` with `Config`, if it exists, otherwise `std::nullopt`
+     *
+     * @warning Always call `has_value()` on the returned value before using it, because this method
+     * may not return a value.
+     *
      * @see get
      */
     std::optional<Config> get_subconfig(const std::string& subconfig_name) const;
@@ -203,9 +315,13 @@ class Config {
 
 
     /**
-     * @brief Allows you to obtain a copy of the internal `Json::Value`
+     * @brief Allows you to obtain a **copy** of the internal `Json::Value`
+     *
      * @return `Json::Value`
-     * @see get for more *efficient* use
+     *
+     * @note Use `Config::get` **for more efficient use**
+     *
+     * @see get
      */
     Json::Value get_json() const;
 
@@ -229,16 +345,47 @@ class Config {
 
 
   private:
-    Json::Value        m_json;
-    mutable std::mutex m_json_mutex;
+    Json::Value        m_json;       ///< Internal json object
+    mutable std::mutex m_json_mutex; ///< Mutex to prevent data race with `m_json`
 };
 
 
 /**
- * @brief Specialization `get` for template parameter `Config`
+ * @brief Specialization of `Config::get` for template parameter `Config` to get subconfigs
  * @param key Key
  * @return The value, if it exists and value is `Json::Value` object, otherwise `std::nullopt`
  * (or if there was an attempt to obtain an inappropriate type)
+ *
+ * @warning Always call `has_value()` on the returned value before using it, because this method may
+ * not return a value.
+ *
+ * @section example_usage Example usage
+ * For example, config has this structure:
+ *
+ * @code{.json}
+ * {
+ *      "key 1": 5,
+ *      "subconfig": {
+ *          "key 2": "value 2",
+ *          "key 3": "value 3"
+ *      }
+ * }
+ * @endcode
+ *
+ * And the code below is executed (`config` is already created):
+ *
+ * @code{.cpp}
+ * auto subconfig = config.get<Config>("subconfig");
+ * @endcode
+ *
+ * Then `subconfig` will have the following structure:
+ *
+ * @code{.json}
+ * {
+ *      "key 2": "value 2",
+ *      "key 3": "value 3"
+ * }
+ * @endcode
  */
 template <> std::optional<Config> Config::get<Config>(const std::string& key) const;
 
