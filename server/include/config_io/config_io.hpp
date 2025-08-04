@@ -55,7 +55,7 @@ class Config_IO {
      * @param module_name Name of module
      * @return filled `smu_server::Config` if success, empty `smu_server::Config` if error
      */
-    Config get_module_config(std::string_view module_name) const noexcept;
+    Config get_module_config(const std::string_view module_name) const noexcept;
 
 
 
@@ -66,7 +66,7 @@ class Config_IO {
      * @param config Config of module
      * @return `std::expected` with void if success, otherwise `std::string` with error
      */
-    std::expected<void, std::string> save_module_config(std::string_view module_name,
+    std::expected<void, std::string> save_module_config(const std::string_view module_name,
                                                         const Config&    config) const;
 
 
@@ -85,7 +85,7 @@ class Config_IO {
      * @return `std::expected` with `smu_server::Config` if success and `std::string` if error
      * @private
      */
-    std::expected<Config, std::string> read_config(std::string_view path) const noexcept;
+    std::expected<Config, std::string> read_config(const std::string_view path) const noexcept;
 
 
 
@@ -96,7 +96,7 @@ class Config_IO {
      * @param config Json config
      * @return `std::expected` with void if success, otherwise `std::string` with error
      */
-    std::expected<void, std::string> save_config(std::string_view path,
+    std::expected<void, std::string> save_config(const std::string_view path,
                                                  const Config&    config) const noexcept;
 };
 

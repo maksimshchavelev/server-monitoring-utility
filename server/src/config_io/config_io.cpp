@@ -46,7 +46,7 @@ std::expected<void, std::string> Config_IO::save_server_config(const Config& con
 
 
 // Public method
-Config Config_IO::get_module_config(std::string_view module_name) const noexcept {
+Config Config_IO::get_module_config(const std::string_view module_name) const noexcept {
     if (auto config = read_config(std::format("{}/{}.json", MODULES_CONFIGS_DIR, module_name));
         config.has_value()) {
         return config.value();
@@ -59,7 +59,7 @@ Config Config_IO::get_module_config(std::string_view module_name) const noexcept
 
 // Public method
 std::expected<void, std::string> Config_IO::save_module_config(
-    std::string_view module_name, const Config& config) const {
+    const std::string_view module_name, const Config& config) const {
     return save_config(std::format("{}/{}.json", MODULES_CONFIGS_DIR, module_name), config);
 }
 
@@ -68,7 +68,7 @@ std::expected<void, std::string> Config_IO::save_module_config(
 
 // Private method
 std::expected<Config, std::string> Config_IO::read_config(
-    std::string_view path) const noexcept {
+    const std::string_view path) const noexcept {
 
     std::ifstream json_file;
     json_file.open(path.data());
@@ -103,7 +103,7 @@ std::expected<Config, std::string> Config_IO::read_config(
 
 // Private method
 std::expected<void, std::string> Config_IO::save_config(
-    std::string_view path, const Config& config) const noexcept {
+    const std::string_view path, const Config& config) const noexcept {
     std::ofstream file;
     file.open(path.data());
 
