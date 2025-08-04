@@ -78,10 +78,22 @@ consteval bool contains_substring(const char* str, const char* substr) {
 
 /**
  * @brief Supporting structure for module registration
+ *
+ * Its object can be created statically, which will result in automatic registration. This is
+ * implemented in the `REGISTER_MODULE` macro.
+ *
+ * @tparam ModuleName Raw module type
+ * @tparam module_name Name of module
  */
 template <typename ModuleName, StringWrapper module_name> struct ModuleRegistrar {
     /**
-     * @brief Constructor for registration
+     * @brief Registration constructor
+     *
+     * Adds a module to the registration queue by calling
+     * `smu_server::Application::add_module_to_queue`
+     *
+     * @note The module must inherit from `smu_server::IModule` and not contain the word "module" in
+     * any case in the module name.
      */
     ModuleRegistrar() {
         static_assert(!(contains_substring(module_name.str, "module")),
