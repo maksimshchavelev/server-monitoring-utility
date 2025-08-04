@@ -159,6 +159,7 @@ Functions</h2></td></tr>
 <tr class="separator:ab2324167d7d0ebb73d6f1a85d097d80b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a522f05053a18b752356b80c93a5fe53e" id="r_a522f05053a18b752356b80c93a5fe53e"><td class="memTemplParams" colspan="2">template&lt;typename Tuple , typename Function &gt; </td></tr>
 <tr class="memitem:a522f05053a18b752356b80c93a5fe53e"><td class="memTemplItemLeft" align="right" valign="top">constexpr void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacesmu__server.html#a522f05053a18b752356b80c93a5fe53e">for_each_tuple</a> (Tuple &amp;&amp;tuple, Function &amp;&amp;function)</td></tr>
+<tr class="memdesc:a522f05053a18b752356b80c93a5fe53e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Iterates over the tuple elements and passes each element to the <code>function</code> function.  <br /></td></tr>
 <tr class="separator:a522f05053a18b752356b80c93a5fe53e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -197,9 +198,28 @@ template&lt;typename Tuple , typename Function &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2maksim_2projects_2smu_2server_2include_2utils_2for_each_tuple_8hpp-example.html#a1">/home/maksim/projects/smu/server/include/utils/for_each_tuple.hpp</a>.</dd>
-</dl>
 
+<p>Iterates over the tuple elements and passes each element to the <code>function</code> function. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tuple</td><td><code>std::tuple</code> </td></tr>
+    <tr><td class="paramname">function</td><td>Function to which each tuple element is passed <b>by universal reference</b></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>This function can work at compile time</dd></dl>
+<h1><a class="anchor" id="example_usage"></a>
+Example usage</h1>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> t = std::make_tuple(42, 3.14, std::string(<span class="stringliteral">&quot;Hello&quot;</span>));</div>
+<div class="line"> </div>
+<div class="line"><a class="code hl_function" href="namespacesmu__server.html#a522f05053a18b752356b80c93a5fe53e">for_each_tuple</a>(t, [](<span class="keyword">auto</span>&amp;&amp; element) {</div>
+<div class="line">     std::cout &lt;&lt; element &lt;&lt; std::endl; <span class="comment">// Print each tuple element</span></div>
+<div class="line">});</div>
+<div class="ttc" id="anamespacesmu__server_html_a522f05053a18b752356b80c93a5fe53e"><div class="ttname"><a href="namespacesmu__server.html#a522f05053a18b752356b80c93a5fe53e">smu_server::for_each_tuple</a></div><div class="ttdeci">constexpr void for_each_tuple(Tuple &amp;&amp;tuple, Function &amp;&amp;function)</div><div class="ttdoc">Iterates over the tuple elements and passes each element to the function function.</div><div class="ttdef"><b>Definition</b> for_each_tuple.hpp:59</div></div>
+</div><!-- fragment --><p>Output: </p><div class="fragment"><div class="line">42</div>
+<div class="line">3.14</div>
+<div class="line">Hello</div>
+</div><!-- fragment --> 
 </div>
 </div>
 <a id="ab2324167d7d0ebb73d6f1a85d097d80b" name="ab2324167d7d0ebb73d6f1a85d097d80b"></a>

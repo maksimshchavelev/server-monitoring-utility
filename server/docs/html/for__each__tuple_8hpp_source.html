@@ -120,19 +120,19 @@ $(document).ready(function(){initNavTree('for__each__tuple_8hpp_source.html','')
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>}</div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Tuple, <span class="keyword">typename</span> Function&gt;</div>
-<div class="foldopen" id="foldopen00049" data-start="{" data-end="}">
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="namespacesmu__server.html#a522f05053a18b752356b80c93a5fe53e">   49</a></span><span class="keyword">constexpr</span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespacesmu__server.html#a522f05053a18b752356b80c93a5fe53e">for_each_tuple</a>(Tuple&amp;&amp; tuple, Function&amp;&amp; function) {</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    for_each_tuple_impl(std::forward&lt;Tuple&gt;(tuple),</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>                        std::forward&lt;Function&gt;(function),</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>                        std::make_index_sequence&lt;std::tuple_size_v&lt;std::decay_t&lt;Tuple&gt;&gt;&gt;());</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>}</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Tuple, <span class="keyword">typename</span> Function&gt;</div>
+<div class="foldopen" id="foldopen00059" data-start="{" data-end="}">
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="namespacesmu__server.html#a522f05053a18b752356b80c93a5fe53e">   59</a></span><span class="keyword">constexpr</span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespacesmu__server.html#a522f05053a18b752356b80c93a5fe53e">for_each_tuple</a>(Tuple&amp;&amp; tuple, Function&amp;&amp; function) {</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    for_each_tuple_impl(std::forward&lt;Tuple&gt;(tuple),</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>                        std::forward&lt;Function&gt;(function),</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>                        std::make_index_sequence&lt;std::tuple_size_v&lt;std::decay_t&lt;Tuple&gt;&gt;&gt;());</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>}</div>
 </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>}</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>}</div>
 <div class="ttc" id="anamespacesmu__server_1_1internals_html_ae143a58e30947d3da9db59a48e46827b"><div class="ttname"><a href="namespacesmu__server_1_1internals.html#ae143a58e30947d3da9db59a48e46827b">smu_server::internals::for_each_tuple_impl</a></div><div class="ttdeci">constexpr void for_each_tuple_impl(Tuple &amp;&amp;tuple, Function &amp;&amp;function, std::index_sequence&lt; Indexes... &gt;)</div><div class="ttdoc">Implementation of smu_server::for_each_tuple</div><div class="ttdef"><b>Definition</b> for_each_tuple.hpp:25</div></div>
 <div class="ttc" id="anamespacesmu__server_html"><div class="ttname"><a href="namespacesmu__server.html">smu_server</a></div><div class="ttdef"><b>Definition</b> cli.hpp:14</div></div>
-<div class="ttc" id="anamespacesmu__server_html_a522f05053a18b752356b80c93a5fe53e"><div class="ttname"><a href="namespacesmu__server.html#a522f05053a18b752356b80c93a5fe53e">smu_server::for_each_tuple</a></div><div class="ttdeci">constexpr void for_each_tuple(Tuple &amp;&amp;tuple, Function &amp;&amp;function)</div><div class="ttdef"><b>Definition</b> for_each_tuple.hpp:49</div></div>
+<div class="ttc" id="anamespacesmu__server_html_a522f05053a18b752356b80c93a5fe53e"><div class="ttname"><a href="namespacesmu__server.html#a522f05053a18b752356b80c93a5fe53e">smu_server::for_each_tuple</a></div><div class="ttdeci">constexpr void for_each_tuple(Tuple &amp;&amp;tuple, Function &amp;&amp;function)</div><div class="ttdoc">Iterates over the tuple elements and passes each element to the function function.</div><div class="ttdef"><b>Definition</b> for_each_tuple.hpp:59</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

@@ -81,7 +81,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_2home_2maksim_2projects_2smu_2server_2include_2core_2internals_2metric_constructor_8hpp-example.html",
-"config_8hpp.html"
+"config_8hpp_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

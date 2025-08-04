@@ -34,15 +34,25 @@ constexpr void for_each_tuple_impl(Tuple&&    tuple,
 /**
  * @brief Iterates over the tuple elements and passes each element to the `function` function
  * @param tuple `std::tuple`
- * @param function Function to which each tuple element is passed by universal reference
- * @example
+ * @param function Function to which each tuple element is passed **by universal reference**
  *
- * ```
+ * @note This function can work at compile time
+ *
+ * @section example_usage Example usage
+ *
+ * @code{.cpp}
  * auto t = std::make_tuple(42, 3.14, std::string("Hello"));
  *
- * for_each_tuple(t, [](const auto& element) {
- *      std::cout << element << '\n'; // Print each tuple element
+ * for_each_tuple(t, [](auto&& element) {
+ *      std::cout << element << std::endl; // Print each tuple element
  * });
+ * @endcode
+ *
+ * Output:
+ * ```
+ * 42
+ * 3.14
+ * Hello
  * ```
  */
 template <typename Tuple, typename Function>
