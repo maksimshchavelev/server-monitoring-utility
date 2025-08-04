@@ -45,9 +45,21 @@ class Application {
 
     /**
      * @brief Register module with type `ModuleType`
+     *
+     * Registers the module by calling its constructor and adding it to the internal vector. Prints
+     * the log.
+     *
+     * @tparam ModuleType Type of module
+     *
      * @note Used only in `ModuleRegistrar`. Do not use directly. Instead, use `add_module_to_queue`
      * for lazy initialization
+     *
      * @see `add_module_to_queue`
+     *
+     * @section example_usage Example usage
+     * @code{.cpp}
+     * Application::instance().register_module<RAM>();
+     * @endcode
      */
     template <typename ModuleType>
     void register_module()

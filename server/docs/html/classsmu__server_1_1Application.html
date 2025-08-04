@@ -238,9 +238,22 @@ requires std::is_base_of_v&lt;<a class="el" href="classsmu__server_1_1IModule.ht
 </div><div class="memdoc">
 
 <p>Register module with type <code>ModuleType</code> </p>
-<dl class="section note"><dt>Note</dt><dd>Used only in <code>ModuleRegistrar</code>. Do not use directly. Instead, use <code>add_module_to_queue</code> for lazy initialization </dd></dl>
-<dl class="section see"><dt>See also</dt><dd><code><a class="el" href="classsmu__server_1_1Application.html#a506ae3d85f266d113791714e7e2a581a" title="Adds module to queue. For lazy module initialization. See details.">add_module_to_queue</a></code> </dd></dl>
-
+<p>Registers the module by calling its constructor and adding it to the internal vector. Prints the log.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">ModuleType</td><td>Type of module</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>Used only in <code>ModuleRegistrar</code>. Do not use directly. Instead, use <code>add_module_to_queue</code> for lazy initialization</dd></dl>
+<dl class="section see"><dt>See also</dt><dd><code><a class="el" href="classsmu__server_1_1Application.html#a506ae3d85f266d113791714e7e2a581a" title="Adds module to queue. For lazy module initialization. See details.">add_module_to_queue</a></code></dd></dl>
+<h1><a class="anchor" id="example_usage"></a>
+Example usage</h1>
+<div class="fragment"><div class="line"><a class="code hl_function" href="classsmu__server_1_1Application.html#a264d4f3997b444cd74a5b67f7cc505ee">Application::instance</a>().<a class="code hl_function" href="classsmu__server_1_1Application.html#a804ca54e0e861ff72e8ff26837953440">register_module</a>&lt;<a class="code hl_class" href="classsmu__server_1_1RAM.html">RAM</a>&gt;();</div>
+<div class="ttc" id="aclasssmu__server_1_1Application_html_a264d4f3997b444cd74a5b67f7cc505ee"><div class="ttname"><a href="classsmu__server_1_1Application.html#a264d4f3997b444cd74a5b67f7cc505ee">smu_server::Application::instance</a></div><div class="ttdeci">static Application &amp; instance()</div><div class="ttdoc">Get Application instance.</div></div>
+<div class="ttc" id="aclasssmu__server_1_1Application_html_a804ca54e0e861ff72e8ff26837953440"><div class="ttname"><a href="classsmu__server_1_1Application.html#a804ca54e0e861ff72e8ff26837953440">smu_server::Application::register_module</a></div><div class="ttdeci">void register_module()</div><div class="ttdoc">Register module with type ModuleType</div><div class="ttdef"><b>Definition</b> app.hpp:65</div></div>
+<div class="ttc" id="aclasssmu__server_1_1RAM_html"><div class="ttname"><a href="classsmu__server_1_1RAM.html">smu_server::RAM</a></div><div class="ttdoc">A module that allows you to get information about RAM.</div><div class="ttdef"><b>Definition</b> ram.hpp:20</div></div>
+</div><!-- fragment --> 
 </div>
 </div>
 <a id="ac726f23658ee9383f791b1f063a0345b" name="ac726f23658ee9383f791b1f063a0345b"></a>
