@@ -110,35 +110,35 @@ $(document).ready(function(){initNavTree('cli_8hpp_source.html',''); initResizab
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">class </span><a class="code hl_class" href="classsmu__server_1_1Application.html">Application</a>; <span class="comment">// Forward declaration to avoid cyclic including</span></div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
-<div class="foldopen" id="foldopen00021" data-start="{" data-end="};">
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="classsmu__server_1_1CLI.html">   21</a></span><span class="keyword">class </span><a class="code hl_class" href="classsmu__server_1_1CLI.html">CLI</a> {</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="classsmu__server_1_1CLI.html#a071ff1a177446a661f9a65ac717c9e58">   27</a></span>    <a class="code hl_function" href="classsmu__server_1_1CLI.html#a071ff1a177446a661f9a65ac717c9e58">CLI</a>(<a class="code hl_class" href="classsmu__server_1_1Application.html">Application</a>&amp; app);</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="classsmu__server_1_1CLI.html#a21f2485388a0e748ca95413a9b5db62c">   35</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classsmu__server_1_1CLI.html#a21f2485388a0e748ca95413a9b5db62c">run</a>();</div>
+<div class="foldopen" id="foldopen00025" data-start="{" data-end="};">
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="classsmu__server_1_1CLI.html">   25</a></span><span class="keyword">class </span><a class="code hl_class" href="classsmu__server_1_1CLI.html">CLI</a> {</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="classsmu__server_1_1CLI.html#a071ff1a177446a661f9a65ac717c9e58">   32</a></span>    <a class="code hl_function" href="classsmu__server_1_1CLI.html#a071ff1a177446a661f9a65ac717c9e58">CLI</a>(<a class="code hl_class" href="classsmu__server_1_1Application.html">Application</a>&amp; app);</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <a class="code hl_class" href="classsmu__server_1_1Application.html">Application</a>&amp;       m_app;</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    std::optional&lt;IPC&gt; m_ipc; <span class="comment">// Optional for lazy initialization in `run_async`</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="classsmu__server_1_1CLI.html#a21f2485388a0e748ca95413a9b5db62c">   40</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classsmu__server_1_1CLI.html#a21f2485388a0e748ca95413a9b5db62c">run</a>();</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    std::string ipc_command_receiver(<span class="keyword">const</span> <a class="code hl_enumeration" href="classsmu__server_1_1IPC.html#acb16f6685fbd659bc87d15236c72c501">IPC::Command</a> cmd, <span class="keyword">const</span> std::vector&lt;std::string&gt;&amp; args);</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    std::string list_modules() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>};</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <a class="code hl_class" href="classsmu__server_1_1Application.html">Application</a>&amp;       m_app; </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    std::optional&lt;IPC&gt; m_ipc; </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    std::string ipc_command_receiver(<span class="keyword">const</span> <a class="code hl_enumeration" href="classsmu__server_1_1IPC.html#acb16f6685fbd659bc87d15236c72c501">IPC::Command</a> cmd, <span class="keyword">const</span> std::vector&lt;std::string&gt;&amp; args);</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    std::string list_modules() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>};</div>
 </div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>} <span class="comment">// namespace smu_server</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>} <span class="comment">// namespace smu_server</span></div>
 </div>
 <div class="ttc" id="aclasssmu__server_1_1Application_html"><div class="ttname"><a href="classsmu__server_1_1Application.html">smu_server::Application</a></div><div class="ttdoc">The Singleton Application class.</div><div class="ttdef"><b>Definition</b> app.hpp:35</div></div>
-<div class="ttc" id="aclasssmu__server_1_1CLI_html"><div class="ttname"><a href="classsmu__server_1_1CLI.html">smu_server::CLI</a></div><div class="ttdoc">The CLI class for process CLI commands.</div><div class="ttdef"><b>Definition</b> cli.hpp:21</div></div>
+<div class="ttc" id="aclasssmu__server_1_1CLI_html"><div class="ttname"><a href="classsmu__server_1_1CLI.html">smu_server::CLI</a></div><div class="ttdoc">The CLI class to processing CLI commands.</div><div class="ttdef"><b>Definition</b> cli.hpp:25</div></div>
 <div class="ttc" id="aclasssmu__server_1_1CLI_html_a071ff1a177446a661f9a65ac717c9e58"><div class="ttname"><a href="classsmu__server_1_1CLI.html#a071ff1a177446a661f9a65ac717c9e58">smu_server::CLI::CLI</a></div><div class="ttdeci">CLI(Application &amp;app)</div><div class="ttdoc">CLI default construcor. CLI has access to all Application fields and methods.</div></div>
-<div class="ttc" id="aclasssmu__server_1_1CLI_html_a21f2485388a0e748ca95413a9b5db62c"><div class="ttname"><a href="classsmu__server_1_1CLI.html#a21f2485388a0e748ca95413a9b5db62c">smu_server::CLI::run</a></div><div class="ttdeci">void run()</div><div class="ttdoc">Runs CLI.</div></div>
+<div class="ttc" id="aclasssmu__server_1_1CLI_html_a21f2485388a0e748ca95413a9b5db62c"><div class="ttname"><a href="classsmu__server_1_1CLI.html#a21f2485388a0e748ca95413a9b5db62c">smu_server::CLI::run</a></div><div class="ttdeci">void run()</div><div class="ttdoc">Runs CLI async.</div></div>
 <div class="ttc" id="aclasssmu__server_1_1IPC_html_acb16f6685fbd659bc87d15236c72c501"><div class="ttname"><a href="classsmu__server_1_1IPC.html#acb16f6685fbd659bc87d15236c72c501">smu_server::IPC::Command</a></div><div class="ttdeci">Command</div><div class="ttdoc">All kinds of command options.</div><div class="ttdef"><b>Definition</b> ipc.hpp:23</div></div>
 <div class="ttc" id="aipc_8hpp_html"><div class="ttname"><a href="ipc_8hpp.html">ipc.hpp</a></div><div class="ttdoc">File with smu-cli interprocessor communication tools.</div></div>
 <div class="ttc" id="anamespacesmu__server_html"><div class="ttname"><a href="namespacesmu__server.html">smu_server</a></div><div class="ttdef"><b>Definition</b> cli.hpp:14</div></div>

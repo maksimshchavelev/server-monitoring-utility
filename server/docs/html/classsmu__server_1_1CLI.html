@@ -97,7 +97,7 @@ $(document).ready(function(){initNavTree('classsmu__server_1_1CLI.html',''); ini
 </div><!--header-->
 <div class="contents">
 
-<p>The <a class="el" href="classsmu__server_1_1CLI.html" title="The CLI class for process CLI commands.">CLI</a> class for process <a class="el" href="classsmu__server_1_1CLI.html" title="The CLI class for process CLI commands.">CLI</a> commands.  
+<p>The <a class="el" href="classsmu__server_1_1CLI.html" title="The CLI class to processing CLI commands.">CLI</a> class to processing <a class="el" href="classsmu__server_1_1CLI.html" title="The CLI class to processing CLI commands.">CLI</a> commands.  
  <a href="classsmu__server_1_1CLI.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="cli_8hpp_source.html">cli/cli.hpp</a>&gt;</code></p>
@@ -105,14 +105,15 @@ $(document).ready(function(){initNavTree('classsmu__server_1_1CLI.html',''); ini
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a071ff1a177446a661f9a65ac717c9e58" id="r_a071ff1a177446a661f9a65ac717c9e58"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1CLI.html#a071ff1a177446a661f9a65ac717c9e58">CLI</a> (<a class="el" href="classsmu__server_1_1Application.html">Application</a> &amp;app)</td></tr>
-<tr class="memdesc:a071ff1a177446a661f9a65ac717c9e58"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classsmu__server_1_1CLI.html" title="The CLI class for process CLI commands.">CLI</a> default construcor. <a class="el" href="classsmu__server_1_1CLI.html" title="The CLI class for process CLI commands.">CLI</a> has access to all <a class="el" href="classsmu__server_1_1Application.html" title="The Singleton Application class.">Application</a> fields and methods.  <br /></td></tr>
+<tr class="memdesc:a071ff1a177446a661f9a65ac717c9e58"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classsmu__server_1_1CLI.html" title="The CLI class to processing CLI commands.">CLI</a> default construcor. <a class="el" href="classsmu__server_1_1CLI.html" title="The CLI class to processing CLI commands.">CLI</a> has access to all <a class="el" href="classsmu__server_1_1Application.html" title="The Singleton Application class.">Application</a> fields and methods.  <br /></td></tr>
 <tr class="separator:a071ff1a177446a661f9a65ac717c9e58"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a21f2485388a0e748ca95413a9b5db62c" id="r_a21f2485388a0e748ca95413a9b5db62c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1CLI.html#a21f2485388a0e748ca95413a9b5db62c">run</a> ()</td></tr>
-<tr class="memdesc:a21f2485388a0e748ca95413a9b5db62c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs <a class="el" href="classsmu__server_1_1CLI.html" title="The CLI class for process CLI commands.">CLI</a>.  <br /></td></tr>
+<tr class="memdesc:a21f2485388a0e748ca95413a9b5db62c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs <a class="el" href="classsmu__server_1_1CLI.html" title="The CLI class to processing CLI commands.">CLI</a> async.  <br /></td></tr>
 <tr class="separator:a21f2485388a0e748ca95413a9b5db62c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The <a class="el" href="classsmu__server_1_1CLI.html" title="The CLI class for process CLI commands.">CLI</a> class for process <a class="el" href="classsmu__server_1_1CLI.html" title="The CLI class for process CLI commands.">CLI</a> commands. </p>
+<div class="textblock"><p>The <a class="el" href="classsmu__server_1_1CLI.html" title="The CLI class to processing CLI commands.">CLI</a> class to processing <a class="el" href="classsmu__server_1_1CLI.html" title="The CLI class to processing CLI commands.">CLI</a> commands. </p>
+<p>This class has full access to <code><a class="el" href="classsmu__server_1_1Application.html" title="The Singleton Application class.">Application</a></code> and its internal methods and fields. It autonomously processes incoming commands and returns a response. It uses the <code><a class="el" href="classsmu__server_1_1IPC.html">IPC</a></code> class for interprocess communication with the <code>smu-cli</code> utility. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a071ff1a177446a661f9a65ac717c9e58" name="a071ff1a177446a661f9a65ac717c9e58"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a071ff1a177446a661f9a65ac717c9e58">&#9670;&#160;</a></span>CLI()</h2>
@@ -130,13 +131,14 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="classsmu__server_1_1CLI.html" title="The CLI class for process CLI commands.">CLI</a> default construcor. <a class="el" href="classsmu__server_1_1CLI.html" title="The CLI class for process CLI commands.">CLI</a> has access to all <a class="el" href="classsmu__server_1_1Application.html" title="The Singleton Application class.">Application</a> fields and methods. </p>
+<p><a class="el" href="classsmu__server_1_1CLI.html" title="The CLI class to processing CLI commands.">CLI</a> default construcor. <a class="el" href="classsmu__server_1_1CLI.html" title="The CLI class to processing CLI commands.">CLI</a> has access to all <a class="el" href="classsmu__server_1_1Application.html" title="The Singleton Application class.">Application</a> fields and methods. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">app</td><td><code><a class="el" href="classsmu__server_1_1Application.html" title="The Singleton Application class.">Application</a></code> object </td></tr>
+    <tr><td class="paramname">app</td><td>Reference to <code><a class="el" href="classsmu__server_1_1Application.html" title="The Singleton Application class.">Application</a></code> </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section note"><dt>Note</dt><dd>Command listening does not start automatically. Call <code><a class="el" href="classsmu__server_1_1CLI.html#a21f2485388a0e748ca95413a9b5db62c" title="Runs CLI async.">CLI::run</a></code> for this. </dd></dl>
 
 </div>
 </div>
@@ -156,7 +158,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Runs <a class="el" href="classsmu__server_1_1CLI.html" title="The CLI class for process CLI commands.">CLI</a>. </p>
+<p>Runs <a class="el" href="classsmu__server_1_1CLI.html" title="The CLI class to processing CLI commands.">CLI</a> async. </p>
 
 </div>
 </div>
