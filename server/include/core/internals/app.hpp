@@ -172,28 +172,28 @@ class Application {
     Application();
     ~Application();
 
-    std::mutex                                     m_modules_mutex;
-    std::vector<std::unique_ptr<IModule>>          m_modules;
-    std::vector<std::function<void(Application&)>> m_modules_queue; // for lazy init
-    Config                                         m_server_config;
+    std::mutex                                     m_modules_mutex; ///< To prevent data race with `m_modules`
+    std::vector<std::unique_ptr<IModule>>          m_modules;       ///< `std::vector` with modules
+    std::vector<std::function<void(Application&)>> m_modules_queue; ///< Queue for lazy initialization of modules in `run`
+    Config                                         m_server_config; ///< Config of server
 
-    friend class CLI; // CLI has access to all Application fields and methods
-    // Heavy objects (and which may throw an exception) should be created in `run`
-    CLI m_cli; // For interprocess communication with CLI
+    friend class CLI; ///< CLI has access to all Application fields and methods
 
-    Network m_network; // network
+    CLI m_cli; ///< For interprocess communication with CLI
 
-    // The flag is needed so that we don't save the config if we started the server with a key that
-    // is not supposed to run (such as version or help output). Without this key, the error of
-    // saving the config is output in the destructor (because we run without superuser rights).
+    Network m_network; ///< For networking
+
+    ///< The flag is needed so that we don't save the config if we started the server with a key that
+    ///< is not supposed to run (such as version or help output). Without this key, the error of
+    ///< saving the config is output in the destructor (because we run without superuser rights).
     bool m_need_save_config_in_destructor{true};
 
-    // If the module's `poll ratio` value is `0`, the data received during the first call to
-    // `get_data` is cached. Subsequently, the data is loaded from the cache instead of calling
-    // `get_data`
-    //
-    // Storing `std::string_view` is safe because the module name exists throughout its lifetime and
-    // the server core does not delete the module.
+    ///< If the module's `poll ratio` value is `0`, the data received during the first call to
+    ///< `get_data` is cached. Subsequently, the data is loaded from the cache instead of calling
+    ///< `get_data`
+    ///<
+    ///< Storing `std::string_view` is safe because the module name exists throughout its lifetime and
+    ///< the server core does not delete the module.
     std::unordered_map<std::string_view /* module name */, Json::Value /* cached data */>
         m_module_cache;
 
