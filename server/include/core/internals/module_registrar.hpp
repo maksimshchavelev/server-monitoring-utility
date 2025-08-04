@@ -73,6 +73,29 @@ template <std::size_t N> class StringWrapper {
  * @param str String
  * @param substr Substring
  * @return `true` if found, otherwise `false`
+ *
+ * @note The function can work at compile time
+ *
+ * @section example_usage Example usage
+ * @code{.cpp}
+ * // This is true
+ * if constexpr (contains_substring("hello world", "WoRlD")) {
+ *      std::cout << "Contains WoRlD!" << std::endl;
+ * }
+ *
+ * // This is false
+ * if constexpr (contains_substring("hello world", "abcd")) {
+ *     std::cout << "Contains abcd!" << std::endl;
+ * } else {
+ *     std::cout << "Not contains abcd!" << std::endl;
+ * }
+ * @endcode
+ *
+ * Output:
+ * ```
+ * Contains WoRlD!
+ * Not contains abcd!
+ * ```
  */
 consteval bool contains_substring(const char* str, const char* substr) {
     for (std::size_t i = 0; str[i]; ++i) {

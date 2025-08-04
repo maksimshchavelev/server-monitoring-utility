@@ -160,8 +160,25 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><code>true</code> if found, otherwise <code>false</code> </dd></dl>
-
+<dl class="section return"><dt>Returns</dt><dd><code>true</code> if found, otherwise <code>false</code></dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The function can work at compile time</dd></dl>
+<h1><a class="anchor" id="example_usage"></a>
+Example usage</h1>
+<div class="fragment"><div class="line"><span class="comment">// This is true</span></div>
+<div class="line"><span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<a class="code hl_function" href="namespacesmu__server_1_1internals.html#ac6001815b6a093112dcdabc7ba1744f8">contains_substring</a>(<span class="stringliteral">&quot;hello world&quot;</span>, <span class="stringliteral">&quot;WoRlD&quot;</span>)) {</div>
+<div class="line">     std::cout &lt;&lt; <span class="stringliteral">&quot;Contains WoRlD!&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// This is false</span></div>
+<div class="line"><span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<a class="code hl_function" href="namespacesmu__server_1_1internals.html#ac6001815b6a093112dcdabc7ba1744f8">contains_substring</a>(<span class="stringliteral">&quot;hello world&quot;</span>, <span class="stringliteral">&quot;abcd&quot;</span>)) {</div>
+<div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Contains abcd!&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">} <span class="keywordflow">else</span> {</div>
+<div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Not contains abcd!&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">}</div>
+<div class="ttc" id="anamespacesmu__server_1_1internals_html_ac6001815b6a093112dcdabc7ba1744f8"><div class="ttname"><a href="namespacesmu__server_1_1internals.html#ac6001815b6a093112dcdabc7ba1744f8">smu_server::internals::contains_substring</a></div><div class="ttdeci">consteval bool contains_substring(const char *str, const char *substr)</div><div class="ttdoc">Searches for a substring in a string regardless of case.</div><div class="ttdef"><b>Definition</b> module_registrar.hpp:100</div></div>
+</div><!-- fragment --><p>Output: </p><div class="fragment"><div class="line">Contains WoRlD!</div>
+<div class="line">Not contains abcd!</div>
+</div><!-- fragment --> 
 </div>
 </div>
 <a id="ae143a58e30947d3da9db59a48e46827b" name="ae143a58e30947d3da9db59a48e46827b"></a>
