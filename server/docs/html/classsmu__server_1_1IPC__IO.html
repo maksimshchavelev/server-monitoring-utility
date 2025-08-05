@@ -137,6 +137,7 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section note"><dt>Note</dt><dd>Listening for messages does not start automatically. Call <code><a class="el" href="classsmu__server_1_1IPC__IO.html#a772279d15e98027681122165680244c5" title="Starts async message receiving and sending a reply back in a separate thread.">IPC_IO::run_listening_async</a></code> </dd></dl>
 
 </div>
 </div>
@@ -160,12 +161,20 @@ Public Member Functions</h2></td></tr>
 <p>Starts async message receiving and sending a reply back in a separate thread. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">callback</td><td>Function to be called when the message is received. The function should return a message to be sent to the client </td></tr>
+    <tr><td class="paramname">callback</td><td>Function to be called when the message is received. The function should return a message to be sent to the client</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section note"><dt>Note</dt><dd>Can be runned only once </dd></dl>
-
+<h1><a class="anchor" id="example_usage"></a>
+Example usage</h1>
+<p>Let the object <code><a class="el" href="classsmu__server_1_1IPC__IO.html" title="The class with async IPC Input-Output class to send/receive raw messages.">IPC_IO</a></code> already be created and named <code>ipc_io</code>. Then, for this code: </p><div class="fragment"><div class="line">ipc_io.run_listening_async([](<span class="keyword">const</span> std::string_view message){</div>
+<div class="line">     std::cout &lt;&lt; message &lt;&lt; std::endl;</div>
+<div class="line">     <span class="keywordflow">return</span> <span class="stringliteral">&quot;answer&quot;</span>; <span class="comment">// we must return something</span></div>
+<div class="line">});</div>
+</div><!-- fragment --><p>If the user sends the command <code>--list modules</code> in <b>smu-cli</b>, the output in <b>smu-server</b> will be as follows: </p><div class="fragment"><div class="line">--list modules</div>
+</div><!-- fragment --><p>And in <b>smu-cli</b>:</p>
+<div class="fragment"><div class="line">answer</div>
+</div><!-- fragment --> 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>

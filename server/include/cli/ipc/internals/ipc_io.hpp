@@ -23,6 +23,7 @@ class IPC_IO {
     /**
      * @brief IPC_IO constructor
      * @param abstract_socket_name Name of abstract socket to interprocess communication with CLI
+     * @note Listening for messages does not start automatically. Call `IPC_IO::run_listening_async`
      */
     IPC_IO(const std::string_view abstract_socket_name);
 
@@ -33,7 +34,27 @@ class IPC_IO {
      * @brief Starts async message receiving and sending a reply back in a separate thread
      * @param callback Function to be called when the message is received. The function should
      * return a message to be sent to the client
-     * @note Can be runned only once
+     *
+     * @section example_usage Example usage
+     * Let the object `IPC_IO` already be created and named `ipc_io`. Then, for this code:
+     * @code{.cpp}
+     * ipc_io.run_listening_async([](const std::string_view message){
+     *      std::cout << message << std::endl;
+     *      return "answer"; // we must return something
+     * });
+     * @endcode
+     *
+     * If the user sends the command `--list modules` in **smu-cli**, the output in **smu-server**
+     * will be as follows:
+     * @code{.bash}
+     * --list modules
+     * @endcode
+     *
+     * And in **smu-cli**:
+     *
+     * @code{.bash}
+     * answer
+     * @endcode
      */
     void run_listening_async(std::function<std::string(const std::string_view message)> callback);
 
@@ -41,8 +62,8 @@ class IPC_IO {
 
 
   private:
-    const std::string m_abstract_socket_name;
-    int               m_socket_fd{0}; // File descriptor of socket. Configuring in init()
+    const std::string m_abstract_socket_name; ///< name of abstract socket to communicate
+    int               m_socket_fd{0}; ///< File descriptor of socket. Configuring in init()
 
 
 
