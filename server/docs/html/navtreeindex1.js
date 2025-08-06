@@ -1,6 +1,5 @@
 var NAVTREEINDEX1 =
 {
-"config__io_8hpp.html":[10,0,1,1,0],
 "config__io_8hpp_source.html":[10,0,1,1,0],
 "core_8hpp.html":[10,0,1,2,1],
 "core_8hpp_source.html":[10,0,1,2,1],
@@ -22,7 +21,6 @@ var NAVTREEINDEX1 =
 "dir_db3bd024fc8dad9e6a1359139b4c19be.html":[10,0,1,2,0],
 "dmi_8hpp.html":[10,0,1,4,0,0],
 "dmi_8hpp_source.html":[10,0,1,4,0,0],
-"examples.html":[11],
 "files.html":[10,0],
 "for__each__tuple_8hpp.html":[10,0,1,6,0],
 "for__each__tuple_8hpp.html#a522f05053a18b752356b80c93a5fe53e":[10,0,1,6,0,0],
@@ -93,10 +91,10 @@ var NAVTREEINDEX1 =
 "pages.html":[],
 "ram_8hpp.html":[10,0,1,4,1,0],
 "ram_8hpp_source.html":[10,0,1,4,1,0],
-"structsmu__server_1_1IMetricNodeBase.html":[9,0,0,6],
 "structsmu__server_1_1IMetricNodeBase.html":[8,0,0,6],
-"structsmu__server_1_1IMetricNodeBase.html#a6316399c6b2518f0a7da75104396c10d":[8,0,0,6,1],
+"structsmu__server_1_1IMetricNodeBase.html":[9,0,0,6],
 "structsmu__server_1_1IMetricNodeBase.html#a6316399c6b2518f0a7da75104396c10d":[9,0,0,6,1],
+"structsmu__server_1_1IMetricNodeBase.html#a6316399c6b2518f0a7da75104396c10d":[8,0,0,6,1],
 "structsmu__server_1_1IMetricNodeBase.html#aac5b31ba7e96436333eadefe54dcbd48":[9,0,0,6,0],
 "structsmu__server_1_1IMetricNodeBase.html#aac5b31ba7e96436333eadefe54dcbd48":[8,0,0,6,0],
 "structsmu__server_1_1internals_1_1ModuleRegistrar.html":[8,0,0,0,3],

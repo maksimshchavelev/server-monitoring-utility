@@ -73,15 +73,14 @@ var NAVTREE =
         [ "All", "globals.html", null ],
         [ "Macros", "globals_defs.html", null ]
       ] ]
-    ] ],
-    [ "Examples", "examples.html", "examples" ]
+    ] ]
   ] ]
 ];
 
 var NAVTREEINDEX =
 [
-"_2home_2maksim_2projects_2smu_2server_2include_2logger_2logger_8hpp-example.html",
-"config__io_8hpp.html"
+"annotated.html",
+"config__io_8hpp_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -21,11 +21,11 @@ class Logger {
      * @brief Log type
      */
     enum class LogType {
-        INFO,    /// white color
-        WARNING, /// yellow color
-        ERROR,   /// red color
-        SUCCESS, /// green color
-        NONE     /// white color
+        INFO,    ///< **White** color
+        WARNING, ///< **Yellow** color
+        ERROR,   ///< **Red** color
+        SUCCESS, ///< **Green** color
+        NONE     ///< **White** color
     };
 
 
@@ -36,6 +36,30 @@ class Logger {
      * @return `Logger&`
      * @see LogType
      * @see logger
+     *
+     * @section example_usage Example usage
+     * This code runned at 04.07.25 18:28:00:
+     *
+     * @code{.cpp}
+     * logger()
+     *      .log(LogType::INFO, "Info")
+     *      .log(LogType::WARNING, "Warning")
+     *      .log(LogType::ERROR, "Error")
+     *      .log(LogType::SUCCESS, "Success");
+     * @endcode
+     *
+     * Will output:
+     *
+     * <div style="background:#282c34; padding:6px 10px; border:1px solid #444; border-radius:4px;
+     * font-family:monospace; font-size:smaller; white-space:pre; line-height:1.2;">
+     * [<span style="color:#00e5ff;">04.07.25 18:28:00</span>] Info<br>
+     * [<span style="color:#00e5ff;">04.07.25 18:28:00</span>] <span
+     * style="color:#ffd700;">Warning</span><br>
+     * [<span style="color:#00e5ff;">04.07.25 18:28:00</span>] <span
+     * style="color:#ff0000;">Error</span><br>
+     * [<span style="color:#00e5ff;">04.07.25 18:28:00</span>] <span
+     * style="color:#00ff00;">Success</span>
+     * </div>
      */
     Logger& log(LogType log_type, const std::string_view message);
 
@@ -108,8 +132,16 @@ class Logger {
 
 
     /**
-     * @brief Friend factory function to get logger
-     * @return `Logger`
+     * @brief Get `Logger` instance
+     * @return `Logger` instance
+     *
+     * @section example_usage Example usage
+     *
+     * @code{.cpp}
+     *
+     * logger().log_info("Info").log_warning("Warning");
+     *
+     * @endcode
      */
     friend Logger& logger();
 };
@@ -117,9 +149,10 @@ class Logger {
 
 
 /**
- * @brief Get logger instance
+ * @brief Get `Logger` instance
  * @return `Logger` instance
- * @example
+ *
+ * @section example_usage Example usage
  *
  * @code{.cpp}
  *
