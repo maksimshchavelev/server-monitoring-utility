@@ -7,6 +7,7 @@
  */
 
 #include "network/network.hpp"
+#include "compile-time_config.hpp"
 
 namespace smu_server {
 
@@ -16,7 +17,13 @@ void Network::run(uint16_t port, std::function<void()> callback) {
     // Init controller
     m_main_ws_controller = std::make_shared<MainWebsocketController>();
 
-    drogon::app().addListener("0.0.0.0", port).registerController(m_main_ws_controller);
+    drogon::app()
+        .addListener("0.0.0.0",
+                     port,
+                     true,
+                     std::format("{}/{}", CONFIGS_DIR, "certificate.crt"),
+                     std::format("{}/{}", CONFIGS_DIR, "privkey.key"))
+        .registerController(m_main_ws_controller);
     drogon::app().getLoop()->runAfter(0.0, [callback]() { callback(); });
     drogon::app().run();
 }
