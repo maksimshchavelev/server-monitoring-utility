@@ -77,7 +77,6 @@ std::optional<Json::Value> DMI::get_data() {
                             make_value_node("Product serial", m_product_serial, ""),
                             make_value_node("Product UUID", m_product_uuid, "")));
 
-    log(LogType::INFO, "Call");
     return root->to_json();
 }
 
