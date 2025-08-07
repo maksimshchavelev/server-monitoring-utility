@@ -22,7 +22,10 @@
 namespace smu_server {
 
 /**
- * @brief Main websocket controller
+ * @brief Main websocket controller for network IO
+ *
+ * Data is transmitted through this controller. It stores a list of connected clients
+ * and has a method for transmitting data to all clients simultaneously
  */
 class MainWebsocketController : public drogon::WebSocketController<MainWebsocketController, false> {
   public:
@@ -43,7 +46,7 @@ class MainWebsocketController : public drogon::WebSocketController<MainWebsocket
 
 
     /**
-     * @brief Handles new message.
+     * @brief Handles new message. Does nothing
      * @see Drogon documentation
      * (https://drogonframework.github.io/drogon-docs/#/ENG/ENG-04-3-Controller-WebSocketController)
      */
@@ -54,7 +57,7 @@ class MainWebsocketController : public drogon::WebSocketController<MainWebsocket
 
 
     /**
-     * @brief Handles new connection.
+     * @brief Handles new connection. Adds the client to the list of connected clients
      * @see Drogon documentation
      * (https://drogonframework.github.io/drogon-docs/#/ENG/ENG-04-3-Controller-WebSocketController)
      */
@@ -65,7 +68,7 @@ class MainWebsocketController : public drogon::WebSocketController<MainWebsocket
 
 
     /**
-     * @brief Handles closing connection.
+     * @brief Handles closing connection. Removes the client from the list of connected clients
      * @see Drogon documentation
      * (https://drogonframework.github.io/drogon-docs/#/ENG/ENG-04-3-Controller-WebSocketController)
      */
@@ -75,8 +78,8 @@ class MainWebsocketController : public drogon::WebSocketController<MainWebsocket
 
 
     /**
-     * @brief Sends json data with metrics to all clients
-     * @param data `Json::Value&` with data
+     * @brief Sends json data with metrics to all connected clients
+     * @param data `Json::Value` with data
      */
     void send_everyone(const Json::Value& data);
 
@@ -91,9 +94,9 @@ class MainWebsocketController : public drogon::WebSocketController<MainWebsocket
 
 
   private:
-    std::set<drogon::WebSocketConnectionPtr> m_connections{};
-    mutable std::mutex                       m_connections_mutex{};
-    std::size_t                              m_connections_count{0};
+    std::set<drogon::WebSocketConnectionPtr> m_connections{}; ///< set with connections
+    mutable std::mutex m_connections_mutex{};  ///< to prevent data race with `m_connections`
+    std::size_t        m_connections_count{0}; ///< count of connections
 };
 
 } // namespace smu_server

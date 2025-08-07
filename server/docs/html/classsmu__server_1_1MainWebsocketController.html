@@ -97,7 +97,7 @@ $(document).ready(function(){initNavTree('classsmu__server_1_1MainWebsocketContr
 </div><!--header-->
 <div class="contents">
 
-<p>Main websocket controller.  
+<p>Main websocket controller for network IO.  
  <a href="classsmu__server_1_1MainWebsocketController.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="websocket__main__controller_8hpp_source.html">network/controllers/websocket_main_controller.hpp</a>&gt;</code></p>
@@ -109,26 +109,27 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a68591ddb27f8874af20d19e374750645" id="r_a68591ddb27f8874af20d19e374750645"><td class="memItemLeft" align="right" valign="top">WS_PATH_LIST_BEGIN&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1MainWebsocketController.html#a68591ddb27f8874af20d19e374750645">WS_PATH_ADD</a> (&quot;/&quot;, drogon::Get)</td></tr>
 <tr class="separator:a68591ddb27f8874af20d19e374750645"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac100880cfecc023ffb338b017458e90f" id="r_ac100880cfecc023ffb338b017458e90f"><td class="memItemLeft" align="right" valign="top">WS_PATH_LIST_END&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1MainWebsocketController.html#ac100880cfecc023ffb338b017458e90f">MainWebsocketController</a> ()=default</td></tr>
-<tr class="memdesc:ac100880cfecc023ffb338b017458e90f"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classsmu__server_1_1MainWebsocketController.html" title="Main websocket controller.">MainWebsocketController</a> constructor.  <br /></td></tr>
+<tr class="memdesc:ac100880cfecc023ffb338b017458e90f"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classsmu__server_1_1MainWebsocketController.html" title="Main websocket controller for network IO.">MainWebsocketController</a> constructor.  <br /></td></tr>
 <tr class="separator:ac100880cfecc023ffb338b017458e90f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abd0b7a3e67c2a2accd8c75cad8252584" id="r_abd0b7a3e67c2a2accd8c75cad8252584"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1MainWebsocketController.html#abd0b7a3e67c2a2accd8c75cad8252584">handleNewMessage</a> (const drogon::WebSocketConnectionPtr &amp;connection, std::string &amp;&amp;message, const drogon::WebSocketMessageType &amp;message_type) override</td></tr>
-<tr class="memdesc:abd0b7a3e67c2a2accd8c75cad8252584"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles new message.  <br /></td></tr>
+<tr class="memdesc:abd0b7a3e67c2a2accd8c75cad8252584"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles new message. Does nothing.  <br /></td></tr>
 <tr class="separator:abd0b7a3e67c2a2accd8c75cad8252584"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3d8be31a7684e879b02a0bf49a35adc1" id="r_a3d8be31a7684e879b02a0bf49a35adc1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1MainWebsocketController.html#a3d8be31a7684e879b02a0bf49a35adc1">handleNewConnection</a> (const drogon::HttpRequestPtr &amp;request, const drogon::WebSocketConnectionPtr &amp;connection) override</td></tr>
-<tr class="memdesc:a3d8be31a7684e879b02a0bf49a35adc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles new connection.  <br /></td></tr>
+<tr class="memdesc:a3d8be31a7684e879b02a0bf49a35adc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles new connection. Adds the client to the list of connected clients.  <br /></td></tr>
 <tr class="separator:a3d8be31a7684e879b02a0bf49a35adc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad674bea88d7f2660c2914a4e9a422892" id="r_ad674bea88d7f2660c2914a4e9a422892"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1MainWebsocketController.html#ad674bea88d7f2660c2914a4e9a422892">handleConnectionClosed</a> (const drogon::WebSocketConnectionPtr &amp;connection) override</td></tr>
-<tr class="memdesc:ad674bea88d7f2660c2914a4e9a422892"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles closing connection.  <br /></td></tr>
+<tr class="memdesc:ad674bea88d7f2660c2914a4e9a422892"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles closing connection. Removes the client from the list of connected clients.  <br /></td></tr>
 <tr class="separator:ad674bea88d7f2660c2914a4e9a422892"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab51c90ae6e3a045ccb8342be5d09e30d" id="r_ab51c90ae6e3a045ccb8342be5d09e30d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1MainWebsocketController.html#ab51c90ae6e3a045ccb8342be5d09e30d">send_everyone</a> (const Json::Value &amp;data)</td></tr>
-<tr class="memdesc:ab51c90ae6e3a045ccb8342be5d09e30d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends json data with metrics to all clients.  <br /></td></tr>
+<tr class="memdesc:ab51c90ae6e3a045ccb8342be5d09e30d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends json data with metrics to all connected clients.  <br /></td></tr>
 <tr class="separator:ab51c90ae6e3a045ccb8342be5d09e30d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0a1ef77762f187da6598325d7299208c" id="r_a0a1ef77762f187da6598325d7299208c"><td class="memItemLeft" align="right" valign="top">std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1MainWebsocketController.html#a0a1ef77762f187da6598325d7299208c">get_connections_count</a> () const noexcept</td></tr>
 <tr class="memdesc:a0a1ef77762f187da6598325d7299208c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns count of connections.  <br /></td></tr>
 <tr class="separator:a0a1ef77762f187da6598325d7299208c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Main websocket controller. </p>
+<div class="textblock"><p>Main websocket controller for network IO. </p>
+<p>Data is transmitted through this controller. It stores a list of connected clients and has a method for transmitting data to all clients simultaneously </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ac100880cfecc023ffb338b017458e90f" name="ac100880cfecc023ffb338b017458e90f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac100880cfecc023ffb338b017458e90f">&#9670;&#160;</a></span>MainWebsocketController()</h2>
@@ -153,7 +154,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="classsmu__server_1_1MainWebsocketController.html" title="Main websocket controller.">MainWebsocketController</a> constructor. </p>
+<p><a class="el" href="classsmu__server_1_1MainWebsocketController.html" title="Main websocket controller for network IO.">MainWebsocketController</a> constructor. </p>
 
 </div>
 </div>
@@ -210,7 +211,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Handles closing connection. </p>
+<p>Handles closing connection. Removes the client from the list of connected clients. </p>
 <dl class="section see"><dt>See also</dt><dd>Drogon documentation (<a href="https://drogonframework.github.io/drogon-docs/#/ENG/ENG-04-3-Controller-WebSocketController">https://drogonframework.github.io/drogon-docs/#/ENG/ENG-04-3-Controller-WebSocketController</a>) </dd></dl>
 
 </div>
@@ -249,7 +250,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Handles new connection. </p>
+<p>Handles new connection. Adds the client to the list of connected clients. </p>
 <dl class="section see"><dt>See also</dt><dd>Drogon documentation (<a href="https://drogonframework.github.io/drogon-docs/#/ENG/ENG-04-3-Controller-WebSocketController">https://drogonframework.github.io/drogon-docs/#/ENG/ENG-04-3-Controller-WebSocketController</a>) </dd></dl>
 
 </div>
@@ -294,7 +295,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Handles new message. </p>
+<p>Handles new message. Does nothing. </p>
 <dl class="section see"><dt>See also</dt><dd>Drogon documentation (<a href="https://drogonframework.github.io/drogon-docs/#/ENG/ENG-04-3-Controller-WebSocketController">https://drogonframework.github.io/drogon-docs/#/ENG/ENG-04-3-Controller-WebSocketController</a>) </dd></dl>
 
 </div>
@@ -315,10 +316,10 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Sends json data with metrics to all clients. </p>
+<p>Sends json data with metrics to all connected clients. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">data</td><td><code>Json::Value&amp;</code> with data </td></tr>
+    <tr><td class="paramname">data</td><td><code>Json::Value</code> with data </td></tr>
   </table>
   </dd>
 </dl>
