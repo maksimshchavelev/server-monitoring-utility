@@ -78,7 +78,7 @@ bool parse_own_arguments(int argc, char** argv) noexcept {
         auto keypair = generate_keypair();
         // Keygen error
         if (!keypair.has_value()) {
-            std::cerr << "Error: " << keypair.error();
+            std::cerr << "Error: " << keypair.error() << std::endl;
         } else {
             try {
                 std::cout << "Saving certificate and private key..." << std::endl;
@@ -89,7 +89,7 @@ bool parse_own_arguments(int argc, char** argv) noexcept {
                 std::cout << "Certificate saved to " << SERVER_CTYPTO_CERTS_DIR << "/certificate.crt\n";
                 std::cout << "Private key saved to " << SERVER_CTYPTO_CERTS_DIR << "/privkey.key" << std::endl;
             } catch (const std::exception& e) {
-                std::cerr << e.what();
+                std::cerr << e.what() << std::endl;
             }
         }
 
