@@ -8,7 +8,6 @@
 
 #include "modules/network/network.hpp"
 #include "ixwebsocket/IXNetSystem.h"
-#include <iostream>
 
 namespace smu {
 
