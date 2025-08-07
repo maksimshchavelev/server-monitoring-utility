@@ -7,6 +7,8 @@ set(CMAKE_INSTALL_PREFIX /usr/local)
 
 # For IPC using an abstract Unix Domain Socket
 set(ABSTRACT_SOCKET_NAME "smu.ipc.socket")
+# The directory where certificates should be saved when executing the keygen command
+set(SERVER_CTYPTO_CERTS_DIR "/var/lib/smu-server")
 
 
 configure_file(
@@ -21,6 +23,8 @@ configure_file(
   @ONLY
 )
 
+
+find_package(OpenSSL REQUIRED)
 
 
 message(STATUS "${PROJECT_NAME}: finding source files...")
@@ -64,7 +68,7 @@ message(STATUS "${PROJECT_NAME}: Configuration of cxxopts is complete")
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 target_include_directories(${PROJECT_NAME} PRIVATE include)
-target_link_libraries(${PROJECT_NAME} PRIVATE cxxopts)
+target_link_libraries(${PROJECT_NAME} PRIVATE cxxopts OpenSSL::SSL)
 
 
 
