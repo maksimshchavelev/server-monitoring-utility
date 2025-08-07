@@ -359,7 +359,7 @@ void write_keypair(const std::string_view directory,
             errno, std::generic_category(), std::format("Failed to open '{}'", cert_path));
     }
 
-    cert_ofs << keypair.private_key;
+    cert_ofs << keypair.certifiacte;
     cert_ofs.close();
 
     if (!cert_ofs) {
