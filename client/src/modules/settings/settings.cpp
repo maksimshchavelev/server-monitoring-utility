@@ -25,17 +25,8 @@ Settings::Settings(int argc, char** argv) : m_port(DEFAULT_PORT) {
     // For Windows. We must manually create a directory with settings and subdirectories. For Linux,
     // this is done by the installation package.
     #if defined(_WIN32)
-    if (!std::filesystem::create_directories(CONFIG_ROOT_DIR)) {
-        throw std::system_error(errno,
-                                std::generic_category(),
-                                std::format("Failed to create directory {}", CONFIG_ROOT_DIR));
-    }
-
-    if (!std::filesystem::create_directories(std::format("{}certs", CONFIG_ROOT_DIR))) {
-        throw std::system_error(errno,
-                                std::generic_category(),
-                                std::format("Failed to create directory {}certs", CONFIG_ROOT_DIR));
-    }
+    std::filesystem::create_directories(CONFIG_ROOT_DIR);
+    std::filesystem::create_directories(std::format("{}certs", CONFIG_ROOT_DIR));
     #endif
 }
 
