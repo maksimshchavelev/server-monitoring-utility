@@ -97,7 +97,7 @@ $(document).ready(function(){initNavTree('classsmu_1_1Application.html',''); ini
 </div><!--header-->
 <div class="contents">
 
-<p>The <a class="el" href="classsmu_1_1Application.html" title="The Application to manage other modules.">Application</a> to manage other modules.  
+<p>The <a class="el" href="classsmu_1_1Application.html" title="The Application class to manage other modules.">Application</a> class to manage other modules.  
  <a href="classsmu_1_1Application.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="application_8hpp_source.html">modules/application/application.hpp</a>&gt;</code></p>
@@ -105,18 +105,17 @@ $(document).ready(function(){initNavTree('classsmu_1_1Application.html',''); ini
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a1f89ab1a41854b4268bc9d3de44d40de" id="r_a1f89ab1a41854b4268bc9d3de44d40de"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu_1_1Application.html#a1f89ab1a41854b4268bc9d3de44d40de">Application</a> (<a class="el" href="classsmu_1_1Settings.html">Settings</a> &amp;settings)</td></tr>
-<tr class="memdesc:a1f89ab1a41854b4268bc9d3de44d40de"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classsmu_1_1Application.html" title="The Application to manage other modules.">Application</a> constructor.  <br /></td></tr>
+<tr class="memdesc:a1f89ab1a41854b4268bc9d3de44d40de"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classsmu_1_1Application.html" title="The Application class to manage other modules.">Application</a> constructor.  <br /></td></tr>
 <tr class="separator:a1f89ab1a41854b4268bc9d3de44d40de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a88a8d7a1b6d71dff944800647a5e47db" id="r_a88a8d7a1b6d71dff944800647a5e47db"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu_1_1Application.html#a88a8d7a1b6d71dff944800647a5e47db">run</a> ()</td></tr>
+<tr class="memdesc:a88a8d7a1b6d71dff944800647a5e47db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs the application and <b>blocks the main thread</b>  <br /></td></tr>
 <tr class="separator:a88a8d7a1b6d71dff944800647a5e47db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af60c80fb0c37f6072a6ebe47a12948db" id="r_af60c80fb0c37f6072a6ebe47a12948db"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu_1_1Application.html#af60c80fb0c37f6072a6ebe47a12948db">exit</a> (std::optional&lt; std::string &gt; error)</td></tr>
-<tr class="memdesc:af60c80fb0c37f6072a6ebe47a12948db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exit application.  <br /></td></tr>
+<tr class="memdesc:af60c80fb0c37f6072a6ebe47a12948db"><td class="mdescLeft">&#160;</td><td class="mdescRight"><b>Force</b> exit application  <br /></td></tr>
 <tr class="separator:af60c80fb0c37f6072a6ebe47a12948db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The <a class="el" href="classsmu_1_1Application.html" title="The Application to manage other modules.">Application</a> to manage other modules. </p>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2maksim_2projects_2smu_2client_2include_2modules_2application_2application_8hpp-example.html#_a0">/home/maksim/projects/smu/client/include/modules/application/application.hpp</a>.</dd>
-</dl>
+<div class="textblock"><p>The <a class="el" href="classsmu_1_1Application.html" title="The Application class to manage other modules.">Application</a> class to manage other modules. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a1f89ab1a41854b4268bc9d3de44d40de" name="a1f89ab1a41854b4268bc9d3de44d40de"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1f89ab1a41854b4268bc9d3de44d40de">&#9670;&#160;</a></span>Application()</h2>
@@ -134,7 +133,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="classsmu_1_1Application.html" title="The Application to manage other modules.">Application</a> constructor. </p>
+<p><a class="el" href="classsmu_1_1Application.html" title="The Application class to manage other modules.">Application</a> constructor. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">settings</td><td>Reference to objcet of <code><a class="el" href="classsmu_1_1Settings.html" title="Settings class to setup application on startup.">smu::Settings</a></code> class </td></tr>
@@ -161,17 +160,19 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Exit application. </p>
+<p><b>Force</b> exit application </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">error</td><td>Error message that will be displayed if an error occurs </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section note"><dt>Note</dt><dd>Returns code <code>1</code> if an error occurred and code <code>0</code> if no error occurred. </dd></dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2maksim_2projects_2smu_2client_2include_2modules_2application_2application_8hpp-example.html#a0">/home/maksim/projects/smu/client/include/modules/application/application.hpp</a>.</dd>
-</dl>
-
+<dl class="section note"><dt>Note</dt><dd>Exits with code <code>1</code> if an error occurred and code <code>0</code> if no error occurred.</dd></dl>
+<h1><a class="anchor" id="example_usage"></a>
+Example usage</h1>
+<div class="fragment"><div class="line">app.exit(std::nullopt); <span class="comment">// No error. Exiting with status code 0</span></div>
+<div class="line">app.exit(<span class="stringliteral">&quot;Fatal error&quot;</span>); <span class="comment">// Display &quot;Fatal error&quot; and exit with status code 1</span></div>
+</div><!-- fragment --> 
 </div>
 </div>
 <a id="a88a8d7a1b6d71dff944800647a5e47db" name="a88a8d7a1b6d71dff944800647a5e47db"></a>
@@ -188,9 +189,20 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="_2home_2maksim_2projects_2smu_2client_2include_2modules_2application_2application_8hpp-example.html#a1">/home/maksim/projects/smu/client/include/modules/application/application.hpp</a>.</dd>
-</dl>
 
+<p>Runs the application and <b>blocks the main thread</b> </p>
+<dl class="section note"><dt>Note</dt><dd>Blocks thread </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><code>0</code> if success exiting, other error code if error</dd></dl>
+<h1><a class="anchor" id="example_usage"></a>
+Example usage</h1>
+<div class="fragment"><div class="line"><span class="keywordtype">int</span> main() {</div>
+<div class="line"> <span class="comment">// Creating smu::Settings here</span></div>
+<div class="line"> </div>
+<div class="line"> <a class="code hl_class" href="classsmu_1_1Application.html">smu::Application</a> app(settings);</div>
+<div class="line"> <span class="keywordflow">return</span> app.run();</div>
+<div class="line">}</div>
+<div class="ttc" id="aclasssmu_1_1Application_html"><div class="ttname"><a href="classsmu_1_1Application.html">smu::Application</a></div><div class="ttdoc">The Application class to manage other modules.</div><div class="ttdef"><b>Definition</b> application.hpp:22</div></div>
+</div><!-- fragment --> 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>

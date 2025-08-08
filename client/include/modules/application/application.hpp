@@ -17,7 +17,7 @@
 namespace smu {
 
 /**
- * @brief The Application to manage other modules
+ * @brief The Application class to manage other modules
  */
 class Application {
   public:
@@ -31,10 +31,11 @@ class Application {
 
 
     /**
-     * @brief Runs the application and block the main thread
+     * @brief Runs the application and **blocks the main thread**
+     * @note Blocks thread
      * @return `0` if success exiting, other error code if error
-     * @example
      *
+     * @section example_usage Example usage
      * @code{.cpp}
      *
      * int main() {
@@ -52,22 +53,28 @@ class Application {
 
 
     /**
-     * @brief Exit application
+     * @brief **Force** exit application
      * @param error Error message that will be displayed if an error occurs
-     * @note Returns code `1` if an error occurred and code `0` if no error occurred.
+     * @note Exits with code `1` if an error occurred and code `0` if no error occurred.
+     *
+     * @section example_usage Example usage
+     * @code{.cpp}
+     * app.exit(std::nullopt); // No error. Exiting with status code 0
+     * app.exit("Fatal error"); // Display "Fatal error" and exit with status code 1
+     * @endcode
      */
     void exit(std::optional<std::string> error);
 
 
 
   private:
-    Settings& m_settings;
-    Network   m_network;
-    UI        m_ui{};
+    Settings& m_settings; ///< Reference to settings
+    Network   m_network;  ///< Network object
+    UI        m_ui{};     ///< UI object
 
-    std::atomic_int         m_return_value{0};
-    std::atomic_bool        m_exit_request{false};
-    std::condition_variable cw; // for m_exit_request
+    std::atomic_int  m_return_value{0}; ///< Return value. Use in conjunction with m_exit_request
+    std::atomic_bool m_exit_request{false}; ///< When it becomes true, the application exits.
+    std::condition_variable cw;             ///< for m_exit_request
 
 
 
