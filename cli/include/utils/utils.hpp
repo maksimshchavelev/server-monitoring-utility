@@ -30,7 +30,7 @@ namespace smu_cli {
 
 
 /**
- * @brief Calls `perror(str)` and exits with EXIT_FAILURE
+ * @brief Calls `perror(str)` and exits with `EXIT_FAILURE`
  * @param str String passed to `perror`
  */
 void handle_error(const char* str) noexcept;
@@ -54,7 +54,7 @@ void handle_error(const char* str) noexcept;
  * @brief Reads from a socket, you can set a timeout to wait for data
  * @param socket_fd Socket file descriptor
  * @param timeout_ms Timeout in milliseconds
- * @msg_end Message end marker
+ * @param msg_end Message end marker
  * @return `std::expected` with the read data, otherwise the error description
  */
 std::expected<std::string, std::string> read_message(int        socket_fd,
