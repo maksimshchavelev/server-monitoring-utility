@@ -1,0 +1,15 @@
+<map id="include/modules/network/network.hpp" name="include/modules/network/network.hpp">
+<area shape="rect" id="Node000001" title="File with network class to connect to a websocket server." alt="" coords="221,5,408,45"/>
+<area shape="rect" id="Node000002" href="$settings_8hpp.html" title="File with settings to setup when startup." alt="" coords="28,93,247,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="273,48,177,90,175,85,271,43"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="271,93,358,119"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="317,46,317,79,312,79,312,46"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="383,93,585,119"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="356,43,448,85,445,90,354,48"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,167,72,192"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="123,121,67,161,64,156,120,117"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="96,167,179,192"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="140,119,140,153,135,153,135,119"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="203,167,261,192"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="154,117,207,156,204,160,151,121"/>
+</map>

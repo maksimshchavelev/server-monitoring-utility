@@ -12,7 +12,7 @@ smu::Application* app_ptr{nullptr};
 
 
 void exit_handler(int) {
-    app_ptr->exit();
+    app_ptr->exit(std::nullopt);
 }
 
 

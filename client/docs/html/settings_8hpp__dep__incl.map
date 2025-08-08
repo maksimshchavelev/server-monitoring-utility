@@ -1,0 +1,8 @@
+<map id="include/modules/settings/settings.hpp" name="include/modules/settings/settings.hpp">
+<area shape="rect" id="Node000001" title="File with settings to setup when startup." alt="" coords="15,5,201,45"/>
+<area shape="rect" id="Node000002" href="$application_8hpp.html" title="File with application class to manage other modules." alt="" coords="5,181,211,221"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="87,58,71,94,67,113,71,133,81,158,95,179,90,182,76,160,65,134,62,113,65,93,83,56"/>
+<area shape="rect" id="Node000003" href="$network_8hpp.html" title="File with network class to connect to a websocket server." alt="" coords="80,93,267,133"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="133,55,161,91,157,95,129,58"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="153,146,125,183,120,179,149,143"/>
+</map>

@@ -10,6 +10,8 @@
 #include "compile-time_config.hpp"
 #include "version.hpp"
 #include <cxxopts.hpp>
+#include <filesystem>
+#include <fstream>
 #include <iostream>
 
 namespace smu {
@@ -17,8 +19,15 @@ namespace smu {
 // Public constructor
 Settings::Settings(int argc, char** argv) : m_port(DEFAULT_PORT) {
     if (auto res = parse(argc, argv); !res.has_value()) {
-        throw std::runtime_error(std::format("Error parsing arguments: {}", res.error()));
+        throw std::runtime_error(res.error());
     }
+
+    // For Windows. We must manually create a directory with settings and subdirectories. For Linux,
+    // this is done by the installation package.
+    #if defined(_WIN32)
+    std::filesystem::create_directories(CONFIG_ROOT_DIR);
+    std::filesystem::create_directories(std::format("{}certs", CONFIG_ROOT_DIR));
+    #endif
 }
 
 
@@ -57,11 +66,19 @@ std::expected<void, std::string> Settings::parse(int argc, char** argv) noexcept
     options.add_options()(
         "p,port", "Specify the port to connect to the smu-server", cxxopts::value<uint16_t>());
 
-    // Positional options
     options.add_options("Positional")("ip", "Server IP address", cxxopts::value<std::string>());
-    options.parse_positional("ip");
-
+    options.parse_positional({"ip"});
     options.show_positional_help();
+
+    options.add_options()(
+        "loadcert",
+        "Load a trusted certificate for a specific server with a specific IP address. Usage:\nsmu "
+        "--loadcert --cert <path to cert> --trust-ip <server ip>")(
+        "cert", "Path to certificate (used only with --loadcert)", cxxopts::value<std::string>())(
+        "trust-ip",
+        "The IP to associate the certificate with (used only with --loadcert)",
+        cxxopts::value<std::string>());
+
 
     cxxopts::ParseResult result;
 
@@ -86,6 +103,44 @@ std::expected<void, std::string> Settings::parse(int argc, char** argv) noexcept
     if (result.contains("help")) {
         std::cout << options.help();
         m_should_exit = true;
+        return {};
+    }
+
+    // LOADCERT
+    if (result.contains("loadcert")) {
+        if (!result.contains("cert") || !result.contains("trust-ip")) {
+            return std::unexpected("Wrong --loadcert syntax! Correct syntax is --loadcert --cert "
+                                   "<path to cert> --trust-ip <server ip>");
+        }
+
+        const auto& path_to_cert = result["cert"].as<std::string>();
+        const auto& server_ip = result["trust-ip"].as<std::string>();
+
+        // Copy certificate
+        const std::string dest_path = std::format("{}certs/{}.crt", CONFIG_ROOT_DIR, server_ip);
+        std::ifstream     source(path_to_cert, std::ios::binary);
+        std::ofstream     dest(dest_path, std::ios::binary);
+
+        // Error opening source
+        if (!source.is_open()) {
+            return std::unexpected(
+                std::format("Failed to open {} for reading: {}", path_to_cert, strerror(errno)));
+        }
+
+        // Error opening dest
+        if (!dest.is_open()) {
+            return std::unexpected(
+                std::format("Failed to open {} for writing: {}", dest_path, strerror(errno)));
+        }
+
+        dest << source.rdbuf();
+
+        dest.close();
+        source.close();
+
+        std::cout << "Done!" << std::endl;
+
+        m_should_exit = true; // Do not continue
         return {};
     }
 

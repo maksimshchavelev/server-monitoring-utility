@@ -3,4 +3,5 @@
 
 #pragma once
 
-#define DEFAULT_PORT 5050
+#define DEFAULT_PORT    5050
+#define CONFIG_ROOT_DIR "/var/lib/smu/"
