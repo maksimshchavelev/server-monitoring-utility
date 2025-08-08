@@ -21,7 +21,7 @@ class Network {
   public:
     /**
      * @brief Network constructor
-     * @param settings smu::Settings object
+     * @param settings `Settings` object. Settings are needed, for example, to specify the port.
      */
     Network(const Settings& settings);
 
@@ -42,14 +42,13 @@ class Network {
 
 
     /**
-     * @brief Aborts connetcion
+     * @brief Aborts connection
      */
     void stop();
 
   private:
-    Settings m_settings;
-
-    std::unique_ptr<ix::WebSocket> m_connection;
+    Settings                       m_settings;   ///< Settings
+    std::unique_ptr<ix::WebSocket> m_connection; ///< Connection
 };
 
 

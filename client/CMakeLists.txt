@@ -1,12 +1,18 @@
 cmake_minimum_required(VERSION 3.28 FATAL_ERROR)
 
-project(smu VERSION 0.1.2 LANGUAGES CXX)
+project(smu VERSION 0.2.0 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 set(CMAKE_INSTALL_PREFIX /usr/local)
 
 set(DEFAULT_PORT 5050)
+
+if (WIN32)
+  set(CONFIG_ROOT_DIR "config/") # For windows
+else()
+  set(CONFIG_ROOT_DIR "/var/lib/smu/") # For Unix like systems
+endif()
 
 
 configure_file(
@@ -24,23 +30,16 @@ configure_file(
 
 
 # Enable sanitizers if Debug
-if(CMAKE_CXX_COMPILER_ID MATCHES "Clang|GNU" AND ${CMAKE_BUILD_TYPE} STREQUAL "Debug")
+if((CMAKE_CXX_COMPILER_ID MATCHES "Clang|GNU") AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
     message(STATUS "${PROJECT_NAME}: Using GCC/Clang sanitizer configuration")
 
-    # Base Debug flags
     set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -Wextra -Wpedantic -g")
-
-    # _GLIBCXX_DEBUG
-    message(STATUS "${PROJECT_NAME}: Enabling _GLIBCXX_DEBUG")
     add_compile_definitions(_GLIBCXX_DEBUG)
 
-    # Sanitizers
-    message(STATUS "${PROJECT_NAME}: Enabling ASan and UBSan")
     set(SANITIZER_FLAGS "-fsanitize=address,undefined,leak -fno-omit-frame-pointer")
     set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} ${SANITIZER_FLAGS}")
-    set(CMAKE_LINKER_FLAGS_DEBUG "${CMAKE_LINKER_FLAGS_DEBUG} ${SANITIZER_FLAGS}")
+    set(CMAKE_EXE_LINKER_FLAGS_DEBUG "${CMAKE_EXE_LINKER_FLAGS_DEBUG} ${SANITIZER_FLAGS}")
 endif()
-
 
 
 
@@ -98,6 +97,9 @@ message(STATUS "${PROJECT_NAME}: Configuration of jsoncpp is complete")
 message(STATUS "${PROJECT_NAME}: Configuring IXWebSocket")
 
 set(USE_TLS ON)
+set(USE_OPEN_SSL ON)
+set(USE_MBED_TLS OFF)
+set(USE_ZLIB OFF)
 
 FetchContent_Declare(
   ixwebsocket
@@ -114,7 +116,6 @@ message(STATUS "${PROJECT_NAME}: Configuration of IXWebSocket is complete")
 message(STATUS "${PROJECT_NAME}: Configuring FTXUI")
 
 set(FTXUI_ENABLE_INSTALL OFF CACHE BOOL "" FORCE)
-include(FetchContent)
 FetchContent_Declare(ftxui
   GIT_REPOSITORY https://github.com/ArthurSonzogni/ftxui
   GIT_TAG v6.1.9
@@ -144,34 +145,88 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
 
 
 
-target_compile_options(${PROJECT_NAME} PRIVATE
-  -pedantic
-  -Wall -Wextra
-  -Wnon-virtual-dtor
-  -Wold-style-cast
-  -Wcast-align
-  -Wunused
-  -Woverloaded-virtual
-  -Wpedantic
-  -Wconversion
-  -Wsign-conversion
-  -Wlogical-op
-  -Wuseless-cast
-)
-
-
-
-if(CMAKE_BUILD_TYPE EQUAL "Release")
-  message(STATUS "Setting O3 optimization")
-  target_compile_options(${PROJECT_NAME} PRIVATE $<$<CONFIG:Release>:-O3>)
+if(MSVC)
+  target_compile_options(${PROJECT_NAME} PRIVATE
+    /W4
+    /permissive-
+    /sdl
+    /w14254
+    /w14265
+    /w14287
+    /we4265
+    /w14296
+  )
+else()
+  # G++ / CLANG
+  target_compile_options(${PROJECT_NAME} PRIVATE
+    -pedantic
+    -Wall -Wextra
+    -Wnon-virtual-dtor
+    -Wold-style-cast
+    -Wcast-align
+    -Wunused
+    -Woverloaded-virtual
+    -Wpedantic
+    -Wconversion
+    -Wsign-conversion
+    -Wlogical-op
+    -Wuseless-cast
+  )
 endif()
 
+
+
+target_compile_options(${PROJECT_NAME} PRIVATE
+    $<$<AND:$<CONFIG:Release>,$<CXX_COMPILER_ID:MSVC>>:/O2>
+    $<$<AND:$<CONFIG:Release>,$<CXX_COMPILER_ID:GNU>>:-O3>
+    $<$<AND:$<CONFIG:Release>,$<CXX_COMPILER_ID:Clang>>:-O3>
+)
+
+if(WIN32)
+  target_compile_definitions(${PROJECT_NAME} PRIVATE _CRT_SECURE_NO_WARNINGS)
+endif()
+
+
+
+
+# Copy OpenSSL .dll-s after building
+if(WIN32)
+    find_package(OpenSSL REQUIRED)
+
+    # Get OpenSSL root directory from the imported target location
+    get_target_property(OPENSSL_CRYPTO_LIB OpenSSL::Crypto IMPORTED_LOCATION)
+    get_filename_component(OPENSSL_ROOT "${OPENSSL_CRYPTO_LIB}" DIRECTORY)
+    get_filename_component(OPENSSL_ROOT "${OPENSSL_ROOT}" DIRECTORY)
+
+    set(OPENSSL_BIN_DIR "${OPENSSL_ROOT}/bin")
+
+    set(SSL_DLL "${OPENSSL_BIN_DIR}/libssl-3-x64.dll")
+    set(CRYPTO_DLL "${OPENSSL_BIN_DIR}/libcrypto-3-x64.dll")
+
+    # List of DLLs to copy
+    set(DLLS_TO_COPY "${SSL_DLL}" "${CRYPTO_DLL}")
+
+    foreach(DLL IN LISTS DLLS_TO_COPY)
+        if(EXISTS "${DLL}")
+            # Add a post-build command to copy DLL to the actual target output directory (with config)
+            add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+                COMMAND ${CMAKE_COMMAND} -E copy_if_different
+                "${DLL}"
+                "$<TARGET_FILE_DIR:${PROJECT_NAME}>"
+                COMMENT "Copying ${DLL} to output directory"
+            )
+        else()
+            message(WARNING "DLL not found: ${DLL}. You may need to copy it manually next to your executable.")
+        endif()
+    endforeach()
+endif()
 
 
 
 
 # Installation rules
 install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION bin)
+install(DIRECTORY config/ DESTINATION ${CONFIG_ROOT_DIR} FILES_MATCHING PATTERN "*")
 
 
 set(CPACK_GENERATOR "DEB")
@@ -188,6 +243,8 @@ set(CPACK_DEBIAN_ARCHITECTURE "amd64")
 set(CPACK_DEBIAN_PACKAGE_PRIORITY "optional")
 set(CPACK_DEBIAN_PACKAGE_HOMEPAGE "https://github.com/maksimshchavelev/server-monitoring-utility")
 set(CPACK_PACKAGE_FILE_NAME "${PROJECT_NAME}-${PROJECT_VERSION}-linux-${CPACK_DEBIAN_ARCHITECTURE}")
+# Dependencies
+set(CPACK_DEBIAN_PACKAGE_DEPENDS "libssl3")
 
 include(CPack)
 
