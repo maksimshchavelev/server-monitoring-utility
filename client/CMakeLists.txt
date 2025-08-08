@@ -210,6 +210,8 @@ set(CPACK_DEBIAN_ARCHITECTURE "amd64")
 set(CPACK_DEBIAN_PACKAGE_PRIORITY "optional")
 set(CPACK_DEBIAN_PACKAGE_HOMEPAGE "https://github.com/maksimshchavelev/server-monitoring-utility")
 set(CPACK_PACKAGE_FILE_NAME "${PROJECT_NAME}-${PROJECT_VERSION}-linux-${CPACK_DEBIAN_ARCHITECTURE}")
+# Dependencies
+set(CPACK_DEBIAN_PACKAGE_DEPENDS "libssl3")
 
 include(CPack)
 
