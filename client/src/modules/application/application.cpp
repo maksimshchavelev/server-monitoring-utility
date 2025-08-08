@@ -34,8 +34,9 @@ int Application::run() {
 
         // Running UI
         m_ui.run_async();
-    } catch (const std::exception& e) {
-        this->exit(e.what());
+    } catch (const std::runtime_error& e) {
+        std::cerr << e.what() << std::endl;
+        m_exit_request.store(true);
     }
 
 
