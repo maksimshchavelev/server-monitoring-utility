@@ -1,0 +1,53 @@
+#--------------------------------------------------------------------------- 
+# Project related configuration options
+#--------------------------------------------------------------------------- 
+PROJECT_NAME           = "smu-cli"
+OUTPUT_DIRECTORY       = docs
+INPUT                  = src include README.md
+FILE_PATTERNS          = *.h *.hpp *.md
+RECURSIVE              = YES
+STRIP_FROM_INC_PATH    = include
+
+#--------------------------------------------------------------------------- 
+# Build related configuration options
+#--------------------------------------------------------------------------- 
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = NO
+EXTRACT_STATIC         = NO
+EXTRACT_LOCAL_CLASSES  = YES
+EXTRACT_LOCAL_METHODS  = NO
+EXTRACT_ANON_NSPACES   = NO
+INTERNAL_DOCS          = NO          # don't export @internal 
+HIDE_UNDOC_MEMBERS     = YES
+HIDE_UNDOC_CLASSES     = YES
+
+#--------------------------------------------------------------------------- 
+# Configuration options related to warning and progress messages
+#--------------------------------------------------------------------------- 
+QUIET                  = NO
+WARNINGS               = YES
+
+#--------------------------------------------------------------------------- 
+# Configuration options related to the input files
+#--------------------------------------------------------------------------- 
+USE_MDFILE_AS_MAINPAGE = README.md
+EXTENSION_MAPPING      = md=markdown
+
+#--------------------------------------------------------------------------- 
+# Configuration options related to the HTML output
+#--------------------------------------------------------------------------- 
+GENERATE_HTML          = YES
+HTML_OUTPUT            = html
+GENERATE_TREEVIEW      = YES
+DISABLE_INDEX          = NO
+FULL_SIDEBAR           = NO
+HTML_EXTRA_STYLESHEET  = doxygen-awesome-css/doxygen-awesome.css
+HTML_COLORSTYLE        = LIGHT
+
+#--------------------------------------------------------------------------- 
+# Configuration options related to other output formats
+#--------------------------------------------------------------------------- 
+GENERATE_LATEX         = NO
+GENERATE_MAN           = NO
+GENERATE_RTF           = NO
+GENERATE_XML           = NO

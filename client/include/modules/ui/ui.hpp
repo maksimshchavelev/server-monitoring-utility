@@ -37,7 +37,7 @@ class UI {
 
 
     /**
-     * @brief Exit UI
+     * @brief Stop UI
      */
     void stop();
 
@@ -46,17 +46,18 @@ class UI {
 
     /**
      * @brief Set json data to draw
+     * @note The data must be obtained from **smu-server**
      * @param data Data
      */
     void set_data(const Json::Value& data);
 
 
   private:
-    std::mutex               m_data_mutex;
-    Json::Value              m_data{};
-    ftxui::ScreenInteractive m_screen;
+    std::mutex               m_data_mutex; ///< Mutex to prevent data rave with m_data
+    Json::Value              m_data{};     ///< Json data
+    ftxui::ScreenInteractive m_screen;     ///< Screen object
 
-    std::shared_ptr<Tabs> m_tabs; // tabs to render
+    std::shared_ptr<Tabs> m_tabs; ///< Tabs to render
 
     /**
      * @brief Unwraps json representation of module to UI

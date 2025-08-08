@@ -1,0 +1,7 @@
+<map id="include/core/core.hpp" name="include/core/core.hpp">
+<area shape="rect" id="Node000001" title="File with core of application." alt="" coords="95,5,256,31"/>
+<area shape="rect" id="Node000002" href="$dmi_8hpp.html" title="This module allows you to get data from DMI/SMBIOS tables. This is the data that the manufacturer wri..." alt="" coords="5,79,164,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="153,42,108,81,105,76,150,38"/>
+<area shape="rect" id="Node000003" href="$ram_8hpp.html" title="File with RAM module class." alt="" coords="188,79,347,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="201,38,247,76,243,81,198,42"/>
+</map>

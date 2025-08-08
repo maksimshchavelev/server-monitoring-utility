@@ -1,5 +1,5 @@
 ## What is smu-cli?
-smu-cli is a terminal-based server management tool that allows you to enable and disable modules, configure behavior, change configs, and more using commands — without worrying about breaking something. This document provides a guide to smu-cli.
+**smu-cli** is a terminal-based server management tool that allows you to enable and disable modules, configure behavior, change configs, and more using commands — without worrying about breaking something. This document provides a guide to smu-cli.
 
 ## Installation
 To install, download the release package and install it via your package manager. After that, the tool will be accessible through the `smu-cli` command.
@@ -18,11 +18,15 @@ To build, download the source code of the desired release, navigate to the `cli`
 smu-cli supports several commands, here are some of them:
 - `--version` displays the version of smu-cli
 - `--help` or `-h` shows help
+- `--keygen` Generates a certificate and private key for the server. You need to specify the IP address for which the certificate will be generated. For example, if the server has the address 1.2.3.4 and you want to connect to it from anywhere, specify the IP address 1.2.3.4. If you specify localhost, you can only connect from localhost (the same applies to 127.0.0.1). Example:
+```
+smu-cli --keygen 1.2.3.4
+```
 - `--list commands` prints the list of commands. Note that these commands are provided by the server.
 - `--list modules` displays the list of modules, their statuses (running / stopped), and descriptions. Here's an example of what it might look like:
 ```
 
-NAME		STATUS		DESCRIPTION
+NAME	STATUS		DESCRIPTION
 
 RAM		RUNNING		A module that allows you to get information about RAM
 
@@ -32,6 +36,7 @@ RAM		RUNNING		A module that allows you to get information about RAM
 > Note that if the server does not find a module by name, it will immediately return an error. In that case, modules listed before the nonexistent one will be turned on (or remain on if they already were), and the state of the modules listed after it will not be changed.
 
 - `--stop <modules>` works the same way as `--run <modules>`, but stops the modules instead.
+
 
 ## Conclusion
 In this guide, you learned how to install, build, and use smu-cli to work with smu-server.

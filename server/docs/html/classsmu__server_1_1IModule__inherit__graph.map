@@ -1,0 +1,7 @@
+<map id="smu_server::IModule" name="smu_server::IModule">
+<area shape="rect" id="Node000001" title="The Interface Module class." alt="" coords="71,5,229,31"/>
+<area shape="rect" id="Node000002" href="$classsmu__server_1_1DMI.html" title="A module to get data from DMI/SMBIOS tables." alt="" coords="5,79,137,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="129,42,86,80,82,76,125,38"/>
+<area shape="rect" id="Node000003" href="$classsmu__server_1_1RAM.html" title="A module that allows you to get information about RAM." alt="" coords="162,79,298,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="175,38,219,76,215,80,171,42"/>
+</map>

@@ -19,30 +19,25 @@ Application::Application(Settings& settings) : m_settings(settings), m_network(m
 
 // Public method
 int Application::run() {
-    // Running network
-    m_network.run(
-        [this](const std::string& msg) {
-            if (auto res = json_from_string(msg); res.has_value()) {
-                // If no error
-                m_ui.set_data(res.value());
-            }
-        },
-        [this](const std::string& connection_error_reason) {
-// Clear screen
-#if defined(__unix__)
-            std::cout << "\033[2J\033[H"; // ANSI code for clear screen in Linux
-#elif defined(_WIN32) or defined(_WIN64)
-            std::cout << "\x1B[2J\x1B[H"; // ANSI code for clear screen in Windows
-#endif
+    try {
+        // Running network
+        m_network.run(
+            [this](const std::string& msg) {
+                if (auto res = json_from_string(msg); res.has_value()) {
+                    // If no error
+                    m_ui.set_data(res.value());
+                }
+            },
+            [this](const std::string& connection_error_reason) {
+                exit("Connection error, reason: " + connection_error_reason);
+            });
 
-            std::cout << "Connection error, reason: " << connection_error_reason << std::endl;
-
-            m_return_value.store(1);
-            exit();
-        });
-
-    // Running UI
-    m_ui.run_async();
+        // Running UI
+        m_ui.run_async();
+    } catch (const std::runtime_error& e) {
+        std::cerr << e.what() << std::endl;
+        m_exit_request.store(true);
+    }
 
 
     // Waiting for exit signal
@@ -53,9 +48,6 @@ int Application::run() {
         cw.wait(lock, [this]() { return m_exit_request.load(); });
     }
 
-    m_network.stop();
-    m_ui.stop();
-
     return m_return_value.load();
 }
 
@@ -63,9 +55,21 @@ int Application::run() {
 
 
 // Public method
-void Application::exit() {
-    m_exit_request.store(true);
-    cw.notify_one();
+void Application::exit(std::optional<std::string> error) {
+    std::thread([this, error = std::move(error)] {
+        m_ui.stop();
+        m_network.stop();
+
+        if (error.has_value()) {
+            m_return_value.store(1);                 // error code
+            std::cout << error.value() << std::endl; // print error
+        } else {
+            m_return_value.store(0); // success code
+        }
+
+        m_exit_request.store(true);
+        cw.notify_one();
+    }).detach();
 }
 
 

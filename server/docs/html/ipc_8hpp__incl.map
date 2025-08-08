@@ -1,0 +1,16 @@
+<map id="include/cli/ipc/ipc.hpp" name="include/cli/ipc/ipc.hpp">
+<area shape="rect" id="Node000001" title="File with smu&#45;cli interprocessor communication tools." alt="" coords="79,5,242,31"/>
+<area shape="rect" id="Node000002" href="$ipc__io_8hpp.html" title="File with async IPC Input&#45;Output class to send/receive raw messages." alt="" coords="86,79,235,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="163,31,163,65,158,65,158,31"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="5,152,92,177"/>
+<area shape="poly" id="edge6_Node000001_Node000004" title=" " alt="" coords="137,33,105,52,76,80,62,109,54,139,49,138,57,107,72,77,102,48,134,28"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="260,79,323,104"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="183,28,259,70,257,74,180,33"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="117,152,199,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="163,104,162,139,156,138,158,104"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="144,106,80,147,77,142,141,102"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="223,152,282,177"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="177,102,229,141,225,146,174,106"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="307,152,404,177"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="193,102,312,145,310,150,191,107"/>
+</map>

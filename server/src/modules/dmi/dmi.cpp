@@ -13,46 +13,38 @@
 namespace smu_server {
 
 // Public constructor
-DMI::DMI(const Json::Value& configuration) : IModule(configuration) {
+DMI::DMI(const Config& configuration) : IModule(configuration) {
     // Create new configuration
     if (m_configuration.empty()) {
-        m_configuration["enabled"] = true;
+        m_configuration.set("enabled", true);
+
+        // Cache data and prevent subsequent calls to `get_data`
+        m_configuration.set("poll_ratio", 0);
     }
 
-    // Load configuration
-    m_enabled = m_configuration["enabled"].asBool();
+    // Check if the `enabled` field exists. If not, log the error and throw an exception to abort
+    // registration.
+    if (auto enabled = m_configuration.get<bool>("enabled"); enabled.has_value()) {
+        m_enabled = enabled.value();
+    } else {
+        log(LogType::ERROR, "The 'enabled' field is missing. Can't continue");
+        throw std::runtime_error("The 'enabled' field is missing");
+    }
 
+    // Check if the `poll_ratio` field exists. If not, log the error and throw an exception to abort
+    // registration.
+    if (auto poll_ratio = m_configuration.get<unsigned int>("poll_ratio"); poll_ratio.has_value()) {
+        m_poll_ratio = poll_ratio.value();
+    } else {
+        log(LogType::ERROR, "The 'poll_ratio' field is missing. Can't continue");
+        throw std::runtime_error("The 'poll_ratio' field is missing");
+    }
+
+    // Collect information
     fill_bios_info();
     fill_board_info();
     fill_chassis_info();
     fill_product_info();
-
-
-    m_root = make_root_node(
-                 // BIOS INFO
-                 make_container_node("BIOS",
-                                     make_value_node("BIOS date", m_bios_date, ""),
-                                     make_value_node("BIOS vendor", m_bios_vendor, ""),
-                                     make_value_node("BIOS version", m_bios_version, "")),
-
-                 // BOARD INFO
-                 make_container_node("Board",
-                                     make_value_node("Board name", m_board_name, ""),
-                                     make_value_node("Board vendor", m_board_vendor, ""),
-                                     make_value_node("Board version", m_board_version, "")),
-
-                 // CHASSIS INFO
-                 make_container_node("Chassis",
-                                     make_value_node("Chassis type", m_chassis_type, ""),
-                                     make_value_node("Chassis vendor", m_chassis_vendor, "")),
-
-                 // PRODUCT INFO
-                 make_container_node("Product",
-                                     make_value_node("Product name", m_product_name, ""),
-                                     make_value_node("Product family", m_product_family, ""),
-                                     make_value_node("Product serial", m_product_serial, ""),
-                                     make_value_node("Product UUID", m_product_uuid, "")))
-                 ->to_json();
 }
 
 
@@ -60,7 +52,50 @@ DMI::DMI(const Json::Value& configuration) : IModule(configuration) {
 
 // Public method
 std::optional<Json::Value> DMI::get_data() {
-    return m_root;
+    auto root = make_root_node(
+        // BIOS INFO
+        make_container_node("BIOS",
+                            make_value_node("BIOS date", m_bios_date, ""),
+                            make_value_node("BIOS vendor", m_bios_vendor, ""),
+                            make_value_node("BIOS version", m_bios_version, "")),
+
+        // BOARD INFO
+        make_container_node("Board",
+                            make_value_node("Board name", m_board_name, ""),
+                            make_value_node("Board vendor", m_board_vendor, ""),
+                            make_value_node("Board version", m_board_version, "")),
+
+        // CHASSIS INFO
+        make_container_node("Chassis",
+                            make_value_node("Chassis type", m_chassis_type, ""),
+                            make_value_node("Chassis vendor", m_chassis_vendor, "")),
+
+        // PRODUCT INFO
+        make_container_node("Product",
+                            make_value_node("Product name", m_product_name, ""),
+                            make_value_node("Product family", m_product_family, ""),
+                            make_value_node("Product serial", m_product_serial, ""),
+                            make_value_node("Product UUID", m_product_uuid, "")));
+
+    return root->to_json();
+}
+
+
+
+
+// Public method
+void DMI::enable() {
+    m_configuration.set("enabled", true);
+    m_enabled = true;
+}
+
+
+
+
+// Public method
+void DMI::disable() {
+    m_configuration.set("enabled", false);
+    m_enabled = false;
 }
 
 

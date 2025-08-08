@@ -1,0 +1,12 @@
+<map id="include/core/internals/app.hpp" name="include/core/internals/app.hpp">
+<area shape="rect" id="Node000001" title="File Application class." alt="" coords="94,5,257,45"/>
+<area shape="rect" id="Node000002" href="$core_8hpp.html" title="File with core of application." alt="" coords="95,181,256,207"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="158,58,143,94,140,113,143,133,154,159,168,180,164,183,150,161,138,134,135,113,138,93,153,56"/>
+<area shape="rect" id="Node000005" href="$module__registrar_8hpp.html" title=" " alt="" coords="153,93,317,133"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="199,55,224,92,220,95,194,58"/>
+<area shape="rect" id="Node000003" href="$dmi_8hpp.html" title="This module allows you to get data from DMI/SMBIOS tables. This is the data that the manufacturer wri..." alt="" coords="5,255,164,295"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="153,218,108,257,105,252,150,214"/>
+<area shape="rect" id="Node000004" href="$ram_8hpp.html" title="File with RAM module class." alt="" coords="188,255,347,295"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="201,214,247,252,243,257,198,218"/>
+<area shape="poly" id="edge5_Node000005_Node000002" title=" " alt="" coords="215,146,186,183,182,179,210,143"/>
+</map>

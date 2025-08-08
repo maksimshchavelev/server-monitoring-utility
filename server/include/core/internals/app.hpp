@@ -8,10 +8,11 @@
 
 #pragma once
 
-#include "config_manager/config_manager.hpp"
-#include "core/controllers/websocket_main_controller.hpp"
-#include "ipc/ipc.hpp"
+#include "cli/cli.hpp"
+#include "config_io/config_io.hpp"
+#include "logger/logger.hpp"
 #include "module.hpp"
+#include "network/network.hpp"
 #include <functional>
 #include <memory>
 #include <mutex>
@@ -44,9 +45,21 @@ class Application {
 
     /**
      * @brief Register module with type `ModuleType`
+     *
+     * Registers the module by calling its constructor and adding it to the internal vector. Prints
+     * the log.
+     *
+     * @tparam ModuleType Type of module
+     *
      * @note Used only in `ModuleRegistrar`. Do not use directly. Instead, use `add_module_to_queue`
      * for lazy initialization
+     *
      * @see `add_module_to_queue`
+     *
+     * @section example_usage Example usage
+     * @code{.cpp}
+     * Application::instance().register_module<RAM>();
+     * @endcode
      */
     template <typename ModuleType>
     void register_module()
@@ -58,24 +71,23 @@ class Application {
 
 
         // Print log
-        std::cout << std::format("Registering a module with name "
-                                 "\"\033[36m{}\033[0m\" and description \"\033[36m{}\033[0m\"...",
-                                 ModuleType::module_name_static(),
-                                 ModuleType::module_description_static())
-                  << std::endl;
-
+        logger().log_colorless(
+            std::format("Registering a module with name "
+                        "\"\033[36m{}\033[0m\" and description \"\033[36m{}\033[0m\"...",
+                        ModuleType::module_name_static(),
+                        ModuleType::module_description_static()));
 
         // Getting config
-        auto config = ConfigManager::instance().get_module_config(ModuleType::module_name_static());
+        auto config = Config_IO::instance().get_module_config(ModuleType::module_name_static());
 
         // For example, [MODULE RAM]
         const std::string module_log_prefix =
             std::format("[MODULE \033[36m{}\033[0m] ", ModuleType::module_name_static());
 
         if (config.empty()) {
-            std::cout << module_log_prefix
-                      << "\033[33mGot empty config. Continuing with default values. \033[0m"
-                      << std::endl;
+            logger().log_colorless(
+                std::format("{}\033[33mGot empty config. Continuing with default values\033[30m",
+                            module_log_prefix));
         }
 
 
@@ -84,12 +96,14 @@ class Application {
         bool                        creation_failed{false};
 
         try {
-            module = std::make_unique<ModuleType>(config);
+            module = std::make_unique<ModuleType>(std::move(config));
+            // Force first data request. Otherwise, the core will wait until the counter reaches
+            // `poll_ratio - 1`.
+            module->m_poll_counter = module->get_poll_ratio();
         } catch (const std::exception& e) {
             creation_failed = true;
-            std::cout << module_log_prefix
-                      << std::format("\033[31mRegistration failed! Cause: {}\033[0m\n", e.what())
-                      << std::endl;
+            logger().log_colorless(std::format(
+                "{}\033[31mRegistration failed! Cause: {}\033[30m\n", module_log_prefix, e.what()));
         }
 
         if (!creation_failed) {
@@ -98,8 +112,8 @@ class Application {
                 module->is_enabled() ? "\033[32mRUNNING\033[0m" : "\033[31mSTOPPED\033[0m";
 
             // Print colorful log
-            std::cout << module_log_prefix
-                      << std::format("\033[32mRegistered\033[0m ({})\n", module_status) << std::endl;
+            logger().log_colorless(std::format(
+                "{}\033[32mRegistered\033[0m ({})\n", module_log_prefix, module_status));
 
             std::lock_guard<std::mutex> lock(m_modules_mutex);
             m_modules.push_back(std::move(module));
@@ -111,11 +125,23 @@ class Application {
 
     /**
      * @brief Adds module to queue. For lazy module initialization. See details
-     * @details Adds `register_function` to the internal vector. When it is time
+     *
+     * Adds `register_function` to the internal vector. When it is time
      * to register a module, each function in the vector that registers the module
      * is called. Thus, `register_function` must call `Application::register_module`
-     * *by accepted reference*.
+     * **by accepted reference**.
+     *
      * @param register_function Registration callback
+     *
+     * @section example_usage Example usage
+     * @code{.cpp}
+     * Application::instance().add_module_to_queue(
+     *      // This function will be called when it is time to register the module
+     *      // (for example, inside `Application::run`). Until then, this callback
+     *      // will be stored in an internal vector.
+     *      [](Application& app) { app.register_module<RAM>(); }
+     * );
+     * @endcode
      */
     void add_module_to_queue(std::function<void(Application&)> register_function);
 
@@ -137,8 +163,50 @@ class Application {
     /**
      * @brief Collects all metrics from all modules
      * @return `Json::Value` with collected metrics
+     * @note Public, as it is a crutch to make the method friendly
      */
     Json::Value collect_metrics();
+
+
+  private:
+    Application();
+    ~Application();
+
+    std::mutex                                     m_modules_mutex; ///< To prevent data race with `m_modules`
+    std::vector<std::unique_ptr<IModule>>          m_modules;       ///< `std::vector` with modules
+    std::vector<std::function<void(Application&)>> m_modules_queue; ///< Queue for lazy initialization of modules in `run`
+    Config                                         m_server_config; ///< Config of server
+
+    friend class CLI; ///< CLI has access to all Application fields and methods
+
+    CLI m_cli; ///< For interprocess communication with CLI
+
+    Network m_network; ///< For networking
+
+    ///< The flag is needed so that we don't save the config if we started the server with a key that
+    ///< is not supposed to run (such as version or help output). Without this key, the error of
+    ///< saving the config is output in the destructor (because we run without superuser rights).
+    bool m_need_save_config_in_destructor{true};
+
+    ///< If the module's `poll ratio` value is `0`, the data received during the first call to
+    ///< `get_data` is cached. Subsequently, the data is loaded from the cache instead of calling
+    ///< `get_data`
+    ///<
+    ///< Storing `std::string_view` is safe because the module name exists throughout its lifetime and
+    ///< the server core does not delete the module.
+    std::unordered_map<std::string_view /* module name */, Json::Value /* cached data */>
+        m_module_cache;
+
+
+    /**
+     * @brief Parses command line arguments
+     * @param argc Count of command line arguments
+     * @param argv Values of command line arguments
+     * @return `true` if arguments that imply server termination are parsed, such as `--version` or
+     * `--help`, otherwise (or when parsing error) false
+     * @note Can print text (help, version or error...)
+     */
+    bool parse_argv(int argc, char** argv) const noexcept;
 
 
 
@@ -155,54 +223,6 @@ class Application {
      * @brief Saves all configs
      */
     void save_configs() const noexcept;
-
-
-  private:
-    Application();
-    ~Application();
-
-    std::mutex                                     m_modules_mutex;
-    std::vector<std::unique_ptr<IModule>>          m_modules;
-    std::vector<std::function<void(Application&)>> m_modules_queue; // for lazy init
-    Json::Value&                                   m_server_config;
-
-    // Heavy objects (and which may throw an exception) should be created in `run`
-    std::optional<IPC> m_ipc; // For interprocess communication with CLI
-    std::optional<std::shared_ptr<MainWebsocketController>> m_main_ws_controller_ptr;
-
-    // The flag is needed so that we don't save the config if we started the server with a key that
-    // is not supposed to run (such as version or help output). Without this key, the error of
-    // saving the config is output in the destructor (because we run without superuser rights).
-    bool m_need_save_config_in_destructor{true};
-
-
-    /**
-     * @brief Parses command line arguments
-     * @param argc Count of command line arguments
-     * @param argv Values of command line arguments
-     * @return `true` if arguments that imply server termination are parsed, such as `--version` or
-     * `--help`, otherwise (or when parsing error) false
-     * @note Can print text (help, version or error...)
-     */
-    bool parse_argv(int argc, char** argv) const noexcept;
-
-
-    // ================================ FOR CLI COMMANDS ================================
-
-    /**
-     * @brief Receives commands from the IPC and processes them. Passed to the `IPC::run` callback
-     * @param cmd Command type
-     * @param args Command args
-     * @return The response to the command, which is then passed to smu-cli
-     */
-    std::string ipc_command_receiver(const IPC::Command cmd, const std::vector<std::string>& args);
-
-
-    /**
-     * @brief Get modules name, status and description
-     * @return `std::string`
-     */
-    std::string list_modules() const;
 };
 
 } // end of namespace smu_server

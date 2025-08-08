@@ -1,12 +1,14 @@
 cmake_minimum_required(VERSION 3.28 FATAL_ERROR)
 
-project(smu-cli VERSION 0.1.3 LANGUAGES CXX)
+project(smu-cli VERSION 0.2.0 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 23)
 
 set(CMAKE_INSTALL_PREFIX /usr/local)
 
 # For IPC using an abstract Unix Domain Socket
 set(ABSTRACT_SOCKET_NAME "smu.ipc.socket")
+# The directory where certificates should be saved when executing the keygen command
+set(SERVER_CTYPTO_CERTS_DIR "/var/lib/smu-server")
 
 
 configure_file(
@@ -21,6 +23,8 @@ configure_file(
   @ONLY
 )
 
+
+find_package(OpenSSL REQUIRED)
 
 
 message(STATUS "${PROJECT_NAME}: finding source files...")
@@ -64,7 +68,7 @@ message(STATUS "${PROJECT_NAME}: Configuration of cxxopts is complete")
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 target_include_directories(${PROJECT_NAME} PRIVATE include)
-target_link_libraries(${PROJECT_NAME} PRIVATE cxxopts)
+target_link_libraries(${PROJECT_NAME} PRIVATE cxxopts OpenSSL::SSL)
 
 
 
@@ -84,6 +88,7 @@ target_compile_options(${PROJECT_NAME} PRIVATE
 )
 
 
+
 # Enable sanitizers if Debug
 if((CMAKE_CXX_COMPILER_ID MATCHES "Clang|GNU") AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
     message(STATUS "${PROJECT_NAME}: Using GCC/Clang sanitizer configuration")
@@ -97,7 +102,7 @@ if((CMAKE_CXX_COMPILER_ID MATCHES "Clang|GNU") AND (CMAKE_BUILD_TYPE STREQUAL "D
 endif()
 
 
-if(CMAKE_BUILD_TYPE EQUAL "Release")
+if(CMAKE_BUILD_TYPE STREQUAL "Release")
   message(STATUS "Setting O3 optimization")
   target_compile_options(${PROJECT_NAME} PRIVATE $<$<CONFIG:Release>:-O3>)
 endif()
