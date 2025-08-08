@@ -21,11 +21,13 @@ class Settings {
   public:
     /**
      * @brief Constructor from command line arguments
-     * @note should_exit returns true if you should exit
+     * @note `should_exit` returns `true` if you should exit
      * (e.g., a print version or help request is received, not a startup option)
+     * @warning Always check `should_exit` after construction!
      * @param argc Count of command-line arguments
      * @param argv Command line arguments
      * @throw Throws `std::runtime_error` with description if parsing error
+     * @see should_exit
      */
     Settings(int argc, char** argv);
 
