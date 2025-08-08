@@ -88,7 +88,10 @@ template <typename ModuleName, StringWrapper module_name> struct ModuleRegistrar
                       "Module name must not contain the word 'module'");
         static_assert(std::is_base_of_v<IModule, ModuleName>,
                       "The module must inherit from the IModule class");
-        Application::instance().register_module<ModuleName>();
+        // Lazy module registering. Only adding to queue
+        Application::instance().add_module_to_queue([](Application& app){
+            app.register_module<ModuleName>();
+        });
     }
 };
 

@@ -7,11 +7,16 @@
  */
 
 #include "ipc/internals/ipc_io.hpp"
-#include "trantor/utils/Logger.h"
 #include <format>
 #include <sys/socket.h>
 #include <sys/un.h>
 #include <thread>
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wsign-conversion"
+#pragma GCC diagnostic ignored "-Wold-style-cast"
+#include "trantor/utils/Logger.h"
+#pragma GCC diagnostic pop
 
 namespace smu_server {
 
@@ -142,8 +147,13 @@ std::expected<void, std::string> IPC_IO::init() noexcept {
     addr.sun_family = AF_UNIX;
     addr.sun_path[0] = '\0'; // for abstract socket
 
+    // Avoid sun_path overflow
+    if(m_abstract_socket_name.size() > sizeof(addr.sun_path) - 1) {
+        return std::unexpected("Socket name too long");
+    }
+
     // Subtract 1 because the first byte is occupied by the character ‘\0’.
-    strncpy(addr.sun_path + 1, m_abstract_socket_name.data(), sizeof(addr.sun_path) - 1);
+    memcpy(addr.sun_path + 1, m_abstract_socket_name.data(), sizeof(addr.sun_path) - 1);
 
     // We add 1 because the first byte is occupied by the character ‘\0’.
     // We count the socket length as the size of sun_family plus the length of the name along with
@@ -181,10 +191,8 @@ std::expected<std::string, std::string> IPC_IO::receive_message(int        conne
     std::string result;
     char        buffer[256];
 
-    ssize_t rd_res{0};
-
     while (true) {
-        rd_res = recv(connected_socket_fd, buffer, sizeof(buffer), 0);
+        ssize_t rd_res = recv(connected_socket_fd, buffer, sizeof(buffer), 0);
 
         // Error occured
         if (rd_res == -1) {
