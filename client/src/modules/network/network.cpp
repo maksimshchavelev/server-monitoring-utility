@@ -7,6 +7,7 @@
  */
 
 #include "modules/network/network.hpp"
+#include "compile-time_config.hpp"
 #include "ixwebsocket/IXNetSystem.h"
 
 namespace smu {
@@ -26,7 +27,7 @@ void Network::run(std::function<void(const std::string&)> on_message,
     // Setup TLS options
     ix::SocketTLSOptions tls_options;
     // Specify the trusted certificate
-    tls_options.caFile = std::format("/var/lib/smu/certs/{}.crt", m_settings.get_ip());
+    tls_options.caFile = std::format("{}certs/{}.crt", CONFIG_ROOT_DIR, m_settings.get_ip());
 
     // Create connection
     m_connection = std::make_unique<ix::WebSocket>();
