@@ -125,17 +125,16 @@ $(document).ready(function(){initNavTree('network_8hpp_source.html',''); initRes
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="classsmu_1_1Network.html#a66442c8030beb57126d5ddede522a7be">   47</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classsmu_1_1Network.html#a66442c8030beb57126d5ddede522a7be">stop</a>();</div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <a class="code hl_class" href="classsmu_1_1Settings.html">Settings</a> m_settings;</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    std::unique_ptr&lt;ix::WebSocket&gt; m_connection;</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>};</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <a class="code hl_class" href="classsmu_1_1Settings.html">Settings</a>                       m_settings;   </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    std::unique_ptr&lt;ix::WebSocket&gt; m_connection; </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>};</div>
 </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>} <span class="comment">// namespace smu</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>} <span class="comment">// namespace smu</span></div>
 <div class="ttc" id="aclasssmu_1_1Network_html"><div class="ttname"><a href="classsmu_1_1Network.html">smu::Network</a></div><div class="ttdoc">Network class to connect to a websocket server.</div><div class="ttdef"><b>Definition</b> network.hpp:20</div></div>
 <div class="ttc" id="aclasssmu_1_1Network_html_a5f88629dcf13253179c52f2c2c333e2a"><div class="ttname"><a href="classsmu_1_1Network.html#a5f88629dcf13253179c52f2c2c333e2a">smu::Network::Network</a></div><div class="ttdeci">Network(const Settings &amp;settings)</div><div class="ttdoc">Network constructor.</div></div>
-<div class="ttc" id="aclasssmu_1_1Network_html_a66442c8030beb57126d5ddede522a7be"><div class="ttname"><a href="classsmu_1_1Network.html#a66442c8030beb57126d5ddede522a7be">smu::Network::stop</a></div><div class="ttdeci">void stop()</div><div class="ttdoc">Aborts connetcion.</div></div>
+<div class="ttc" id="aclasssmu_1_1Network_html_a66442c8030beb57126d5ddede522a7be"><div class="ttname"><a href="classsmu_1_1Network.html#a66442c8030beb57126d5ddede522a7be">smu::Network::stop</a></div><div class="ttdeci">void stop()</div><div class="ttdoc">Aborts connection.</div></div>
 <div class="ttc" id="aclasssmu_1_1Network_html_ab6fdedd93dc8cdd750b1bfe15d10c87a"><div class="ttname"><a href="classsmu_1_1Network.html#ab6fdedd93dc8cdd750b1bfe15d10c87a">smu::Network::run</a></div><div class="ttdeci">void run(std::function&lt; void(const std::string &amp;)&gt; on_message, std::function&lt; void(const std::string &amp;)&gt; on_connection_error)</div><div class="ttdoc">Runs module.</div></div>
 <div class="ttc" id="aclasssmu_1_1Settings_html"><div class="ttname"><a href="classsmu_1_1Settings.html">smu::Settings</a></div><div class="ttdoc">Settings class to setup application on startup.</div><div class="ttdef"><b>Definition</b> settings.hpp:20</div></div>
 <div class="ttc" id="anamespacesmu_html"><div class="ttname"><a href="namespacesmu.html">smu</a></div><div class="ttdef"><b>Definition</b> application.hpp:17</div></div>
