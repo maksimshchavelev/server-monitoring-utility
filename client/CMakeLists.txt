@@ -195,6 +195,42 @@ endif()
 
 
 
+
+# Copy OpenSSL .dll-s after building
+if(WIN32)
+    find_package(OpenSSL REQUIRED)
+
+    # Get OpenSSL root directory from the imported target location
+    get_target_property(OPENSSL_CRYPTO_LIB OpenSSL::Crypto IMPORTED_LOCATION)
+    get_filename_component(OPENSSL_ROOT "${OPENSSL_CRYPTO_LIB}" DIRECTORY)
+    get_filename_component(OPENSSL_ROOT "${OPENSSL_ROOT}" DIRECTORY)
+
+    set(OPENSSL_BIN_DIR "${OPENSSL_ROOT}/bin")
+
+    set(SSL_DLL "${OPENSSL_BIN_DIR}/libssl-3-x64.dll")
+    set(CRYPTO_DLL "${OPENSSL_BIN_DIR}/libcrypto-3-x64.dll")
+
+    # List of DLLs to copy
+    set(DLLS_TO_COPY "${SSL_DLL}" "${CRYPTO_DLL}")
+
+    foreach(DLL IN LISTS DLLS_TO_COPY)
+        if(EXISTS "${DLL}")
+            # Add a post-build command to copy DLL to the actual target output directory (with config)
+            add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+                COMMAND ${CMAKE_COMMAND} -E copy_if_different
+                "${DLL}"
+                "$<TARGET_FILE_DIR:${PROJECT_NAME}>"
+                COMMENT "Copying ${DLL} to output directory"
+            )
+        else()
+            message(WARNING "DLL not found: ${DLL}. You may need to copy it manually next to your executable.")
+        endif()
+    endforeach()
+endif()
+
+
+
+
 # Installation rules
 install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION bin)
 install(DIRECTORY config/ DESTINATION ${CONFIG_ROOT_DIR} FILES_MATCHING PATTERN "*")
