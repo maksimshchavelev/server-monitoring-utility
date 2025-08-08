@@ -9,6 +9,7 @@
 #include "modules/network/network.hpp"
 #include "compile-time_config.hpp"
 #include "ixwebsocket/IXNetSystem.h"
+#include <filesystem>
 
 namespace smu {
 
@@ -22,12 +23,20 @@ Network::Network(const Settings& settings) : m_settings(settings) {}
 void Network::run(std::function<void(const std::string&)> on_message,
                   std::function<void(const std::string&)> on_connection_error) {
 
+    const std::string path_to_cert =
+        std::format("{}certs/{}.crt", CONFIG_ROOT_DIR, m_settings.get_ip());
+    // Check if certificate exists
+    if (!std::filesystem::exists(path_to_cert)) {
+        throw std::runtime_error(std::format(
+            "Certificate for IP {} ({}) doesn't exists!", m_settings.get_ip(), path_to_cert));
+    }
+
     ix::initNetSystem(); // For Windows. _WIN32 macro inside
 
     // Setup TLS options
     ix::SocketTLSOptions tls_options;
     // Specify the trusted certificate
-    tls_options.caFile = std::format("{}certs/{}.crt", CONFIG_ROOT_DIR, m_settings.get_ip());
+    tls_options.caFile = path_to_cert;
 
     // Create connection
     m_connection = std::make_unique<ix::WebSocket>();
