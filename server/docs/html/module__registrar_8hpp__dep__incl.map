@@ -1,0 +1,9 @@
+<map id="include/core/internals/module_registrar.hpp" name="include/core/internals/module_registrar.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="93,5,257,45"/>
+<area shape="rect" id="Node000002" href="$core_8hpp.html" title="File with core of application." alt="" coords="95,93,256,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="178,59,178,93,173,93,173,59"/>
+<area shape="rect" id="Node000003" href="$dmi_8hpp.html" title="This module allows you to get data from DMI/SMBIOS tables. This is the data that the manufacturer wri..." alt="" coords="5,167,164,207"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="153,130,108,169,105,164,150,126"/>
+<area shape="rect" id="Node000004" href="$ram_8hpp.html" title="File with RAM module class." alt="" coords="188,167,347,207"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="201,126,247,164,243,169,198,130"/>
+</map>

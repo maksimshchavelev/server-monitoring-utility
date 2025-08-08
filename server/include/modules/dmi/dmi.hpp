@@ -24,12 +24,22 @@ class DMI : public IModule {
 
 
 
-    DMI(const Json::Value& config);
+    DMI(const Config& config);
 
 
 
 
     std::optional<Json::Value> get_data() override;
+
+
+
+
+    void enable() override;
+
+
+
+
+    void disable() override;
 
 
   private:
@@ -53,8 +63,6 @@ class DMI : public IModule {
     std::string m_product_serial;
     std::string m_product_uuid;
 
-    // Root json
-    Json::Value m_root;
 
 
 

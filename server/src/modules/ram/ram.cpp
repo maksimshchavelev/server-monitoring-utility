@@ -17,13 +17,30 @@ namespace smu_server {
 
 
 // Public method
-RAM::RAM(const Json::Value& config) : IModule(config) {
+RAM::RAM(const Config& config) : IModule(config) {
     // Create new configuration
     if (m_configuration.empty()) {
-        m_configuration["enabled"] = true;
+        m_configuration.set("enabled", true);
+        m_configuration.set("poll_ratio", 1);
     }
 
-    m_enabled = m_configuration["enabled"].asBool();
+    // Check if the `enabled` field exists. If not, log the error and throw an exception to abort
+    // registration.
+    if (auto enabled = m_configuration.get<bool>("enabled"); enabled.has_value()) {
+        m_enabled = enabled.value();
+    } else {
+        log(LogType::ERROR, "The 'enabled' field is missing. Can't continue");
+        throw std::runtime_error("The 'enabled' field is missing");
+    }
+
+    // Check if the `poll_ratio` field exists. If not, log the error and throw an exception to abort
+    // registration.
+    if (auto poll_ratio = m_configuration.get<unsigned int>("poll_ratio"); poll_ratio.has_value()) {
+        m_poll_ratio = poll_ratio.value();
+    } else {
+        log(LogType::ERROR, "The 'poll_ratio' field is missing. Can't continue");
+        throw std::runtime_error("The 'poll_ratio' field is missing");
+    }
 }
 
 
@@ -61,7 +78,8 @@ std::optional<Json::Value> RAM::get_data() {
 
 // Public method
 void RAM::enable() {
-    m_configuration["enabled"] = true;
+    m_configuration.set("enabled", true);
+    m_enabled = true;
 }
 
 
@@ -69,7 +87,8 @@ void RAM::enable() {
 
 // Public method
 void RAM::disable() {
-    m_configuration["enabled"] = false;
+    m_configuration.set("enabled", false);
+    m_enabled = false;
 }
 
 } // namespace smu_server

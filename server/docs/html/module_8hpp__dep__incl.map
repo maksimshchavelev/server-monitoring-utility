@@ -1,0 +1,16 @@
+<map id="include/core/internals/module.hpp" name="include/core/internals/module.hpp">
+<area shape="rect" id="Node000001" title="File with IModule class." alt="" coords="129,5,291,45"/>
+<area shape="rect" id="Node000002" href="$core_8hpp.html" title="File with core of application." alt="" coords="95,269,256,295"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="158,54,136,72,119,95,111,118,110,143,114,168,123,192,146,236,168,268,164,271,141,239,118,194,109,169,105,143,106,117,114,92,132,69,155,50"/>
+<area shape="rect" id="Node000005" href="$app_8hpp.html" title="File Application class." alt="" coords="129,93,291,133"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="213,59,213,93,207,93,207,59"/>
+<area shape="rect" id="Node000006" href="$module__registrar_8hpp.html" title=" " alt="" coords="213,181,377,221"/>
+<area shape="poly" id="edge8_Node000001_Node000006" title=" " alt="" coords="265,50,288,69,306,92,313,115,314,140,305,182,300,181,308,139,308,116,301,95,284,72,262,54"/>
+<area shape="rect" id="Node000003" href="$dmi_8hpp.html" title="This module allows you to get data from DMI/SMBIOS tables. This is the data that the manufacturer wri..." alt="" coords="5,343,164,383"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="153,306,108,345,105,340,150,302"/>
+<area shape="rect" id="Node000004" href="$ram_8hpp.html" title="File with RAM module class." alt="" coords="188,343,347,383"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="201,302,247,340,243,345,198,306"/>
+<area shape="poly" id="edge5_Node000005_Node000002" title=" " alt="" coords="206,147,180,270,175,269,201,146"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="240,141,278,179,275,183,237,145"/>
+<area shape="poly" id="edge7_Node000006_Node000002" title=" " alt="" coords="256,231,194,271,192,267,254,227"/>
+</map>

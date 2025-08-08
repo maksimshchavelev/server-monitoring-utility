@@ -7,18 +7,19 @@
  */
 
 #include "core/internals/module.hpp"
-#include <iostream>
+#include "logger/logger.hpp"
 
 
 
 // Public constructor
-smu_server::IModule::IModule(const Json::Value& configuration) : m_configuration(configuration) {}
+smu_server::IModule::IModule(const smu_server::Config& configuration) :
+    m_configuration(configuration) {}
 
 
 
 
 // Public method
-const Json::Value& smu_server::IModule::get_configuration() const noexcept {
+const smu_server::Config& smu_server::IModule::get_configuration() const noexcept {
     return m_configuration;
 }
 
@@ -49,8 +50,24 @@ bool smu_server::IModule::is_enabled() const {
 
 
 
+// Public method
+void smu_server::IModule::set_poll_ratio(uint32_t poll_ratio) {
+    m_poll_ratio = poll_ratio;
+}
+
+
+
+
+// Public method
+uint32_t smu_server::IModule::get_poll_ratio() const {
+    return m_poll_ratio;
+}
+
+
+
+
 // Protected method
-void smu_server::IModule::log(LogType log_type, std::string_view message) {
+void smu_server::IModule::log(LogType log_type, std::string_view message) const {
     const char* color = nullptr;
 
     switch (log_type) {
@@ -69,6 +86,6 @@ void smu_server::IModule::log(LogType log_type, std::string_view message) {
     }
 
     // For example: [MODULE RAM] Initialization error!
-    std::cout << "[MODULE \033[36m" << module_name() << "\033[0m] " << color << message << "\033[0m"
-              << std::endl; // `endl` for flush
+    logger().log_colorless(
+        std::format("[MODULE \033[36m{}\033[0m] {}{}\033[0m", module_name(), color, message));
 }

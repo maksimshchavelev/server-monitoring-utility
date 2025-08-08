@@ -1,5 +1,6 @@
 # Developer Guide
 This guide covers the following topics:
 
- - [Adding your own module](own_module.md)
- - [Optimization of modules storing static data](static_data_modules.md)
+### Module creation
+ - [Adding your own module](modules/1_own_module.md)
+ - [Optimization of modules storing static data](modules/2_static_data_modules.md)

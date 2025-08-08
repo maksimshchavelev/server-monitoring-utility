@@ -1,12 +1,15 @@
 cmake_minimum_required(VERSION 3.28 FATAL_ERROR)
 
-project(smu-server VERSION 0.2.2 LANGUAGES CXX)
+project(smu-server VERSION 0.3.0 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 23)
 
 set(CMAKE_INSTALL_PREFIX /usr)
 
 # For IPC using an abstract Unix Domain Socket
 set(ABSTRACT_SOCKET_NAME "smu.ipc.socket")
+
+
+option(BUILD_TESTS "Need to build tests?" ON)
 
 
 # This is where the program configuration will be
@@ -128,7 +131,7 @@ target_compile_options(${PROJECT_NAME} PRIVATE
 )
 
 
-if(CMAKE_BUILD_TYPE EQUAL "Release")
+if(CMAKE_BUILD_TYPE STREQUAL "Release")
   message(STATUS "Setting O3 optimization")
   target_compile_options(${PROJECT_NAME} PRIVATE $<$<CONFIG:Release>:-O3>)
 endif()
@@ -145,6 +148,34 @@ if((CMAKE_CXX_COMPILER_ID MATCHES "Clang|GNU") AND (CMAKE_BUILD_TYPE STREQUAL "D
     set(SANITIZER_FLAGS "-fsanitize=address,undefined,leak -fno-omit-frame-pointer")
     set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} ${SANITIZER_FLAGS}")
     set(CMAKE_EXE_LINKER_FLAGS_DEBUG "${CMAKE_EXE_LINKER_FLAGS_DEBUG} ${SANITIZER_FLAGS}")
+endif()
+
+
+
+
+# Configuring tests
+if(${BUILD_TESTS})
+  message(STATUS "${PROJECT_NAME}: Configuring tests...")
+
+  add_library(smu-server-libary STATIC ${SOURCES}) # For linking tests with smu-server
+  target_include_directories(smu-server-libary PUBLIC ${CMAKE_SOURCE_DIR}/include)
+  target_link_libraries(smu-server-libary PRIVATE
+    drogon
+    jsoncpp_static
+    cxxopts)
+
+  include(CTest)
+  enable_testing()
+  add_subdirectory(tests)
+
+  # Add custom target to run tests
+  add_custom_target(run-tests
+    COMMAND ${CMAKE_CTEST_COMMAND} "--output-on-failure"
+    DEPENDS tests
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+  )
+
+  message(STATUS "${PROJECT_NAME}: Tests configured")
 endif()
 
 
