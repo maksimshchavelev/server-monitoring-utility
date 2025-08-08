@@ -23,20 +23,28 @@ void Network::run(std::function<void(const std::string&)> on_message,
 
     ix::initNetSystem(); // For Windows. _WIN32 macro inside
 
+    // Setup TLS options
+    ix::SocketTLSOptions tls_options;
+    // Specify the trusted certificate
+    tls_options.caFile = std::format("/var/lib/smu/certs/{}.crt", m_settings.get_ip());
+
+    // Create connection
     m_connection = std::make_unique<ix::WebSocket>();
 
-    m_connection->setUrl(std::format("ws://{}:{}", m_settings.get_ip(), m_settings.get_port()));
+    m_connection->setUrl(std::format("wss://{}:{}", m_settings.get_ip(), m_settings.get_port()));
     m_connection->setPingInterval(20);
+    m_connection->setTLSOptions(tls_options);
 
-    m_connection->setOnMessageCallback([on_message, on_connection_error](const ix::WebSocketMessagePtr& msg) {
-        if (msg->type == ix::WebSocketMessageType::Message) {
-            on_message(msg->str);
-        }
-        // If connection error
-        else if (msg->type == ix::WebSocketMessageType::Error) {
-            on_connection_error(msg->errorInfo.reason);
-        }
-    });
+    m_connection->setOnMessageCallback(
+        [on_message, on_connection_error](const ix::WebSocketMessagePtr& msg) {
+            if (msg->type == ix::WebSocketMessageType::Message) {
+                on_message(msg->str);
+            }
+            // If connection error
+            else if (msg->type == ix::WebSocketMessageType::Error) {
+                on_connection_error(msg->errorInfo.reason);
+            }
+        });
 
     m_connection->start();
 }
