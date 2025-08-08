@@ -1,0 +1,9 @@
+<map id="include/modules/ui/internals/tabs.hpp" name="include/modules/ui/internals/tabs.hpp">
+<area shape="rect" id="Node000001" title="Tabs UI interactive component." alt="" coords="289,5,435,45"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,93,239,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="305,48,171,92,169,87,304,43"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="263,93,461,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="365,46,365,79,359,79,359,46"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="485,93,548,119"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="400,43,483,85,481,89,398,48"/>
+</map>

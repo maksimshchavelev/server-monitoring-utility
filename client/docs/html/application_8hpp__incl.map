@@ -1,0 +1,37 @@
+<map id="include/modules/application/application.hpp" name="include/modules/application/application.hpp">
+<area shape="rect" id="Node000001" title="File with application class to manage other modules." alt="" coords="757,5,963,45"/>
+<area shape="rect" id="Node000002" href="$network_8hpp.html" title="File with network class to connect to a websocket server." alt="" coords="325,93,545,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="759,48,511,93,510,88,758,43"/>
+<area shape="rect" id="Node000003" href="$settings_8hpp.html" title="File with settings to setup when startup." alt="" coords="28,174,247,199"/>
+<area shape="poly" id="edge8_Node000001_Node000003" title=" " alt="" coords="757,31,662,36,549,47,430,67,313,96,272,111,232,130,167,168,164,164,230,126,270,106,311,91,429,61,549,42,661,31,757,25"/>
+<area shape="rect" id="Node000009" href="$ui_8hpp.html" title="File with user interface." alt="" coords="791,93,929,119"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="863,46,863,79,857,79,857,46"/>
+<area shape="rect" id="Node000016" title=" " alt="" coords="1173,174,1265,199"/>
+<area shape="poly" id="edge18_Node000001_Node000016" title=" " alt="" coords="884,43,932,80,993,116,1039,135,1076,144,1162,164,1172,167,1170,172,1161,169,1074,149,1037,140,991,121,929,85,880,48"/>
+<area shape="rect" id="Node000017" title=" " alt="" coords="1004,93,1071,119"/>
+<area shape="poly" id="edge17_Node000001_Node000017" title=" " alt="" coords="904,43,1000,85,998,90,901,48"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="392,121,195,173,193,168,391,116"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="271,174,358,199"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="418,121,346,168,343,164,416,117"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="383,174,585,199"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="444,117,472,161,467,164,440,120"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="5,255,72,280"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="124,202,66,248,62,244,121,197"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="96,255,179,280"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="140,200,140,241,135,241,135,200"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="203,255,261,280"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="153,197,209,244,206,248,150,202"/>
+<area shape="rect" id="Node000010" href="$tabs_8hpp.html" title="Tabs UI interactive component." alt="" coords="609,174,748,199"/>
+<area shape="poly" id="edge10_Node000009_Node000010" title=" " alt="" coords="835,121,719,171,717,166,833,116"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="773,167,947,207"/>
+<area shape="poly" id="edge14_Node000009_Node000014" title=" " alt="" coords="863,119,863,153,857,153,857,119"/>
+<area shape="rect" id="Node000015" title=" " alt="" coords="971,174,1149,199"/>
+<area shape="poly" id="edge15_Node000009_Node000015" title=" " alt="" coords="890,116,1019,166,1017,171,888,121"/>
+<area shape="poly" id="edge16_Node000009_Node000016" title=" " alt="" coords="930,116,1039,136,1162,164,1174,167,1173,173,1161,169,1038,141,929,121"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="322,255,555,280"/>
+<area shape="poly" id="edge11_Node000010_Node000011" title=" " alt="" coords="645,202,487,253,486,248,643,197"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="580,255,777,280"/>
+<area shape="poly" id="edge12_Node000010_Node000012" title=" " alt="" coords="681,200,681,241,676,241,676,200"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="802,255,865,280"/>
+<area shape="poly" id="edge13_Node000010_Node000013" title=" " alt="" coords="703,197,799,246,797,251,700,202"/>
+</map>
