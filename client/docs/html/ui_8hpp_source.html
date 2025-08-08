@@ -127,25 +127,25 @@ $(document).ready(function(){initNavTree('ui_8hpp_source.html',''); initResizabl
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="classsmu_1_1UI.html#a9f7b943c8ca7b58b018c5a85a16514b1">   51</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classsmu_1_1UI.html#a9f7b943c8ca7b58b018c5a85a16514b1">set_data</a>(<span class="keyword">const</span> Json::Value&amp; data);</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="classsmu_1_1UI.html#a9f7b943c8ca7b58b018c5a85a16514b1">   52</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classsmu_1_1UI.html#a9f7b943c8ca7b58b018c5a85a16514b1">set_data</a>(<span class="keyword">const</span> Json::Value&amp; data);</div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    std::mutex               m_data_mutex;</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    Json::Value              m_data{};</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    ftxui::ScreenInteractive m_screen;</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    std::shared_ptr&lt;Tabs&gt; m_tabs; <span class="comment">// tabs to render</span></div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    ftxui::Component unwrap_module(<span class="keyword">const</span> Json::Value&amp; data);</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>};</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    std::mutex               m_data_mutex; </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    Json::Value              m_data{};     </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    ftxui::ScreenInteractive m_screen;     </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    std::shared_ptr&lt;Tabs&gt; m_tabs; </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    ftxui::Component unwrap_module(<span class="keyword">const</span> Json::Value&amp; data);</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>};</div>
 </div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>} <span class="comment">// namespace smu</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>} <span class="comment">// namespace smu</span></div>
 <div class="ttc" id="aclasssmu_1_1UI_html"><div class="ttname"><a href="classsmu_1_1UI.html">smu::UI</a></div><div class="ttdoc">Class with user interface.</div><div class="ttdef"><b>Definition</b> ui.hpp:21</div></div>
 <div class="ttc" id="aclasssmu_1_1UI_html_a9f7b943c8ca7b58b018c5a85a16514b1"><div class="ttname"><a href="classsmu_1_1UI.html#a9f7b943c8ca7b58b018c5a85a16514b1">smu::UI::set_data</a></div><div class="ttdeci">void set_data(const Json::Value &amp;data)</div><div class="ttdoc">Set json data to draw.</div></div>
-<div class="ttc" id="aclasssmu_1_1UI_html_ab0bd06b600119b48f6e300eecbc84880"><div class="ttname"><a href="classsmu_1_1UI.html#ab0bd06b600119b48f6e300eecbc84880">smu::UI::stop</a></div><div class="ttdeci">void stop()</div><div class="ttdoc">Exit UI.</div></div>
+<div class="ttc" id="aclasssmu_1_1UI_html_ab0bd06b600119b48f6e300eecbc84880"><div class="ttname"><a href="classsmu_1_1UI.html#ab0bd06b600119b48f6e300eecbc84880">smu::UI::stop</a></div><div class="ttdeci">void stop()</div><div class="ttdoc">Stop UI.</div></div>
 <div class="ttc" id="aclasssmu_1_1UI_html_ac1c17fa5208193c5fde692db7f92015c"><div class="ttname"><a href="classsmu_1_1UI.html#ac1c17fa5208193c5fde692db7f92015c">smu::UI::run_async</a></div><div class="ttdeci">void run_async()</div><div class="ttdoc">Runs UI async.</div></div>
 <div class="ttc" id="aclasssmu_1_1UI_html_acbe2508115c78f594913294fe721ce2e"><div class="ttname"><a href="classsmu_1_1UI.html#acbe2508115c78f594913294fe721ce2e">smu::UI::UI</a></div><div class="ttdeci">UI()</div><div class="ttdoc">UI constructor.</div></div>
 <div class="ttc" id="anamespacesmu_html"><div class="ttname"><a href="namespacesmu.html">smu</a></div><div class="ttdef"><b>Definition</b> application.hpp:17</div></div>
