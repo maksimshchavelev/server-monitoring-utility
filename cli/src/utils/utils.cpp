@@ -8,6 +8,7 @@
 
 #include "utils/utils.hpp"
 #include "version.hpp"
+#include <compile-time_config.hpp>
 #include <cxxopts.hpp>
 #include <filesystem>
 #include <fstream>
@@ -17,11 +18,11 @@
 #include <openssl/pem.h>
 #include <openssl/rsa.h>
 #include <openssl/x509.h>
+#include <openssl/x509v3.h>
 #include <poll.h>
 #include <sys/socket.h>
 #include <system_error>
 #include <unistd.h>
-#include <compile-time_config.hpp>
 
 namespace smu_cli {
 
@@ -32,8 +33,15 @@ bool parse_own_arguments(int argc, char** argv) noexcept {
 
     options.add_options()("version", "Show smu-cli version");
     options.add_options()("h,help", "Show help information");
-    options.add_options()("keygen",
-                          "Generate and save an X509 certificate and private key for the server");
+    options.add_options()(
+        "keygen",
+        "Generate and save an X509 certificate and private key for the server."
+        "Additionally, you need to specify the IP address of the server for which the certificate "
+        "is being generated. You can specify localhost, and then you will only be able to connect "
+        "to the server that is listening to localhost.\n"
+        "Example usage:\n"
+        "smu-cli --keygen 192.168.0.92",
+        cxxopts::value<std::string>());
 
     // Add a fake command name (should be "-list commands"), since cxxopts does not support spaces
     // in the command name. When outputting help, "--list-commands" will be replaced by "--list
@@ -75,7 +83,7 @@ bool parse_own_arguments(int argc, char** argv) noexcept {
 
     if (result.contains("keygen")) {
         std::cout << "Generating certificate and private key..." << std::endl;
-        auto keypair = generate_keypair();
+        auto keypair = generate_keypair(result["keygen"].as<std::string>().data());
         // Keygen error
         if (!keypair.has_value()) {
             std::cerr << "Error: " << keypair.error() << std::endl;
@@ -83,11 +91,14 @@ bool parse_own_arguments(int argc, char** argv) noexcept {
             try {
                 std::cout << "Saving certificate and private key..." << std::endl;
 
-                write_keypair(SERVER_CTYPTO_CERTS_DIR, "certificate.crt", "privkey.key", keypair.value());
+                write_keypair(
+                    SERVER_CTYPTO_CERTS_DIR, "certificate.crt", "privkey.key", keypair.value());
 
                 std::cout << "Done!\n";
-                std::cout << "Certificate saved to " << SERVER_CTYPTO_CERTS_DIR << "/certificate.crt\n";
-                std::cout << "Private key saved to " << SERVER_CTYPTO_CERTS_DIR << "/privkey.key" << std::endl;
+                std::cout << "Certificate saved to " << SERVER_CTYPTO_CERTS_DIR
+                          << "/certificate.crt\n";
+                std::cout << "Private key saved to " << SERVER_CTYPTO_CERTS_DIR << "/privkey.key"
+                          << std::endl;
             } catch (const std::exception& e) {
                 std::cerr << e.what() << std::endl;
             }
@@ -260,7 +271,35 @@ std::expected<KeyPair, std::string> generate_keypair(const std::string_view vali
         return std::unexpected("X509_set_pubkey() failed");
     }
 
-    // Subject & issuer: only CN=localhost
+
+
+    // Adding SAN (IP:<ip>)
+    // Initialize the context for adding extensions
+    X509V3_CTX ext_ctx;
+    X509V3_set_ctx_nodb(&ext_ctx);
+    X509V3_set_ctx(&ext_ctx, x509, x509, nullptr, nullptr, 0);
+
+    std::string san = std::format("IP:{}", valid_ip);
+
+    X509_EXTENSION* ext = X509V3_EXT_conf_nid(nullptr, &ext_ctx, NID_subject_alt_name, san.c_str());
+    if (!ext) {
+        X509_free(x509);
+        EVP_PKEY_free(pkey);
+        return std::unexpected("Failed to create subjectAltName extension");
+    }
+
+    if (!X509_add_ext(x509, ext, -1)) {
+        X509_EXTENSION_free(ext);
+        X509_free(x509);
+        EVP_PKEY_free(pkey);
+        return std::unexpected("Failed to add subjectAltName to certificate");
+    }
+
+    X509_EXTENSION_free(ext);
+
+
+
+    // SN
     X509_NAME* name = X509_get_subject_name(x509);
     if (!X509_NAME_add_entry_by_txt(name,
                                     "CN",
@@ -279,6 +318,7 @@ std::expected<KeyPair, std::string> generate_keypair(const std::string_view vali
         EVP_PKEY_free(pkey);
         return std::unexpected("X509_sign() failed");
     }
+
 
     // Write to memory via BIO
     bioKey = BIO_new(BIO_s_mem());
