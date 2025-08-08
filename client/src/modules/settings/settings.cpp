@@ -19,7 +19,7 @@ namespace smu {
 // Public constructor
 Settings::Settings(int argc, char** argv) : m_port(DEFAULT_PORT) {
     if (auto res = parse(argc, argv); !res.has_value()) {
-        throw std::runtime_error(std::format("Error parsing arguments: {}", res.error()));
+        throw std::runtime_error(res.error());
     }
 
     // For Windows. We must manually create a directory with settings and subdirectories. For Linux,
