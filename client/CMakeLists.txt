@@ -189,6 +189,9 @@ target_compile_options(${PROJECT_NAME} PRIVATE
     $<$<AND:$<CONFIG:Release>,$<CXX_COMPILER_ID:Clang>>:-O3>
 )
 
+if(WIN32)
+  target_compile_definitions(${PROJECT_NAME} PRIVATE _CRT_SECURE_NO_WARNINGS)
+endif()
 
 
 
