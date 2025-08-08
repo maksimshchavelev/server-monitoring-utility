@@ -8,6 +8,12 @@ set(CMAKE_INSTALL_PREFIX /usr/local)
 
 set(DEFAULT_PORT 5050)
 
+if (WIN32)
+  set(CONFIG_ROOT_DIR "config/") # For windows
+else()
+  set(CONFIG_ROOT_DIR "/var/lib/smu/") # For Unix like systems
+endif()
+
 
 configure_file(
   ${CMAKE_CURRENT_SOURCE_DIR}/include/version.hpp.in

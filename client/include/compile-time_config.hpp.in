@@ -3,4 +3,5 @@
 
 #pragma once
 
-#define DEFAULT_PORT @DEFAULT_PORT@
+#define DEFAULT_PORT    @DEFAULT_PORT@
+#define CONFIG_ROOT_DIR "@CONFIG_ROOT_DIR@"
