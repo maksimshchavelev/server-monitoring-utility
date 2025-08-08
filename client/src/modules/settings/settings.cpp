@@ -10,6 +10,7 @@
 #include "compile-time_config.hpp"
 #include "version.hpp"
 #include <cxxopts.hpp>
+#include <filesystem>
 #include <fstream>
 #include <iostream>
 
@@ -20,6 +21,22 @@ Settings::Settings(int argc, char** argv) : m_port(DEFAULT_PORT) {
     if (auto res = parse(argc, argv); !res.has_value()) {
         throw std::runtime_error(std::format("Error parsing arguments: {}", res.error()));
     }
+
+    // For Windows. We must manually create a directory with settings and subdirectories. For Linux,
+    // this is done by the installation package.
+    #if defined(_WIN32)
+    if (!std::filesystem::create_directories(CONFIG_ROOT_DIR)) {
+        throw std::system_error(errno,
+                                std::generic_category(),
+                                std::format("Failed to create directory {}", CONFIG_ROOT_DIR));
+    }
+
+    if (!std::filesystem::create_directories(std::format("{}certs", CONFIG_ROOT_DIR))) {
+        throw std::system_error(errno,
+                                std::generic_category(),
+                                std::format("Failed to create directory {}certs", CONFIG_ROOT_DIR));
+    }
+    #endif
 }
 
 
