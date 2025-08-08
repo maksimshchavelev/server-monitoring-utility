@@ -194,6 +194,7 @@ target_compile_options(${PROJECT_NAME} PRIVATE
 
 # Installation rules
 install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION bin)
+install(DIRECTORY config/ DESTINATION ${CONFIG_ROOT_DIR} FILES_MATCHING PATTERN "*")
 
 
 set(CPACK_GENERATOR "DEB")
