@@ -110,10 +110,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a5e40981844fee8475022a2b585e68612"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classsmu_1_1Tabs.html" title="Tabs UI interactive component.">Tabs</a> constructor.  <br /></td></tr>
 <tr class="separator:a5e40981844fee8475022a2b585e68612"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8360c74d205586e3383e3fda6924351c" id="r_a8360c74d205586e3383e3fda6924351c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu_1_1Tabs.html#a8360c74d205586e3383e3fda6924351c">Tabs</a> ()=default</td></tr>
-<tr class="memdesc:a8360c74d205586e3383e3fda6924351c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default tabs constructor.  <br /></td></tr>
+<tr class="memdesc:a8360c74d205586e3383e3fda6924351c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default tabs constructor. Does nothing.  <br /></td></tr>
 <tr class="separator:a8360c74d205586e3383e3fda6924351c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac1c5d799733fbb5b65966cbd67332999" id="r_ac1c5d799733fbb5b65966cbd67332999"><td class="memItemLeft" align="right" valign="top">ftxui::Element&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu_1_1Tabs.html#ac1c5d799733fbb5b65966cbd67332999">OnRender</a> () override</td></tr>
-<tr class="memdesc:ac1c5d799733fbb5b65966cbd67332999"><td class="mdescLeft">&#160;</td><td class="mdescRight">OnRender Draw the component. Build a ftxui::Element to be drawn on the ftxi::Screen representing this ftxui::ComponentBase.  <br /></td></tr>
+<tr class="memdesc:ac1c5d799733fbb5b65966cbd67332999"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws the component. Build a ftxui::Element to be drawn on the ftxi::Screen representing this ftxui::ComponentBase.  <br /></td></tr>
 <tr class="separator:ac1c5d799733fbb5b65966cbd67332999"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a455f117e15819c6131b940f993a1da16" id="r_a455f117e15819c6131b940f993a1da16"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu_1_1Tabs.html#a455f117e15819c6131b940f993a1da16">OnEvent</a> (ftxui::Event e) override</td></tr>
 <tr class="memdesc:a455f117e15819c6131b940f993a1da16"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called in response to an event.  <br /></td></tr>
@@ -159,6 +159,7 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section note"><dt>Note</dt><dd>The number of elements in <code>headers</code> must be equal to the number of elements in <code>tabs</code>, otherwise an exception is thrown. </dd></dl>
 
 </div>
 </div>
@@ -185,7 +186,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Default tabs constructor. </p>
+<p>Default tabs constructor. Does nothing. </p>
 
 </div>
 </div>
@@ -248,7 +249,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>OnRender Draw the component. Build a ftxui::Element to be drawn on the ftxi::Screen representing this ftxui::ComponentBase. </p>
+<p>Draws the component. Build a ftxui::Element to be drawn on the ftxi::Screen representing this ftxui::ComponentBase. </p>
 <dl class="section return"><dt>Returns</dt><dd><code>ftxui::Element</code> </dd></dl>
 
 </div>
@@ -293,7 +294,6 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section note"><dt>Note</dt><dd>Use via <code>dynamic_cast</code> </dd></dl>
 
 </div>
 </div>
