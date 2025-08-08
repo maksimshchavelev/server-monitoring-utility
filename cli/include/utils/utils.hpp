@@ -78,12 +78,13 @@ struct KeyPair {
 
 /**
  * @brief Function for generating an X509 certificate and private key
+ * @param valid_ip The IP address for which the certificate will be generated.
  * @return `KeyPair`
  * @see `std::expected` with the `KeyPair` struct, otherwise the error description
  *
  * @section example_usage Example usage
  * @code{.cpp}
- * auto keypair = generate_keypair();
+ * auto keypair = generate_keypair("192.168.0.92");
  * // Keygen error
  * if (!keypair.has_value()) {
  *     std::cout << "Error: " << keypair.error();
@@ -93,7 +94,7 @@ struct KeyPair {
  * }
  * @endcode
  */
-std::expected<KeyPair, std::string> generate_keypair();
+std::expected<KeyPair, std::string> generate_keypair(const std::string_view valid_ip);
 
 
 

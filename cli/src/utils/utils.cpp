@@ -203,7 +203,7 @@ std::expected<std::string, std::string> read_message(int        socket_fd,
 
 
 // ============ generate_keypair ============
-std::expected<KeyPair, std::string> generate_keypair() {
+std::expected<KeyPair, std::string> generate_keypair(const std::string_view valid_ip) {
     // Thanks to the ChatGPT! :)
 
     EVP_PKEY*     pkey = nullptr;
@@ -265,7 +265,7 @@ std::expected<KeyPair, std::string> generate_keypair() {
     if (!X509_NAME_add_entry_by_txt(name,
                                     "CN",
                                     MBSTRING_ASC,
-                                    reinterpret_cast<const unsigned char*>("localhost"),
+                                    reinterpret_cast<const unsigned char*>(valid_ip.data()),
                                     -1,
                                     -1,
                                     0)) {
