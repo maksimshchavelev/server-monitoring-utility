@@ -19,20 +19,24 @@ Application::Application(Settings& settings) : m_settings(settings), m_network(m
 
 // Public method
 int Application::run() {
-    // Running network
-    m_network.run(
-        [this](const std::string& msg) {
-            if (auto res = json_from_string(msg); res.has_value()) {
-                // If no error
-                m_ui.set_data(res.value());
-            }
-        },
-        [this](const std::string& connection_error_reason) {
-            exit("Connection error, reason: " + connection_error_reason);
-        });
+    try {
+        // Running network
+        m_network.run(
+            [this](const std::string& msg) {
+                if (auto res = json_from_string(msg); res.has_value()) {
+                    // If no error
+                    m_ui.set_data(res.value());
+                }
+            },
+            [this](const std::string& connection_error_reason) {
+                exit("Connection error, reason: " + connection_error_reason);
+            });
 
-    // Running UI
-    m_ui.run_async();
+        // Running UI
+        m_ui.run_async();
+    } catch (const std::exception& e) {
+        this->exit(e.what());
+    }
 
 
     // Waiting for exit signal
@@ -51,12 +55,12 @@ int Application::run() {
 
 // Public method
 void Application::exit(std::optional<std::string> error) {
-    std::thread([this, error = std::move(error)]{
+    std::thread([this, error = std::move(error)] {
         m_ui.stop();
         m_network.stop();
 
-        if(error.has_value()) {
-            m_return_value.store(1); // error code
+        if (error.has_value()) {
+            m_return_value.store(1);                 // error code
             std::cout << error.value() << std::endl; // print error
         } else {
             m_return_value.store(0); // success code
