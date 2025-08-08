@@ -89,6 +89,19 @@ target_compile_options(${PROJECT_NAME} PRIVATE
 
 
 
+# Enable sanitizers if Debug
+if((CMAKE_CXX_COMPILER_ID MATCHES "Clang|GNU") AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
+    message(STATUS "${PROJECT_NAME}: Using GCC/Clang sanitizer configuration")
+
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -Wextra -Wpedantic -g")
+    add_compile_definitions(_GLIBCXX_DEBUG)
+
+    set(SANITIZER_FLAGS "-fsanitize=address,undefined,leak -fno-omit-frame-pointer")
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} ${SANITIZER_FLAGS}")
+    set(CMAKE_EXE_LINKER_FLAGS_DEBUG "${CMAKE_EXE_LINKER_FLAGS_DEBUG} ${SANITIZER_FLAGS}")
+endif()
+
+
 if(CMAKE_BUILD_TYPE STREQUAL "Release")
   message(STATUS "Setting O3 optimization")
   target_compile_options(${PROJECT_NAME} PRIVATE $<$<CONFIG:Release>:-O3>)

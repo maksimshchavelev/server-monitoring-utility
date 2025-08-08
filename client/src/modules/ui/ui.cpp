@@ -8,7 +8,6 @@
 
 
 #include "modules/ui/ui.hpp"
-#include "modules/ui/internals/tabs.hpp"
 #include <ftxui/component/component.hpp>
 #include <iostream>
 #include <thread>
@@ -18,45 +17,23 @@ namespace smu {
 
 
 // Public constructor
-UI::UI() : m_screen(ftxui::ScreenInteractive::TerminalOutput()) {}
+UI::UI() : m_screen(ftxui::ScreenInteractive::TerminalOutput()), m_tabs(make_tabs()) {}
 
 
 
 
 // Public method
 void UI::run_async() {
-    std::thread runner([this]() {
+    std::thread runner([&]() {
         using namespace ftxui;
 
-        auto tabs_renderer = Renderer([&]() {
-            std::lock_guard<std::mutex> lock(m_data_mutex);
-
-            if (!m_data.empty()) {
-                std::vector<Element> headers;
-                headers.reserve(m_data.size());
-
-                std::vector<Component> content;
-                content.reserve(m_data.size());
-
-                for (const auto& module_name : m_data.getMemberNames()) {
-                    headers.push_back(text(module_name));
-                    content.push_back(unwrap_module(m_data[module_name]));
-                }
-
-                return make_tabs(std::move(headers), std::move(content))->Render();
-            }
-
-            return text("Nothing to render");
-        });
-
-    #if defined(__unix__)
+#if defined(__unix__)
         std::cout << "\033[2J\033[H"; // ANSI code for clear screen in Linux
-    #elif defined(_WIN32) or defined(_WIN64)
+#elif defined(_WIN32) or defined(_WIN64)
         std::cout << "\x1B[2J\x1B[H"; // ANSI code for clear screen in Windows
-    #endif
+#endif
 
-        m_screen.Loop(tabs_renderer);
-
+        m_screen.Loop(m_tabs);
     });
     runner.detach();
 }
@@ -66,10 +43,11 @@ void UI::run_async() {
 
 // Public method
 void UI::stop() {
-    m_screen.ExitLoopClosure()();
     m_screen.Exit();
-    m_screen.RequestAnimationFrame();
-    m_screen.PostEvent(ftxui::Event::Custom);
+
+    while (m_screen.Active()) {
+        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+    }
 }
 
 
@@ -79,6 +57,17 @@ void UI::stop() {
 void UI::set_data(const Json::Value& data) {
     std::lock_guard<std::mutex> lock(m_data_mutex);
     m_data = data;
+
+    std::vector<ftxui::Element>   m_tabs_headers;
+    std::vector<ftxui::Component> m_tabs_content;
+
+    // Set headers and content
+    for (const auto& module_name : m_data.getMemberNames()) {
+        m_tabs_headers.push_back(ftxui::text(module_name));
+        m_tabs_content.push_back(unwrap_module(m_data[module_name]));
+    }
+
+    m_tabs->set_data(std::move(m_tabs_headers), std::move(m_tabs_content));
     m_screen.PostEvent(ftxui::Event::Custom);
 }
 
@@ -112,6 +101,11 @@ ftxui::Component UI::unwrap_module(const Json::Value& data) {
             // Value display component
             std::string value = inner_node["value"].asString();
             std::string units = inner_node["units"].asString();
+
+            // Display N/A if value is empty
+            if(value.empty()) {
+                value = "N/A";
+            }
 
             Color text_color(Color::RGB(255, 255, 255));
             bool  alarm_flag{false};

@@ -8,6 +8,7 @@
 
 #pragma once
 
+#include "internals/tabs.hpp"
 #include <ftxui/component/screen_interactive.hpp>
 #include <ftxui/dom/elements.hpp>
 #include <json/json.h>
@@ -54,6 +55,8 @@ class UI {
     std::mutex               m_data_mutex;
     Json::Value              m_data{};
     ftxui::ScreenInteractive m_screen;
+
+    std::shared_ptr<Tabs> m_tabs; // tabs to render
 
     /**
      * @brief Unwraps json representation of module to UI
