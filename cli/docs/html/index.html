@@ -93,7 +93,7 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
   <div class="headertitle"><div class="title">What is smu-cli? </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="md_README"></a>smu-cli is a terminal-based server management tool that allows you to enable and disable modules, configure behavior, change configs, and more using commands — without worrying about breaking something. This document provides a guide to smu-cli.</p>
+<div class="textblock"><p><a class="anchor" id="md_README"></a><b>smu-cli</b> is a terminal-based server management tool that allows you to enable and disable modules, configure behavior, change configs, and more using commands — without worrying about breaking something. This document provides a guide to smu-cli.</p>
 <h1><a class="anchor" id="autotoc_md1"></a>
 Installation</h1>
 <p>To install, download the release package and install it via your package manager. After that, the tool will be accessible through the <code>smu-cli</code> command.</p>
@@ -114,8 +114,10 @@ Command Reference</h1>
 <p>smu-cli supports several commands, here are some of them:</p><ul>
 <li><code>--version</code> displays the version of smu-cli</li>
 <li><code>--help</code> or <code>-h</code> shows help</li>
+<li><code>--keygen</code> Generates a certificate and private key for the server. You need to specify the IP address for which the certificate will be generated. For example, if the server has the address 1.2.3.4 and you want to connect to it from anywhere, specify the IP address 1.2.3.4. If you specify localhost, you can only connect from localhost (the same applies to 127.0.0.1). Example: <div class="fragment"><div class="line">smu-cli --keygen 1.2.3.4</div>
+</div><!-- fragment --></li>
 <li><code>--list commands</code> prints the list of commands. Note that these commands are provided by the server.</li>
-<li><code>--list modules</code> displays the list of modules, their statuses (running / stopped), and descriptions. Here's an example of what it might look like: <div class="fragment"><div class="line">NAME        STATUS      DESCRIPTION</div>
+<li><code>--list modules</code> displays the list of modules, their statuses (running / stopped), and descriptions. Here's an example of what it might look like: <div class="fragment"><div class="line">NAME    STATUS      DESCRIPTION</div>
 <div class="line"> </div>
 <div class="line">RAM     RUNNING     A module that allows you to get information about RAM</div>
 </div><!-- fragment --></li>
