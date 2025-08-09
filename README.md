@@ -99,5 +99,6 @@ It uses third-party components:
 - [jsoncpp](https://github.com/open-source-parsers/jsoncpp) - MIT license
 - [cxxopts](https://github.com/jarro2783/cxxopts) - MIT license
 - [IXWebSocket](https://github.com/machinezone/IXWebSocket) - BSD-3-Clause license
+- [OpenSSL](https://openssl-library.org)
 
 See [third party](3dparty) for details
