@@ -14,6 +14,7 @@
 #include <cxxopts.hpp>
 #include <external_module_loader/external_module_loader.hpp>
 #include <filesystem>
+#include <sys/stat.h>
 
 
 // Public constructor
@@ -254,6 +255,22 @@ void smu_server::Application::register_dynamic_modules(const std::string_view mo
             continue;
         }
 
+        // If incorrect owner (must be root)
+        {
+            struct stat st;
+            if (stat(so_file.c_str(), &st) != 0) {
+                logger().log_error(std::format("'stat' syscal error, cause: {}", strerror(errno)));
+                continue;
+            }
+
+            // If owner isn't root
+            if (st.st_uid != 0) {
+                logger().log_error(
+                    std::format("Owner of file {} must be 'root'!", so_file.c_str()));
+                continue;
+            }
+        }
+
         // Load config
         auto config = Config_IO::instance().get_module_config(module_name);
 
@@ -272,9 +289,8 @@ void smu_server::Application::register_dynamic_modules(const std::string_view mo
                                              so_file.string()));
             m_modules.push_back(std::move(module.value()));
         } else {
-            logger().log_error(std::format("Can't load dynamic module '{}', cause: {}",
-                                           module_name,
-                                           module.error()));
+            logger().log_error(std::format(
+                "Can't load dynamic module '{}', cause: {}", module_name, module.error()));
             continue;
         }
     }
