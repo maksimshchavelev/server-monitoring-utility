@@ -12,6 +12,8 @@
 #include "logger/logger.hpp"
 #include "version.hpp"
 #include <cxxopts.hpp>
+#include <external_module_loader/external_module_loader.hpp>
+#include <filesystem>
 
 
 // Public constructor
@@ -40,8 +42,11 @@ void smu_server::Application::run(int argc, char** argv) {
     }
 
     for (const auto& module_registrar : m_modules_queue) {
-        module_registrar(*this); // register each module
+        module_registrar(*this); // register each built-in module
     }
+
+    // Register dynamic modules
+    register_dynamic_modules(MODULES_CONFIGS_DIR);
 
     // Get port
     auto port = m_server_config.get<int>("port");
@@ -121,7 +126,8 @@ Json::Value smu_server::Application::collect_metrics() {
                 }
             } else {
                 // Load from cache instead of calling `get_data` if no necessity
-                root[module->module_name().data()] = poll_ratio_between_get_datas_cache[module->module_name()];
+                root[module->module_name().data()] =
+                    poll_ratio_between_get_datas_cache[module->module_name()];
             }
 
             ++module->m_poll_counter; // increase poll counter
@@ -212,6 +218,65 @@ smu_server::Application::Application() :
 smu_server::Application::~Application() {
     if (m_need_save_config_in_destructor) {
         save_configs();
+    }
+}
+
+
+
+
+// Private method
+void smu_server::Application::register_dynamic_modules(const std::string_view modules_directory) {
+    std::lock_guard<std::mutex> lock(m_modules_mutex);
+
+    std::filesystem::directory_entry entry(modules_directory);
+
+    for (const auto& dir : std::filesystem::directory_iterator(entry)) {
+        // If not
+        if (!dir.is_directory()) {
+            continue;
+        }
+
+        auto module_name = dir.path().filename().string();
+        auto so_file = dir.path() / (module_name + ".so");
+
+        // Directory without .so module
+        if (!std::filesystem::exists(so_file)) {
+            continue;
+        }
+
+        // If incorrect permissions (must be r-x------)
+        if (auto perms = std::filesystem::status(so_file).permissions();
+            perms != (std::filesystem::perms::owner_read | std::filesystem::perms::owner_exec)) {
+            logger().log_error(std::format(
+                "Incorrect permissions of file {} (module {}). Permissions must be 'r-x------'",
+                so_file.string(),
+                module_name));
+            continue;
+        }
+
+        // Load config
+        auto config = Config_IO::instance().get_module_config(module_name);
+
+        // If error
+        if (config.empty()) {
+            logger().log_error(
+                std::format("Failed to open config of dynamic module '{}'", module_name));
+            continue;
+        }
+
+        if (auto module = ExternalModuleLoader::load(so_file.c_str(), config); module.has_value()) {
+            logger().log_success(std::format("The dynamic module named '{}' (description: {}) was "
+                                             "successfully loaded from file {}",
+                                             module_name,
+                                             module.value()->module_description(),
+                                             so_file.string()));
+            m_modules.push_back(std::move(module.value()));
+        } else {
+            logger().log_error(std::format("Can't load dynamic module '{}', cause: {}",
+                                           module_name,
+                                           module.error()));
+            continue;
+        }
     }
 }
 
