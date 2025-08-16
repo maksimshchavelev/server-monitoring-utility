@@ -78,10 +78,6 @@ struct __attribute__((packed)) ABI_MODULE_FUNCTIONS {
     const char* (*module_get_module_name)(); ///< Get module name
 
     const char* (*module_get_module_description)(); ///< Get module description
-
-    void (*module_set_poll_counter)(uint32_t poll_counter); ///< Set poll counter of module
-
-    uint32_t (*module_get_poll_counter)(); ///< Get poll counter of module
 };
 
 
