@@ -21,7 +21,7 @@ std::expected<std::unique_ptr<IModule>, std::string> ExternalModuleLoader::load(
 
     // Opening error
     if (dl_descriptor == nullptr) {
-        return std::unexpected(std::format("Can't open {}, cause: ", path, dlerror()));
+        return std::unexpected(dlerror());
     }
 
     auto module_init_fn = reinterpret_cast<ABI_MODULE_FUNCTIONS (*)(
@@ -31,7 +31,7 @@ std::expected<std::unique_ptr<IModule>, std::string> ExternalModuleLoader::load(
     // Finding init function error
     if (module_init_fn == nullptr) {
         dlclose(dl_descriptor);
-        return std::unexpected(std::format("Can't find 'module_init' symbol in {}", path));
+        return std::unexpected(std::format("can't find 'module_init' symbol in {}", path));
     }
 
     // Init server core functions
@@ -47,7 +47,7 @@ std::expected<std::unique_ptr<IModule>, std::string> ExternalModuleLoader::load(
 
     // Error
     if (module_context == nullptr) {
-        return std::unexpected(std::format("Failed to get module context from {}", path));
+        return std::unexpected(std::format("failed to get module context from {}", path));
     }
 
     return std::make_unique<internals::ProxyModule>(
