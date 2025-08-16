@@ -12,7 +12,7 @@
 
 namespace smu_server {
 
-extern "C" int abi_get_abi_version() {
+extern "C" int abi_get_abi_version(ABI_CONTEXT*) {
     return ABI_VERSION;
 }
 

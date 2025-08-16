@@ -79,7 +79,7 @@ struct __attribute__((packed)) ABI_MODULE_FUNCTIONS {
 
     const char* (*module_get_module_description)(); ///< Get module description
 
-    ABI_CONTEXT (*module_get_context)(); ///< Get context of module. See `ABI_CONTEXT`
+    ABI_CONTEXT* (*module_get_context)(); ///< Get context of module. See `ABI_CONTEXT`
 };
 
 
@@ -91,7 +91,7 @@ struct __attribute__((packed)) ABI_MODULE_FUNCTIONS {
 /**
  * @brief C-callabe function for obtaining the ABI version
  */
-extern "C" int abi_get_abi_version();
+extern "C" int abi_get_abi_version(ABI_CONTEXT*);
 
 
 /**
