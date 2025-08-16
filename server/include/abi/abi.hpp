@@ -43,7 +43,7 @@ struct __attribute__((packed)) ABI_SERVER_CORE_FUNCTIONS {
                                           ///< `1`: Yellow (warning) log message
                                           ///< '2': Red (error) log message
 
-    int (*abi_get_abi_version)(); ///< Returns ABI version
+    int (*abi_get_abi_version)(ABI_CONTEXT* context); ///< Returns ABI version
 };
 
 
@@ -78,6 +78,8 @@ struct __attribute__((packed)) ABI_MODULE_FUNCTIONS {
     const char* (*module_get_module_name)(); ///< Get module name
 
     const char* (*module_get_module_description)(); ///< Get module description
+
+    ABI_CONTEXT (*module_get_context)(); ///< Get context of module. See `ABI_CONTEXT`
 };
 
 
