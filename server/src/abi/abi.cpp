@@ -17,7 +17,7 @@ extern "C" int abi_get_abi_version(ABI_CONTEXT*) {
 }
 
 
-void abi_log(ABI_CONTEXT* context, int log_type, const char* message) {
+extern "C" void abi_log(ABI_CONTEXT* context, int log_type, const char* message) {
     if (context == nullptr || context->module_name == nullptr || message == nullptr) {
         return;
     }
