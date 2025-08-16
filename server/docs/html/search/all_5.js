@@ -12,10 +12,11 @@ var searchData=
   ['config_5fio_9',['Config_IO',['../classsmu__server_1_1Config__IO.html',1,'smu_server']]],
   ['config_5fio_2ehpp_10',['config_io.hpp',['../config__io_8hpp.html',1,'']]],
   ['config_5fpath_11',['CONFIG_PATH',['../compile-time__config_8hpp.html#a863ab5d791c86f9dfff4c6e90624130c',1,'compile-time_config.hpp']]],
-  ['constructor_12',['Constructor',['../md_for-developers_2modules_21__own__module.html#autotoc_md5',1,'']]],
-  ['contains_5fsubstring_13',['contains_substring',['../namespacesmu__server_1_1internals.html#ac6001815b6a093112dcdabc7ba1744f8',1,'smu_server::internals']]],
-  ['core_2ehpp_14',['core.hpp',['../core_8hpp.html',1,'']]],
-  ['creating_20modules_15',['Storing the entire JSON tree when creating modules',['../md_for-developers_2modules_23__storing__json__tree.html',1,'']]],
-  ['creating_20modules_20with_20static_20data_16',['Creating modules with static data',['../md_for-developers_2modules_22__static__data__modules.html',1,'']]],
-  ['creation_17',['Module creation',['../md_for-developers_2beginning.html#autotoc_md1',1,'']]]
+  ['configs_5fdir_12',['CONFIGS_DIR',['../compile-time__config_8hpp.html#a827d2cfc63d4a19fc37d391fb79ae21f',1,'compile-time_config.hpp']]],
+  ['constructor_13',['Constructor',['../md_for-developers_2modules_21__own__module.html#autotoc_md5',1,'']]],
+  ['contains_5fsubstring_14',['contains_substring',['../namespacesmu__server_1_1internals.html#ac6001815b6a093112dcdabc7ba1744f8',1,'smu_server::internals']]],
+  ['core_2ehpp_15',['core.hpp',['../core_8hpp.html',1,'']]],
+  ['creating_20modules_16',['Storing the entire JSON tree when creating modules',['../md_for-developers_2modules_23__storing__json__tree.html',1,'']]],
+  ['creating_20modules_20with_20static_20data_17',['Creating modules with static data',['../md_for-developers_2modules_22__static__data__modules.html',1,'']]],
+  ['creation_18',['Module creation',['../md_for-developers_2beginning.html#autotoc_md1',1,'']]]
 ];

@@ -6,7 +6,7 @@ var searchData=
   ['make_5fvalue_5fnode_3',['make_value_node',['../namespacesmu__server.html#a219dae7d70a890e3fb0740451fbf5dbe',1,'smu_server']]],
   ['metriccontainernode_4',['MetricContainerNode',['../classsmu__server_1_1internals_1_1MetricContainerNode.html#ac7a77703a79b9694e93dab6fcddf7030',1,'smu_server::internals::MetricContainerNode']]],
   ['metricvaluenode_5',['MetricValueNode',['../classsmu__server_1_1internals_1_1MetricValueNode.html#a5adf1cda5ee7aa8b5581afba2e5f2dfa',1,'smu_server::internals::MetricValueNode']]],
-  ['module_5fdescription_6',['module_description',['../classsmu__server_1_1IModule.html#aaef5d08464fb3bada417fced684d44a4',1,'smu_server::IModule']]],
-  ['module_5fname_7',['module_name',['../classsmu__server_1_1IModule.html#a7b88ea0d08c0b11a564b418953740d85',1,'smu_server::IModule']]],
+  ['module_5fdescription_6',['module_description',['../classsmu__server_1_1IModule.html#aaef5d08464fb3bada417fced684d44a4',1,'smu_server::IModule::module_description()'],['../classsmu__server_1_1internals_1_1ProxyModule.html#a410a330697c266348745965253a1bc9c',1,'smu_server::internals::ProxyModule::module_description()']]],
+  ['module_5fname_7',['module_name',['../classsmu__server_1_1IModule.html#a7b88ea0d08c0b11a564b418953740d85',1,'smu_server::IModule::module_name()'],['../classsmu__server_1_1internals_1_1ProxyModule.html#aab73b60aae752a17db2852a0d2fa6797',1,'smu_server::internals::ProxyModule::module_name()']]],
   ['moduleregistrar_8',['ModuleRegistrar',['../structsmu__server_1_1internals_1_1ModuleRegistrar.html#a102c18568dc517c4f0784cbb8dbd2f9f',1,'smu_server::internals::ModuleRegistrar']]]
 ];

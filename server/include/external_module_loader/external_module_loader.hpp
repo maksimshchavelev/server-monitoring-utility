@@ -21,7 +21,8 @@ class ExternalModuleLoader {
      * @brief Loads external dynamic module
      * @param path Path to .so (for example, `modules/CPU.so`)
      * @param config The configuration that will be transferred to the module
-     * @return `std::expected` with pointer to `IModule` if success, otherwise error description
+     * @return `std::expected` with pointer to `IModule` (with `internals::ProxyModule`) if success,
+     * otherwise error description
      */
     static std::expected<std::unique_ptr<IModule>, std::string> load(const std::string_view path,
                                                                      const Config&          config);

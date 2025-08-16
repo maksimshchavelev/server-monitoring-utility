@@ -93,7 +93,8 @@ $(document).ready(function(){initNavTree('namespacesmu__server.html',''); initRe
   <div class="summary">
 <a href="#namespaces">Namespaces</a> &#124;
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">smu_server Namespace Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -108,6 +109,15 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsmu__server_1_1ABI__CONTEXT.html">ABI_CONTEXT</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The context in which the module calls server core functions.  <a href="structsmu__server_1_1ABI__CONTEXT.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsmu__server_1_1ABI__MODULE__FUNCTIONS.html">ABI_MODULE_FUNCTIONS</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Functions of the module that calls the server core.  <a href="structsmu__server_1_1ABI__MODULE__FUNCTIONS.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsmu__server_1_1ABI__SERVER__CORE__FUNCTIONS.html">ABI_SERVER_CORE_FUNCTIONS</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Functions provided by the server for the module.  <a href="structsmu__server_1_1ABI__SERVER__CORE__FUNCTIONS.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1Application.html">Application</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Singleton <a class="el" href="classsmu__server_1_1Application.html" title="The Singleton Application class.">Application</a> class.  <a href="classsmu__server_1_1Application.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -122,6 +132,9 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1DMI.html">DMI</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A module to get data from DMI/SMBIOS tables.  <a href="classsmu__server_1_1DMI.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1ExternalModuleLoader.html">ExternalModuleLoader</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class for loading external .so modules.  <a href="classsmu__server_1_1ExternalModuleLoader.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsmu__server_1_1IMetricNodeBase.html">IMetricNodeBase</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Base IMetricNode class to simplify the storage of data obtained from <code><a class="el" href="namespacesmu__server.html#a23038498ffcba3c5453a07ab861d13cf" title="Creates a root node.">smu_server::make_root_node</a></code>  <a href="structsmu__server_1_1IMetricNodeBase.html#details">More...</a><br /></td></tr>
@@ -150,6 +163,12 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a53f3ba249e0d9599285f409d92c37e4f" id="r_a53f3ba249e0d9599285f409d92c37e4f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesmu__server.html#a53f3ba249e0d9599285f409d92c37e4f">abi_get_abi_version</a> (<a class="el" href="structsmu__server_1_1ABI__CONTEXT.html">ABI_CONTEXT</a> *)</td></tr>
+<tr class="memdesc:a53f3ba249e0d9599285f409d92c37e4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">C-callabe function for obtaining the ABI version.  <br /></td></tr>
+<tr class="separator:a53f3ba249e0d9599285f409d92c37e4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9fe52ec6b8691f1aa8bfda6a403c10e7" id="r_a9fe52ec6b8691f1aa8bfda6a403c10e7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesmu__server.html#a9fe52ec6b8691f1aa8bfda6a403c10e7">abi_log</a> (<a class="el" href="structsmu__server_1_1ABI__CONTEXT.html">ABI_CONTEXT</a> *context, int log_type, const char *message)</td></tr>
+<tr class="memdesc:a9fe52ec6b8691f1aa8bfda6a403c10e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">C-callabe function for logging.  <br /></td></tr>
+<tr class="separator:a9fe52ec6b8691f1aa8bfda6a403c10e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a219dae7d70a890e3fb0740451fbf5dbe" id="r_a219dae7d70a890e3fb0740451fbf5dbe"><td class="memTemplParams" colspan="2">template&lt;typename ValueType &gt; </td></tr>
 <tr class="memitem:a219dae7d70a890e3fb0740451fbf5dbe"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacesmu__server.html#a219dae7d70a890e3fb0740451fbf5dbe">make_value_node</a> (const std::string &amp;metric_name, ValueType &amp;&amp;metric_value, const std::string &amp;value_units) -&gt; std::unique_ptr&lt; <a class="el" href="classsmu__server_1_1internals_1_1MetricValueNode.html">internals::MetricValueNode</a> &gt;</td></tr>
 <tr class="memdesc:a219dae7d70a890e3fb0740451fbf5dbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a node with the value.  <br /></td></tr>
@@ -169,11 +188,73 @@ Functions</h2></td></tr>
 <tr class="memitem:a522f05053a18b752356b80c93a5fe53e"><td class="memTemplItemLeft" align="right" valign="top">constexpr void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacesmu__server.html#a522f05053a18b752356b80c93a5fe53e">for_each_tuple</a> (Tuple &amp;&amp;tuple, Function &amp;&amp;function)</td></tr>
 <tr class="memdesc:a522f05053a18b752356b80c93a5fe53e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Iterates over the tuple elements and passes each element to the <code>function</code> function.  <br /></td></tr>
 <tr class="separator:a522f05053a18b752356b80c93a5fe53e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a4c254331db0c72dc1fe2e32ab94ececf" id="r_a4c254331db0c72dc1fe2e32ab94ececf"><td class="memItemLeft" align="right" valign="top">constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesmu__server.html#a4c254331db0c72dc1fe2e32ab94ececf">ABI_VERSION</a> = 1</td></tr>
+<tr class="memdesc:a4c254331db0c72dc1fe2e32ab94ececf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Version of ABI.  <br /></td></tr>
+<tr class="separator:a4c254331db0c72dc1fe2e32ab94ececf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A global singleton class that helps read and write configurations in files. configuration management. </p>
 <p>GPLv3 LICENSE, Copyright (©) 2025, Maksim Shchavelev <a href="#" onclick="location.href='mai'+'lto:'+'mak'+'si'+'msh'+'ch'+'ave'+'le'+'v@g'+'ma'+'il.'+'co'+'m'; return false;">maksi<span class="obfuscator">.nosp@m.</span>mshc<span class="obfuscator">.nosp@m.</span>havel<span class="obfuscator">.nosp@m.</span>ev@g<span class="obfuscator">.nosp@m.</span>mail.<span class="obfuscator">.nosp@m.</span>com</a> See LICENSE for details </p>
 </div><h2 class="groupheader">Function Documentation</h2>
+<a id="a53f3ba249e0d9599285f409d92c37e4f" name="a53f3ba249e0d9599285f409d92c37e4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53f3ba249e0d9599285f409d92c37e4f">&#9670;&#160;</a></span>abi_get_abi_version()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int smu_server::abi_get_abi_version </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structsmu__server_1_1ABI__CONTEXT.html">ABI_CONTEXT</a> *&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>C-callabe function for obtaining the ABI version. </p>
+
+</div>
+</div>
+<a id="a9fe52ec6b8691f1aa8bfda6a403c10e7" name="a9fe52ec6b8691f1aa8bfda6a403c10e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9fe52ec6b8691f1aa8bfda6a403c10e7">&#9670;&#160;</a></span>abi_log()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void smu_server::abi_log </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structsmu__server_1_1ABI__CONTEXT.html">ABI_CONTEXT</a> *&#160;</td>
+          <td class="paramname"><em>context</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>log_type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>message</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>C-callabe function for logging. </p>
+
+</div>
+</div>
 <a id="a522f05053a18b752356b80c93a5fe53e" name="a522f05053a18b752356b80c93a5fe53e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a522f05053a18b752356b80c93a5fe53e">&#9670;&#160;</a></span>for_each_tuple()</h2>
 
@@ -503,6 +584,31 @@ Example usage</h1>
 <div class="line">     &quot;value&quot;: &quot;4217&quot;</div>
 <div class="line">}</div>
 </div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>The node name is only used if the node is nested in a <b>container node</b> or <b>root node</b>. <b>A value node never contains its own name!</b> </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a4c254331db0c72dc1fe2e32ab94ececf" name="a4c254331db0c72dc1fe2e32ab94ececf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c254331db0c72dc1fe2e32ab94ececf">&#9670;&#160;</a></span>ABI_VERSION</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr int smu_server::ABI_VERSION = 1</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Version of ABI. </p>
 
 </div>
 </div>

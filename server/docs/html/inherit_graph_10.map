@@ -1,3 +1,9 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$classsmu__server_1_1IPC__IO.html" title="The class with async IPC Input&#45;Output class to send/receive raw messages." alt="" coords="5,5,153,31"/>
+<area shape="rect" id="Node000000" href="$classsmu__server_1_1IModule.html" title="The Interface Module class." alt="" coords="5,55,164,80"/>
+<area shape="rect" id="Node000001" href="$classsmu__server_1_1DMI.html" title="A module to get data from DMI/SMBIOS tables." alt="" coords="227,5,359,31"/>
+<area shape="poly" id="edge7_Node000000_Node000001" title=" " alt="" coords="152,49,238,28,239,33,153,54"/>
+<area shape="rect" id="Node000002" href="$classsmu__server_1_1RAM.html" title="A module that allows you to get information about RAM." alt="" coords="225,55,361,80"/>
+<area shape="poly" id="edge8_Node000000_Node000002" title=" " alt="" coords="178,65,225,65,225,70,178,70"/>
+<area shape="rect" id="Node000003" href="$classsmu__server_1_1internals_1_1ProxyModule.html" title="A proxy module that interacts specifically with ABI, but does not collect any data itself." alt="" coords="212,105,375,145"/>
+<area shape="poly" id="edge9_Node000000_Node000003" title=" " alt="" coords="146,81,221,102,219,107,144,86"/>
 </map>

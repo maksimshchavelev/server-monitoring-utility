@@ -1,11 +1,11 @@
 <map id="include/modules" name="include/modules">
 <area shape="rect" id="node1" href="dir_3d69f64eaf81436fe2b22361382717e5.html" title="core" alt="" coords="72,136,123,161"/>
 <area shape="rect" id="node3" href="dir_94dba67126b74f5d6aff8a988b5fa409.html" title="dmi" alt="" coords="110,63,157,88"/>
-<area shape="poly" id="edge1" href="dir_000004_000003.html" alt="" coords="130,90,112,125,107,122,125,87"/>
-<area shape="rect" id="edge1-headlabel" href="dir_000004_000003.html" title="1" alt="" coords="114,116,124,131"/>
+<area shape="poly" id="edge1" href="dir_000005_000004.html" alt="" coords="130,90,112,125,107,122,125,87"/>
+<area shape="rect" id="edge1-headlabel" href="dir_000005_000004.html" title="1" alt="" coords="114,116,124,131"/>
 <area shape="rect" id="node4" href="dir_cf9748d62f770785738c7329e7c22a07.html" title="ram" alt="" coords="37,63,85,88"/>
-<area shape="poly" id="edge2" href="dir_000014_000003.html" alt="" coords="70,87,88,122,83,125,65,90"/>
-<area shape="rect" id="edge2-headlabel" href="dir_000014_000003.html" title="1" alt="" coords="86,109,95,123"/>
+<area shape="poly" id="edge2" href="dir_000017_000004.html" alt="" coords="70,87,88,122,83,125,65,90"/>
+<area shape="rect" id="edge2-headlabel" href="dir_000017_000004.html" title="1" alt="" coords="86,109,95,123"/>
 <area shape="rect" id="clust2" href="dir_2b62a22b82aac776549c15514a2aafcf.html" alt="" coords="27,52,271,99"/>
 <area shape="rect" id="clust1" href="dir_d44c64559bbebec7f509842c48db8b23.html" title="include" alt="" coords="16,16,281,172"/>
 </map>

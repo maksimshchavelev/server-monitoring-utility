@@ -1,0 +1,7 @@
+<map id="smu_server::ABI_MODULE_FUNCTIONS" name="smu_server::ABI_MODULE_FUNCTIONS">
+<area shape="rect" id="Node000001" title="Functions of the module that calls the server core." alt="" coords="111,123,303,163"/>
+<area shape="rect" id="Node000002" href="$structsmu__server_1_1ABI__SERVER__CORE__FUNCTIONS.html" title="Functions provided by the server for the module." alt="" coords="5,5,192,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="125,54,163,97,188,121,184,125,159,101,121,58"/>
+<area shape="rect" id="Node000003" href="$structsmu__server_1_1ABI__CONTEXT.html" title="The context in which the module calls server core functions." alt="" coords="216,13,413,38"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="312,52,303,77,287,100,255,125,252,120,283,97,298,74,307,50"/>
+</map>

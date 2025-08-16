@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['version_2ehpp_0',['version.hpp',['../version_8hpp.html',1,'']]]
+  ['proxy_5fmodule_2ehpp_0',['proxy_module.hpp',['../proxy__module_8hpp.html',1,'']]]
 ];

@@ -1,0 +1,77 @@
+<map id="include/external_module_loader/external_module_loader.hpp" name="include/external_module_loader/external_module_loader.hpp">
+<area shape="rect" id="Node000001" title="File with class for load external .so modules." alt="" coords="929,5,1113,60"/>
+<area shape="rect" id="Node000002" href="$core_8hpp.html" title="File with core of application." alt="" coords="965,108,1076,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1023,60,1023,94,1018,94,1018,60"/>
+<area shape="rect" id="Node000003" href="$module_8hpp.html" title="File with IModule class." alt="" coords="1098,343,1258,368"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="1009,135,982,167,974,186,975,206,986,235,999,255,1040,293,1081,318,1124,336,1122,341,1078,323,1036,297,995,258,982,237,970,207,969,185,977,164,1005,132"/>
+<area shape="rect" id="Node000008" href="$module__registrar_8hpp.html" title=" " alt="" coords="985,181,1206,207"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="1034,131,1075,170,1071,174,1031,135"/>
+<area shape="rect" id="Node000009" href="$app_8hpp.html" title="File Application class." alt="" coords="667,262,742,287"/>
+<area shape="poly" id="edge38_Node000002_Node000009" title=" " alt="" coords="998,136,742,258,740,254,996,131"/>
+<area shape="rect" id="Node000028" href="$metric__constructor_8hpp.html" title="File with metric constructor." alt="" coords="1230,181,1462,207"/>
+<area shape="poly" id="edge39_Node000002_Node000028" title=" " alt="" coords="1074,131,1281,176,1279,181,1072,136"/>
+<area shape="rect" id="Node000004" href="$config_8hpp.html" title="Thread&#45;safe wrapper for storing Json configs." alt="" coords="832,423,921,449"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="1135,371,934,423,933,417,1134,365"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="581,423,655,449"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="1098,370,669,430,669,425,1097,365"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="793,577,880,603"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="876,449,846,565,841,564,871,448"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="913,504,1005,529"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="891,447,939,493,935,496,887,451"/>
+<area shape="poly" id="edge35_Node000008_Node000003" title=" " alt="" coords="1084,209,1068,226,1053,248,1046,271,1046,283,1051,293,1076,319,1109,336,1107,341,1073,323,1046,296,1041,284,1040,271,1049,246,1064,223,1081,205"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="1039,209,756,266,755,261,1038,204"/>
+<area shape="rect" id="Node000026" title=" " alt="" coords="1061,262,1132,287"/>
+<area shape="poly" id="edge36_Node000008_Node000026" title=" " alt="" coords="1098,207,1099,248,1094,248,1093,207"/>
+<area shape="rect" id="Node000027" title=" " alt="" coords="1156,262,1248,287"/>
+<area shape="poly" id="edge37_Node000008_Node000027" title=" " alt="" coords="1113,205,1177,252,1174,256,1109,209"/>
+<area shape="poly" id="edge25_Node000009_Node000003" title=" " alt="" coords="743,280,1096,338,1095,343,742,285"/>
+<area shape="poly" id="edge30_Node000009_Node000005" title=" " alt="" coords="742,275,816,281,905,293,986,312,1017,325,1037,341,1053,364,1061,381,1067,403,1067,429,1061,459,1045,493,1019,531,992,555,960,571,927,582,894,588,893,583,925,577,958,567,989,551,1015,528,1040,490,1055,457,1062,429,1061,404,1056,383,1049,366,1033,345,1014,329,984,317,904,298,816,286,742,280"/>
+<area shape="rect" id="Node000010" href="$cli_8hpp.html" title="File with smu&#45;cli command receiver." alt="" coords="403,343,487,368"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="668,290,496,341,495,336,666,285"/>
+<area shape="rect" id="Node000016" title=" " alt="" coords="441,504,504,529"/>
+<area shape="poly" id="edge33_Node000009_Node000016" title=" " alt="" coords="667,281,597,287,514,299,438,318,410,330,392,344,382,362,380,382,384,402,394,423,421,462,451,493,447,497,417,465,389,425,379,404,375,382,377,361,388,341,407,326,436,313,513,294,596,282,667,276"/>
+<area shape="rect" id="Node000017" href="$config__io_8hpp.html" title=" " alt="" coords="853,343,1023,368"/>
+<area shape="poly" id="edge19_Node000009_Node000017" title=" " alt="" coords="739,285,892,336,891,341,738,290"/>
+<area shape="rect" id="Node000018" href="$logger_8hpp.html" title="Logger class for logging." alt="" coords="5,423,140,449"/>
+<area shape="poly" id="edge23_Node000009_Node000018" title=" " alt="" coords="667,280,554,285,404,296,257,316,198,329,155,345,134,359,116,377,88,413,84,410,112,373,131,355,153,340,197,324,256,310,403,291,553,280,667,274"/>
+<area shape="rect" id="Node000019" href="$network_8hpp.html" title="File with network part of smu&#45;server." alt="" coords="166,343,326,368"/>
+<area shape="poly" id="edge26_Node000009_Node000019" title=" " alt="" coords="668,285,327,343,326,338,667,280"/>
+<area shape="rect" id="Node000023" title=" " alt="" coords="511,343,589,368"/>
+<area shape="poly" id="edge31_Node000009_Node000023" title=" " alt="" coords="683,290,586,339,584,334,681,285"/>
+<area shape="rect" id="Node000024" title=" " alt="" coords="613,343,677,368"/>
+<area shape="poly" id="edge32_Node000009_Node000024" title=" " alt="" coords="698,289,664,333,660,330,694,286"/>
+<area shape="rect" id="Node000025" title=" " alt="" coords="701,343,829,368"/>
+<area shape="poly" id="edge34_Node000009_Node000025" title=" " alt="" coords="716,286,749,330,745,333,711,289"/>
+<area shape="poly" id="edge18_Node000010_Node000007" title=" " alt="" coords="471,366,581,415,579,420,469,370"/>
+<area shape="rect" id="Node000011" href="$ipc_8hpp.html" title="File with smu&#45;cli interprocessor communication tools." alt="" coords="451,423,543,449"/>
+<area shape="poly" id="edge10_Node000010_Node000011" title=" " alt="" coords="455,367,484,410,479,413,450,370"/>
+<area shape="poly" id="edge16_Node000011_Node000005" title=" " alt="" coords="538,446,611,469,692,502,756,535,809,567,806,572,753,539,690,506,609,474,537,451"/>
+<area shape="rect" id="Node000012" href="$ipc__io_8hpp.html" title="File with async IPC Input&#45;Output class to send/receive raw messages." alt="" coords="530,504,679,529"/>
+<area shape="poly" id="edge11_Node000011_Node000012" title=" " alt="" coords="514,447,579,494,576,498,511,451"/>
+<area shape="poly" id="edge17_Node000011_Node000016" title=" " alt="" coords="496,450,483,491,478,490,491,448"/>
+<area shape="poly" id="edge13_Node000012_Node000005" title=" " alt="" coords="643,527,787,571,785,576,641,532"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="677,577,759,603"/>
+<area shape="poly" id="edge12_Node000012_Node000013" title=" " alt="" coords="624,527,690,568,687,572,621,532"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="575,577,634,603"/>
+<area shape="poly" id="edge14_Node000012_Node000014" title=" " alt="" coords="607,530,607,564,602,564,602,530"/>
+<area shape="rect" id="Node000015" title=" " alt="" coords="251,577,348,603"/>
+<area shape="poly" id="edge15_Node000012_Node000015" title=" " alt="" coords="556,532,362,577,361,572,555,527"/>
+<area shape="poly" id="edge20_Node000017_Node000004" title=" " alt="" coords="931,370,896,414,892,411,927,367"/>
+<area shape="poly" id="edge22_Node000017_Node000006" title=" " alt="" coords="942,368,959,490,953,490,937,368"/>
+<area shape="poly" id="edge21_Node000017_Node000013" title=" " alt="" coords="904,371,862,390,821,418,790,454,764,494,729,566,725,563,759,492,785,451,818,414,859,385,901,366"/>
+<area shape="poly" id="edge24_Node000018_Node000015" title=" " alt="" coords="78,448,91,487,104,509,120,527,147,546,177,560,238,578,236,583,175,565,144,551,116,531,99,512,87,489,73,450"/>
+<area shape="rect" id="Node000020" href="$websocket__main__controller_8hpp.html" title="Main websocket controller." alt="" coords="164,416,328,456"/>
+<area shape="poly" id="edge27_Node000019_Node000020" title=" " alt="" coords="249,368,249,402,243,402,243,368"/>
+<area shape="rect" id="Node000021" title=" " alt="" coords="197,504,415,529"/>
+<area shape="poly" id="edge28_Node000020_Node000021" title=" " alt="" coords="263,455,291,491,287,495,258,458"/>
+<area shape="rect" id="Node000022" title=" " alt="" coords="130,504,173,529"/>
+<area shape="poly" id="edge29_Node000020_Node000022" title=" " alt="" coords="225,458,178,497,175,493,221,454"/>
+<area shape="rect" id="Node000029" href="$metric__constructor__nodes_8hpp.html" title="File with metric constructor." alt="" coords="1274,255,1418,295"/>
+<area shape="poly" id="edge40_Node000028_Node000029" title=" " alt="" coords="1349,207,1349,241,1343,241,1343,207"/>
+<area shape="poly" id="edge41_Node000029_Node000006" title=" " alt="" coords="1336,297,1309,333,1272,370,1205,415,1134,452,1066,481,1010,502,1008,497,1064,476,1132,447,1202,410,1268,366,1305,330,1332,293"/>
+<area shape="rect" id="Node000030" title=" " alt="" coords="1381,423,1436,449"/>
+<area shape="poly" id="edge42_Node000029_Node000030" title=" " alt="" coords="1352,294,1361,329,1374,367,1396,410,1392,413,1369,369,1356,330,1347,295"/>
+<area shape="rect" id="Node000031" href="$for__each__tuple_8hpp.html" title="File with for_each_tuple implementation." alt="" coords="1383,343,1562,368"/>
+<area shape="poly" id="edge43_Node000029_Node000031" title=" " alt="" coords="1378,293,1444,333,1441,338,1375,297"/>
+<area shape="poly" id="edge44_Node000031_Node000030" title=" " alt="" coords="1465,370,1429,414,1425,411,1461,366"/>
+</map>

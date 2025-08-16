@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ram_0',['RAM',['../classsmu__server_1_1RAM.html',1,'smu_server']]]
+  ['network_0',['Network',['../classsmu__server_1_1Network.html',1,'smu_server']]]
 ];
