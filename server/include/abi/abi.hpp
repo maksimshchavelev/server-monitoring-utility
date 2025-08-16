@@ -59,6 +59,8 @@ struct __attribute__((packed)) ABI_MODULE_FUNCTIONS {
     (ABI_SERVER_CORE_FUNCTIONS server_functions,
      const char*               json_configuration); ///< Initializes module
 
+    void (*module_destroy)(); ///< Destroys module
+
     const char* (*module_get_configuraion)(); ///< Get module json configuration
 
     const char* (*module_get_data)(); ///< Get json module data
