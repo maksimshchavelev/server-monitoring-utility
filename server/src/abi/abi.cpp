@@ -40,8 +40,9 @@ void abi_log(ABI_CONTEXT* context, int log_type, const char* message) {
     }
 
     // For example: [MODULE RAM] Initialization error!
+    const char* module_name = context->module_name;
     logger().log_colorless(std::format(
-        "[MODULE \033[36m{}\033[0m] {}{}\033[0m", context->module_name, color, message));
+        "[MODULE \033[36m{}\033[0m] {}{}\033[0m", module_name, color, message));
 }
 
 } // namespace smu_server
