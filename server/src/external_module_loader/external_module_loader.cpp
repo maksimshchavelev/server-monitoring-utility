@@ -6,8 +6,6 @@
  * @brief File with class for load external .so modules
  */
 
-#pragma once
-
 #include "external_module_loader/external_module_loader.hpp"
 #include "external_module_loader/internals/proxy_module.hpp"
 #include <dlfcn.h>
