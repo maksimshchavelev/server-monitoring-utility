@@ -141,9 +141,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a95e788d97c1c26e50c7c5c9b2ef78956" id="r_a95e788d97c1c26e50c7c5c9b2ef78956"><td class="memItemLeft" align="right" valign="top">virtual const <a class="el" href="classsmu__server_1_1Config.html">Config</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1IModule.html#a95e788d97c1c26e50c7c5c9b2ef78956">get_configuration</a> () const noexcept</td></tr>
 <tr class="memdesc:a95e788d97c1c26e50c7c5c9b2ef78956"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method for obtaining module configuration.  <br /></td></tr>
 <tr class="separator:a95e788d97c1c26e50c7c5c9b2ef78956"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1ae4b0e7d1d57a492fc8036203cf3d0c" id="r_a1ae4b0e7d1d57a492fc8036203cf3d0c"><td class="memItemLeft" align="right" valign="top">virtual std::optional&lt; Json::Value &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1IModule.html#a1ae4b0e7d1d57a492fc8036203cf3d0c">get_data</a> ()=0</td></tr>
-<tr class="memdesc:a1ae4b0e7d1d57a492fc8036203cf3d0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get module data to send to the client.  <br /></td></tr>
-<tr class="separator:a1ae4b0e7d1d57a492fc8036203cf3d0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8856549ce7ec4f8dd7090e4da93bbbd8" id="r_a8856549ce7ec4f8dd7090e4da93bbbd8"><td class="memItemLeft" align="right" valign="top">virtual std::optional&lt; std::vector&lt; uint8_t &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1IModule.html#a8856549ce7ec4f8dd7090e4da93bbbd8">get_data</a> ()=0</td></tr>
+<tr class="memdesc:a8856549ce7ec4f8dd7090e4da93bbbd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get module data to send to the client.  <br /></td></tr>
+<tr class="separator:a8856549ce7ec4f8dd7090e4da93bbbd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa864a3b435f889dbd9a1fc5df5d29ca8" id="r_aa864a3b435f889dbd9a1fc5df5d29ca8"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1IModule.html#aa864a3b435f889dbd9a1fc5df5d29ca8">enable</a> ()</td></tr>
 <tr class="memdesc:aa864a3b435f889dbd9a1fc5df5d29ca8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable module.  <br /></td></tr>
 <tr class="separator:aa864a3b435f889dbd9a1fc5df5d29ca8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -377,8 +377,8 @@ Friends</h2></td></tr>
 
 </div>
 </div>
-<a id="a1ae4b0e7d1d57a492fc8036203cf3d0c" name="a1ae4b0e7d1d57a492fc8036203cf3d0c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1ae4b0e7d1d57a492fc8036203cf3d0c">&#9670;&#160;</a></span>get_data()</h2>
+<a id="a8856549ce7ec4f8dd7090e4da93bbbd8" name="a8856549ce7ec4f8dd7090e4da93bbbd8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8856549ce7ec4f8dd7090e4da93bbbd8">&#9670;&#160;</a></span>get_data()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -387,7 +387,7 @@ Friends</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual std::optional&lt; Json::Value &gt; smu_server::IModule::get_data </td>
+          <td class="memname">virtual std::optional&lt; std::vector&lt; uint8_t &gt; &gt; smu_server::IModule::get_data </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -407,6 +407,7 @@ Friends</h2></td></tr>
 <a class="el" href="namespacesmu__server.html#a0290ea5f19c20a5ad90d4837a627fb88" title="Creates a node that contains other nodes.">make_container_node</a> </dd>
 <dd>
 <a class="el" href="namespacesmu__server.html#a219dae7d70a890e3fb0740451fbf5dbe" title="Creates a node with the value.">make_value_node</a> </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><code>std::vector&lt;uint8_t&gt;</code> with bytes in MDTP protocol </dd></dl>
 
 <p>Implemented in <a class="el" href="classsmu__server_1_1internals_1_1ProxyModule.html#aae999699fb07738b3e90700566e1978e">smu_server::internals::ProxyModule</a>, <a class="el" href="classsmu__server_1_1DMI.html#a5d6a1023b987253b607a4055fbf8fa50">smu_server::DMI</a>, and <a class="el" href="classsmu__server_1_1RAM.html#a8bb83b1235b67b3f80b9e1c079d101b6">smu_server::RAM</a>.</p>
 
