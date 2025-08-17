@@ -365,11 +365,14 @@ template <typename... Children> class MetricContainerNode : public IMetricNode<C
             root["type"] = "container";
         }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
         // Iterate through the descendants and recursively call get_json. The recursion will stop
         // as soon as we reach the node-value. The obtained objects are placed with the desired
         // name in root and return
         for_each_tuple(IMetricNode<Children...>::m_children,
                        [this, &root](auto& child) { root[child->get_name()] = child->to_json(); });
+#pragma GCC diagnostic pop
 
         return root;
     }
