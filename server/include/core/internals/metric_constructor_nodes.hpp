@@ -422,8 +422,13 @@ template <typename... Children> class MetricContainerNode : public IMetricNode<C
 
         // If node type is root, insert header
         if (IMetricNode<Children...>::m_is_root) {
-            write_ubyte_be(result, 0, MDTP_VERSION);                           // write version
-            write_uint32_be(result, 1, static_cast<uint32_t>(payload.size())); // write payload size
+            write_ubyte_be(result, 0, MDTP_VERSION); // write version
+            write_uint32_be(
+                result,
+                1,
+                static_cast<uint32_t>(payload.size() + 1 /* node type */ + 4 /* name length */ +
+                                      IMetricNode<Children...>::m_name.length() /* name */
+                                      + 4 /* payload size */));                 // write tail size
         }
 
         return result;
