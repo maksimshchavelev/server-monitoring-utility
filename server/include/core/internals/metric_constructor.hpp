@@ -36,7 +36,7 @@ namespace smu_server {
  * @code{.cpp}
  * // The metric value can be either a number or a string; it is converted
  * // to a string if needed.
- * auto node = make_value_node("RAM usage", 4217, "MB");
+ * auto node = make_value_node("RAM usage", 4217, "MB")->to_json();
  * @endcode
  *
  * This code gives json fragment:
@@ -120,7 +120,7 @@ inline auto make_value_node(const std::string& metric_name,
  * auto cpu = make_container_node("CPU",
  *      make_value_node("temperature", 75, "C"),
  *      make_value_node("frequency", "3.5", "GHz")
- * );
+ * )->to_json();
  * @endcode
  *
  * This code gives json fragment:
@@ -226,7 +226,7 @@ inline auto make_container_node(const std::string& container_name, Children&&...
  * @code{.cpp}
  * auto root = make_root_node(
  *      make_value_node("RAM usage", "4217", "MB")
- * );
+ * )->to_json();
  * @endcode
  *
  * This code will produce a json of the form:
