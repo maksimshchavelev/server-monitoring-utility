@@ -25,5 +25,6 @@ var namespacesmu__server =
     [ "make_container_node", "namespacesmu__server.html#a0290ea5f19c20a5ad90d4837a627fb88", null ],
     [ "make_root_node", "namespacesmu__server.html#a23038498ffcba3c5453a07ab861d13cf", null ],
     [ "make_value_node", "namespacesmu__server.html#a219dae7d70a890e3fb0740451fbf5dbe", null ],
-    [ "ABI_VERSION", "namespacesmu__server.html#a4c254331db0c72dc1fe2e32ab94ececf", null ]
+    [ "ABI_VERSION", "namespacesmu__server.html#a4c254331db0c72dc1fe2e32ab94ececf", null ],
+    [ "MDTP_VERSION", "namespacesmu__server.html#a0fee28ffb64000aebdddc5c1afc99d3f", null ]
 ];

@@ -57,6 +57,7 @@ var NAVTREE =
         [ "Example 3: Complex container with multiple subsystems", "md_for-developers_2modules_24__mdtp.html#autotoc_md30", null ]
       ] ]
     ] ],
+    [ "Deprecated List", "deprecated.html", null ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
       [ "Namespace Members", "namespacemembers.html", [
@@ -90,7 +91,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "abi_8hpp.html",
-"classsmu__server_1_1internals_1_1ProxyModule.html#a608995fa4ff02a8160cae996d1fae6d9"
+"classsmu__server_1_1internals_1_1ProxyModule.html#a36b6641cdd0b73a935b6733323d11413"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
