@@ -93,17 +93,14 @@ TEST(MetricConstructor, ContainerNode_WithTwoChildren_MDTP_Layout) {
 
 
 // ---------- ROOT NODE ----------
-// Root is an unnamed container: [type=0][name_len=0][payload_size][payload...]
-
-TEST(MetricConstructor, RootNode_IsContainerWithEmptyName) {
-    auto a = make_value_node("uptime", "1234", "s")->to_mdtp(); // 1+4+6+4+1+4+4 = 24
-    auto b = make_value_node("load", 56, "%")->to_mdtp();       // 20
-
+TEST(MetricConstructor, RootNode_WithFrameHeader) {
+    // Prepare children
+    auto a = make_value_node("uptime", "1234", "s")->to_mdtp(); // 24 bytes
+    auto b = make_value_node("load", 56, "%")->to_mdtp();       // 20 bytes
     ASSERT_EQ(a.size(), 24u);
     ASSERT_EQ(b.size(), 20u);
 
     std::vector<uint8_t> children_concat;
-    children_concat.reserve(a.size() + b.size());
     children_concat.insert(children_concat.end(), a.begin(), a.end());
     children_concat.insert(children_concat.end(), b.begin(), b.end());
     ASSERT_EQ(children_concat.size(), 44u);
@@ -113,21 +110,30 @@ TEST(MetricConstructor, RootNode_IsContainerWithEmptyName) {
                     make_value_node("load", 56, "%")
                     )->to_mdtp();
 
-    // Total size of root: 1 + 4 + 0 + 4 + 44 = 53
-    ASSERT_EQ(root.size(), 53u);
+    // Sizes
+    const size_t frame_header = 5;          // version + payload size
+    const size_t container_header = 9;      // type + name_len + name(0) + payload_size
+    const size_t children_size = 44;
+    const size_t expected_total = frame_header + container_header + children_size; // 58
 
-    // [0] type = container
-    EXPECT_EQ(root[0], 0);
+    ASSERT_EQ(root.size(), expected_total);
 
-    // [1..4] name length = 0
-    EXPECT_EQ(internals::read_uint32_be(root, 1), 0u);
+    // --- Frame header ---
+    EXPECT_EQ(root[0], 1); // version
 
-    // [5..8] payload size = 44
-    EXPECT_EQ(internals::read_uint32_be(root, 5), 44u);
+    // Payload size should include container header + children = 9 + 44 = 53
+    EXPECT_EQ(internals::read_uint32_be(root, 1), 53u);
 
-    // payload begins from offset = 9
-    const size_t payload_offset = 9;
-    ASSERT_LE(payload_offset + children_concat.size(), root.size());
+    // --- Root container header (starts at offset 5) ---
+    const size_t offset = frame_header;
+
+    EXPECT_EQ(root[offset], 0); // type = container
+    EXPECT_EQ(internals::read_uint32_be(root, offset + 1), 0u); // name length = 0
+    EXPECT_EQ(internals::read_uint32_be(root, offset + 5), 44u); // payload size = children
+
+    // --- Root container payload (children) ---
     EXPECT_TRUE(std::equal(children_concat.begin(), children_concat.end(),
-                           root.begin() + payload_offset));
+                           root.begin() + frame_header + container_header));
 }
+
+
