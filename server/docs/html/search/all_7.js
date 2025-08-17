@@ -1,12 +1,10 @@
 var searchData=
 [
-  ['empty_0',['empty',['../classsmu__server_1_1Config.html#a85349866f1ce6dae04eabc87f5116a50',1,'smu_server::Config']]],
-  ['enable_1',['enable',['../classsmu__server_1_1IModule.html#aa864a3b435f889dbd9a1fc5df5d29ca8',1,'smu_server::IModule::enable()'],['../classsmu__server_1_1internals_1_1ProxyModule.html#a36b6641cdd0b73a935b6733323d11413',1,'smu_server::internals::ProxyModule::enable()'],['../classsmu__server_1_1DMI.html#a5be4632a07a1f22bddc5e0db9b3b3a79',1,'smu_server::DMI::enable()'],['../classsmu__server_1_1RAM.html#a7536fa78c74e0f0e78df5dabf722bcab',1,'smu_server::RAM::enable()']]],
-  ['enable_20and_20disable_2',['enable() and disable()',['../md_for-developers_2modules_21__own__module.html#autotoc_md8',1,'']]],
-  ['entire_20json_20tree_20when_20creating_20modules_3',['Storing the entire JSON tree when creating modules',['../md_for-developers_2modules_23__storing__json__tree.html',1,'']]],
-  ['error_4',['error',['../classsmu__server_1_1IModule.html#aa189a7c389bd96a3caa1adb0f0bdc7bdabb1ca97ec761fc37101737ba0aa2e7c5',1,'smu_server::IModule::ERROR'],['../classsmu__server_1_1Logger.html#a41aafc267cf295e67590b6534067a8e3abb1ca97ec761fc37101737ba0aa2e7c5',1,'smu_server::Logger::ERROR']]],
-  ['example_5',['example',['../classsmu__server_1_1internals_1_1MetricValueNode.html#example',1,'Example'],['../md_for-developers_2modules_22__static__data__modules.html#autotoc_md18',1,'Example']]],
-  ['example_20usage_6',['Example usage',['../namespacesmu__server_1_1internals.html#example_usage',1,'']]],
-  ['external_5fmodule_5floader_2ehpp_7',['external_module_loader.hpp',['../external__module__loader_8hpp.html',1,'']]],
-  ['externalmoduleloader_8',['ExternalModuleLoader',['../classsmu__server_1_1ExternalModuleLoader.html',1,'smu_server']]]
+  ['data_0',['Creating modules with static data',['../md_for-developers_2modules_22__static__data__modules.html',1,'']]],
+  ['data_20transmission_20protocol_1',['Module Data Transmission Protocol',['../md_for-developers_2modules_24__mdtp.html',1,'']]],
+  ['developer_20guide_2',['Developer Guide',['../md_for-developers_2beginning.html',1,'']]],
+  ['developing_20your_20own_20module_3',['Developing Your Own Module',['../md_for-developers_2modules_21__own__module.html',1,'']]],
+  ['disable_4',['disable',['../classsmu__server_1_1IModule.html#a5ef057292c4a5f9b5a37155516a7b071',1,'smu_server::IModule::disable()'],['../classsmu__server_1_1internals_1_1ProxyModule.html#ad70a569715e34e5fd3042e2d663bbd69',1,'smu_server::internals::ProxyModule::disable()'],['../classsmu__server_1_1DMI.html#aa97682f6ea08fdaa06107be456813970',1,'smu_server::DMI::disable()'],['../classsmu__server_1_1RAM.html#a3032638936ba60de63b9b5b9cfcaae2b',1,'smu_server::RAM::disable()'],['../md_for-developers_2modules_21__own__module.html#autotoc_md8',1,'enable() and disable()']]],
+  ['dmi_5',['dmi',['../classsmu__server_1_1DMI.html',1,'smu_server::DMI'],['../classsmu__server_1_1DMI.html#aada50cf4d50fd875df640d9f3c4c36bf',1,'smu_server::DMI::DMI()']]],
+  ['dmi_2ehpp_6',['dmi.hpp',['../dmi_8hpp.html',1,'']]]
 ];

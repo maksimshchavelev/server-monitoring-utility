@@ -1,25 +1,10 @@
 var searchData=
 [
-  ['save_5fmodule_5fconfig_0',['save_module_config',['../classsmu__server_1_1Config__IO.html#a782bdb408593b4c369306a65596ce214',1,'smu_server::Config_IO']]],
-  ['save_5fserver_5fconfig_1',['save_server_config',['../classsmu__server_1_1Config__IO.html#a1b6787f583f86672ce210d79f72190c4',1,'smu_server::Config_IO']]],
-  ['section_2',['Practical Section',['../md_for-developers_2modules_21__own__module.html#autotoc_md13',1,'']]],
-  ['send_5feveryone_3',['send_everyone',['../classsmu__server_1_1MainWebsocketController.html#ab51c90ae6e3a045ccb8342be5d09e30d',1,'smu_server::MainWebsocketController::send_everyone()'],['../classsmu__server_1_1Network.html#aeaee190159a388a6b429ca98bd950fae',1,'smu_server::Network::send_everyone()']]],
-  ['server_4',['server',['../index.html#autotoc_md25',1,'How to build smu-server?'],['../index.html',1,'smu-server']]],
-  ['server_5ffunctions_5',['server_functions',['../structsmu__server_1_1ABI__MODULE__FUNCTIONS.html#a03f3adb53aa1b644448d64dce04cfcc9',1,'smu_server::ABI_MODULE_FUNCTIONS']]],
-  ['set_6',['set',['../classsmu__server_1_1Config.html#ab6a96866f5eb401124e17144d7eb24c7',1,'smu_server::Config']]],
-  ['set_5fpoll_5fratio_7',['set_poll_ratio',['../classsmu__server_1_1IModule.html#a844f0b53bfcb56be8ae9636012fbaa6b',1,'smu_server::IModule::set_poll_ratio()'],['../classsmu__server_1_1internals_1_1ProxyModule.html#a994f5b6c31e6dfef129240d955521efd',1,'smu_server::internals::ProxyModule::set_poll_ratio()']]],
-  ['set_5fpoll_5fratio_20and_20get_5fpoll_5fratio_8',['set_poll_ratio and get_poll_ratio',['../md_for-developers_2modules_21__own__module.html#autotoc_md10',1,'']]],
-  ['size_9',['size',['../classsmu__server_1_1Config.html#a5687bcd35dce87a9cbb2b4a03193f061',1,'smu_server::Config']]],
-  ['smu_20server_10',['smu server',['../index.html#autotoc_md25',1,'How to build smu-server?'],['../index.html',1,'smu-server']]],
-  ['smu_5fserver_11',['smu_server',['../namespacesmu__server.html',1,'']]],
-  ['smu_5fserver_3a_3ainternals_12',['internals',['../namespacesmu__server_1_1internals.html',1,'smu_server']]],
-  ['solution_13',['Solution',['../md_for-developers_2modules_23__storing__json__tree.html#autotoc_md22',1,'']]],
-  ['started_20general_20concept_14',['Getting Started. General Concept',['../md_for-developers_2modules_21__own__module.html#autotoc_md3',1,'']]],
-  ['static_20data_15',['Creating modules with static data',['../md_for-developers_2modules_22__static__data__modules.html',1,'']]],
-  ['stop_16',['STOP',['../classsmu__server_1_1IPC.html#acb16f6685fbd659bc87d15236c72c501a615a46af313786fc4e349f34118be111',1,'smu_server::IPC']]],
-  ['storing_20the_20entire_20json_20tree_20when_20creating_20modules_17',['Storing the entire JSON tree when creating modules',['../md_for-developers_2modules_23__storing__json__tree.html',1,'']]],
-  ['str_18',['str',['../classsmu__server_1_1internals_1_1StringWrapper.html#a6ce7946f708678a5478f0af40d7bd40b',1,'smu_server::internals::StringWrapper']]],
-  ['stringwrapper_19',['stringwrapper',['../classsmu__server_1_1internals_1_1StringWrapper.html#ac100a87a07c37ea605ae92be5a08c6fa',1,'smu_server::internals::StringWrapper::StringWrapper()'],['../classsmu__server_1_1internals_1_1StringWrapper.html',1,'smu_server::internals::StringWrapper&lt; N &gt;']]],
-  ['success_20',['SUCCESS',['../classsmu__server_1_1Logger.html#a41aafc267cf295e67590b6534067a8e3ad0749aaba8b833466dfcbb0428e4f89c',1,'smu_server::Logger']]],
-  ['summary_21',['summary',['../md_for-developers_2modules_21__own__module.html#autotoc_md14',1,'Summary'],['../md_for-developers_2modules_22__static__data__modules.html#autotoc_md19',1,'Summary'],['../md_for-developers_2modules_23__storing__json__tree.html#autotoc_md23',1,'Summary']]]
+  ['ram_0',['ram',['../classsmu__server_1_1RAM.html',1,'smu_server::RAM'],['../classsmu__server_1_1RAM.html#afd645cb1386bfa114aec6592174fef43',1,'smu_server::RAM::RAM()']]],
+  ['ram_2ehpp_1',['ram.hpp',['../ram_8hpp.html',1,'']]],
+  ['ratio_2',['What is poll ratio?',['../md_for-developers_2modules_22__static__data__modules.html#autotoc_md17',1,'']]],
+  ['readme_2emd_3',['README.md',['../README_8md.html',1,'']]],
+  ['register_5fmodule_4',['register_module',['../classsmu__server_1_1Application.html#a804ca54e0e861ff72e8ff26837953440',1,'smu_server::Application::register_module()'],['../module__registrar_8hpp.html#a0ae008fd11e0c412f9693acac82e0ab1',1,'REGISTER_MODULE:&#160;module_registrar.hpp']]],
+  ['run_5',['run',['../classsmu__server_1_1IPC.html#acb16f6685fbd659bc87d15236c72c501a855520d2a5b0b1a64b939e7e30889e2a',1,'smu_server::IPC::RUN'],['../classsmu__server_1_1CLI.html#a21f2485388a0e748ca95413a9b5db62c',1,'smu_server::CLI::run()'],['../classsmu__server_1_1IPC.html#aaa8bd6d729d29da5ab06e32d3c3a0198',1,'smu_server::IPC::run()'],['../classsmu__server_1_1Application.html#ac726f23658ee9383f791b1f063a0345b',1,'smu_server::Application::run()'],['../classsmu__server_1_1Network.html#ac7ad6d0b434ee2c55d16131009b8169b',1,'smu_server::Network::run()']]],
+  ['run_5flistening_5fasync_6',['run_listening_async',['../classsmu__server_1_1IPC__IO.html#a772279d15e98027681122165680244c5',1,'smu_server::IPC_IO']]]
 ];

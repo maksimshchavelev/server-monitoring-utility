@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['ram_2ehpp_0',['ram.hpp',['../ram_8hpp.html',1,'']]],
-  ['readme_2emd_1',['README.md',['../README_8md.html',1,'']]]
+  ['proxy_5fmodule_2ehpp_0',['proxy_module.hpp',['../proxy__module_8hpp.html',1,'']]]
 ];

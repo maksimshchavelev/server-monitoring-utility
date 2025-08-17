@@ -1,7 +1,28 @@
 var searchData=
 [
-  ['the_20entire_20json_20tree_20when_20creating_20modules_0',['Storing the entire JSON tree when creating modules',['../md_for-developers_2modules_23__storing__json__tree.html',1,'']]],
-  ['to_20build_20smu_20server_1',['How to build smu-server?',['../index.html#autotoc_md25',1,'']]],
-  ['to_5fjson_2',['to_json',['../structsmu__server_1_1IMetricNodeBase.html#a6316399c6b2518f0a7da75104396c10d',1,'smu_server::IMetricNodeBase::to_json()'],['../classsmu__server_1_1internals_1_1IMetricNode.html#af9ffcf89e9d9a23ae652ac967d516015',1,'smu_server::internals::IMetricNode::to_json()'],['../classsmu__server_1_1internals_1_1MetricValueNode.html#aa4b0cf35997500b03adca3e4597868e1',1,'smu_server::internals::MetricValueNode::to_json()'],['../classsmu__server_1_1internals_1_1MetricContainerNode.html#aeb9520298cce9afa7d55d943de2812cd',1,'smu_server::internals::MetricContainerNode::to_json()']]],
-  ['tree_20when_20creating_20modules_3',['Storing the entire JSON tree when creating modules',['../md_for-developers_2modules_23__storing__json__tree.html',1,'']]]
+  ['save_5fmodule_5fconfig_0',['save_module_config',['../classsmu__server_1_1Config__IO.html#a782bdb408593b4c369306a65596ce214',1,'smu_server::Config_IO']]],
+  ['save_5fserver_5fconfig_1',['save_server_config',['../classsmu__server_1_1Config__IO.html#a1b6787f583f86672ce210d79f72190c4',1,'smu_server::Config_IO']]],
+  ['section_2',['Practical Section',['../md_for-developers_2modules_21__own__module.html#autotoc_md13',1,'']]],
+  ['send_5feveryone_3',['send_everyone',['../classsmu__server_1_1MainWebsocketController.html#ab51c90ae6e3a045ccb8342be5d09e30d',1,'smu_server::MainWebsocketController::send_everyone()'],['../classsmu__server_1_1Network.html#aeaee190159a388a6b429ca98bd950fae',1,'smu_server::Network::send_everyone()']]],
+  ['server_4',['server',['../index.html#autotoc_md32',1,'How to build smu-server?'],['../index.html',1,'smu-server']]],
+  ['server_5ffunctions_5',['server_functions',['../structsmu__server_1_1ABI__MODULE__FUNCTIONS.html#a03f3adb53aa1b644448d64dce04cfcc9',1,'smu_server::ABI_MODULE_FUNCTIONS']]],
+  ['set_6',['set',['../classsmu__server_1_1Config.html#ab6a96866f5eb401124e17144d7eb24c7',1,'smu_server::Config']]],
+  ['set_5fpoll_5fratio_7',['set_poll_ratio',['../classsmu__server_1_1IModule.html#a844f0b53bfcb56be8ae9636012fbaa6b',1,'smu_server::IModule::set_poll_ratio()'],['../classsmu__server_1_1internals_1_1ProxyModule.html#a994f5b6c31e6dfef129240d955521efd',1,'smu_server::internals::ProxyModule::set_poll_ratio()']]],
+  ['set_5fpoll_5fratio_20and_20get_5fpoll_5fratio_8',['set_poll_ratio and get_poll_ratio',['../md_for-developers_2modules_21__own__module.html#autotoc_md10',1,'']]],
+  ['simple_20value_20node_9',['Example 1: A simple value node',['../md_for-developers_2modules_24__mdtp.html#autotoc_md28',1,'']]],
+  ['size_10',['size',['../classsmu__server_1_1Config.html#a5687bcd35dce87a9cbb2b4a03193f061',1,'smu_server::Config']]],
+  ['smu_20server_11',['smu server',['../index.html#autotoc_md32',1,'How to build smu-server?'],['../index.html',1,'smu-server']]],
+  ['smu_5fserver_12',['smu_server',['../namespacesmu__server.html',1,'']]],
+  ['smu_5fserver_3a_3ainternals_13',['internals',['../namespacesmu__server_1_1internals.html',1,'smu_server']]],
+  ['solution_14',['Solution',['../md_for-developers_2modules_23__storing__json__tree.html#autotoc_md22',1,'']]],
+  ['started_20general_20concept_15',['Getting Started. General Concept',['../md_for-developers_2modules_21__own__module.html#autotoc_md3',1,'']]],
+  ['static_20data_16',['Creating modules with static data',['../md_for-developers_2modules_22__static__data__modules.html',1,'']]],
+  ['stop_17',['STOP',['../classsmu__server_1_1IPC.html#acb16f6685fbd659bc87d15236c72c501a615a46af313786fc4e349f34118be111',1,'smu_server::IPC']]],
+  ['storing_20the_20entire_20json_20tree_20when_20creating_20modules_18',['Storing the entire JSON tree when creating modules',['../md_for-developers_2modules_23__storing__json__tree.html',1,'']]],
+  ['str_19',['str',['../classsmu__server_1_1internals_1_1StringWrapper.html#a6ce7946f708678a5478f0af40d7bd40b',1,'smu_server::internals::StringWrapper']]],
+  ['stringwrapper_20',['stringwrapper',['../classsmu__server_1_1internals_1_1StringWrapper.html#ac100a87a07c37ea605ae92be5a08c6fa',1,'smu_server::internals::StringWrapper::StringWrapper()'],['../classsmu__server_1_1internals_1_1StringWrapper.html',1,'smu_server::internals::StringWrapper&lt; N &gt;']]],
+  ['structure_20of_20mdtp_21',['Internal structure of MDTP',['../md_for-developers_2modules_24__mdtp.html#autotoc_md26',1,'']]],
+  ['subsystems_22',['Example 3: Complex container with multiple subsystems',['../md_for-developers_2modules_24__mdtp.html#autotoc_md30',1,'']]],
+  ['success_23',['SUCCESS',['../classsmu__server_1_1Logger.html#a41aafc267cf295e67590b6534067a8e3ad0749aaba8b833466dfcbb0428e4f89c',1,'smu_server::Logger']]],
+  ['summary_24',['summary',['../md_for-developers_2modules_21__own__module.html#autotoc_md14',1,'Summary'],['../md_for-developers_2modules_22__static__data__modules.html#autotoc_md19',1,'Summary'],['../md_for-developers_2modules_23__storing__json__tree.html#autotoc_md23',1,'Summary']]]
 ];

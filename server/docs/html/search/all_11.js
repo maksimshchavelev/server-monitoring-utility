@@ -1,12 +1,7 @@
 var searchData=
 [
-  ['poll_20ratio_0',['What is poll ratio?',['../md_for-developers_2modules_22__static__data__modules.html#autotoc_md17',1,'']]],
-  ['practical_20section_1',['Practical Section',['../md_for-developers_2modules_21__own__module.html#autotoc_md13',1,'']]],
-  ['problem_2',['Problem',['../md_for-developers_2modules_23__storing__json__tree.html#autotoc_md21',1,'']]],
-  ['problems_20after_20updating_3',['Problems after updating',['../index.html#autotoc_md27',1,'']]],
-  ['project_5fversion_5fmajor_4',['PROJECT_VERSION_MAJOR',['../version_8hpp.html#abecd2198575b690d25a741857f8390d1',1,'version.hpp']]],
-  ['project_5fversion_5fminor_5',['PROJECT_VERSION_MINOR',['../version_8hpp.html#a43e23009192a3e216fefec17750d8673',1,'version.hpp']]],
-  ['project_5fversion_5fpatch_6',['PROJECT_VERSION_PATCH',['../version_8hpp.html#a4a5fc96a4bdd7d68ed99ccce9ca2e77e',1,'version.hpp']]],
-  ['proxy_5fmodule_2ehpp_7',['proxy_module.hpp',['../proxy__module_8hpp.html',1,'']]],
-  ['proxymodule_8',['proxymodule',['../classsmu__server_1_1internals_1_1ProxyModule.html',1,'smu_server::internals::ProxyModule'],['../classsmu__server_1_1internals_1_1ProxyModule.html#a8d3bbb4cf03ab16a4624d15b63728410',1,'smu_server::internals::ProxyModule::ProxyModule()']]]
+  ['of_20mdtp_0',['Internal structure of MDTP',['../md_for-developers_2modules_24__mdtp.html#autotoc_md26',1,'']]],
+  ['operator_3d_1',['operator=',['../classsmu__server_1_1Config.html#a0440fe08cc61ead28f9b588c13238971',1,'smu_server::Config::operator=(const Config &amp;other)'],['../classsmu__server_1_1Config.html#af2101d0495a6978394783da8e38dc474',1,'smu_server::Config::operator=(Config &amp;&amp;other)']]],
+  ['operator_3d_3d_2',['operator==',['../classsmu__server_1_1Config.html#a2fdcf1e9fd8a484fbcc0158faf6174c0',1,'smu_server::Config']]],
+  ['own_20module_3',['Developing Your Own Module',['../md_for-developers_2modules_21__own__module.html',1,'']]]
 ];

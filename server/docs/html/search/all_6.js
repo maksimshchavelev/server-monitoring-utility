@@ -1,9 +1,25 @@
 var searchData=
 [
-  ['data_0',['Creating modules with static data',['../md_for-developers_2modules_22__static__data__modules.html',1,'']]],
-  ['developer_20guide_1',['Developer Guide',['../md_for-developers_2beginning.html',1,'']]],
-  ['developing_20your_20own_20module_2',['Developing Your Own Module',['../md_for-developers_2modules_21__own__module.html',1,'']]],
-  ['disable_3',['disable',['../classsmu__server_1_1IModule.html#a5ef057292c4a5f9b5a37155516a7b071',1,'smu_server::IModule::disable()'],['../classsmu__server_1_1internals_1_1ProxyModule.html#ad70a569715e34e5fd3042e2d663bbd69',1,'smu_server::internals::ProxyModule::disable()'],['../classsmu__server_1_1DMI.html#aa97682f6ea08fdaa06107be456813970',1,'smu_server::DMI::disable()'],['../classsmu__server_1_1RAM.html#a3032638936ba60de63b9b5b9cfcaae2b',1,'smu_server::RAM::disable()'],['../md_for-developers_2modules_21__own__module.html#autotoc_md8',1,'enable() and disable()']]],
-  ['dmi_4',['dmi',['../classsmu__server_1_1DMI.html',1,'smu_server::DMI'],['../classsmu__server_1_1DMI.html#aada50cf4d50fd875df640d9f3c4c36bf',1,'smu_server::DMI::DMI()']]],
-  ['dmi_2ehpp_5',['dmi.hpp',['../dmi_8hpp.html',1,'']]]
+  ['cli_0',['cli',['../classsmu__server_1_1Application.html#a4c65eb115c3fcb233198a28ea61f3038',1,'smu_server::Application::CLI'],['../classsmu__server_1_1CLI.html#a071ff1a177446a661f9a65ac717c9e58',1,'smu_server::CLI::CLI()'],['../classsmu__server_1_1CLI.html',1,'smu_server::CLI']]],
+  ['cli_2ehpp_1',['cli.hpp',['../cli_8hpp.html',1,'']]],
+  ['collect_5fmetrics_2',['collect_metrics',['../classsmu__server_1_1Application.html#aa9e4dcd24d9c34201fe162fdc9a86085',1,'smu_server::Application']]],
+  ['command_3',['Command',['../classsmu__server_1_1IPC.html#acb16f6685fbd659bc87d15236c72c501',1,'smu_server::IPC']]],
+  ['compile_2dtime_5fconfig_2ehpp_4',['compile-time_config.hpp',['../compile-time__config_8hpp.html',1,'']]],
+  ['complex_20container_20with_20multiple_20subsystems_5',['Example 3: Complex container with multiple subsystems',['../md_for-developers_2modules_24__mdtp.html#autotoc_md30',1,'']]],
+  ['concept_6',['concept',['../md_for-developers_2modules_21__own__module.html#autotoc_md3',1,'Getting Started. General Concept'],['../md_for-developers_2modules_24__mdtp.html#autotoc_md25',1,'MDTP concept']]],
+  ['conclusion_7',['Conclusion',['../index.html#autotoc_md35',1,'']]],
+  ['config_8',['config',['../classsmu__server_1_1Config.html#ad6f481d418e66ee35eb8fc63e607da28',1,'smu_server::Config::Config(const Config &amp;other)'],['../classsmu__server_1_1Config.html#a02482f1f6f6d89eea6fa8ea31bf3de07',1,'smu_server::Config::Config(Config &amp;&amp;other)'],['../classsmu__server_1_1Config.html#ae4008f023a7b4dbe6ffc75c3eb5a1ef3',1,'smu_server::Config::Config(Json::Value json)'],['../classsmu__server_1_1Config.html#ab20f355361632ed64d85968791161a6c',1,'smu_server::Config::Config()'],['../classsmu__server_1_1Config.html',1,'smu_server::Config']]],
+  ['config_2ehpp_9',['config.hpp',['../config_8hpp.html',1,'']]],
+  ['config_5fio_10',['Config_IO',['../classsmu__server_1_1Config__IO.html',1,'smu_server']]],
+  ['config_5fio_2ehpp_11',['config_io.hpp',['../config__io_8hpp.html',1,'']]],
+  ['config_5fpath_12',['CONFIG_PATH',['../compile-time__config_8hpp.html#a863ab5d791c86f9dfff4c6e90624130c',1,'compile-time_config.hpp']]],
+  ['configs_5fdir_13',['CONFIGS_DIR',['../compile-time__config_8hpp.html#a827d2cfc63d4a19fc37d391fb79ae21f',1,'compile-time_config.hpp']]],
+  ['constructor_14',['Constructor',['../md_for-developers_2modules_21__own__module.html#autotoc_md5',1,'']]],
+  ['container_20with_20multiple_20subsystems_15',['Example 3: Complex container with multiple subsystems',['../md_for-developers_2modules_24__mdtp.html#autotoc_md30',1,'']]],
+  ['container_20with_20nested_20nodes_16',['Example 2: Container with nested nodes',['../md_for-developers_2modules_24__mdtp.html#autotoc_md29',1,'']]],
+  ['contains_5fsubstring_17',['contains_substring',['../namespacesmu__server_1_1internals.html#ac6001815b6a093112dcdabc7ba1744f8',1,'smu_server::internals']]],
+  ['core_2ehpp_18',['core.hpp',['../core_8hpp.html',1,'']]],
+  ['creating_20modules_19',['Storing the entire JSON tree when creating modules',['../md_for-developers_2modules_23__storing__json__tree.html',1,'']]],
+  ['creating_20modules_20with_20static_20data_20',['Creating modules with static data',['../md_for-developers_2modules_22__static__data__modules.html',1,'']]],
+  ['creation_21',['Module creation',['../md_for-developers_2beginning.html#autotoc_md1',1,'']]]
 ];
