@@ -32,7 +32,7 @@ void Network::run(uint16_t port, std::function<void()> callback) {
 
 
 // Public method
-void Network::send_everyone(const Json::Value& data) {
+void Network::send_everyone(const std::vector<uint8_t>& data) {
     m_main_ws_controller->send_everyone(data);
 }
 
