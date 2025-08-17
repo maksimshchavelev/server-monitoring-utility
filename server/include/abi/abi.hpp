@@ -29,6 +29,16 @@ struct __attribute__((packed)) ABI_CONTEXT {
 
 
 /**
+ * @brief Struct to storing MDTP data. See documentation for MDTP protocol
+ * @note This is a packaged structure.
+ */
+struct __attribute__((packed)) ABI_MDTP_DATA {
+    const uint8_t* data; ///< Pointer to data
+    const uint32_t size; ///< Size of data
+};
+
+
+/**
  * @brief Functions provided by the server for the module
  *
  * This structure will be passed to the module initialization function.
@@ -63,7 +73,7 @@ struct __attribute__((packed)) ABI_MODULE_FUNCTIONS {
 
     const char* (*module_get_configuraion)(); ///< Get module json configuration
 
-    const char* (*module_get_data)(); ///< Get json module data
+    ABI_MDTP_DATA (*module_get_data)(); ///< Get MDTP module data
 
     void (*module_enable)(); ///< Enables a module
 
