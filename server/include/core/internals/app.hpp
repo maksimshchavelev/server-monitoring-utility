@@ -195,7 +195,7 @@ class Application {
     ///<
     ///< Storing `std::string_view` is safe because the module name exists throughout its lifetime
     ///< and the server core does not delete the module.
-    std::unordered_map<std::string_view /* module name */, std::vector<uint8_t> /* cached data */>
+    std::unordered_map<std::string /* module name */, std::vector<uint8_t> /* cached data */>
         m_module_cache;
 
 
