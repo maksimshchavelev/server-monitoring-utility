@@ -15,6 +15,8 @@
 
 namespace smu_server {
 
+constexpr uint8_t MDTP_VERSION = 1;
+
 /**
  * @brief The Base IMetricNode class to simplify the storage of data obtained from
  * `smu_server::make_root_node`
@@ -375,7 +377,15 @@ template <typename... Children> class MetricContainerNode : public IMetricNode<C
                           IMetricNode<Children...>::m_name.length() /* name */
                           + 4 /* payload size */ + 0 /* payload */,
                       0x0 /* fill by 0x0 */);
+
         std::size_t offset = 0;
+
+        // If node type is root
+        if (IMetricNode<Children...>::m_is_root) {
+            // Add header
+            result.resize(result.size() + 1 /* version */ + 4 /* payload size */);
+            offset = 5; // After header
+        }
 
         // Payload
         std::vector<uint8_t> payload;
@@ -393,7 +403,8 @@ template <typename... Children> class MetricContainerNode : public IMetricNode<C
         ++offset;
 
         // Write node name length
-        write_uint32_be(result, offset, static_cast<uint32_t>(IMetricNode<Children...>::m_name.length()));
+        write_uint32_be(
+            result, offset, static_cast<uint32_t>(IMetricNode<Children...>::m_name.length()));
         offset += 4;
 
         // Write node name
@@ -408,6 +419,12 @@ template <typename... Children> class MetricContainerNode : public IMetricNode<C
 
         // Write payload
         std::copy(payload.begin(), payload.end(), std::back_inserter(result));
+
+        // If node type is root, insert header
+        if (IMetricNode<Children...>::m_is_root) {
+            write_ubyte_be(result, 0, MDTP_VERSION);                           // write version
+            write_uint32_be(result, 1, static_cast<uint32_t>(payload.size())); // write payload size
+        }
 
         return result;
     }
