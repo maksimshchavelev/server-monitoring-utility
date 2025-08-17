@@ -8,6 +8,7 @@
 
 #pragma once
 
+#include "memutils.hpp"
 #include <json/json.h>
 #include <tuple>
 #include <utils/for_each_tuple.hpp>
@@ -45,6 +46,17 @@ struct IMetricNodeBase {
      * @return The generated json
      */
     virtual Json::Value to_json() const = 0;
+
+
+    /**
+     * @brief Generates binary data in MDTP protocol format.
+     *
+     * See the developer documentation for the MDTP protocol specification and examples.
+     *
+     * @return `std::vector<uint8_t>` with bytes
+     */
+    virtual std::vector<uint8_t> to_mdtp() const = 0;
+
 
     /**
      * @brief Does nothing
@@ -117,6 +129,18 @@ template <typename... Children> class IMetricNode : public IMetricNodeBase {
      * @return The generated json
      */
     virtual Json::Value to_json() const = 0;
+
+
+
+
+    /**
+     * @brief Generates binary data in MDTP protocol format.
+     *
+     * See the developer documentation for the MDTP protocol specification and examples.
+     *
+     * @return `std::vector<uint8_t>` with bytes
+     */
+    virtual std::vector<uint8_t> to_mdtp() const = 0;
 
 
 
@@ -210,6 +234,54 @@ class MetricValueNode : public IMetricNode<> {
 
         return root;
     }
+
+
+
+
+    /**
+     * @brief Generates binary data in MDTP protocol format.
+     *
+     * See the developer documentation for the MDTP protocol specification and examples.
+     *
+     * @return `std::vector<uint8_t>` with bytes
+     */
+    std::vector<uint8_t> to_mdtp() const override {
+        std::vector<uint8_t> result;
+        result.resize(1 /* node type */ + 4 /* name length */ + m_name.length() /* name */ +
+                          4 /* units length */ + m_units.length() /* units */ +
+                          4 /* value length */ + m_value.length() /* value */,
+                      0x0 /* fill by 0x0 */);
+        std::size_t offset = 0;
+
+        // Write node type (1 is value node)
+        write_ubyte_be(result, offset, 1);
+        ++offset;
+
+        // Write name length
+        write_uint32_be(result, offset, static_cast<uint32_t>(m_name.length()));
+        offset += 4;
+
+        // Write name
+        std::copy(m_name.begin(), m_name.end(), result.data() + offset);
+        offset += m_name.length();
+
+        // Write units length
+        write_uint32_be(result, offset, static_cast<uint32_t>(m_units.length()));
+        offset += 4;
+
+        // Write units
+        std::copy(m_units.begin(), m_units.end(), result.data() + offset);
+        offset += m_units.length();
+
+        // Write value length
+        write_uint32_be(result, offset, static_cast<uint32_t>(m_value.length()));
+        offset += 4;
+
+        // Write value
+        std::copy(m_value.begin(), m_value.end(), result.data() + offset);
+
+        return result;
+    }
 };
 
 
@@ -285,6 +357,59 @@ template <typename... Children> class MetricContainerNode : public IMetricNode<C
                        [this, &root](auto& child) { root[child->get_name()] = child->to_json(); });
 
         return root;
+    }
+
+
+
+
+    /**
+     * @brief Generates binary data in MDTP protocol format.
+     *
+     * See the developer documentation for the MDTP protocol specification and examples.
+     *
+     * @return `std::vector<uint8_t>` with bytes
+     */
+    std::vector<uint8_t> to_mdtp() const override {
+        std::vector<uint8_t> result;
+        result.resize(1 /* node type */ + 4 /* name length */ +
+                          IMetricNode<Children...>::m_name.length() /* name */
+                          + 4 /* payload size */ + 0 /* payload */,
+                      0x0 /* fill by 0x0 */);
+        std::size_t offset = 0;
+
+        // Payload
+        std::vector<uint8_t> payload;
+
+        // Iterate through the descendants and recursively call to_mdtp. The recursion will stop
+        // as soon as we reach the node-value. The obtained objects are placed with the desired
+        // name in root and return
+        for_each_tuple(IMetricNode<Children...>::m_children, [this, &payload](auto& child) {
+            auto child_data = child->to_mdtp();
+            payload.insert(payload.end(), child_data.begin(), child_data.end());
+        });
+
+        // Write node type
+        write_ubyte_be(result, offset, 0);
+        ++offset;
+
+        // Write node name length
+        write_uint32_be(result, offset, static_cast<uint32_t>(IMetricNode<Children...>::m_name.length()));
+        offset += 4;
+
+        // Write node name
+        std::copy(IMetricNode<Children...>::m_name.begin(),
+                  IMetricNode<Children...>::m_name.end(),
+                  result.data() + offset);
+        offset += IMetricNode<Children...>::m_name.length();
+
+        // Write payload size
+        write_uint32_be(result, offset, static_cast<uint32_t>(payload.size()));
+        offset += 4;
+
+        // Write payload
+        std::copy(payload.begin(), payload.end(), std::back_inserter(result));
+
+        return result;
     }
 };
 
