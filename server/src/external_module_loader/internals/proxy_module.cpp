@@ -32,27 +32,10 @@ ProxyModule::~ProxyModule() {
 
 
 // Public method
-std::optional<Json::Value> ProxyModule::get_data() {
-    const char* json = m_module_functions.module_get_data();
+std::optional<std::vector<uint8_t>> ProxyModule::get_data() {
+    ABI_MDTP_DATA data = m_module_functions.module_get_data();
 
-    // Error
-    if (json == nullptr) {
-        return std::nullopt;
-    }
-
-    // Converting string to json
-    const auto     raw_json_length = static_cast<int>(strlen(json));
-    JSONCPP_STRING err;
-    Json::Value    config;
-
-    Json::CharReaderBuilder                 builder;
-    const std::unique_ptr<Json::CharReader> reader(builder.newCharReader());
-    if (!reader->parse(json, json + raw_json_length, &config, &err)) {
-        // error
-        return std::nullopt;
-    }
-
-    return config; // success
+    return std::vector<uint8_t>(data.data, data.data + data.size);
 }
 
 

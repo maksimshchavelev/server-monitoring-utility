@@ -46,7 +46,7 @@ class ProxyModule : public IModule {
      * @brief Calls `module_get_data` and obtaining data
      * @return `std::optional<Json::Value>`
      */
-    std::optional<Json::Value> get_data() override;
+    std::optional<std::vector<uint8_t>> get_data() override;
 
 
     /**
