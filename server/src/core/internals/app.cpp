@@ -66,80 +66,129 @@ void smu_server::Application::run(int argc, char** argv) {
 
 
 // Public method
-Json::Value smu_server::Application::collect_metrics() {
-    // If the module's poll ratio is greater than 1, the last get_data call must be cached,
-    // otherwise the module data will not reach the user.
-    static std::unordered_map<std::string_view /* module_name */, Json::Value /* cached_data */>
-        poll_ratio_between_get_datas_cache;
+std::vector<uint8_t> smu_server::Application::collect_metrics() {
+    // cache for the "between polls" case (poll_ratio > 1)
+    static std::unordered_map<std::string, std::vector<uint8_t>> poll_ratio_between_get_datas_cache;
 
+    // final frame: we'll build header (5 bytes) and then append payload
+    std::vector<uint8_t> frame;
+    frame.resize(5, 0x00); // placeholder for [version(1)] [frame_payload_size(4)]
 
-    Json::Value root;
+    // payload = concatenation of container blocks from modules (each container includes its own
+    // header)
+    std::vector<uint8_t> payload;
+    payload.reserve(1024); // heuristic; optional
 
+    // helper: extract module's "container block" from module_frame bytes and append to 'payload'.
+    // If module_frame is a full MDTP frame (declared_size matches), copy bytes [5 ..
+    // 5+declared_size-1]. Otherwise fallback: append whole module_frame (assume it's already a
+    // container block).
+    auto append_module_block = [&](const std::vector<uint8_t>& module_frame) {
+        if (module_frame.size() >= 5) {
+            uint32_t declared = internals::read_uint32_be(module_frame, 1);
+            // sanity: declared shouldn't overflow the available bytes
+            if (module_frame.size() >= static_cast<size_t>(5 + declared)) {
+                payload.insert(
+                    payload.end(), module_frame.begin() + 5, module_frame.begin() + 5 + declared);
+                return;
+            }
+        }
+        // fallback (non-framed data / already a container block)
+        payload.insert(payload.end(), module_frame.begin(), module_frame.end());
+    };
 
     std::lock_guard<std::mutex> lock(m_modules_mutex);
-    for (const auto& module : m_modules) {
-        // Skip module if module is disabled
-        if (!module->is_enabled()) {
+
+    for (const auto& module_ptr : m_modules) {
+        auto& module = *module_ptr;
+
+        // skip disabled modules
+        if (!module.is_enabled())
             continue;
-        }
+
+        const std::string name{module.module_name()}; // stable key for maps
 
         try {
-            // Need to cache
-            if (module->get_poll_ratio() == 0) {
-                // Try to cache if not cached
-                if (auto iter = m_module_cache.find(module->module_name());
-                    iter == m_module_cache.end()) {
+            const uint32_t poll_ratio = module.get_poll_ratio();
 
-                    // Cache first call of `module->get_data()`
-                    if (auto module_data = module->get_data(); module_data.has_value()) {
-                        m_module_cache[module->module_name()] = std::move(module_data.value());
+            // ---- cacheable modules: poll_ratio == 0 ----
+            if (poll_ratio == 0) {
+                auto it_cache = m_module_cache.find(name);
+                if (it_cache == m_module_cache.end()) {
+                    // try to get and cache once
+                    if (auto module_data = module.get_data(); module_data.has_value()) {
+                        m_module_cache[name] = std::move(module_data.value());
                     } else {
-                        // Failed to cache
-                        logger().log_warning(
-                            std::format("Failed to cache data from module {} (marked as cacheable)",
-                                        module->module_name()));
+                        logger().log_warning(std::format(
+                            "Failed to cache data from module {} (marked as cacheable)", name));
+                        continue; // skip this module for this cycle
                     }
                 }
-
-                // Load cache
-                root[module->module_name().data()] =
-                    m_module_cache[module->module_name()]; // There is no `std::move`, as this would
-                                                           // otherwise invalidate the cache.
+                // append cached block (if any)
+                if (!m_module_cache[name].empty()) {
+                    append_module_block(m_module_cache[name]);
+                }
                 continue;
             }
 
-            // Check necessity of polling uncacheable module
-            if (module->m_poll_counter >= module->get_poll_ratio() - 1) {
-                // Poll uncacheable module
-                if (auto module_data = module->get_data(); module_data.has_value()) {
-                    // Do not move to cache if poll ratio is 1
-                    if (module->get_poll_ratio() == 1) {
-                        root[module->module_name().data()] = std::move(module_data.value());
+            // ---- pollable modules: poll_ratio >= 1 ----
+            if (module.m_poll_counter >= (poll_ratio > 0 ? poll_ratio - 1 : 0)) {
+                // time to poll this module
+                if (auto module_data = module.get_data(); module_data.has_value()) {
+                    auto bytes = std::move(module_data.value());
+                    if (poll_ratio == 1) {
+                        // always fresh, do not store in between-cache
+                        append_module_block(bytes);
                     } else {
-                        // Otherwise, first to the cache, then to `root`
-                        poll_ratio_between_get_datas_cache[module->module_name()] =
-                            module_data.value();
-                        root[module->module_name().data()] = std::move(module_data.value());
+                        // store last polled value for between-polls usage
+                        poll_ratio_between_get_datas_cache[name] = bytes;
+                        append_module_block(poll_ratio_between_get_datas_cache[name]);
                     }
-
-                    module->m_poll_counter = 0; // reset poll counter
+                    module.m_poll_counter = 0;
                     continue;
+                } else {
+                    logger().log_warning(
+                        std::format("Failed to poll module {} when scheduled", name));
+                    // if we have a previously polled value, append it; otherwise skip
+                    auto it = poll_ratio_between_get_datas_cache.find(name);
+                    if (it != poll_ratio_between_get_datas_cache.end()) {
+                        append_module_block(it->second);
+                    }
+                    // reset counter? keep it unchanged to try again next cycle
                 }
             } else {
-                // Load from cache instead of calling `get_data` if no necessity
-                root[module->module_name().data()] =
-                    poll_ratio_between_get_datas_cache[module->module_name()];
+                // not time to poll: try to use the 'between polls' cache if present
+                auto it = poll_ratio_between_get_datas_cache.find(name);
+                if (it != poll_ratio_between_get_datas_cache.end()) {
+                    append_module_block(it->second);
+                } else {
+                    // nothing to append — skip
+                }
             }
 
-            ++module->m_poll_counter; // increase poll counter
+            // increment poll counter for next cycle
+            ++module.m_poll_counter;
 
         } catch (const std::exception& e) {
             logger().log_warning(std::format(
-                "Failed to get data from module {}, cause: {}", module->module_name(), e.what()));
+                "Failed to get data from module {}, cause: {}", module.module_name(), e.what()));
+            // skip module on error
         }
+    } // end for modules
+
+    // Write final frame header:
+    // - version
+    frame[0] = static_cast<uint8_t>(MDTP_VERSION);
+    // - frame payload size = total bytes after the frame header (i.e. payload.size())
+    uint32_t frame_payload_size = static_cast<uint32_t>(payload.size());
+    internals::write_uint32_be(frame, 1, frame_payload_size);
+
+    // append payload (concatenated container blocks)
+    if (!payload.empty()) {
+        frame.insert(frame.end(), payload.begin(), payload.end());
     }
 
-    return root;
+    return frame;
 }
 
 

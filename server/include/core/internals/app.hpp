@@ -162,10 +162,10 @@ class Application {
 
     /**
      * @brief Collects all metrics from all modules
-     * @return `Json::Value` with collected metrics
+     * @return `std::vector<uint8_t>` with collected metrics (bytes in MDTP protocol)
      * @note Public, as it is a crutch to make the method friendly
      */
-    Json::Value collect_metrics();
+    std::vector<uint8_t> collect_metrics();
 
 
   private:
@@ -195,7 +195,7 @@ class Application {
     ///<
     ///< Storing `std::string_view` is safe because the module name exists throughout its lifetime
     ///< and the server core does not delete the module.
-    std::unordered_map<std::string_view /* module name */, Json::Value /* cached data */>
+    std::unordered_map<std::string_view /* module name */, std::vector<uint8_t> /* cached data */>
         m_module_cache;
 
 
