@@ -15,7 +15,7 @@
 
 namespace smu_server {
 
-constexpr uint8_t MDTP_VERSION = 1;
+constexpr uint8_t MDTP_VERSION = 1; ///< Version of MDTP protocol
 
 /**
  * @brief The Base IMetricNode class to simplify the storage of data obtained from
