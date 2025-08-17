@@ -331,6 +331,7 @@ template&lt;typename... Children&gt; </div>
 
 <p>Recursively generates json, preserving the hierarchy of nodes, their types, values and names. </p>
 <dl class="section return"><dt>Returns</dt><dd>The generated json </dd></dl>
+<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000005">Deprecated:</a></b></dt><dd><code><a class="el" href="classsmu__server_1_1internals_1_1IMetricNode.html#af9ffcf89e9d9a23ae652ac967d516015" title="Recursively generates json, preserving the hierarchy of nodes, their types, values and names.">to_json()</a></code> is deprecated for transport. <code><a class="el" href="classsmu__server_1_1internals_1_1IMetricNode.html#a10c6d9c928b656329a1b983a227a0725" title="Generates binary data in MDTP protocol format.">to_mdtp()</a></code>/MDTP should be used for binary transport between modules and the server core. <code><a class="el" href="classsmu__server_1_1internals_1_1IMetricNode.html#af9ffcf89e9d9a23ae652ac967d516015" title="Recursively generates json, preserving the hierarchy of nodes, their types, values and names.">to_json()</a></code> may remain useful for human readable debugging, but it is not recommended for production transport. </dd></dl>
 
 <p>Implements <a class="el" href="structsmu__server_1_1IMetricNodeBase.html#a6316399c6b2518f0a7da75104396c10d">smu_server::IMetricNodeBase</a>.</p>
 

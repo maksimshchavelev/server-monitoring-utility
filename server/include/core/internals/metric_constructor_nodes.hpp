@@ -46,8 +46,12 @@ struct IMetricNodeBase {
      * @warning Do not call this function too often, as it may cause performance degradation
      *
      * @return The generated json
+     *
+     * @deprecated `to_json()` is deprecated for transport. `to_mdtp()`/MDTP should be used for
+     * binary transport between modules and the server core. `to_json()` may remain useful for human
+     * readable debugging, but it is not recommended for production transport.
      */
-    virtual Json::Value to_json() const = 0;
+    [[deprecated("Use to_mdtp() instead")]] virtual Json::Value to_json() const = 0;
 
 
     /**
@@ -129,8 +133,11 @@ template <typename... Children> class IMetricNode : public IMetricNodeBase {
      * @brief Recursively generates json, preserving the hierarchy
      * of nodes, their types, values and names
      * @return The generated json
+     * @deprecated `to_json()` is deprecated for transport. `to_mdtp()`/MDTP should be used for
+     * binary transport between modules and the server core. `to_json()` may remain useful for human
+     * readable debugging, but it is not recommended for production transport.
      */
-    virtual Json::Value to_json() const = 0;
+    [[deprecated("Use to_mdtp() instead")]] virtual Json::Value to_json() const = 0;
 
 
 
@@ -226,8 +233,11 @@ class MetricValueNode : public IMetricNode<> {
      * @brief Recursively generates json, preserving the hierarchy
      * of nodes, their types, values and names
      * @return The generated json
+     * @deprecated `to_json()` is deprecated for transport. `to_mdtp()`/MDTP should be used for
+     * binary transport between modules and the server core. `to_json()` may remain useful for human
+     * readable debugging, but it is not recommended for production transport.
      */
-    Json::Value to_json() const override {
+    [[deprecated("Use to_mdtp() instead")]] Json::Value to_json() const override {
         Json::Value root;
 
         root["type"] = "value";
@@ -343,8 +353,11 @@ template <typename... Children> class MetricContainerNode : public IMetricNode<C
      *      }
      * }
      * ```
+     * @deprecated `to_json()` is deprecated for transport. `to_mdtp()`/MDTP should be used for
+     * binary transport between modules and the server core. `to_json()` may remain useful for human
+     * readable debugging, but it is not recommended for production transport.
      */
-    Json::Value to_json() const override {
+    [[deprecated("Use to_mdtp() instead")]] Json::Value to_json() const override {
         Json::Value root;
 
         // We don't need to store the type if we are root node
