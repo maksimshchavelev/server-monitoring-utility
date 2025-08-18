@@ -67,127 +67,146 @@ void smu_server::Application::run(int argc, char** argv) {
 
 // Public method
 std::vector<uint8_t> smu_server::Application::collect_metrics() {
-    // cache for the "between polls" case (poll_ratio > 1)
-    static std::unordered_map<std::string, std::vector<uint8_t>> poll_ratio_between_get_datas_cache;
+    // Between-poll cache for poll_ratio > 1
+    static std::unordered_map<std::string, std::vector<uint8_t>>
+        poll_ratio_between_get_datas_cache;
 
-    // final frame: we'll build header (5 bytes) and then append payload
-    std::vector<uint8_t> frame;
-    frame.resize(5, 0x00); // placeholder for [version(1)] [frame_payload_size(4)]
+    // Final MDTP frame: [version:1][payload_size:4] + payload
+    std::vector<uint8_t> frame(5, 0x00);
+    std::vector<uint8_t> payload; // concatenation of per-module named containers
 
-    // payload = concatenation of container blocks from modules (each container includes its own
-    // header)
-    std::vector<uint8_t> payload;
-    payload.reserve(1024); // heuristic; optional
-
-    // helper: extract module's "container block" from module_frame bytes and append to 'payload'.
-    // If module_frame is a full MDTP frame (declared_size matches), copy bytes [5 ..
-    // 5+declared_size-1]. Otherwise fallback: append whole module_frame (assume it's already a
-    // container block).
-    auto append_module_block = [&](const std::vector<uint8_t>& module_frame) {
-        if (module_frame.size() >= 5) {
-            uint32_t declared = internals::read_uint32_be(module_frame, 1);
-            // sanity: declared shouldn't overflow the available bytes
-            if (module_frame.size() >= static_cast<size_t>(5 + declared)) {
-                payload.insert(
-                    payload.end(), module_frame.begin() + 5, module_frame.begin() + 5 + declared);
+    // Helper: wrap module_frame into a named container with module_name,
+    // stripping the module's own MDTP frame header (5 bytes).
+    auto append_module_as_named_container =
+        [&](const std::vector<uint8_t>& module_frame, const std::string& module_name) {
+            // Expect a full MDTP frame: at least 5 bytes
+            if (module_frame.size() < 5) {
+                logger().log_warning(std::format(
+                    "Module '{}' returned too small frame ({} bytes) — skip",
+                    module_name, module_frame.size()));
                 return;
             }
-        }
-        // fallback (non-framed data / already a container block)
-        payload.insert(payload.end(), module_frame.begin(), module_frame.end());
-    };
+
+            // Read declared payload size from module-frame header
+            const uint32_t inner_size = internals::read_uint32_be(module_frame, 1);
+            const size_t   need = static_cast<size_t>(5) + static_cast<size_t>(inner_size);
+
+            if (module_frame.size() < need) {
+                logger().log_warning(std::format(
+                    "Module '{}' returned truncated frame: declared={}, actual={} — skip",
+                    module_name, inner_size, module_frame.size()));
+                return;
+            }
+
+            // The module payload is everything after its 5-byte header
+            const uint8_t* inner_begin = module_frame.data() + 5;
+
+            // Build container header:
+            // [node type=0:1][name len:4][name:bytes][payload size:4][payload...]
+            const uint32_t name_len = static_cast<uint32_t>(module_name.size());
+            const size_t   header   = 1 + 4 + name_len + 4;
+            const size_t   old_size = payload.size();
+
+            payload.resize(old_size + header + inner_size);
+
+            size_t off = old_size;
+
+            // node type = 0 (container)
+            payload[off++] = 0;
+
+            // node name length (BE)
+            internals::write_uint32_be(payload, off, name_len);
+            off += 4;
+
+            // node name bytes (no terminating zero)
+            std::memcpy(payload.data() + off, module_name.data(), module_name.size());
+            off += module_name.size();
+
+            // payload size (BE) — equal to module's inner payload size
+            internals::write_uint32_be(payload, off, inner_size);
+            off += 4;
+
+            // payload bytes (module payload without frame header)
+            std::memcpy(payload.data() + off, inner_begin, inner_size);
+            // off += inner_size; // not required further
+        };
 
     std::lock_guard<std::mutex> lock(m_modules_mutex);
 
-    for (const auto& module_ptr : m_modules) {
-        auto& module = *module_ptr;
+    for (const auto& mod_ptr : m_modules) {
+        if (!mod_ptr) continue;
+        auto& module = *mod_ptr;
 
-        // skip disabled modules
-        if (!module.is_enabled())
-            continue;
+        if (!module.is_enabled()) continue;
 
-        const std::string name{module.module_name()}; // stable key for maps
-
+        const std::string name{module.module_name()};
         try {
             const uint32_t poll_ratio = module.get_poll_ratio();
 
-            // ---- cacheable modules: poll_ratio == 0 ----
+            // Cache-once modules (poll_ratio == 0)
             if (poll_ratio == 0) {
-                auto it_cache = m_module_cache.find(name);
-                if (it_cache == m_module_cache.end()) {
-                    // try to get and cache once
+                auto it = m_module_cache.find(name);
+                if (it == m_module_cache.end()) {
                     if (auto module_data = module.get_data(); module_data.has_value()) {
+                        // Store full module frame
                         m_module_cache[name] = std::move(module_data.value());
                     } else {
                         logger().log_warning(std::format(
-                            "Failed to cache data from module {} (marked as cacheable)", name));
-                        continue; // skip this module for this cycle
+                            "Failed to cache data from module '{}' (cacheable)", name));
+                        continue;
                     }
                 }
-                // append cached block (if any)
-                if (!m_module_cache[name].empty()) {
-                    append_module_block(m_module_cache[name]);
-                }
+                // Wrap cached frame into named container
+                append_module_as_named_container(m_module_cache[name], name);
                 continue;
             }
 
-            // ---- pollable modules: poll_ratio >= 1 ----
+            // Pollable modules (poll_ratio >= 1)
             if (module.m_poll_counter >= (poll_ratio > 0 ? poll_ratio - 1 : 0)) {
-                // time to poll this module
+                // Time to poll
                 if (auto module_data = module.get_data(); module_data.has_value()) {
-                    auto bytes = std::move(module_data.value());
+                    auto bytes = std::move(module_data.value()); // full module frame
                     if (poll_ratio == 1) {
-                        // always fresh, do not store in between-cache
-                        append_module_block(bytes);
+                        append_module_as_named_container(bytes, name);
                     } else {
-                        // store last polled value for between-polls usage
-                        poll_ratio_between_get_datas_cache[name] = bytes;
-                        append_module_block(poll_ratio_between_get_datas_cache[name]);
+                        // Keep last result for between-polls
+                        poll_ratio_between_get_datas_cache[name] = std::move(bytes);
+                        append_module_as_named_container(
+                            poll_ratio_between_get_datas_cache[name], name);
                     }
                     module.m_poll_counter = 0;
                     continue;
                 } else {
-                    logger().log_warning(
-                        std::format("Failed to poll module {} when scheduled", name));
-                    // if we have a previously polled value, append it; otherwise skip
+                    logger().log_warning(std::format(
+                        "Failed to poll module '{}' when scheduled", name));
+                    // Fallback to between-polls cache if exists
                     auto it = poll_ratio_between_get_datas_cache.find(name);
                     if (it != poll_ratio_between_get_datas_cache.end()) {
-                        append_module_block(it->second);
+                        append_module_as_named_container(it->second, name);
                     }
-                    // reset counter? keep it unchanged to try again next cycle
                 }
             } else {
-                // not time to poll: try to use the 'between polls' cache if present
+                // Not time to poll: try between-polls cache
                 auto it = poll_ratio_between_get_datas_cache.find(name);
                 if (it != poll_ratio_between_get_datas_cache.end()) {
-                    append_module_block(it->second);
-                } else {
-                    // nothing to append — skip
+                    append_module_as_named_container(it->second, name);
                 }
             }
 
-            // increment poll counter for next cycle
             ++module.m_poll_counter;
 
         } catch (const std::exception& e) {
             logger().log_warning(std::format(
-                "Failed to get data from module {}, cause: {}", module.module_name(), e.what()));
-            // skip module on error
+                "Failed to get data from module '{}', cause: {}", name, e.what()));
         }
-    } // end for modules
-
-    // Write final frame header:
-    // - version
-    frame[0] = static_cast<uint8_t>(MDTP_VERSION);
-    // - frame payload size = total bytes after the frame header (i.e. payload.size())
-    uint32_t frame_payload_size = static_cast<uint32_t>(payload.size());
-    internals::write_uint32_be(frame, 1, frame_payload_size);
-
-    // append payload (concatenated container blocks)
-    if (!payload.empty()) {
-        frame.insert(frame.end(), payload.begin(), payload.end());
     }
 
+    // Write final frame header
+    frame[0] = static_cast<uint8_t>(MDTP_VERSION);
+    internals::write_uint32_be(frame, 1, static_cast<uint32_t>(payload.size()));
+
+    // Append payload
+    frame.insert(frame.end(), payload.begin(), payload.end());
     return frame;
 }
 
