@@ -2,7 +2,7 @@ var searchData=
 [
   ['cli_0',['cli',['../classsmu__server_1_1Application.html#a4c65eb115c3fcb233198a28ea61f3038',1,'smu_server::Application::CLI'],['../classsmu__server_1_1CLI.html#a071ff1a177446a661f9a65ac717c9e58',1,'smu_server::CLI::CLI()'],['../classsmu__server_1_1CLI.html',1,'smu_server::CLI']]],
   ['cli_2ehpp_1',['cli.hpp',['../cli_8hpp.html',1,'']]],
-  ['collect_5fmetrics_2',['collect_metrics',['../classsmu__server_1_1Application.html#aa9e4dcd24d9c34201fe162fdc9a86085',1,'smu_server::Application']]],
+  ['collect_5fmetrics_2',['collect_metrics',['../classsmu__server_1_1Application.html#a9b8103af49a022f890fa7c9a77ea0616',1,'smu_server::Application']]],
   ['command_3',['Command',['../classsmu__server_1_1IPC.html#acb16f6685fbd659bc87d15236c72c501',1,'smu_server::IPC']]],
   ['compile_2dtime_5fconfig_2ehpp_4',['compile-time_config.hpp',['../compile-time__config_8hpp.html',1,'']]],
   ['complex_20container_20with_20multiple_20subsystems_5',['Example 3: Complex container with multiple subsystems',['../md_for-developers_2modules_24__mdtp.html#autotoc_md30',1,'']]],

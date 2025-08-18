@@ -2,6 +2,7 @@ var namespacesmu__server =
 [
     [ "internals", "namespacesmu__server_1_1internals.html", "namespacesmu__server_1_1internals" ],
     [ "ABI_CONTEXT", "structsmu__server_1_1ABI__CONTEXT.html", "structsmu__server_1_1ABI__CONTEXT" ],
+    [ "ABI_MDTP_DATA", "structsmu__server_1_1ABI__MDTP__DATA.html", "structsmu__server_1_1ABI__MDTP__DATA" ],
     [ "ABI_MODULE_FUNCTIONS", "structsmu__server_1_1ABI__MODULE__FUNCTIONS.html", "structsmu__server_1_1ABI__MODULE__FUNCTIONS" ],
     [ "ABI_SERVER_CORE_FUNCTIONS", "structsmu__server_1_1ABI__SERVER__CORE__FUNCTIONS.html", "structsmu__server_1_1ABI__SERVER__CORE__FUNCTIONS" ],
     [ "Application", "classsmu__server_1_1Application.html", "classsmu__server_1_1Application" ],

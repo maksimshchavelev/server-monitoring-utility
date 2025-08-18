@@ -6,7 +6,7 @@ var structsmu__server_1_1ABI__MODULE__FUNCTIONS =
     [ "module_enable", "structsmu__server_1_1ABI__MODULE__FUNCTIONS.html#ac99862501d63d336720683ced97ac53a", null ],
     [ "module_get_configuraion", "structsmu__server_1_1ABI__MODULE__FUNCTIONS.html#ad1ccfd426ed7b9823c89e27ef45b7c67", null ],
     [ "module_get_context", "structsmu__server_1_1ABI__MODULE__FUNCTIONS.html#ade2137a821b8d877d842b627d8367616", null ],
-    [ "module_get_data", "structsmu__server_1_1ABI__MODULE__FUNCTIONS.html#a8c8fc4ec5763c635d75e21117dae1a54", null ],
+    [ "module_get_data", "structsmu__server_1_1ABI__MODULE__FUNCTIONS.html#af093509565cd19dc3182bdcfc7e8b625", null ],
     [ "module_get_module_description", "structsmu__server_1_1ABI__MODULE__FUNCTIONS.html#a8d96857ca995005fb166e0453a181c6a", null ],
     [ "module_get_module_name", "structsmu__server_1_1ABI__MODULE__FUNCTIONS.html#a8b8415778a86ca21c977ddb4407528e7", null ],
     [ "module_get_poll_ratio", "structsmu__server_1_1ABI__MODULE__FUNCTIONS.html#ae0043163015664b88ef17d262989ea0d", null ],

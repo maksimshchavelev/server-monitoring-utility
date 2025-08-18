@@ -1,7 +1,9 @@
 <map id="smu_server::ABI_MODULE_FUNCTIONS" name="smu_server::ABI_MODULE_FUNCTIONS">
-<area shape="rect" id="Node000001" title="Functions of the module that calls the server core." alt="" coords="111,123,303,163"/>
-<area shape="rect" id="Node000002" href="$structsmu__server_1_1ABI__SERVER__CORE__FUNCTIONS.html" title="Functions provided by the server for the module." alt="" coords="5,5,192,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="125,54,163,97,188,121,184,125,159,101,121,58"/>
-<area shape="rect" id="Node000003" href="$structsmu__server_1_1ABI__CONTEXT.html" title="The context in which the module calls server core functions." alt="" coords="216,13,413,38"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="312,52,303,77,287,100,255,125,252,120,283,97,298,74,307,50"/>
+<area shape="rect" id="Node000001" title="Functions of the module that calls the server core." alt="" coords="405,63,597,103"/>
+<area shape="rect" id="Node000002" href="$structsmu__server_1_1ABI__SERVER__CORE__FUNCTIONS.html" title="Functions provided by the server for the module." alt="" coords="19,5,206,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="220,37,382,60,405,64,404,69,381,65,219,42"/>
+<area shape="rect" id="Node000003" href="$structsmu__server_1_1ABI__MDTP__DATA.html" title="Struct to storing MDTP data. See documentation for MDTP protocol." alt="" coords="5,70,220,95"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="234,80,405,80,405,85,234,85"/>
+<area shape="rect" id="Node000004" href="$structsmu__server_1_1ABI__CONTEXT.html" title="The context in which the module calls server core functions." alt="" coords="14,119,211,145"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="225,119,381,100,404,97,405,102,382,105,226,124"/>
 </map>

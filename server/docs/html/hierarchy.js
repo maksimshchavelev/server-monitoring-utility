@@ -1,6 +1,7 @@
 var hierarchy =
 [
     [ "smu_server::ABI_CONTEXT", "structsmu__server_1_1ABI__CONTEXT.html", null ],
+    [ "smu_server::ABI_MDTP_DATA", "structsmu__server_1_1ABI__MDTP__DATA.html", null ],
     [ "smu_server::ABI_MODULE_FUNCTIONS", "structsmu__server_1_1ABI__MODULE__FUNCTIONS.html", null ],
     [ "smu_server::ABI_SERVER_CORE_FUNCTIONS", "structsmu__server_1_1ABI__SERVER__CORE__FUNCTIONS.html", null ],
     [ "smu_server::Application", "classsmu__server_1_1Application.html", null ],

@@ -304,6 +304,7 @@ template&lt;typename... Children&gt; </div>
 
 <p>Generates binary data in MDTP protocol format. </p>
 <p>See the developer documentation for the MDTP protocol specification and examples.</p>
+<dl class="section note"><dt>Note</dt><dd>If the node type is <b>root</b>, then only the frame header (version and payload size) will be added.</dd></dl>
 <dl class="section return"><dt>Returns</dt><dd><code>std::vector&lt;uint8_t&gt;</code> with bytes </dd></dl>
 
 <p>Implements <a class="el" href="classsmu__server_1_1internals_1_1IMetricNode.html#a10c6d9c928b656329a1b983a227a0725">smu_server::internals::IMetricNode&lt; Children... &gt;</a>.</p>

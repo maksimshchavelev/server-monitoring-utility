@@ -296,89 +296,91 @@ $(document).ready(function(){initNavTree('metric__constructor__nodes_8hpp_source
 <div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>            root[<span class="stringliteral">&quot;type&quot;</span>] = <span class="stringliteral">&quot;container&quot;</span>;</div>
 <div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>        }</div>
 <div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span> </div>
-<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>        <span class="comment">// Iterate through the descendants and recursively call get_json. The recursion will stop</span></div>
-<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>        <span class="comment">// as soon as we reach the node-value. The obtained objects are placed with the desired</span></div>
-<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>        <span class="comment">// name in root and return</span></div>
-<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>        <a class="code hl_function" href="namespacesmu__server.html#a522f05053a18b752356b80c93a5fe53e">for_each_tuple</a>(<a class="code hl_class" href="classsmu__server_1_1internals_1_1IMetricNode.html">IMetricNode&lt;Children...&gt;::m_children</a>,</div>
-<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>                       [<span class="keyword">this</span>, &amp;root](<span class="keyword">auto</span>&amp; child) { root[child-&gt;get_name()] = child-&gt;<a class="code hl_function" href="classsmu__server_1_1internals_1_1IMetricNode.html#af9ffcf89e9d9a23ae652ac967d516015">to_json</a>(); });</div>
-<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span> </div>
-<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>        <span class="keywordflow">return</span> root;</div>
-<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>    }</div>
-</div>
+<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span><span class="preprocessor">#pragma GCC diagnostic push</span></div>
+<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span><span class="preprocessor">#pragma GCC diagnostic ignored &quot;-Wdeprecated-declarations&quot;</span></div>
+<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>        <span class="comment">// Iterate through the descendants and recursively call get_json. The recursion will stop</span></div>
+<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>        <span class="comment">// as soon as we reach the node-value. The obtained objects are placed with the desired</span></div>
+<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>        <span class="comment">// name in root and return</span></div>
+<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>        <a class="code hl_function" href="namespacesmu__server.html#a522f05053a18b752356b80c93a5fe53e">for_each_tuple</a>(<a class="code hl_class" href="classsmu__server_1_1internals_1_1IMetricNode.html">IMetricNode&lt;Children...&gt;::m_children</a>,</div>
+<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>                       [<span class="keyword">this</span>, &amp;root](<span class="keyword">auto</span>&amp; child) { root[child-&gt;get_name()] = child-&gt;<a class="code hl_function" href="classsmu__server_1_1internals_1_1IMetricNode.html#af9ffcf89e9d9a23ae652ac967d516015">to_json</a>(); });</div>
+<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span><span class="preprocessor">#pragma GCC diagnostic pop</span></div>
 <div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span> </div>
-<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span> </div>
-<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span> </div>
+<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>        <span class="keywordflow">return</span> root;</div>
+<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>    }</div>
+</div>
 <div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span> </div>
-<div class="foldopen" id="foldopen00387" data-start="{" data-end="}">
-<div class="line"><a id="l00387" name="l00387"></a><span class="lineno"><a class="line" href="classsmu__server_1_1internals_1_1MetricContainerNode.html#a6a3e432a6bbf33b29699cf8d731e0693">  387</a></span>    std::vector&lt;uint8_t&gt; <a class="code hl_function" href="classsmu__server_1_1internals_1_1MetricContainerNode.html#a6a3e432a6bbf33b29699cf8d731e0693">to_mdtp</a>()<span class="keyword"> const override </span>{</div>
-<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span>        std::vector&lt;uint8_t&gt; result;</div>
-<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>        result.resize(1 <span class="comment">/* node type */</span> + 4 <span class="comment">/* name length */</span> +</div>
-<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>                          <a class="code hl_class" href="classsmu__server_1_1internals_1_1IMetricNode.html">IMetricNode&lt;Children...&gt;::m_name</a>.length() <span class="comment">/* name */</span></div>
-<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>                          + 4 <span class="comment">/* payload size */</span> + 0 <span class="comment">/* payload */</span>,</div>
-<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span>                      0x0 <span class="comment">/* fill by 0x0 */</span>);</div>
-<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span> </div>
-<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span>        std::size_t offset = 0;</div>
-<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span> </div>
-<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span>        <span class="comment">// If node type is root</span></div>
-<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span>        <span class="keywordflow">if</span> (<a class="code hl_class" href="classsmu__server_1_1internals_1_1IMetricNode.html">IMetricNode&lt;Children...&gt;::m_is_root</a>) {</div>
-<div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span>            <span class="comment">// Add header</span></div>
-<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span>            result.resize(result.size() + 1 <span class="comment">/* version */</span> + 4 <span class="comment">/* payload size */</span>);</div>
-<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span>            offset = 5; <span class="comment">// After header</span></div>
-<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span>        }</div>
-<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span> </div>
-<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span>        <span class="comment">// Payload</span></div>
-<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span>        std::vector&lt;uint8_t&gt; payload;</div>
-<div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span> </div>
-<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span>        <span class="comment">// Iterate through the descendants and recursively call to_mdtp. The recursion will stop</span></div>
-<div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span>        <span class="comment">// as soon as we reach the node-value. The obtained objects are placed with the desired</span></div>
-<div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span>        <span class="comment">// name in root and return</span></div>
-<div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span>        <a class="code hl_function" href="namespacesmu__server.html#a522f05053a18b752356b80c93a5fe53e">for_each_tuple</a>(<a class="code hl_class" href="classsmu__server_1_1internals_1_1IMetricNode.html">IMetricNode&lt;Children...&gt;::m_children</a>, [<span class="keyword">this</span>, &amp;payload](<span class="keyword">auto</span>&amp; child) {</div>
-<div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span>            <span class="keyword">auto</span> child_data = child-&gt;<a class="code hl_function" href="classsmu__server_1_1internals_1_1IMetricNode.html#a10c6d9c928b656329a1b983a227a0725">to_mdtp</a>();</div>
-<div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span>            payload.insert(payload.end(), child_data.begin(), child_data.end());</div>
-<div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span>        });</div>
-<div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span> </div>
-<div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span>        <span class="comment">// Write node type</span></div>
-<div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span>        <a class="code hl_function" href="namespacesmu__server_1_1internals.html#a28590aac4b0c5475381c30ed6116c009">write_ubyte_be</a>(result, offset, 0);</div>
-<div class="line"><a id="l00416" name="l00416"></a><span class="lineno">  416</span>        ++offset;</div>
-<div class="line"><a id="l00417" name="l00417"></a><span class="lineno">  417</span> </div>
-<div class="line"><a id="l00418" name="l00418"></a><span class="lineno">  418</span>        <span class="comment">// Write node name length</span></div>
-<div class="line"><a id="l00419" name="l00419"></a><span class="lineno">  419</span>        <a class="code hl_function" href="namespacesmu__server_1_1internals.html#a0ff2ee20526b34f8384f32f24d212d0d">write_uint32_be</a>(</div>
-<div class="line"><a id="l00420" name="l00420"></a><span class="lineno">  420</span>            result, offset, <span class="keyword">static_cast&lt;</span>uint32_t<span class="keyword">&gt;</span>(<a class="code hl_class" href="classsmu__server_1_1internals_1_1IMetricNode.html">IMetricNode&lt;Children...&gt;::m_name</a>.length()));</div>
-<div class="line"><a id="l00421" name="l00421"></a><span class="lineno">  421</span>        offset += 4;</div>
-<div class="line"><a id="l00422" name="l00422"></a><span class="lineno">  422</span> </div>
-<div class="line"><a id="l00423" name="l00423"></a><span class="lineno">  423</span>        <span class="comment">// Write node name</span></div>
-<div class="line"><a id="l00424" name="l00424"></a><span class="lineno">  424</span>        std::copy(<a class="code hl_class" href="classsmu__server_1_1internals_1_1IMetricNode.html">IMetricNode&lt;Children...&gt;::m_name</a>.begin(),</div>
-<div class="line"><a id="l00425" name="l00425"></a><span class="lineno">  425</span>                  <a class="code hl_class" href="classsmu__server_1_1internals_1_1IMetricNode.html">IMetricNode&lt;Children...&gt;::m_name</a>.end(),</div>
-<div class="line"><a id="l00426" name="l00426"></a><span class="lineno">  426</span>                  result.data() + offset);</div>
-<div class="line"><a id="l00427" name="l00427"></a><span class="lineno">  427</span>        offset += <a class="code hl_class" href="classsmu__server_1_1internals_1_1IMetricNode.html">IMetricNode</a>&lt;Children...&gt;<a class="code hl_variable" href="classsmu__server_1_1internals_1_1IMetricNode.html#a1898f32fd32a4c453042572bcff68eac">::m_name</a>.length();</div>
+<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span> </div>
+<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span> </div>
+<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span> </div>
+<div class="foldopen" id="foldopen00393" data-start="{" data-end="}">
+<div class="line"><a id="l00393" name="l00393"></a><span class="lineno"><a class="line" href="classsmu__server_1_1internals_1_1MetricContainerNode.html#a6a3e432a6bbf33b29699cf8d731e0693">  393</a></span>    std::vector&lt;uint8_t&gt; <a class="code hl_function" href="classsmu__server_1_1internals_1_1MetricContainerNode.html#a6a3e432a6bbf33b29699cf8d731e0693">to_mdtp</a>()<span class="keyword"> const override </span>{</div>
+<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span>        <span class="comment">// 1) Collect children payload (concatenate bytes of all children nodes).</span></div>
+<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span>        <span class="comment">//    Each child already knows how to serialize itself (value or container).</span></div>
+<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span>        std::vector&lt;uint8_t&gt; children_payload;</div>
+<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span>        children_payload.reserve(128); <span class="comment">// small heuristic; optional</span></div>
+<div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span> </div>
+<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span>        <a class="code hl_function" href="namespacesmu__server.html#a522f05053a18b752356b80c93a5fe53e">for_each_tuple</a>(<a class="code hl_class" href="classsmu__server_1_1internals_1_1IMetricNode.html">IMetricNode&lt;Children...&gt;::m_children</a>, [&amp;](<span class="keyword">auto</span>&amp; child) {</div>
+<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span>            <span class="keyword">auto</span> bytes = child-&gt;<a class="code hl_function" href="classsmu__server_1_1internals_1_1IMetricNode.html#a10c6d9c928b656329a1b983a227a0725">to_mdtp</a>();</div>
+<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span>            children_payload.insert(children_payload.end(), bytes.begin(), bytes.end());</div>
+<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span>        });</div>
+<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span> </div>
+<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span>        <span class="comment">// 2) Root vs non-root behavior.</span></div>
+<div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span>        <span class="keywordflow">if</span> (<a class="code hl_class" href="classsmu__server_1_1internals_1_1IMetricNode.html">IMetricNode&lt;Children...&gt;::m_is_root</a>) {</div>
+<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span>            <span class="comment">// --- Root node: only MDTP frame header + children payload ---</span></div>
+<div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span>            <span class="comment">// Frame header: [version:1][payload_size:4]</span></div>
+<div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span>            std::vector&lt;uint8_t&gt; result(5, 0x00);</div>
+<div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span> </div>
+<div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span>            <span class="comment">// write version</span></div>
+<div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span>            <a class="code hl_function" href="namespacesmu__server_1_1internals.html#a28590aac4b0c5475381c30ed6116c009">write_ubyte_be</a>(result, 0, <a class="code hl_variable" href="namespacesmu__server.html#a0fee28ffb64000aebdddc5c1afc99d3f">MDTP_VERSION</a>);</div>
+<div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span>            <span class="comment">// write payload size = total bytes of concatenated children</span></div>
+<div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span>            <a class="code hl_function" href="namespacesmu__server_1_1internals.html#a0ff2ee20526b34f8384f32f24d212d0d">write_uint32_be</a>(result, 1, <span class="keyword">static_cast&lt;</span>uint32_t<span class="keyword">&gt;</span>(children_payload.size()));</div>
+<div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span> </div>
+<div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span>            <span class="comment">// append children payload</span></div>
+<div class="line"><a id="l00416" name="l00416"></a><span class="lineno">  416</span>            result.insert(result.end(), children_payload.begin(), children_payload.end());</div>
+<div class="line"><a id="l00417" name="l00417"></a><span class="lineno">  417</span>            <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00418" name="l00418"></a><span class="lineno">  418</span> </div>
+<div class="line"><a id="l00419" name="l00419"></a><span class="lineno">  419</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00420" name="l00420"></a><span class="lineno">  420</span>            <span class="comment">// --- Regular container: container header + children payload ---</span></div>
+<div class="line"><a id="l00421" name="l00421"></a><span class="lineno">  421</span>            <span class="comment">// Container header:</span></div>
+<div class="line"><a id="l00422" name="l00422"></a><span class="lineno">  422</span>            <span class="comment">// [node type=0:1][name length:4][name bytes][payload size:4]</span></div>
+<div class="line"><a id="l00423" name="l00423"></a><span class="lineno">  423</span>            <span class="keyword">const</span> uint32_t name_len =</div>
+<div class="line"><a id="l00424" name="l00424"></a><span class="lineno">  424</span>                <span class="keyword">static_cast&lt;</span>uint32_t<span class="keyword">&gt;</span>(<a class="code hl_class" href="classsmu__server_1_1internals_1_1IMetricNode.html">IMetricNode</a>&lt;Children...&gt;<a class="code hl_variable" href="classsmu__server_1_1internals_1_1IMetricNode.html#a1898f32fd32a4c453042572bcff68eac">::m_name</a>.size());</div>
+<div class="line"><a id="l00425" name="l00425"></a><span class="lineno">  425</span> </div>
+<div class="line"><a id="l00426" name="l00426"></a><span class="lineno">  426</span>            std::vector&lt;uint8_t&gt; result;</div>
+<div class="line"><a id="l00427" name="l00427"></a><span class="lineno">  427</span>            result.resize(1 + 4 + name_len + 4); <span class="comment">// header without payload</span></div>
 <div class="line"><a id="l00428" name="l00428"></a><span class="lineno">  428</span> </div>
-<div class="line"><a id="l00429" name="l00429"></a><span class="lineno">  429</span>        <span class="comment">// Write payload size</span></div>
-<div class="line"><a id="l00430" name="l00430"></a><span class="lineno">  430</span>        <a class="code hl_function" href="namespacesmu__server_1_1internals.html#a0ff2ee20526b34f8384f32f24d212d0d">write_uint32_be</a>(result, offset, <span class="keyword">static_cast&lt;</span>uint32_t<span class="keyword">&gt;</span>(payload.size()));</div>
-<div class="line"><a id="l00431" name="l00431"></a><span class="lineno">  431</span>        offset += 4;</div>
-<div class="line"><a id="l00432" name="l00432"></a><span class="lineno">  432</span> </div>
-<div class="line"><a id="l00433" name="l00433"></a><span class="lineno">  433</span>        <span class="comment">// Write payload</span></div>
-<div class="line"><a id="l00434" name="l00434"></a><span class="lineno">  434</span>        std::copy(payload.begin(), payload.end(), std::back_inserter(result));</div>
-<div class="line"><a id="l00435" name="l00435"></a><span class="lineno">  435</span> </div>
-<div class="line"><a id="l00436" name="l00436"></a><span class="lineno">  436</span>        <span class="comment">// If node type is root, insert header</span></div>
-<div class="line"><a id="l00437" name="l00437"></a><span class="lineno">  437</span>        <span class="keywordflow">if</span> (<a class="code hl_class" href="classsmu__server_1_1internals_1_1IMetricNode.html">IMetricNode&lt;Children...&gt;::m_is_root</a>) {</div>
-<div class="line"><a id="l00438" name="l00438"></a><span class="lineno">  438</span>            <a class="code hl_function" href="namespacesmu__server_1_1internals.html#a28590aac4b0c5475381c30ed6116c009">write_ubyte_be</a>(result, 0, <a class="code hl_variable" href="namespacesmu__server.html#a0fee28ffb64000aebdddc5c1afc99d3f">MDTP_VERSION</a>); <span class="comment">// write version</span></div>
-<div class="line"><a id="l00439" name="l00439"></a><span class="lineno">  439</span>            <a class="code hl_function" href="namespacesmu__server_1_1internals.html#a0ff2ee20526b34f8384f32f24d212d0d">write_uint32_be</a>(</div>
-<div class="line"><a id="l00440" name="l00440"></a><span class="lineno">  440</span>                result,</div>
-<div class="line"><a id="l00441" name="l00441"></a><span class="lineno">  441</span>                1,</div>
-<div class="line"><a id="l00442" name="l00442"></a><span class="lineno">  442</span>                <span class="keyword">static_cast&lt;</span>uint32_t<span class="keyword">&gt;</span>(payload.size() + 1 <span class="comment">/* node type */</span> + 4 <span class="comment">/* name length */</span> +</div>
-<div class="line"><a id="l00443" name="l00443"></a><span class="lineno">  443</span>                                      <a class="code hl_class" href="classsmu__server_1_1internals_1_1IMetricNode.html">IMetricNode&lt;Children...&gt;::m_name</a>.length() <span class="comment">/* name */</span></div>
-<div class="line"><a id="l00444" name="l00444"></a><span class="lineno">  444</span>                                      + 4 <span class="comment">/* payload size */</span>));                 <span class="comment">// write tail size</span></div>
-<div class="line"><a id="l00445" name="l00445"></a><span class="lineno">  445</span>        }</div>
-<div class="line"><a id="l00446" name="l00446"></a><span class="lineno">  446</span> </div>
-<div class="line"><a id="l00447" name="l00447"></a><span class="lineno">  447</span>        <span class="keywordflow">return</span> result;</div>
-<div class="line"><a id="l00448" name="l00448"></a><span class="lineno">  448</span>    }</div>
+<div class="line"><a id="l00429" name="l00429"></a><span class="lineno">  429</span>            <span class="keywordtype">size_t</span> off = 0;</div>
+<div class="line"><a id="l00430" name="l00430"></a><span class="lineno">  430</span> </div>
+<div class="line"><a id="l00431" name="l00431"></a><span class="lineno">  431</span>            <span class="comment">// node type = 0 (container)</span></div>
+<div class="line"><a id="l00432" name="l00432"></a><span class="lineno">  432</span>            <a class="code hl_function" href="namespacesmu__server_1_1internals.html#a28590aac4b0c5475381c30ed6116c009">write_ubyte_be</a>(result, off, 0);</div>
+<div class="line"><a id="l00433" name="l00433"></a><span class="lineno">  433</span>            ++off;</div>
+<div class="line"><a id="l00434" name="l00434"></a><span class="lineno">  434</span> </div>
+<div class="line"><a id="l00435" name="l00435"></a><span class="lineno">  435</span>            <span class="comment">// name length (BE)</span></div>
+<div class="line"><a id="l00436" name="l00436"></a><span class="lineno">  436</span>            <a class="code hl_function" href="namespacesmu__server_1_1internals.html#a0ff2ee20526b34f8384f32f24d212d0d">write_uint32_be</a>(result, off, name_len);</div>
+<div class="line"><a id="l00437" name="l00437"></a><span class="lineno">  437</span>            off += 4;</div>
+<div class="line"><a id="l00438" name="l00438"></a><span class="lineno">  438</span> </div>
+<div class="line"><a id="l00439" name="l00439"></a><span class="lineno">  439</span>            <span class="comment">// name bytes (no terminating zero)</span></div>
+<div class="line"><a id="l00440" name="l00440"></a><span class="lineno">  440</span>            <span class="keywordflow">if</span> (name_len) {</div>
+<div class="line"><a id="l00441" name="l00441"></a><span class="lineno">  441</span>                std::memcpy(result.data() + off, <a class="code hl_class" href="classsmu__server_1_1internals_1_1IMetricNode.html">IMetricNode&lt;Children...&gt;::m_name</a>.data(), name_len);</div>
+<div class="line"><a id="l00442" name="l00442"></a><span class="lineno">  442</span>                off += name_len;</div>
+<div class="line"><a id="l00443" name="l00443"></a><span class="lineno">  443</span>            }</div>
+<div class="line"><a id="l00444" name="l00444"></a><span class="lineno">  444</span> </div>
+<div class="line"><a id="l00445" name="l00445"></a><span class="lineno">  445</span>            <span class="comment">// payload size (BE)</span></div>
+<div class="line"><a id="l00446" name="l00446"></a><span class="lineno">  446</span>            <a class="code hl_function" href="namespacesmu__server_1_1internals.html#a0ff2ee20526b34f8384f32f24d212d0d">write_uint32_be</a>(result, off, <span class="keyword">static_cast&lt;</span>uint32_t<span class="keyword">&gt;</span>(children_payload.size()));</div>
+<div class="line"><a id="l00447" name="l00447"></a><span class="lineno">  447</span>            off += 4;</div>
+<div class="line"><a id="l00448" name="l00448"></a><span class="lineno">  448</span> </div>
+<div class="line"><a id="l00449" name="l00449"></a><span class="lineno">  449</span>            <span class="comment">// append children payload</span></div>
+<div class="line"><a id="l00450" name="l00450"></a><span class="lineno">  450</span>            result.insert(result.end(), children_payload.begin(), children_payload.end());</div>
+<div class="line"><a id="l00451" name="l00451"></a><span class="lineno">  451</span>            <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00452" name="l00452"></a><span class="lineno">  452</span>        }</div>
+<div class="line"><a id="l00453" name="l00453"></a><span class="lineno">  453</span>    }</div>
 </div>
-<div class="line"><a id="l00449" name="l00449"></a><span class="lineno">  449</span>};</div>
+<div class="line"><a id="l00454" name="l00454"></a><span class="lineno">  454</span>};</div>
 </div>
-<div class="line"><a id="l00450" name="l00450"></a><span class="lineno">  450</span> </div>
-<div class="line"><a id="l00451" name="l00451"></a><span class="lineno">  451</span>} <span class="comment">// namespace internals</span></div>
-<div class="line"><a id="l00452" name="l00452"></a><span class="lineno">  452</span> </div>
-<div class="line"><a id="l00453" name="l00453"></a><span class="lineno">  453</span>} <span class="comment">// namespace smu_server</span></div>
+<div class="line"><a id="l00455" name="l00455"></a><span class="lineno">  455</span> </div>
+<div class="line"><a id="l00456" name="l00456"></a><span class="lineno">  456</span>} <span class="comment">// namespace internals</span></div>
+<div class="line"><a id="l00457" name="l00457"></a><span class="lineno">  457</span> </div>
+<div class="line"><a id="l00458" name="l00458"></a><span class="lineno">  458</span>} <span class="comment">// namespace smu_server</span></div>
 <div class="ttc" id="aclasssmu__server_1_1internals_1_1IMetricNode_html"><div class="ttname"><a href="classsmu__server_1_1internals_1_1IMetricNode.html">smu_server::internals::IMetricNode</a></div><div class="ttdoc">Interface IMetricNode class.</div><div class="ttdef"><b>Definition</b> metric_constructor_nodes.hpp:94</div></div>
 <div class="ttc" id="aclasssmu__server_1_1internals_1_1IMetricNode_html_a10c6d9c928b656329a1b983a227a0725"><div class="ttname"><a href="classsmu__server_1_1internals_1_1IMetricNode.html#a10c6d9c928b656329a1b983a227a0725">smu_server::internals::IMetricNode::to_mdtp</a></div><div class="ttdeci">virtual std::vector&lt; uint8_t &gt; to_mdtp() const =0</div><div class="ttdoc">Generates binary data in MDTP protocol format.</div></div>
 <div class="ttc" id="aclasssmu__server_1_1internals_1_1IMetricNode_html_a1166d138d08a8101141c03978f12d7ff"><div class="ttname"><a href="classsmu__server_1_1internals_1_1IMetricNode.html#a1166d138d08a8101141c03978f12d7ff">smu_server::internals::IMetricNode::get_name</a></div><div class="ttdeci">virtual const std::string &amp; get_name() const noexcept</div><div class="ttdoc">Get name of node.</div><div class="ttdef"><b>Definition</b> metric_constructor_nodes.hpp:161</div></div>
@@ -391,7 +393,7 @@ $(document).ready(function(){initNavTree('metric__constructor__nodes_8hpp_source
 <div class="ttc" id="aclasssmu__server_1_1internals_1_1IMetricNode_html_acf41e23c012492b27bf50942bff87b99"><div class="ttname"><a href="classsmu__server_1_1internals_1_1IMetricNode.html#acf41e23c012492b27bf50942bff87b99">smu_server::internals::IMetricNode::m_is_root</a></div><div class="ttdeci">bool m_is_root</div><div class="ttdoc">true if node type is root</div><div class="ttdef"><b>Definition</b> metric_constructor_nodes.hpp:170</div></div>
 <div class="ttc" id="aclasssmu__server_1_1internals_1_1IMetricNode_html_af9ffcf89e9d9a23ae652ac967d516015"><div class="ttname"><a href="classsmu__server_1_1internals_1_1IMetricNode.html#af9ffcf89e9d9a23ae652ac967d516015">smu_server::internals::IMetricNode::to_json</a></div><div class="ttdeci">virtual Json::Value to_json() const =0</div><div class="ttdoc">Recursively generates json, preserving the hierarchy of nodes, their types, values and names.</div></div>
 <div class="ttc" id="aclasssmu__server_1_1internals_1_1MetricContainerNode_html"><div class="ttname"><a href="classsmu__server_1_1internals_1_1MetricContainerNode.html">smu_server::internals::MetricContainerNode</a></div><div class="ttdoc">Implements container with nodes.</div><div class="ttdef"><b>Definition</b> metric_constructor_nodes.hpp:318</div></div>
-<div class="ttc" id="aclasssmu__server_1_1internals_1_1MetricContainerNode_html_a6a3e432a6bbf33b29699cf8d731e0693"><div class="ttname"><a href="classsmu__server_1_1internals_1_1MetricContainerNode.html#a6a3e432a6bbf33b29699cf8d731e0693">smu_server::internals::MetricContainerNode::to_mdtp</a></div><div class="ttdeci">std::vector&lt; uint8_t &gt; to_mdtp() const override</div><div class="ttdoc">Generates binary data in MDTP protocol format.</div><div class="ttdef"><b>Definition</b> metric_constructor_nodes.hpp:387</div></div>
+<div class="ttc" id="aclasssmu__server_1_1internals_1_1MetricContainerNode_html_a6a3e432a6bbf33b29699cf8d731e0693"><div class="ttname"><a href="classsmu__server_1_1internals_1_1MetricContainerNode.html#a6a3e432a6bbf33b29699cf8d731e0693">smu_server::internals::MetricContainerNode::to_mdtp</a></div><div class="ttdeci">std::vector&lt; uint8_t &gt; to_mdtp() const override</div><div class="ttdoc">Generates binary data in MDTP protocol format.</div><div class="ttdef"><b>Definition</b> metric_constructor_nodes.hpp:393</div></div>
 <div class="ttc" id="aclasssmu__server_1_1internals_1_1MetricContainerNode_html_ac7a77703a79b9694e93dab6fcddf7030"><div class="ttname"><a href="classsmu__server_1_1internals_1_1MetricContainerNode.html#ac7a77703a79b9694e93dab6fcddf7030">smu_server::internals::MetricContainerNode::MetricContainerNode</a></div><div class="ttdeci">MetricContainerNode(const std::string &amp;node_name, bool is_root_container, Children &amp;&amp;... children)</div><div class="ttdoc">MetricContainerNode constructor.</div><div class="ttdef"><b>Definition</b> metric_constructor_nodes.hpp:331</div></div>
 <div class="ttc" id="aclasssmu__server_1_1internals_1_1MetricContainerNode_html_aeb9520298cce9afa7d55d943de2812cd"><div class="ttname"><a href="classsmu__server_1_1internals_1_1MetricContainerNode.html#aeb9520298cce9afa7d55d943de2812cd">smu_server::internals::MetricContainerNode::to_json</a></div><div class="ttdeci">Json::Value to_json() const override</div><div class="ttdoc">Recursively generates json, preserving the hierarchy of nodes, their types, values and names.</div><div class="ttdef"><b>Definition</b> metric_constructor_nodes.hpp:360</div></div>
 <div class="ttc" id="aclasssmu__server_1_1internals_1_1MetricValueNode_html"><div class="ttname"><a href="classsmu__server_1_1internals_1_1MetricValueNode.html">smu_server::internals::MetricValueNode</a></div><div class="ttdoc">Implements a value node.</div><div class="ttdef"><b>Definition</b> metric_constructor_nodes.hpp:193</div></div>

@@ -112,6 +112,9 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsmu__server_1_1ABI__CONTEXT.html">ABI_CONTEXT</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The context in which the module calls server core functions.  <a href="structsmu__server_1_1ABI__CONTEXT.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsmu__server_1_1ABI__MDTP__DATA.html">ABI_MDTP_DATA</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Struct to storing MDTP data. See documentation for MDTP protocol.  <a href="structsmu__server_1_1ABI__MDTP__DATA.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsmu__server_1_1ABI__MODULE__FUNCTIONS.html">ABI_MODULE_FUNCTIONS</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Functions of the module that calls the server core.  <a href="structsmu__server_1_1ABI__MODULE__FUNCTIONS.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -501,7 +504,7 @@ Example usage</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> root = <a class="code hl_function" href="namespacesmu__server.html#a23038498ffcba3c5453a07ab861d13cf">make_root_node</a>(</div>
 <div class="line">     <a class="code hl_function" href="namespacesmu__server.html#a219dae7d70a890e3fb0740451fbf5dbe">make_value_node</a>(<span class="stringliteral">&quot;RAM usage&quot;</span>, <span class="stringliteral">&quot;4217&quot;</span>, <span class="stringliteral">&quot;MB&quot;</span>)</div>
 <div class="line">)-&gt;to_json();</div>
-<div class="ttc" id="anamespacesmu__server_html_a23038498ffcba3c5453a07ab861d13cf"><div class="ttname"><a href="namespacesmu__server.html#a23038498ffcba3c5453a07ab861d13cf">smu_server::make_root_node</a></div><div class="ttdeci">auto make_root_node(Children &amp;&amp;... children) -&gt; std::unique_ptr&lt; internals::MetricContainerNode&lt; Children... &gt; &gt;</div><div class="ttdoc">Creates a root node.</div><div class="ttdef"><b>Definition</b> metric_constructor.hpp:297</div></div>
+<div class="ttc" id="anamespacesmu__server_html_a23038498ffcba3c5453a07ab861d13cf"><div class="ttname"><a href="namespacesmu__server.html#a23038498ffcba3c5453a07ab861d13cf">smu_server::make_root_node</a></div><div class="ttdeci">auto make_root_node(Children &amp;&amp;... children) -&gt; std::unique_ptr&lt; internals::MetricContainerNode&lt; Children... &gt; &gt;</div><div class="ttdoc">Creates a root node.</div><div class="ttdef"><b>Definition</b> metric_constructor.hpp:319</div></div>
 </div><!-- fragment --><p>This code will produce a json of the form:</p>
 <div class="fragment"><div class="line">{</div>
 <div class="line">     &quot;RAM usage&quot;: {</div>
@@ -513,25 +516,40 @@ Example usage</h1>
 <div class="line">}</div>
 </div><!-- fragment --><h1><a class="anchor" id="mdtp_protocol"></a>
 MDTP (preferred) — value node encoding</h1>
-<p>Root nodes produce a <b>full MDTP frame</b>: a 5-byte frame header followed by the usual container node encoding (container header + concatenated children). Frame header fields:</p>
-<ul>
-<li>1 byte: MDTP version (currently <code>0x01</code>)</li>
-<li>4 bytes: frame payload size (Big-Endian uint32) — the number of bytes after the frame header, i.e. <code>container header + container payload</code></li>
+<p><b>New behaviour:</b> a root node now emits a <em>full MDTP frame</em> consisting of a short frame header followed <b>directly</b> by the concatenation of children node encodings. Root does <b>not</b> add an extra container header of its own. Each child node already serializes itself as a proper MDTP node (container or value), so the root frame payload is simply the concatenation of those child encodings.</p>
+<p>Frame header format (Big-Endian):</p><ul>
+<li>1 byte : MDTP version (currently <code>0x01</code>)</li>
+<li>4 bytes: frame payload size (uint32 BE) — number of bytes following the frame header</li>
 </ul>
-<p>Example: two children:</p><ul>
+<p>Important consequences:</p><ul>
+<li>The root does <b>not</b> wrap children into an additional anonymous container.</li>
+<li>The server will send the exact sequence returned by <code>root-&gt;to_mdtp()</code> as-is.</li>
+<li>Use <code>to_mdtp()</code> on root to obtain the ready-to-send MDTP frame.</li>
+</ul>
+<p>Example (two value children):</p><ul>
 <li><code>a = make_value_node("uptime", "1234", "s")</code> -&gt; 24 bytes</li>
 <li><code>b = make_value_node("load", 56, "%")</code> -&gt; 20 bytes</li>
 </ul>
-<p>children concat size = 24 + 20 = 44 bytes (0x2C)</p>
-<p>Container header (root container with empty name): </p><div class="fragment"><div class="line">00                                    // [node type] = 0x00 (container)</div>
-<div class="line">00 00 00 00                           // [name length] = 0x00000000 (0 bytes) — root has no name</div>
-<div class="line">00 00 00 2C                           // [container payload size] = 0x0000002C (44 bytes)</div>
-<div class="line">                                      // container header total = 1 + 4 + 0 + 4 = 9 bytes</div>
-</div><!-- fragment --><p>Frame header (prefixing the container): </p><div class="fragment"><div class="line">01                                    // [MDTP version] = 0x01 (1)</div>
-<div class="line">00 00 00 35                           // [frame payload size] = 0x00000035 (53 bytes)</div>
-<div class="line">                                      // 53 = container header (9) + children (44)</div>
+<p>children concat size = 24 + 20 = 44 bytes (0x2C) (44 bytes)</p>
+<p>Frame header (prefix): </p><div class="fragment"><div class="line">01                                    // [MDTP version] = 0x01 (1)</div>
+<div class="line">00 00 00 2C                           // [frame payload size] = 0x0000002C (44 bytes)</div>
 <div class="line">                                      // frame header total = 1 + 4 = 5 bytes</div>
-</div><!-- fragment --><p>Full frame layout (frame header + container header + children) — total = 5 + 9 + 44 = 58 bytes.</p>
+</div><!-- fragment --><p>Payload (concatenation of child encodings). Example bytes for the two value nodes:</p>
+<p>Child A ("uptime", "1234", "s") — 24 bytes: </p><div class="fragment"><div class="line">01                                    // [node type] = 0x01 (value)</div>
+<div class="line">00 00 00 06                           // [name length] = 6 (&quot;uptime&quot;)</div>
+<div class="line">75 70 74 69 6D 65                     // &quot;uptime&quot; (6 bytes)</div>
+<div class="line">00 00 00 01                           // [units length] = 1 (&quot;s&quot;)</div>
+<div class="line">73                                    // &quot;s&quot;</div>
+<div class="line">00 00 00 04                           // [value length] = 4 (&quot;1234&quot;)</div>
+<div class="line">31 32 33 34                           // &quot;1234&quot;</div>
+</div><!-- fragment --><p>Child B ("load", 56, "%") — 20 bytes: </p><div class="fragment"><div class="line">01                                    // [node type] = 0x01 (value)</div>
+<div class="line">00 00 00 04                           // [name length] = 4 (&quot;load&quot;)</div>
+<div class="line">6C 6F 61 64                           // &quot;load&quot;</div>
+<div class="line">00 00 00 01                           // [units length] = 1 (&quot;%&quot;)</div>
+<div class="line">25                                    // &quot;%&quot;</div>
+<div class="line">00 00 00 02                           // [value length] = 2 (&quot;56&quot;)</div>
+<div class="line">35 36                                 // &quot;56&quot;</div>
+</div><!-- fragment --><p>Full frame layout (frame header + concatenated children) — total = 5 + 44 = 49 bytes.</p>
 <dl class="section note"><dt>Note</dt><dd>Use <code>to_mdtp()</code> on the root node to obtain the full MDTP frame ready to be written to the network or stored. MDTP is Big-Endian; your sender/receiver must honor endianness.</dd></dl>
 <dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000003">Deprecated:</a></b></dt><dd><code>to_json()</code> is deprecated for transport. <code>to_mdtp()</code>/MDTP should be used for binary transport between modules and the server core. <code>to_json()</code> may remain useful for human readable debugging, but it is not recommended for production transport.</dd></dl>
 <h1><a class="anchor" id="examples_more"></a>

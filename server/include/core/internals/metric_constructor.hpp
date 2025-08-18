@@ -244,39 +244,62 @@ inline auto make_container_node(const std::string& container_name, Children&&...
  *
  * @section mdtp_protocol MDTP (preferred) — full MDTP frame emitted by root
  *
- * Root nodes produce a **full MDTP frame**: a 5-byte frame header followed by the usual container
- * node encoding (container header + concatenated children). Frame header fields:
+ * **New behaviour:** a root node now emits a *full MDTP frame* consisting of a short
+ * frame header followed **directly** by the concatenation of children node encodings.
+ * Root does **not** add an extra container header of its own. Each child node already
+ * serializes itself as a proper MDTP node (container or value), so the root frame payload
+ * is simply the concatenation of those child encodings.
  *
- * - 1 byte: MDTP version (currently `0x01`)
- * - 4 bytes: frame payload size (Big-Endian uint32) — the number of bytes after the frame header,
- *   i.e. `container header + container payload`
+ * Frame header format (Big-Endian):
+ * - 1 byte : MDTP version (currently `0x01`)
+ * - 4 bytes: frame payload size (uint32 BE) — number of bytes following the frame header
  *
- * Example: two children:
- *  - `a = make_value_node("uptime", "1234", "s")`  -> 24 bytes
- *  - `b = make_value_node("load", 56, "%")`        -> 20 bytes
+ * Important consequences:
+ * - The root does **not** wrap children into an additional anonymous container.
+ * - The server will send the exact sequence returned by `root->to_mdtp()` as-is.
+ * - Use `to_mdtp()` on root to obtain the ready-to-send MDTP frame.
  *
- * children concat size = 24 + 20 = 44 bytes (0x2C)
+ * Example (two value children):
+ *  - `a = make_value_node("uptime", "1234", "s")` -> 24 bytes
+ *  - `b = make_value_node("load", 56, "%")`       -> 20 bytes
  *
- * Container header (root container with empty name):
- * @code{.text}
- * 00                                    // [node type] = 0x00 (container)
- * 00 00 00 00                           // [name length] = 0x00000000 (0 bytes) — root has no name
- * 00 00 00 2C                           // [container payload size] = 0x0000002C (44 bytes)
- *                                       // container header total = 1 + 4 + 0 + 4 = 9 bytes
- * @endcode
+ * children concat size = 24 + 20 = 44 bytes (0x2C) (44 bytes)
  *
- * Frame header (prefixing the container):
+ * Frame header (prefix):
  * @code{.text}
  * 01                                    // [MDTP version] = 0x01 (1)
- * 00 00 00 35                           // [frame payload size] = 0x00000035 (53 bytes)
- *                                       // 53 = container header (9) + children (44)
+ * 00 00 00 2C                           // [frame payload size] = 0x0000002C (44 bytes)
  *                                       // frame header total = 1 + 4 = 5 bytes
  * @endcode
  *
- * Full frame layout (frame header + container header + children) — total = 5 + 9 + 44 = 58 bytes.
+ * Payload (concatenation of child encodings). Example bytes for the two value nodes:
  *
- * @note Use `to_mdtp()` on the root node to obtain the full MDTP frame ready to be written to the
- * network or stored. MDTP is Big-Endian; your sender/receiver must honor endianness.
+ * Child A ("uptime", "1234", "s") — 24 bytes:
+ * @code{.text}
+ * 01                                    // [node type] = 0x01 (value)
+ * 00 00 00 06                           // [name length] = 6 ("uptime")
+ * 75 70 74 69 6D 65                     // "uptime" (6 bytes)
+ * 00 00 00 01                           // [units length] = 1 ("s")
+ * 73                                    // "s"
+ * 00 00 00 04                           // [value length] = 4 ("1234")
+ * 31 32 33 34                           // "1234"
+ * @endcode
+ *
+ * Child B ("load", 56, "%") — 20 bytes:
+ * @code{.text}
+ * 01                                    // [node type] = 0x01 (value)
+ * 00 00 00 04                           // [name length] = 4 ("load")
+ * 6C 6F 61 64                           // "load"
+ * 00 00 00 01                           // [units length] = 1 ("%")
+ * 25                                    // "%"
+ * 00 00 00 02                           // [value length] = 2 ("56")
+ * 35 36                                 // "56"
+ * @endcode
+ *
+ * Full frame layout (frame header + concatenated children) — total = 5 + 44 = 49 bytes.
+ *
+ * @note Use `to_mdtp()` on the root node to obtain the full MDTP frame ready to be written
+ * to the network or stored. MDTP is Big-Endian; your sender/receiver must honor endianness.
  *
  * @deprecated `to_json()` is deprecated for transport. `to_mdtp()`/MDTP should be used for
  * binary transport between modules and the server core. `to_json()` may remain useful for human
@@ -292,7 +315,6 @@ inline auto make_container_node(const std::string& container_name, Children&&...
  * @note All length fields in MDTP are counts of bytes **without** a terminating NUL. Strings are
  * transmitted as raw bytes; they are NOT NUL-terminated in the stream.
  */
-
 template <typename... Children>
 inline auto make_root_node(Children&&... children)
     -> std::unique_ptr<internals::MetricContainerNode<Children...>> {

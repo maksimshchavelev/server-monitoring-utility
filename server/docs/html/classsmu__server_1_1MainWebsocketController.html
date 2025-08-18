@@ -120,9 +120,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad674bea88d7f2660c2914a4e9a422892" id="r_ad674bea88d7f2660c2914a4e9a422892"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1MainWebsocketController.html#ad674bea88d7f2660c2914a4e9a422892">handleConnectionClosed</a> (const drogon::WebSocketConnectionPtr &amp;connection) override</td></tr>
 <tr class="memdesc:ad674bea88d7f2660c2914a4e9a422892"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles closing connection. Removes the client from the list of connected clients.  <br /></td></tr>
 <tr class="separator:ad674bea88d7f2660c2914a4e9a422892"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab51c90ae6e3a045ccb8342be5d09e30d" id="r_ab51c90ae6e3a045ccb8342be5d09e30d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1MainWebsocketController.html#ab51c90ae6e3a045ccb8342be5d09e30d">send_everyone</a> (const Json::Value &amp;data)</td></tr>
-<tr class="memdesc:ab51c90ae6e3a045ccb8342be5d09e30d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends json data with metrics to all connected clients.  <br /></td></tr>
-<tr class="separator:ab51c90ae6e3a045ccb8342be5d09e30d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1d88bf258a86bfa15970374c28297f4" id="r_ae1d88bf258a86bfa15970374c28297f4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1MainWebsocketController.html#ae1d88bf258a86bfa15970374c28297f4">send_everyone</a> (const std::vector&lt; uint8_t &gt; &amp;data)</td></tr>
+<tr class="memdesc:ae1d88bf258a86bfa15970374c28297f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends json data with metrics to all connected clients.  <br /></td></tr>
+<tr class="separator:ae1d88bf258a86bfa15970374c28297f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0a1ef77762f187da6598325d7299208c" id="r_a0a1ef77762f187da6598325d7299208c"><td class="memItemLeft" align="right" valign="top">std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1MainWebsocketController.html#a0a1ef77762f187da6598325d7299208c">get_connections_count</a> () const noexcept</td></tr>
 <tr class="memdesc:a0a1ef77762f187da6598325d7299208c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns count of connections.  <br /></td></tr>
 <tr class="separator:a0a1ef77762f187da6598325d7299208c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -300,8 +300,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ab51c90ae6e3a045ccb8342be5d09e30d" name="ab51c90ae6e3a045ccb8342be5d09e30d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab51c90ae6e3a045ccb8342be5d09e30d">&#9670;&#160;</a></span>send_everyone()</h2>
+<a id="ae1d88bf258a86bfa15970374c28297f4" name="ae1d88bf258a86bfa15970374c28297f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1d88bf258a86bfa15970374c28297f4">&#9670;&#160;</a></span>send_everyone()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -309,7 +309,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">void smu_server::MainWebsocketController::send_everyone </td>
           <td>(</td>
-          <td class="paramtype">const Json::Value &amp;&#160;</td>
+          <td class="paramtype">const std::vector&lt; uint8_t &gt; &amp;&#160;</td>
           <td class="paramname"><em>data</em></td><td>)</td>
           <td></td>
         </tr>
@@ -319,7 +319,7 @@ Public Member Functions</h2></td></tr>
 <p>Sends json data with metrics to all connected clients. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">data</td><td><code>Json::Value</code> with data </td></tr>
+    <tr><td class="paramname">data</td><td><code>std::vector&lt;uint8_t&gt;</code> with data in MDTP protocol </td></tr>
   </table>
   </dd>
 </dl>
