@@ -385,69 +385,71 @@ template <typename... Children> class MetricContainerNode : public IMetricNode<C
      *
      * See the developer documentation for the MDTP protocol specification and examples.
      *
+     * @note If the node type is **root**, then only the frame header (version and payload size)
+     * will be added.
+     *
      * @return `std::vector<uint8_t>` with bytes
      */
     std::vector<uint8_t> to_mdtp() const override {
-        std::vector<uint8_t> result;
-        result.resize(1 /* node type */ + 4 /* name length */ +
-                          IMetricNode<Children...>::m_name.length() /* name */
-                          + 4 /* payload size */ + 0 /* payload */,
-                      0x0 /* fill by 0x0 */);
+        // 1) Collect children payload (concatenate bytes of all children nodes).
+        //    Each child already knows how to serialize itself (value or container).
+        std::vector<uint8_t> children_payload;
+        children_payload.reserve(128); // small heuristic; optional
 
-        std::size_t offset = 0;
-
-        // If node type is root
-        if (IMetricNode<Children...>::m_is_root) {
-            // Add header
-            result.resize(result.size() + 1 /* version */ + 4 /* payload size */);
-            offset = 5; // After header
-        }
-
-        // Payload
-        std::vector<uint8_t> payload;
-
-        // Iterate through the descendants and recursively call to_mdtp. The recursion will stop
-        // as soon as we reach the node-value. The obtained objects are placed with the desired
-        // name in root and return
-        for_each_tuple(IMetricNode<Children...>::m_children, [this, &payload](auto& child) {
-            auto child_data = child->to_mdtp();
-            payload.insert(payload.end(), child_data.begin(), child_data.end());
+        for_each_tuple(IMetricNode<Children...>::m_children, [&](auto& child) {
+            auto bytes = child->to_mdtp();
+            children_payload.insert(children_payload.end(), bytes.begin(), bytes.end());
         });
 
-        // Write node type
-        write_ubyte_be(result, offset, 0);
-        ++offset;
-
-        // Write node name length
-        write_uint32_be(
-            result, offset, static_cast<uint32_t>(IMetricNode<Children...>::m_name.length()));
-        offset += 4;
-
-        // Write node name
-        std::copy(IMetricNode<Children...>::m_name.begin(),
-                  IMetricNode<Children...>::m_name.end(),
-                  result.data() + offset);
-        offset += IMetricNode<Children...>::m_name.length();
-
-        // Write payload size
-        write_uint32_be(result, offset, static_cast<uint32_t>(payload.size()));
-        offset += 4;
-
-        // Write payload
-        std::copy(payload.begin(), payload.end(), std::back_inserter(result));
-
-        // If node type is root, insert header
+        // 2) Root vs non-root behavior.
         if (IMetricNode<Children...>::m_is_root) {
-            write_ubyte_be(result, 0, MDTP_VERSION); // write version
-            write_uint32_be(
-                result,
-                1,
-                static_cast<uint32_t>(payload.size() + 1 /* node type */ + 4 /* name length */ +
-                                      IMetricNode<Children...>::m_name.length() /* name */
-                                      + 4 /* payload size */));                 // write tail size
-        }
+            // --- Root node: only MDTP frame header + children payload ---
+            // Frame header: [version:1][payload_size:4]
+            std::vector<uint8_t> result(5, 0x00);
 
-        return result;
+            // write version
+            write_ubyte_be(result, 0, MDTP_VERSION);
+            // write payload size = total bytes of concatenated children
+            write_uint32_be(result, 1, static_cast<uint32_t>(children_payload.size()));
+
+            // append children payload
+            result.insert(result.end(), children_payload.begin(), children_payload.end());
+            return result;
+
+        } else {
+            // --- Regular container: container header + children payload ---
+            // Container header:
+            // [node type=0:1][name length:4][name bytes][payload size:4]
+            const uint32_t name_len =
+                static_cast<uint32_t>(IMetricNode<Children...>::m_name.size());
+
+            std::vector<uint8_t> result;
+            result.resize(1 + 4 + name_len + 4); // header without payload
+
+            size_t off = 0;
+
+            // node type = 0 (container)
+            write_ubyte_be(result, off, 0);
+            ++off;
+
+            // name length (BE)
+            write_uint32_be(result, off, name_len);
+            off += 4;
+
+            // name bytes (no terminating zero)
+            if (name_len) {
+                std::memcpy(result.data() + off, IMetricNode<Children...>::m_name.data(), name_len);
+                off += name_len;
+            }
+
+            // payload size (BE)
+            write_uint32_be(result, off, static_cast<uint32_t>(children_payload.size()));
+            off += 4;
+
+            // append children payload
+            result.insert(result.end(), children_payload.begin(), children_payload.end());
+            return result;
+        }
     }
 };
 
