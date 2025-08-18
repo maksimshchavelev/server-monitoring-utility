@@ -93,47 +93,69 @@ TEST(MetricConstructor, ContainerNode_WithTwoChildren_MDTP_Layout) {
 
 
 // ---------- ROOT NODE ----------
-TEST(MetricConstructor, RootNode_WithFrameHeader) {
-    // Prepare children
-    auto a = make_value_node("uptime", "1234", "s")->to_mdtp(); // 24 bytes
-    auto b = make_value_node("load", 56, "%")->to_mdtp();       // 20 bytes
-    ASSERT_EQ(a.size(), 24u);
-    ASSERT_EQ(b.size(), 20u);
+TEST(MDTP_RootNode, FrameHeaderAndChildrenConcatenation) {
+    // --- Arrange ---
+    // Build children first so we can serialize them before moving into root.
+    auto child1 = make_container_node(
+        "RAM",
+        make_value_node("Total", 8, "GB")
+        );
+    auto child2 = make_container_node(
+        "CPU",
+        make_value_node("Cores", 12, "cnt")
+        );
 
-    std::vector<uint8_t> children_concat;
-    children_concat.insert(children_concat.end(), a.begin(), a.end());
-    children_concat.insert(children_concat.end(), b.begin(), b.end());
-    ASSERT_EQ(children_concat.size(), 44u);
+    // Serialize children individually to form the expected payload.
+    const auto bytes_child1 = child1->to_mdtp();
+    const auto bytes_child2 = child2->to_mdtp();
 
-    auto root = make_root_node(
-                    make_value_node("uptime", "1234", "s"),
-                    make_value_node("load", 56, "%")
-                    )->to_mdtp();
+    std::vector<uint8_t> expected_payload;
+    expected_payload.insert(expected_payload.end(), bytes_child1.begin(), bytes_child1.end());
+    expected_payload.insert(expected_payload.end(), bytes_child2.begin(), bytes_child2.end());
 
-    // Sizes
-    const size_t frame_header = 5;          // version + payload size
-    const size_t container_header = 9;      // type + name_len + name(0) + payload_size
-    const size_t children_size = 44;
-    const size_t expected_total = frame_header + container_header + children_size; // 58
+    // Now build the root frame (moves children).
+    auto root = make_root_node(std::move(child1), std::move(child2));
 
-    ASSERT_EQ(root.size(), expected_total);
+    // --- Act ---
+    const auto frame = root->to_mdtp();
 
-    // --- Frame header ---
-    EXPECT_EQ(root[0], 1); // version
+    // --- Assert: frame header ---
+    // [0] - MDTP version, [1..4] - payload size (big endian)
+    ASSERT_GE(frame.size(), 5u) << "Root frame must contain header of 5 bytes";
+    EXPECT_EQ(frame[0], static_cast<uint8_t>(MDTP_VERSION)) << "Invalid MDTP version in header";
 
-    // Payload size should include container header + children = 9 + 44 = 53
-    EXPECT_EQ(internals::read_uint32_be(root, 1), 53u);
+    const uint32_t payload_size_be = internals::read_uint32_be(frame, 1);
+    const uint32_t actual_payload_size = static_cast<uint32_t>(frame.size() - 5);
+    EXPECT_EQ(payload_size_be, actual_payload_size)
+        << "Header payload size must equal actual payload bytes";
 
-    // --- Root container header (starts at offset 5) ---
-    const size_t offset = frame_header;
+    // --- Assert: payload equals concatenation of children ---
+    std::vector<uint8_t> payload(frame.begin() + 5, frame.end());
+    EXPECT_EQ(payload, expected_payload)
+        << "Root payload must be a plain concatenation of children bytes";
 
-    EXPECT_EQ(root[offset], 0); // type = container
-    EXPECT_EQ(internals::read_uint32_be(root, offset + 1), 0u); // name length = 0
-    EXPECT_EQ(internals::read_uint32_be(root, offset + 5), 44u); // payload size = children
+    // --- Extra spot checks to ensure no extra containerization by root ---
+    // Payload should start with the first child's node header (container => type=0).
+    ASSERT_FALSE(payload.empty());
+    EXPECT_EQ(payload[0], 0) << "First payload byte must be 'container' node type (0)";
 
-    // --- Root container payload (children) ---
-    EXPECT_TRUE(std::equal(children_concat.begin(), children_concat.end(),
-                           root.begin() + frame_header + container_header));
+    // Check the first child's name length and name ("RAM").
+    ASSERT_GE(payload.size(), 1 + 4u);
+    const uint32_t name_len_child1 = internals::read_uint32_be(payload, 1);
+    EXPECT_EQ(name_len_child1, 3u) << "First container name length must be 3 ('RAM')";
+
+    ASSERT_GE(payload.size(), 1 + 4u + name_len_child1);
+    EXPECT_EQ(payload[5], 'R');
+    EXPECT_EQ(payload[6], 'A');
+    EXPECT_EQ(payload[7], 'M');
+
+    // Sanity: the second child must follow immediately after the first child's bytes.
+    ASSERT_GE(expected_payload.size(), bytes_child1.size() + 1u);
+    ASSERT_GE(payload.size(), bytes_child1.size() + 1u);
+    EXPECT_EQ(
+        std::vector<uint8_t>(payload.begin() + bytes_child1.size(), payload.end()),
+        bytes_child2
+        ) << "Second child must follow the first child without extra bytes from root";
 }
 
 
