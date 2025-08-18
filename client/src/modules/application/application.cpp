@@ -22,11 +22,8 @@ int Application::run() {
     try {
         // Running network
         m_network.run(
-            [this](const std::string& msg) {
-                if (auto res = json_from_string(msg); res.has_value()) {
-                    // If no error
-                    m_ui.set_data(res.value());
-                }
+            [this](const std::vector<uint8_t>& msg) {
+                m_ui.set_data(msg);
             },
             [this](const std::string& connection_error_reason) {
                 exit("Connection error, reason: " + connection_error_reason);
@@ -71,28 +68,5 @@ void Application::exit(std::optional<std::string> error) {
         cw.notify_one();
     }).detach();
 }
-
-
-
-
-// Private method
-std::expected<Json::Value, std::string> Application::json_from_string(
-    const std::string& str) const noexcept {
-    const auto     raw_json_length = static_cast<int>(str.length());
-    JSONCPP_STRING err;
-    Json::Value    json;
-
-    Json::CharReaderBuilder                 builder;
-    const std::unique_ptr<Json::CharReader> reader(builder.newCharReader());
-    if (!reader->parse(str.c_str(), str.c_str() + raw_json_length, &json, &err)) {
-        // error
-        return std::unexpected(std::format("Error conversion to json: {}", err));
-    }
-
-    return json;
-}
-
-
-
 
 } // namespace smu
