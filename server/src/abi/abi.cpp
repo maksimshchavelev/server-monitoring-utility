@@ -12,17 +12,17 @@
 
 namespace smu_server {
 
-extern "C" int abi_get_abi_version(ABI_CONTEXT*) {
+extern "C" uint32_t abi_get_abi_version(const ABI_MODULE_CONTEXT *) {
     return ABI_VERSION;
 }
 
 
-extern "C" void abi_log(ABI_CONTEXT* context, int log_type, const char* message) {
+extern "C" void abi_log(const ABI_MODULE_CONTEXT *context, int log_type, const char *message) {
     if (context == nullptr || context->module_name == nullptr || message == nullptr) {
         return;
     }
 
-    const char* color = nullptr;
+    const char *color = nullptr;
 
     switch (log_type) {
     case 0:
@@ -40,9 +40,9 @@ extern "C" void abi_log(ABI_CONTEXT* context, int log_type, const char* message)
     }
 
     // For example: [MODULE RAM] Initialization error!
-    const char* module_name = context->module_name;
-    logger().log_colorless(std::format(
-        "[MODULE \033[36m{}\033[0m] {}{}\033[0m", module_name, color, message));
+    const char *module_name = context->module_name;
+    logger().log_colorless(
+        std::format("[MODULE \033[36m{}\033[0m] {}{}\033[0m", module_name, color, message));
 }
 
 } // namespace smu_server

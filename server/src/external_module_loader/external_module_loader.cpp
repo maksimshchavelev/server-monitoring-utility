@@ -35,23 +35,14 @@ std::expected<std::unique_ptr<IModule>, std::string> ExternalModuleLoader::load(
     }
 
     // Init server core functions
-    ABI_SERVER_CORE_FUNCTIONS server_core_functions{.abi_log = abi_log,
-                                                    .abi_get_abi_version = abi_get_abi_version};
+    ABI_SERVER_CORE_FUNCTIONS server_core_functions{.abi_get_abi_version = abi_get_abi_version,
+                                                    .abi_log = abi_log};
 
     // Init module
     ABI_MODULE_FUNCTIONS module_functions =
         module_init_fn(server_core_functions, config.get_json().toStyledString().data());
 
-    // Get context
-    ABI_CONTEXT* module_context = module_functions.module_get_context();
-
-    // Error
-    if (module_context == nullptr) {
-        return std::unexpected(std::format("failed to get module context from {}", path));
-    }
-
-    return std::make_unique<internals::ProxyModule>(
-        dl_descriptor, module_functions, module_context, config);
+    return std::make_unique<internals::ProxyModule>(dl_descriptor, module_functions, config);
 }
 
 } // namespace smu_server
