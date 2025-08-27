@@ -24,9 +24,10 @@ std::expected<std::unique_ptr<IModule>, std::string> ExternalModuleLoader::load(
         return std::unexpected(dlerror());
     }
 
-    auto module_init_fn = reinterpret_cast<ABI_MODULE_FUNCTIONS (*)(
-        ABI_SERVER_CORE_FUNCTIONS, const char* /* configuration */)>(
-        dlsym(dl_descriptor, "module_init"));
+    auto module_init_fn =
+        reinterpret_cast<ABI_MODULE_FUNCTIONS* (*)(ABI_SERVER_CORE_FUNCTIONS,
+                                                   const char* /* configuration */)>(
+            dlsym(dl_descriptor, "module_init"));
 
     // Finding init function error
     if (module_init_fn == nullptr) {
@@ -39,10 +40,10 @@ std::expected<std::unique_ptr<IModule>, std::string> ExternalModuleLoader::load(
                                                     .abi_log = abi_log};
 
     // Init module
-    ABI_MODULE_FUNCTIONS module_functions =
+    ABI_MODULE_FUNCTIONS* module_functions =
         module_init_fn(server_core_functions, config.get_json().toStyledString().data());
 
-    return std::make_unique<internals::ProxyModule>(dl_descriptor, module_functions, config);
+    return std::make_unique<internals::ProxyModule>(dl_descriptor, *module_functions, config);
 }
 
 } // namespace smu_server
