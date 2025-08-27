@@ -28,13 +28,9 @@ class ProxyModule : public IModule {
      * executed.
      * @param dl_handle Dynamic object descriptor obtained via dlopen
      * @param module_functions Structure with pointers to module functions
-     * @param context Module context (name and description)
      * @param cfg Configuration of module
      */
-    ProxyModule(void*                dl_handle,
-                ABI_MODULE_FUNCTIONS module_functions,
-                ABI_CONTEXT*         context,
-                const Config&        cfg);
+    ProxyModule(void* dl_handle, ABI_MODULE_FUNCTIONS module_functions, const Config& cfg);
 
     /**
      * @brief Destroys the module and closes the dynamic object
@@ -59,6 +55,13 @@ class ProxyModule : public IModule {
      * @brief Disables module
      */
     void disable() override;
+
+
+    /**
+     * @brief Is module enabled?
+     * @return `true` if enabled, otherwise `false`
+     */
+    bool is_enabled() const override;
 
 
     /**
@@ -92,7 +95,6 @@ class ProxyModule : public IModule {
     void* m_dl_handle; ///< Dynamic object descriptor obtained via dlopen
 
     ABI_MODULE_FUNCTIONS m_module_functions; ///< Structure with pointers to module functions
-    ABI_CONTEXT*         m_module_context;   ///< Module context (name and description)
 };
 
 } // namespace smu_server::internals
