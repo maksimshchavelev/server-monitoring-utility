@@ -192,7 +192,7 @@ constexpr std::string_view ProxyModule::module_description() const noexcept {
         return "NO DESCRIPTION";
     }
 
-    if (const char* module_desc = m_module_functions.module_get_module_name();
+    if (const char* module_desc = m_module_functions.module_get_module_description();
         module_desc == nullptr) {
         log(LogType::ERROR,
             "module_description(): call to 'module_get_module_description' failed because the "
