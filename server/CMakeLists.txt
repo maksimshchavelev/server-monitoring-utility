@@ -31,6 +31,12 @@ set(SMU_MODULE_TARGETS "")
 
 # ==============================================================================
 
+# =============================== SDK PACKAGING ================================
+
+set(SDK_SCRIPT "${CMAKE_SOURCE_DIR}/scripts/build-sdk.sh")
+
+# ==============================================================================
+
 configure_file(
   ${CMAKE_CURRENT_SOURCE_DIR}/include/version.hpp.in
   ${CMAKE_CURRENT_SOURCE_DIR}/include/version.hpp
@@ -212,6 +218,19 @@ if(BUILD_EXTERNAL_MODULES)
   endforeach()
 endif()
 # ==================================================================================
+
+
+# =============================== SDK PACKAGING ================================
+
+# Type cmake --build . --target sdk to pack SDKs
+add_custom_target(sdk
+  COMMAND ${SDK_SCRIPT} ${PROJECT_VERSION}
+  WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+  COMMENT "Building combined SDK packages"
+)
+
+# ==============================================================================
+
 
 # Configuring tests
 if(${BUILD_TESTS})
