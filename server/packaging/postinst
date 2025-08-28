@@ -6,4 +6,11 @@ systemctl daemon-reexec
 systemctl enable smu-server.service
 systemctl start smu-server.service
 
+# Set owner and permissions for modules
+if [ -d "/var/lib/smu-server/modules.d" ]; then
+    chown -R root:root /var/lib/smu-server/modules.d
+    find /var/lib/smu-server/modules.d -type f -name "*.so" -exec chmod 0500 {} \;
+    find /var/lib/smu-server/modules.d -type d -exec chmod 0550 {} \;
+fi
+
 exit 0
