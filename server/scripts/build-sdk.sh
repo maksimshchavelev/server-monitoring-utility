@@ -2,21 +2,31 @@
 # ==============================================================================
 # build-sdk.sh
 #
-# Downloads latest SDK .deb releases, separates runtime and dev packages,
-# combines them into smu-server-sdk.deb and smu-server-sdk-dev.deb.
+# This script downloads the latest SDK releases from listed repositories,
+# separates runtime and dev packages, and combines them into two packages:
+#  - smu-server-sdk.deb  (runtime libraries)
+#  - smu-server-sdk-dev.deb (development files)
 #
 # Usage:
 #   Called via CMake custom target:
 #     add_custom_target(sdk
-#       COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/scripts/build-sdk.sh
-#       WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/sdk-build
+#       COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/scripts/build-sdk.sh ${PROJECT_VERSION}
+#       WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/sdk-build
 #     )
 #
 # Requirements:
 #   - curl
 #   - dpkg-deb
+#   - tar
 # ==============================================================================
 set -eo pipefail
+
+if [[ -z "$1" ]]; then
+    echo "Usage: $0 <version>"
+    exit 1
+fi
+
+VERSION="$1"
 
 # SDK repositories list
 REPOS=(
@@ -33,60 +43,42 @@ mkdir -p "${RUNTIME_DIR}" "${DEV_DIR}"
 # Clean previous contents
 rm -rf "${RUNTIME_DIR:?}/*" "${DEV_DIR:?}/*"
 
-info() {
-    echo "[INFO] $*"
-}
-
-warn() {
-    echo "[WARNING] $*"
-}
-
-error() {
-    echo -e "\033[1;31m[ERROR]\033[0m $*" >&2
-}
-
+# Iterate over repositories
 for repo_url in "${REPOS[@]}"; do
-    info "Processing repo $repo_url..."
+    echo "Processing repo $repo_url..."
 
     repo_name=$(basename "$repo_url" .git)
     owner_name=$(basename "$(dirname "$repo_url")")
     api_url="https://api.github.com/repos/$owner_name/$repo_name/releases/latest"
 
-    # Get download URLs for .deb packages
     assets=$(curl -s "$api_url" | grep "browser_download_url" | grep ".deb" | cut -d '"' -f 4 || true)
 
     if [[ -z "$assets" ]]; then
-        warn "No .deb assets found for $repo_url"
+        echo -e "\033[1;33mWARNING:\033[0m No .deb assets found for $repo_url"
         continue
     fi
 
-    info "Found assets:"
+    echo "Found assets:"
     echo "$assets"
 
     while IFS= read -r asset_url; do
-        info "Downloading $asset_url..."
-        if ! curl -L -O "$asset_url"; then
-            error "Failed to download $asset_url"
-            continue
-        fi
+        echo "Downloading $asset_url..."
+        curl -L -O "$asset_url"
 
         deb_file=$(basename "$asset_url")
 
         if [[ "$deb_file" == *"dev"* ]]; then
-            info "Copying $deb_file into DEV_DIR"
+            echo "Copying $deb_file into DEV_DIR"
             dpkg-deb -x "$deb_file" "$DEV_DIR"
         else
-            info "Copying $deb_file into RUNTIME_DIR"
+            echo "Copying $deb_file into RUNTIME_DIR"
             dpkg-deb -x "$deb_file" "$RUNTIME_DIR"
         fi
+
     done <<< "$assets"
 done
 
-# Build combined packages
-VERSION="1.0.0"  # optional: detect dynamically if needed
-PACKAGE_RUNTIME="smu-server-sdk-${VERSION}.deb"
-PACKAGE_DEV="smu-server-sdk-dev-${VERSION}.deb"
-
+echo "Building combined SDK packages for version ${VERSION}..."
 pushd "$BUILD_DIR" > /dev/null
 
 # Runtime package
@@ -100,13 +92,12 @@ Architecture: amd64
 Maintainer: Maksim Shchavelev <maksimshchavelev@gmail.com>
 Description: Combined SDK runtime libraries
 EOF
-cp -r "${RUNTIME_DIR}/." runtime-package/
 
-# Set permissions for .so files
+cp -r "${RUNTIME_DIR}/." runtime-package/
 find runtime-package/ -type f -name "*.so" -exec chmod 500 {} \;
 find runtime-package/ -type f -name "*.so" -exec chown root:root {} \;
 
-dpkg-deb --build runtime-package "$PACKAGE_RUNTIME"
+dpkg-deb --build runtime-package "smu-server-sdk-${VERSION}.deb"
 
 # Dev package
 mkdir -p "dev-package/DEBIAN"
@@ -119,10 +110,11 @@ Architecture: amd64
 Maintainer: Maksim Shchavelev <maksimshchavelev@gmail.com>
 Description: Combined SDK development files
 EOF
+
 cp -r "${DEV_DIR}/." dev-package/
 
-dpkg-deb --build dev-package "$PACKAGE_DEV"
+dpkg-deb --build dev-package "smu-server-sdk-dev-${VERSION}.deb"
 
 popd > /dev/null
 
-info "SDK packages built successfully in $BUILD_DIR/"
+echo "SDK packages built successfully in $BUILD_DIR/"
