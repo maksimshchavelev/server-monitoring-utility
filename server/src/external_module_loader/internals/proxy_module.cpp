@@ -39,6 +39,37 @@ std::optional<std::vector<uint8_t>> ProxyModule::get_data() {
 
 
 // Public method
+const Config &ProxyModule::get_configuration() const noexcept
+{
+    if (m_module_functions.module_get_configuration == nullptr) {
+        log(LogType::ERROR, "get_configuration(): failed to call 'module_get_configuration' because it points to NULL");
+        return m_configuration;
+    }
+
+    const char* configuration = m_module_functions.module_get_configuration();
+    if (configuration == nullptr) {
+        log(LogType::ERROR, "get_configuration(): call to 'module_get_configuration' failed because the return value is NULL");
+        return m_configuration;
+    }
+
+    // Converting string to json
+    const auto     raw_json_length = static_cast<int>(strlen(configuration));
+    JSONCPP_STRING err;
+    Json::Value    config;
+
+    Json::CharReaderBuilder                 builder;
+    const std::unique_ptr<Json::CharReader> reader(builder.newCharReader());
+    if (!reader->parse(configuration, configuration + raw_json_length, &config, &err)) {
+        log(LogType::ERROR, "get_configuration(): failed to parse json from module, cause: " + err);
+        return m_configuration;
+    }
+
+    m_configuration = Config(config);
+    return m_configuration;
+}
+
+
+// Public method
 void ProxyModule::enable() {
     m_module_functions.module_enable();
 }

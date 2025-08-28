@@ -46,6 +46,13 @@ class ProxyModule : public IModule {
 
 
     /**
+     * @brief Method for obtaining module configuration
+     * @return `const Config&`
+     */
+    const Config& get_configuration() const noexcept override;
+
+
+    /**
      * @brief Enables module
      */
     void enable() override;
@@ -95,6 +102,11 @@ class ProxyModule : public IModule {
     void* m_dl_handle; ///< Dynamic object descriptor obtained via dlopen
 
     ABI_MODULE_FUNCTIONS m_module_functions; ///< Structure with pointers to module functions
+
+    mutable Config
+        m_configuration; ///< A field with the same name will override m_configuration of the base
+                         ///< class, and mutable will allow it to be changed in constant methods. A
+                         ///< "hack" for get_configuration. See the implementation
 };
 
 } // namespace smu_server::internals
