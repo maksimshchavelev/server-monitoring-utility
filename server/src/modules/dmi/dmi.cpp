@@ -51,7 +51,7 @@ DMI::DMI(const Config& configuration) : IModule(configuration) {
 
 
 // Public method
-std::optional<Json::Value> DMI::get_data() {
+std::optional<std::vector<uint8_t>> DMI::get_data() {
     auto root = make_root_node(
         // BIOS INFO
         make_container_node("BIOS",
@@ -77,7 +77,7 @@ std::optional<Json::Value> DMI::get_data() {
                             make_value_node("Product serial", m_product_serial, ""),
                             make_value_node("Product UUID", m_product_uuid, "")));
 
-    return root->to_json();
+    return root->to_mdtp();
 }
 
 

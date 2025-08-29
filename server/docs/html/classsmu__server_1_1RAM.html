@@ -128,9 +128,9 @@ Collaboration diagram for smu_server::RAM:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:afd645cb1386bfa114aec6592174fef43" id="r_afd645cb1386bfa114aec6592174fef43"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1RAM.html#afd645cb1386bfa114aec6592174fef43">RAM</a> (const <a class="el" href="classsmu__server_1_1Config.html">Config</a> &amp;config)</td></tr>
 <tr class="separator:afd645cb1386bfa114aec6592174fef43"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8bb83b1235b67b3f80b9e1c079d101b6" id="r_a8bb83b1235b67b3f80b9e1c079d101b6"><td class="memItemLeft" align="right" valign="top">std::optional&lt; Json::Value &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1RAM.html#a8bb83b1235b67b3f80b9e1c079d101b6">get_data</a> () override</td></tr>
-<tr class="memdesc:a8bb83b1235b67b3f80b9e1c079d101b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get module data to send to the client.  <br /></td></tr>
-<tr class="separator:a8bb83b1235b67b3f80b9e1c079d101b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6af2977519ce7e24319d689382fc7fa9" id="r_a6af2977519ce7e24319d689382fc7fa9"><td class="memItemLeft" align="right" valign="top">std::optional&lt; std::vector&lt; uint8_t &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1RAM.html#a6af2977519ce7e24319d689382fc7fa9">get_data</a> () override</td></tr>
+<tr class="memdesc:a6af2977519ce7e24319d689382fc7fa9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get module data to send to the client.  <br /></td></tr>
+<tr class="separator:a6af2977519ce7e24319d689382fc7fa9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7536fa78c74e0f0e78df5dabf722bcab" id="r_a7536fa78c74e0f0e78df5dabf722bcab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1RAM.html#a7536fa78c74e0f0e78df5dabf722bcab">enable</a> () override</td></tr>
 <tr class="memdesc:a7536fa78c74e0f0e78df5dabf722bcab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable module.  <br /></td></tr>
 <tr class="separator:a7536fa78c74e0f0e78df5dabf722bcab"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -267,8 +267,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="a8bb83b1235b67b3f80b9e1c079d101b6" name="a8bb83b1235b67b3f80b9e1c079d101b6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8bb83b1235b67b3f80b9e1c079d101b6">&#9670;&#160;</a></span>get_data()</h2>
+<a id="a6af2977519ce7e24319d689382fc7fa9" name="a6af2977519ce7e24319d689382fc7fa9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6af2977519ce7e24319d689382fc7fa9">&#9670;&#160;</a></span>get_data()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -277,7 +277,7 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::optional&lt; Json::Value &gt; smu_server::RAM::get_data </td>
+          <td class="memname">std::optional&lt; std::vector&lt; uint8_t &gt; &gt; smu_server::RAM::get_data </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -297,8 +297,9 @@ Additional Inherited Members</h2></td></tr>
 <a class="el" href="namespacesmu__server.html#a0290ea5f19c20a5ad90d4837a627fb88" title="Creates a node that contains other nodes.">make_container_node</a> </dd>
 <dd>
 <a class="el" href="namespacesmu__server.html#a219dae7d70a890e3fb0740451fbf5dbe" title="Creates a node with the value.">make_value_node</a> </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><code>std::vector&lt;uint8_t&gt;</code> with bytes in MDTP protocol </dd></dl>
 
-<p>Implements <a class="el" href="classsmu__server_1_1IModule.html#a1ae4b0e7d1d57a492fc8036203cf3d0c">smu_server::IModule</a>.</p>
+<p>Implements <a class="el" href="classsmu__server_1_1IModule.html#a8856549ce7ec4f8dd7090e4da93bbbd8">smu_server::IModule</a>.</p>
 
 </div>
 </div>

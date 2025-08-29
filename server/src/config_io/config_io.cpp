@@ -9,6 +9,7 @@
 
 #include "config_io/config_io.hpp"
 #include "compile-time_config.hpp"
+#include <filesystem>
 #include <fstream>
 
 namespace smu_server {
@@ -24,21 +25,22 @@ Config_IO& smu_server::Config_IO::instance() {
 
 // Public method
 smu_server::Config Config_IO::get_server_config() {
-        auto res = read_config(CONFIG_PATH);
-        if (res.has_value()) {
-            // If success
-            return std::move(res.value());
-        } else {
-            // If error
-            throw std::runtime_error(res.error());
-        }
+    auto res = read_config(CONFIG_PATH);
+    if (res.has_value()) {
+        // If success
+        return std::move(res.value());
+    } else {
+        // If error
+        throw std::runtime_error(res.error());
+    }
 }
 
 
 
 
 // Public method
-std::expected<void, std::string> Config_IO::save_server_config(const Config& config) const noexcept {
+std::expected<void, std::string> Config_IO::save_server_config(
+    const Config& config) const noexcept {
     return save_config(CONFIG_PATH, config);
 }
 
@@ -47,7 +49,8 @@ std::expected<void, std::string> Config_IO::save_server_config(const Config& con
 
 // Public method
 Config Config_IO::get_module_config(const std::string_view module_name) const noexcept {
-    if (auto config = read_config(std::format("{}/{}.json", MODULES_CONFIGS_DIR, module_name));
+    if (auto config = read_config(
+            std::format("{}/{}/{}.json", MODULES_CONFIGS_DIR, module_name, module_name));
         config.has_value()) {
         return config.value();
     }
@@ -58,9 +61,10 @@ Config Config_IO::get_module_config(const std::string_view module_name) const no
 
 
 // Public method
-std::expected<void, std::string> Config_IO::save_module_config(
-    const std::string_view module_name, const Config& config) const {
-    return save_config(std::format("{}/{}.json", MODULES_CONFIGS_DIR, module_name), config);
+std::expected<void, std::string> Config_IO::save_module_config(const std::string_view module_name,
+                                                               const Config& config) const {
+    return save_config(std::format("{}/{}/{}.json", MODULES_CONFIGS_DIR, module_name, module_name),
+                       config);
 }
 
 
@@ -102,17 +106,19 @@ std::expected<Config, std::string> Config_IO::read_config(
 
 
 // Private method
-std::expected<void, std::string> Config_IO::save_config(
-    const std::string_view path, const Config& config) const noexcept {
+std::expected<void, std::string> Config_IO::save_config(const std::string_view path,
+                                                        const Config& config) const noexcept {
+
+    // Create directories
+    std::filesystem::create_directories(std::filesystem::path(path).parent_path());
+
     std::ofstream file;
     file.open(path.data());
 
     if (file.is_open()) {
         // If success
 
-        config.get([&](const Json::Value& value){
-            file << value.toStyledString();
-        });
+        config.get([&](const Json::Value& value) { file << value.toStyledString(); });
 
         file.close();
         return {};

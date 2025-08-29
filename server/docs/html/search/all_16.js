@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['version_2ehpp_0',['version.hpp',['../version_8hpp.html',1,'']]]
+  ['updating_0',['Problems after updating',['../index.html#autotoc_md34',1,'']]],
+  ['usage_1',['usage',['../namespacesmu__server_1_1internals.html#example_usage',1,'Example usage'],['../index.html#autotoc_md33',1,'Usage']]],
+  ['usage_20notes_2',['Advanced usage notes',['../namespacesmu__server.html#examples_more',1,'']]]
 ];

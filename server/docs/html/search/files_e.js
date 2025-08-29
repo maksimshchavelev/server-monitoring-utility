@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['websocket_5fmain_5fcontroller_2ehpp_0',['websocket_main_controller.hpp',['../websocket__main__controller_8hpp.html',1,'']]]
+  ['proxy_5fmodule_2ehpp_0',['proxy_module.hpp',['../proxy__module_8hpp.html',1,'']]]
 ];

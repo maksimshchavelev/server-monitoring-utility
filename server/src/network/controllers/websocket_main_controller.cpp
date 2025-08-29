@@ -44,9 +44,10 @@ void MainWebsocketController::handleConnectionClosed(
 
 
 // Public method
-void MainWebsocketController::send_everyone(const Json::Value& data) {
+void MainWebsocketController::send_everyone(const std::vector<uint8_t>& data) {
     for (auto& connection : m_connections) {
-        connection->sendJson(data);
+        connection->send(std::string(data.begin(), data.end()),
+                         drogon::WebSocketMessageType::Binary);
     }
 }
 

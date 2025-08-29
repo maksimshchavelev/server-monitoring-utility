@@ -25,10 +25,10 @@
 var NAVTREE =
 [
   [ "smu-server", "index.html", [
-    [ "How to build smu-server?", "index.html#autotoc_md25", null ],
-    [ "Usage", "index.html#autotoc_md26", null ],
-    [ "Problems after updating", "index.html#autotoc_md27", null ],
-    [ "Conclusion", "index.html#autotoc_md28", null ],
+    [ "How to build smu-server?", "index.html#autotoc_md32", null ],
+    [ "Usage", "index.html#autotoc_md33", null ],
+    [ "Problems after updating", "index.html#autotoc_md34", null ],
+    [ "Conclusion", "index.html#autotoc_md35", null ],
     [ "Developer Guide", "md_for-developers_2beginning.html", null ],
     [ "Developing Your Own Module", "md_for-developers_2modules_21__own__module.html", [
       [ "Getting Started. General Concept", "md_for-developers_2modules_21__own__module.html#autotoc_md3", null ],
@@ -48,11 +48,22 @@ var NAVTREE =
       [ "Solution", "md_for-developers_2modules_23__storing__json__tree.html#autotoc_md22", null ],
       [ "Summary", "md_for-developers_2modules_23__storing__json__tree.html#autotoc_md23", null ]
     ] ],
+    [ "Module Data Transmission Protocol", "md_for-developers_2modules_24__mdtp.html", [
+      [ "MDTP concept", "md_for-developers_2modules_24__mdtp.html#autotoc_md25", null ],
+      [ "Internal structure of MDTP", "md_for-developers_2modules_24__mdtp.html#autotoc_md26", null ],
+      [ "Examples", "md_for-developers_2modules_24__mdtp.html#autotoc_md27", [
+        [ "Example 1: A simple value node", "md_for-developers_2modules_24__mdtp.html#autotoc_md28", null ],
+        [ "Example 2: Container with nested nodes", "md_for-developers_2modules_24__mdtp.html#autotoc_md29", null ],
+        [ "Example 3: Complex container with multiple subsystems", "md_for-developers_2modules_24__mdtp.html#autotoc_md30", null ]
+      ] ]
+    ] ],
+    [ "Deprecated List", "deprecated.html", null ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
       [ "Namespace Members", "namespacemembers.html", [
         [ "All", "namespacemembers.html", null ],
-        [ "Functions", "namespacemembers_func.html", null ]
+        [ "Functions", "namespacemembers_func.html", null ],
+        [ "Variables", "namespacemembers_vars.html", null ]
       ] ]
     ] ],
     [ "Classes", "annotated.html", [
@@ -79,8 +90,8 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"annotated.html",
-"config__io_8hpp_source.html"
+"abi_8hpp.html",
+"classsmu__server_1_1internals_1_1ProxyModule.html#a36b6641cdd0b73a935b6733323d11413"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
