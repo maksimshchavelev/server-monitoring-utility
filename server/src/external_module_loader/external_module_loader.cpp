@@ -43,6 +43,11 @@ std::expected<std::unique_ptr<IModule>, std::string> ExternalModuleLoader::load(
     ABI_MODULE_FUNCTIONS* module_functions =
         module_init_fn(server_core_functions, config.get_json().toStyledString().data());
 
+    // If error occured
+    if (module_functions == nullptr) {
+        return std::unexpected("'module_init' returned NULL");
+    }
+
     return std::make_unique<internals::ProxyModule>(dl_descriptor, *module_functions, config);
 }
 
