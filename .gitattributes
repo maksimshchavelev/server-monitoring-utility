@@ -2,3 +2,5 @@ cli/docs/** linguist-vendored
 client/docs/** linguist-vendored
 server/docs/** linguist-vendored
 doxygen-awesome-css/** linguist-vendored
+CMakeLists.txt linguist-vendored
+*.sh linguist-vendored
