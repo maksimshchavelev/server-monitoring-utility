@@ -134,6 +134,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af9ffcf89e9d9a23ae652ac967d516015" id="r_af9ffcf89e9d9a23ae652ac967d516015"><td class="memItemLeft" align="right" valign="top">virtual Json::Value&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1internals_1_1IMetricNode.html#af9ffcf89e9d9a23ae652ac967d516015">to_json</a> () const =0</td></tr>
 <tr class="memdesc:af9ffcf89e9d9a23ae652ac967d516015"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recursively generates json, preserving the hierarchy of nodes, their types, values and names.  <br /></td></tr>
 <tr class="separator:af9ffcf89e9d9a23ae652ac967d516015"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10c6d9c928b656329a1b983a227a0725" id="r_a10c6d9c928b656329a1b983a227a0725"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1internals_1_1IMetricNode.html#a10c6d9c928b656329a1b983a227a0725">to_mdtp</a> () const =0</td></tr>
+<tr class="memdesc:a10c6d9c928b656329a1b983a227a0725"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates binary data in MDTP protocol format.  <br /></td></tr>
+<tr class="separator:a10c6d9c928b656329a1b983a227a0725"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1166d138d08a8101141c03978f12d7ff" id="r_a1166d138d08a8101141c03978f12d7ff"><td class="memItemLeft" align="right" valign="top">virtual const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1internals_1_1IMetricNode.html#a1166d138d08a8101141c03978f12d7ff">get_name</a> () const noexcept</td></tr>
 <tr class="memdesc:a1166d138d08a8101141c03978f12d7ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get name of node.  <br /></td></tr>
 <tr class="separator:a1166d138d08a8101141c03978f12d7ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -328,10 +331,46 @@ template&lt;typename... Children&gt; </div>
 
 <p>Recursively generates json, preserving the hierarchy of nodes, their types, values and names. </p>
 <dl class="section return"><dt>Returns</dt><dd>The generated json </dd></dl>
+<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000005">Deprecated:</a></b></dt><dd><code><a class="el" href="classsmu__server_1_1internals_1_1IMetricNode.html#af9ffcf89e9d9a23ae652ac967d516015" title="Recursively generates json, preserving the hierarchy of nodes, their types, values and names.">to_json()</a></code> is deprecated for transport. <code><a class="el" href="classsmu__server_1_1internals_1_1IMetricNode.html#a10c6d9c928b656329a1b983a227a0725" title="Generates binary data in MDTP protocol format.">to_mdtp()</a></code>/MDTP should be used for binary transport between modules and the server core. <code><a class="el" href="classsmu__server_1_1internals_1_1IMetricNode.html#af9ffcf89e9d9a23ae652ac967d516015" title="Recursively generates json, preserving the hierarchy of nodes, their types, values and names.">to_json()</a></code> may remain useful for human readable debugging, but it is not recommended for production transport. </dd></dl>
 
 <p>Implements <a class="el" href="structsmu__server_1_1IMetricNodeBase.html#a6316399c6b2518f0a7da75104396c10d">smu_server::IMetricNodeBase</a>.</p>
 
 <p>Implemented in <a class="el" href="classsmu__server_1_1internals_1_1MetricValueNode.html#aa4b0cf35997500b03adca3e4597868e1">smu_server::internals::MetricValueNode</a>, and <a class="el" href="classsmu__server_1_1internals_1_1MetricContainerNode.html#aeb9520298cce9afa7d55d943de2812cd">smu_server::internals::MetricContainerNode&lt; Children &gt;</a>.</p>
+
+</div>
+</div>
+<a id="a10c6d9c928b656329a1b983a227a0725" name="a10c6d9c928b656329a1b983a227a0725"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a10c6d9c928b656329a1b983a227a0725">&#9670;&#160;</a></span>to_mdtp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Children&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual std::vector&lt; uint8_t &gt; <a class="el" href="classsmu__server_1_1internals_1_1IMetricNode.html">smu_server::internals::IMetricNode</a>&lt; Children &gt;::to_mdtp </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Generates binary data in MDTP protocol format. </p>
+<p>See the developer documentation for the MDTP protocol specification and examples.</p>
+<dl class="section return"><dt>Returns</dt><dd><code>std::vector&lt;uint8_t&gt;</code> with bytes </dd></dl>
+
+<p>Implements <a class="el" href="structsmu__server_1_1IMetricNodeBase.html#a3622a36cc18b2ec5c10342083c7fa261">smu_server::IMetricNodeBase</a>.</p>
+
+<p>Implemented in <a class="el" href="classsmu__server_1_1internals_1_1MetricValueNode.html#a9d3b66a9b25084f4f69d112a9a554f0d">smu_server::internals::MetricValueNode</a>, and <a class="el" href="classsmu__server_1_1internals_1_1MetricContainerNode.html#a6a3e432a6bbf33b29699cf8d731e0693">smu_server::internals::MetricContainerNode&lt; Children &gt;</a>.</p>
 
 </div>
 </div>

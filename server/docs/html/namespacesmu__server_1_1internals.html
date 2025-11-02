@@ -111,12 +111,27 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsmu__server_1_1internals_1_1ModuleRegistrar.html">ModuleRegistrar</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Supporting structure for module registration.  <a href="structsmu__server_1_1internals_1_1ModuleRegistrar.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1internals_1_1ProxyModule.html">ProxyModule</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A proxy module that interacts specifically with ABI, but does not collect any data itself.  <a href="classsmu__server_1_1internals_1_1ProxyModule.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1internals_1_1StringWrapper.html">StringWrapper</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classsmu__server_1_1internals_1_1StringWrapper.html" title="The StringWrapper class to wrap const char*">StringWrapper</a> class to wrap <code>const char*</code>  <a href="classsmu__server_1_1internals_1_1StringWrapper.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a0ff2ee20526b34f8384f32f24d212d0d" id="r_a0ff2ee20526b34f8384f32f24d212d0d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesmu__server_1_1internals.html#a0ff2ee20526b34f8384f32f24d212d0d">write_uint32_be</a> (std::span&lt; uint8_t &gt; memory, std::size_t offset, uint32_t value)</td></tr>
+<tr class="memdesc:a0ff2ee20526b34f8384f32f24d212d0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes a signed 32-bit integer to <code>memory</code> starting at offset <code>offset</code> in <b>Big Endian order</b>  <br /></td></tr>
+<tr class="separator:a0ff2ee20526b34f8384f32f24d212d0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28590aac4b0c5475381c30ed6116c009" id="r_a28590aac4b0c5475381c30ed6116c009"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesmu__server_1_1internals.html#a28590aac4b0c5475381c30ed6116c009">write_ubyte_be</a> (std::span&lt; uint8_t &gt; memory, std::size_t offset, uint8_t value)</td></tr>
+<tr class="memdesc:a28590aac4b0c5475381c30ed6116c009"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes an unsigned 8-bit integer (a byte) to <code>memory</code>.  <br /></td></tr>
+<tr class="separator:a28590aac4b0c5475381c30ed6116c009"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d8ef8bb818f2d7638bcfc8b452720e6" id="r_a3d8ef8bb818f2d7638bcfc8b452720e6"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesmu__server_1_1internals.html#a3d8ef8bb818f2d7638bcfc8b452720e6">read_ubyte_be</a> (std::span&lt; const uint8_t &gt; memory, std::size_t offset)</td></tr>
+<tr class="memdesc:a3d8ef8bb818f2d7638bcfc8b452720e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads an unsigned 8-bit integer (a byte) from <code>memory</code>.  <br /></td></tr>
+<tr class="separator:a3d8ef8bb818f2d7638bcfc8b452720e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9411f1033435eff237c2339200cc9a1" id="r_ac9411f1033435eff237c2339200cc9a1"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesmu__server_1_1internals.html#ac9411f1033435eff237c2339200cc9a1">read_uint32_be</a> (std::span&lt; const uint8_t &gt; memory, std::size_t offset)</td></tr>
+<tr class="memdesc:ac9411f1033435eff237c2339200cc9a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads an unsigned 32-bit integer from <code>memory</code> in <b>Big Endian</b> order.  <br /></td></tr>
+<tr class="separator:ac9411f1033435eff237c2339200cc9a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac6001815b6a093112dcdabc7ba1744f8" id="r_ac6001815b6a093112dcdabc7ba1744f8"><td class="memItemLeft" align="right" valign="top">consteval bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesmu__server_1_1internals.html#ac6001815b6a093112dcdabc7ba1744f8">contains_substring</a> (const char *str, const char *substr)</td></tr>
 <tr class="memdesc:ac6001815b6a093112dcdabc7ba1744f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Searches for a substring in a string regardless of case.  <br /></td></tr>
 <tr class="separator:ac6001815b6a093112dcdabc7ba1744f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -233,6 +248,229 @@ template&lt;typename Tuple , typename Function , std::size_t... Indexes&gt; </di
   </dd>
 </dl>
 <dl class="section see"><dt>See also</dt><dd><code><a class="el" href="namespacesmu__server.html#a522f05053a18b752356b80c93a5fe53e" title="Iterates over the tuple elements and passes each element to the function function.">for_each_tuple</a></code> </dd></dl>
+
+</div>
+</div>
+<a id="a3d8ef8bb818f2d7638bcfc8b452720e6" name="a3d8ef8bb818f2d7638bcfc8b452720e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d8ef8bb818f2d7638bcfc8b452720e6">&#9670;&#160;</a></span>read_ubyte_be()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t smu_server::internals::read_ubyte_be </td>
+          <td>(</td>
+          <td class="paramtype">std::span&lt; const uint8_t &gt;&#160;</td>
+          <td class="paramname"><em>memory</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>offset</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reads an unsigned 8-bit integer (a byte) from <code>memory</code>. </p>
+<h1><a class="anchor" id="example_usage"></a>
+Example usage</h1>
+<p>If memory <code>mem</code> looks like this: </p><div class="fragment"><div class="line">[0] : 0xFF (255)</div>
+</div><!-- fragment --><p> Then the code: </p><div class="fragment"><div class="line">uint8_t val = <a class="code hl_function" href="namespacesmu__server_1_1internals.html#a3d8ef8bb818f2d7638bcfc8b452720e6">read_ubyte_be</a>(mem, 0); <span class="comment">// val will be 255</span></div>
+<div class="ttc" id="anamespacesmu__server_1_1internals_html_a3d8ef8bb818f2d7638bcfc8b452720e6"><div class="ttname"><a href="namespacesmu__server_1_1internals.html#a3d8ef8bb818f2d7638bcfc8b452720e6">smu_server::internals::read_ubyte_be</a></div><div class="ttdeci">uint8_t read_ubyte_be(std::span&lt; const uint8_t &gt; memory, std::size_t offset)</div><div class="ttdoc">Reads an unsigned 8-bit integer (a byte) from memory.</div><div class="ttdef"><b>Definition</b> memutils.hpp:92</div></div>
+</div><!-- fragment --><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">memory</td><td>The memory buffer to read from. </td></tr>
+    <tr><td class="paramname">offset</td><td>The offset in bytes from the start of the buffer. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The 8-bit value read from memory. </dd></dl>
+
+</div>
+</div>
+<a id="ac9411f1033435eff237c2339200cc9a1" name="ac9411f1033435eff237c2339200cc9a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9411f1033435eff237c2339200cc9a1">&#9670;&#160;</a></span>read_uint32_be()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t smu_server::internals::read_uint32_be </td>
+          <td>(</td>
+          <td class="paramtype">std::span&lt; const uint8_t &gt;&#160;</td>
+          <td class="paramname"><em>memory</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>offset</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reads an unsigned 32-bit integer from <code>memory</code> in <b>Big Endian</b> order. </p>
+<h1><a class="anchor" id="example_usage"></a>
+Example usage</h1>
+<p>If memory <code>mem</code> looks like this: </p><div class="fragment"><div class="line">[0] : 0x00 (MSB)</div>
+<div class="line">[1] : 0x00</div>
+<div class="line">[2] : 0x00</div>
+<div class="line">[3] : 0x0C (LSB)</div>
+</div><!-- fragment --><p> Then the code: </p><div class="fragment"><div class="line">uint32_t val = <a class="code hl_function" href="namespacesmu__server_1_1internals.html#ac9411f1033435eff237c2339200cc9a1">read_uint32_be</a>(mem, 0); <span class="comment">// val will be 12</span></div>
+<div class="ttc" id="anamespacesmu__server_1_1internals_html_ac9411f1033435eff237c2339200cc9a1"><div class="ttname"><a href="namespacesmu__server_1_1internals.html#ac9411f1033435eff237c2339200cc9a1">smu_server::internals::read_uint32_be</a></div><div class="ttdeci">uint32_t read_uint32_be(std::span&lt; const uint8_t &gt; memory, std::size_t offset)</div><div class="ttdoc">Reads an unsigned 32-bit integer from memory in Big Endian order.</div><div class="ttdef"><b>Definition</b> memutils.hpp:119</div></div>
+</div><!-- fragment --><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">memory</td><td>The memory buffer to read from. </td></tr>
+    <tr><td class="paramname">offset</td><td>The offset in bytes from the start of the buffer. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The 32-bit value reconstructed from memory. </dd></dl>
+
+</div>
+</div>
+<a id="a28590aac4b0c5475381c30ed6116c009" name="a28590aac4b0c5475381c30ed6116c009"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28590aac4b0c5475381c30ed6116c009">&#9670;&#160;</a></span>write_ubyte_be()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void smu_server::internals::write_ubyte_be </td>
+          <td>(</td>
+          <td class="paramtype">std::span&lt; uint8_t &gt;&#160;</td>
+          <td class="paramname"><em>memory</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>offset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Writes an unsigned 8-bit integer (a byte) to <code>memory</code>. </p>
+<p>Endianness does not apply to a single byte, but the function is provided for a consistent API.</p>
+<h1><a class="anchor" id="example_usage"></a>
+Example usage</h1>
+<p>After executing this code: </p><div class="fragment"><div class="line"><a class="code hl_function" href="namespacesmu__server_1_1internals.html#a28590aac4b0c5475381c30ed6116c009">write_ubyte_be</a>(mem, 0, 255);</div>
+<div class="ttc" id="anamespacesmu__server_1_1internals_html_a28590aac4b0c5475381c30ed6116c009"><div class="ttname"><a href="namespacesmu__server_1_1internals.html#a28590aac4b0c5475381c30ed6116c009">smu_server::internals::write_ubyte_be</a></div><div class="ttdeci">void write_ubyte_be(std::span&lt; uint8_t &gt; memory, std::size_t offset, uint8_t value)</div><div class="ttdoc">Writes an unsigned 8-bit integer (a byte) to memory.</div><div class="ttdef"><b>Definition</b> memutils.hpp:68</div></div>
+</div><!-- fragment --><p>Memory <code>mem</code> will look like: </p><div class="fragment"><div class="line">[0] : 0xFF (255)</div>
+</div><!-- fragment --><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">memory</td><td>The memory buffer to write to. </td></tr>
+    <tr><td class="paramname">offset</td><td>The offset in bytes from the start of the buffer. </td></tr>
+    <tr><td class="paramname">value</td><td>The 8-bit value to write. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a0ff2ee20526b34f8384f32f24d212d0d" name="a0ff2ee20526b34f8384f32f24d212d0d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ff2ee20526b34f8384f32f24d212d0d">&#9670;&#160;</a></span>write_uint32_be()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void smu_server::internals::write_uint32_be </td>
+          <td>(</td>
+          <td class="paramtype">std::span&lt; uint8_t &gt;&#160;</td>
+          <td class="paramname"><em>memory</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>offset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Writes a signed 32-bit integer to <code>memory</code> starting at offset <code>offset</code> in <b>Big Endian order</b> </p>
+<h1><a class="anchor" id="example_usage"></a>
+Example usage</h1>
+<p>After executing this code </p><div class="fragment"><div class="line"><a class="code hl_function" href="namespacesmu__server_1_1internals.html#a0ff2ee20526b34f8384f32f24d212d0d">write_uint32_be</a>(mem, 0, 12)</div>
+<div class="ttc" id="anamespacesmu__server_1_1internals_html_a0ff2ee20526b34f8384f32f24d212d0d"><div class="ttname"><a href="namespacesmu__server_1_1internals.html#a0ff2ee20526b34f8384f32f24d212d0d">smu_server::internals::write_uint32_be</a></div><div class="ttdeci">void write_uint32_be(std::span&lt; uint8_t &gt; memory, std::size_t offset, uint32_t value)</div><div class="ttdoc">Writes a signed 32-bit integer to memory starting at offset offset in Big Endian order</div><div class="ttdef"><b>Definition</b> memutils.hpp:38</div></div>
+</div><!-- fragment --><p>Memory <code>mem</code> will look like: </p><div class="fragment"><div class="line">[0] : 0x00</div>
+<div class="line">[1] : 0x00</div>
+<div class="line">[2] : 0x00</div>
+<div class="line">[3] : 0x0C (12)</div>
+</div><!-- fragment --><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">memory</td><td>Memory </td></tr>
+    <tr><td class="paramname">offset</td><td>Offset </td></tr>
+    <tr><td class="paramname">value</td><td>Value to write </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

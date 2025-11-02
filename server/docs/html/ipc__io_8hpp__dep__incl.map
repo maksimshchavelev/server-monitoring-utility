@@ -1,18 +1,22 @@
 <map id="include/cli/ipc/internals/ipc_io.hpp" name="include/cli/ipc/internals/ipc_io.hpp">
-<area shape="rect" id="Node000001" title="File with async IPC Input&#45;Output class to send/receive raw messages." alt="" coords="89,5,261,45"/>
-<area shape="rect" id="Node000002" href="$ipc_8hpp.html" title="File with smu&#45;cli interprocessor communication tools." alt="" coords="94,93,257,119"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="178,59,178,93,173,93,173,59"/>
-<area shape="rect" id="Node000003" href="$cli_8hpp.html" title="File with smu&#45;cli command receiver." alt="" coords="108,167,243,192"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="178,132,178,167,173,167,173,132"/>
-<area shape="rect" id="Node000004" href="$app_8hpp.html" title="File Application class." alt="" coords="94,240,257,280"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="178,206,178,240,173,240,173,206"/>
-<area shape="rect" id="Node000005" href="$core_8hpp.html" title="File with core of application." alt="" coords="95,416,256,441"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="158,293,143,329,140,348,143,367,154,393,168,414,164,417,150,396,138,369,135,348,138,327,153,291"/>
-<area shape="rect" id="Node000008" href="$module__registrar_8hpp.html" title=" " alt="" coords="153,328,317,368"/>
-<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="199,290,224,326,220,329,194,293"/>
-<area shape="rect" id="Node000006" href="$dmi_8hpp.html" title="This module allows you to get data from DMI/SMBIOS tables. This is the data that the manufacturer wri..." alt="" coords="5,489,164,529"/>
-<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="153,452,108,491,105,487,150,448"/>
-<area shape="rect" id="Node000007" href="$ram_8hpp.html" title="File with RAM module class." alt="" coords="188,489,347,529"/>
-<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="201,448,247,487,243,491,198,452"/>
-<area shape="poly" id="edge8_Node000008_Node000005" title=" " alt="" coords="215,381,186,417,182,414,210,377"/>
+<area shape="rect" id="Node000001" title="File with async IPC Input&#45;Output class to send/receive raw messages." alt="" coords="317,5,489,45"/>
+<area shape="rect" id="Node000002" href="$ipc_8hpp.html" title="File with smu&#45;cli interprocessor communication tools." alt="" coords="321,93,484,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="405,59,405,93,400,93,400,59"/>
+<area shape="rect" id="Node000003" href="$cli_8hpp.html" title="File with smu&#45;cli command receiver." alt="" coords="335,167,470,192"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="405,132,405,167,400,167,400,132"/>
+<area shape="rect" id="Node000004" href="$app_8hpp.html" title="File Application class." alt="" coords="321,240,484,280"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="405,206,405,240,400,240,400,206"/>
+<area shape="rect" id="Node000005" href="$core_8hpp.html" title="File with core of application." alt="" coords="322,416,483,441"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="385,293,371,329,367,348,371,367,382,393,396,414,391,417,377,396,365,369,362,348,365,327,381,291"/>
+<area shape="rect" id="Node000010" href="$module__registrar_8hpp.html" title=" " alt="" coords="381,328,545,368"/>
+<area shape="poly" id="edge9_Node000004_Node000010" title=" " alt="" coords="426,290,452,326,447,329,422,293"/>
+<area shape="rect" id="Node000006" href="$external__module__loader_8hpp.html" title="File with class for load external .so modules." alt="" coords="5,489,189,544"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="349,448,190,492,189,487,348,443"/>
+<area shape="rect" id="Node000007" href="$proxy__module_8hpp.html" title="File with class for load external .so modules." alt="" coords="214,489,397,544"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="381,452,337,491,333,487,378,448"/>
+<area shape="rect" id="Node000008" href="$dmi_8hpp.html" title="This module allows you to get data from DMI/SMBIOS tables. This is the data that the manufacturer wri..." alt="" coords="421,497,579,537"/>
+<area shape="poly" id="edge7_Node000005_Node000008" title=" " alt="" coords="428,448,480,495,477,499,424,452"/>
+<area shape="rect" id="Node000009" href="$ram_8hpp.html" title="File with RAM module class." alt="" coords="603,497,762,537"/>
+<area shape="poly" id="edge8_Node000005_Node000009" title=" " alt="" coords="454,443,622,494,620,499,453,448"/>
+<area shape="poly" id="edge10_Node000010_Node000005" title=" " alt="" coords="442,381,414,417,410,414,438,377"/>
 </map>

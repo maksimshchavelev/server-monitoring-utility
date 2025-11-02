@@ -1,16 +1,20 @@
 <map id="include/network/controllers/websocket_main_controller.hpp" name="include/network/controllers/websocket_main_controller.hpp">
-<area shape="rect" id="Node000001" title="Main websocket controller." alt="" coords="60,5,291,45"/>
-<area shape="rect" id="Node000002" href="$network_8hpp.html" title="File with network part of smu&#45;server." alt="" coords="70,93,281,119"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="178,59,178,93,173,93,173,59"/>
-<area shape="rect" id="Node000003" href="$app_8hpp.html" title="File Application class." alt="" coords="94,167,257,207"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="178,132,178,167,173,167,173,132"/>
-<area shape="rect" id="Node000004" href="$core_8hpp.html" title="File with core of application." alt="" coords="95,343,256,368"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="158,219,143,255,140,275,143,294,154,320,168,341,164,344,150,322,138,295,135,275,138,254,153,217"/>
-<area shape="rect" id="Node000007" href="$module__registrar_8hpp.html" title=" " alt="" coords="153,255,317,295"/>
-<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="199,216,224,253,220,256,194,219"/>
-<area shape="rect" id="Node000005" href="$dmi_8hpp.html" title="This module allows you to get data from DMI/SMBIOS tables. This is the data that the manufacturer wri..." alt="" coords="5,416,164,456"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="153,379,108,418,105,414,150,375"/>
-<area shape="rect" id="Node000006" href="$ram_8hpp.html" title="File with RAM module class." alt="" coords="188,416,347,456"/>
-<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="201,375,247,414,243,418,198,379"/>
-<area shape="poly" id="edge7_Node000007_Node000004" title=" " alt="" coords="215,307,186,344,182,341,210,304"/>
+<area shape="rect" id="Node000001" title="Main websocket controller." alt="" coords="287,5,518,45"/>
+<area shape="rect" id="Node000002" href="$network_8hpp.html" title="File with network part of smu&#45;server." alt="" coords="297,93,508,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="405,59,405,93,400,93,400,59"/>
+<area shape="rect" id="Node000003" href="$app_8hpp.html" title="File Application class." alt="" coords="321,167,484,207"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="405,132,405,167,400,167,400,132"/>
+<area shape="rect" id="Node000004" href="$core_8hpp.html" title="File with core of application." alt="" coords="322,343,483,368"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="385,219,371,255,367,275,371,294,382,320,396,341,391,344,377,322,365,295,362,275,365,254,381,217"/>
+<area shape="rect" id="Node000009" href="$module__registrar_8hpp.html" title=" " alt="" coords="381,255,545,295"/>
+<area shape="poly" id="edge8_Node000003_Node000009" title=" " alt="" coords="426,216,452,253,447,256,422,219"/>
+<area shape="rect" id="Node000005" href="$external__module__loader_8hpp.html" title="File with class for load external .so modules." alt="" coords="5,416,189,471"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="349,374,190,419,189,414,348,369"/>
+<area shape="rect" id="Node000006" href="$proxy__module_8hpp.html" title="File with class for load external .so modules." alt="" coords="214,416,397,471"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="381,379,337,418,333,414,378,375"/>
+<area shape="rect" id="Node000007" href="$dmi_8hpp.html" title="This module allows you to get data from DMI/SMBIOS tables. This is the data that the manufacturer wri..." alt="" coords="421,423,579,463"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="428,375,480,421,477,425,424,379"/>
+<area shape="rect" id="Node000008" href="$ram_8hpp.html" title="File with RAM module class." alt="" coords="603,423,762,463"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="454,370,622,421,620,426,453,375"/>
+<area shape="poly" id="edge9_Node000009_Node000004" title=" " alt="" coords="442,307,414,344,410,341,438,304"/>
 </map>

@@ -7,6 +7,11 @@ INPUT                  = src include for-developers README.md
 FILE_PATTERNS          = *.h *.hpp *.md
 RECURSIVE              = YES
 STRIP_FROM_INC_PATH    = include
+ENABLE_PREPROCESSING   = YES
+MACRO_EXPANSION        = YES
+PREDEFINED 	       += __attribute__(x)=
+PREDEFINED 	       += __attribute__((x))=
+PREDEFINED 	       += __attribute__((packed))=
 
 #--------------------------------------------------------------------------- 
 # Build related configuration options

@@ -95,7 +95,7 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="md_README"></a> This component is one of the three parts of <b>smu</b> — the server monitoring system. You can install it by downloading the <code>.deb</code> package from the releases or by building it manually (explained below).</p>
 <p>Check the usage guide here. If you'd like to <b>contribute to the development</b> of smu-server, head over <a class="el" href="md_for-developers_2beginning.html">here</a>.</p>
-<h1><a class="anchor" id="autotoc_md25"></a>
+<h1><a class="anchor" id="autotoc_md32"></a>
 How to build smu-server?</h1>
 <p>First, clone the main repository and navigate to the <code>server</code> folder. For convenience, we will build it in a separate <code>build</code> directory (you'll need to create it — all commands below should be executed from the <code>build</code> directory).</p>
 <blockquote class="doxtable">
@@ -126,7 +126,7 @@ How to build smu-server?</h1>
 <blockquote class="doxtable">
 <p>&zwj;If installed via a package manager, a systemd service script will be installed, systemd will reload, and <code>smu-server</code> will start immediately. The service is called <code>smu-server</code> (you can manage it via <code>systemd</code>). </p>
 </blockquote>
-<h1><a class="anchor" id="autotoc_md26"></a>
+<h1><a class="anchor" id="autotoc_md33"></a>
 Usage</h1>
 <blockquote class="doxtable">
 <p>&zwj;<code>smu-server</code> comes with a CLI tool that allows you to configure the server without directly editing config files. This method is preferred (see the CLI documentation for details). Below is a basic overview of the config structure, which is also worth reading. </p>
@@ -161,12 +161,12 @@ Usage</h1>
 <div class="fragment"><div class="line">sudo systemctl start smu-server</div>
 </div><!-- fragment --><p>You can also check whether the server started correctly (and see logs if errors occurred) with:</p>
 <div class="fragment"><div class="line">sudo systemctl status smu-server</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md27"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md34"></a>
 Problems after updating</h1>
 <p>If you encounter a <b>module registration error</b> after updating, for example: </p><div class="fragment"><div class="line">[30.07.25 10:00:59] [MODULE RAM] The &#39;poll_ratio&#39; field is missing. Can&#39;t continue</div>
 <div class="line">[30.07.25 10:00:59] [MODULE RAM] Registration failed! Cause: The &#39;poll_ratio&#39; field is missing</div>
 </div><!-- fragment --><p>Then you need to delete the module configuration and restart the server. Usually, the module configuration is located in the <code>/var/lib/smu-server/modules.d</code> directory. In the example above, you need to delete <code>/var/lib/smu-server/modules.d/RAM.json</code></p>
-<h1><a class="anchor" id="autotoc_md28"></a>
+<h1><a class="anchor" id="autotoc_md35"></a>
 Conclusion</h1>
 <p>We’ve covered installation, building from source, and a basic configuration example for <code>smu-server</code>. Enjoy using it! </p>
 </div></div><!-- PageDoc -->

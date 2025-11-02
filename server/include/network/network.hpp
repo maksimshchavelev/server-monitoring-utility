@@ -49,10 +49,10 @@ class Network {
 
     /**
      * @brief Sends json data with metrics to all clients
-     * @param data `Json::Value` with data
+     * @param data `std::vector<uint8_t>` with data (MDTP protocol)
      * @note Call after calling `Network::run`
      */
-    void send_everyone(const Json::Value& data);
+    void send_everyone(const std::vector<uint8_t>& data);
 
 
 

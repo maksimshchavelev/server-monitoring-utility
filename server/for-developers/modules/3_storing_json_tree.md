@@ -98,4 +98,4 @@ return m_root->to_json();
 ```
 
 # Summary
-This chapter discussed an approach for storing the JSON tree obtained from `make_root_node`.
+This chapter discussed an approach for storing the JSON tree obtained from `make_root_node`. [See next guide](4_mdtp.md)

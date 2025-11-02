@@ -47,7 +47,7 @@ RAM::RAM(const Config& config) : IModule(config) {
 
 
 // Public method
-std::optional<Json::Value> RAM::get_data() {
+std::optional<std::vector<uint8_t>> RAM::get_data() {
     struct sysinfo info;
 
     if (sysinfo(&info) == -1) { // error
@@ -70,7 +70,7 @@ std::optional<Json::Value> RAM::get_data() {
             make_value_node(
                 "SWAP usage (%)", (info.totalswap - info.freeswap) * 100 / info.totalswap, "%")));
 
-    return root->to_json();
+    return root->to_mdtp();
 }
 
 

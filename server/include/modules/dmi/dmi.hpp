@@ -29,7 +29,7 @@ class DMI : public IModule {
 
 
 
-    std::optional<Json::Value> get_data() override;
+    std::optional<std::vector<uint8_t>> get_data() override;
 
 
 

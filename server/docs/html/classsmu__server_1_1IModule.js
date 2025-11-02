@@ -10,7 +10,7 @@ var classsmu__server_1_1IModule =
     [ "disable", "classsmu__server_1_1IModule.html#a5ef057292c4a5f9b5a37155516a7b071", null ],
     [ "enable", "classsmu__server_1_1IModule.html#aa864a3b435f889dbd9a1fc5df5d29ca8", null ],
     [ "get_configuration", "classsmu__server_1_1IModule.html#a95e788d97c1c26e50c7c5c9b2ef78956", null ],
-    [ "get_data", "classsmu__server_1_1IModule.html#a1ae4b0e7d1d57a492fc8036203cf3d0c", null ],
+    [ "get_data", "classsmu__server_1_1IModule.html#a8856549ce7ec4f8dd7090e4da93bbbd8", null ],
     [ "get_poll_ratio", "classsmu__server_1_1IModule.html#aa7b0ea5de8292e4ca388ef37fe12e1f5", null ],
     [ "is_enabled", "classsmu__server_1_1IModule.html#a785d5aac1d0fcb853440529e25c463d0", null ],
     [ "log", "classsmu__server_1_1IModule.html#af0fc5991b677607972689ee105859a71", null ],

@@ -117,9 +117,9 @@ requires std::is_base_of_v&lt;<a class="el" href="classsmu__server_1_1IModule.ht
 <tr class="memitem:ac726f23658ee9383f791b1f063a0345b" id="r_ac726f23658ee9383f791b1f063a0345b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1Application.html#ac726f23658ee9383f791b1f063a0345b">run</a> (int argc, char **argv)</td></tr>
 <tr class="memdesc:ac726f23658ee9383f791b1f063a0345b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run the application.  <br /></td></tr>
 <tr class="separator:ac726f23658ee9383f791b1f063a0345b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa9e4dcd24d9c34201fe162fdc9a86085" id="r_aa9e4dcd24d9c34201fe162fdc9a86085"><td class="memItemLeft" align="right" valign="top">Json::Value&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1Application.html#aa9e4dcd24d9c34201fe162fdc9a86085">collect_metrics</a> ()</td></tr>
-<tr class="memdesc:aa9e4dcd24d9c34201fe162fdc9a86085"><td class="mdescLeft">&#160;</td><td class="mdescRight">Collects all metrics from all modules.  <br /></td></tr>
-<tr class="separator:aa9e4dcd24d9c34201fe162fdc9a86085"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b8103af49a022f890fa7c9a77ea0616" id="r_a9b8103af49a022f890fa7c9a77ea0616"><td class="memItemLeft" align="right" valign="top">std::vector&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1Application.html#a9b8103af49a022f890fa7c9a77ea0616">collect_metrics</a> ()</td></tr>
+<tr class="memdesc:a9b8103af49a022f890fa7c9a77ea0616"><td class="mdescLeft">&#160;</td><td class="mdescRight">Collects all metrics from all modules.  <br /></td></tr>
+<tr class="separator:a9b8103af49a022f890fa7c9a77ea0616"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -177,14 +177,14 @@ Example usage</h1>
 </div><!-- fragment --> 
 </div>
 </div>
-<a id="aa9e4dcd24d9c34201fe162fdc9a86085" name="aa9e4dcd24d9c34201fe162fdc9a86085"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa9e4dcd24d9c34201fe162fdc9a86085">&#9670;&#160;</a></span>collect_metrics()</h2>
+<a id="a9b8103af49a022f890fa7c9a77ea0616" name="a9b8103af49a022f890fa7c9a77ea0616"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b8103af49a022f890fa7c9a77ea0616">&#9670;&#160;</a></span>collect_metrics()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">Json::Value smu_server::Application::collect_metrics </td>
+          <td class="memname">std::vector&lt; uint8_t &gt; smu_server::Application::collect_metrics </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -193,7 +193,7 @@ Example usage</h1>
 </div><div class="memdoc">
 
 <p>Collects all metrics from all modules. </p>
-<dl class="section return"><dt>Returns</dt><dd><code>Json::Value</code> with collected metrics </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><code>std::vector&lt;uint8_t&gt;</code> with collected metrics (bytes in MDTP protocol) </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>Public, as it is a crutch to make the method friendly </dd></dl>
 
 </div>

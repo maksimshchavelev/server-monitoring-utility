@@ -93,7 +93,8 @@ $(document).ready(function(){initNavTree('namespacesmu__server.html',''); initRe
   <div class="summary">
 <a href="#namespaces">Namespaces</a> &#124;
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">smu_server Namespace Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -108,6 +109,18 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsmu__server_1_1ABI__CONTEXT.html">ABI_CONTEXT</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The context in which the module calls server core functions.  <a href="structsmu__server_1_1ABI__CONTEXT.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsmu__server_1_1ABI__MDTP__DATA.html">ABI_MDTP_DATA</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Struct to storing MDTP data. See documentation for MDTP protocol.  <a href="structsmu__server_1_1ABI__MDTP__DATA.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsmu__server_1_1ABI__MODULE__FUNCTIONS.html">ABI_MODULE_FUNCTIONS</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Functions of the module that calls the server core.  <a href="structsmu__server_1_1ABI__MODULE__FUNCTIONS.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsmu__server_1_1ABI__SERVER__CORE__FUNCTIONS.html">ABI_SERVER_CORE_FUNCTIONS</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Functions provided by the server for the module.  <a href="structsmu__server_1_1ABI__SERVER__CORE__FUNCTIONS.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1Application.html">Application</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Singleton <a class="el" href="classsmu__server_1_1Application.html" title="The Singleton Application class.">Application</a> class.  <a href="classsmu__server_1_1Application.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -122,6 +135,9 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1DMI.html">DMI</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A module to get data from DMI/SMBIOS tables.  <a href="classsmu__server_1_1DMI.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1ExternalModuleLoader.html">ExternalModuleLoader</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class for loading external .so modules.  <a href="classsmu__server_1_1ExternalModuleLoader.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsmu__server_1_1IMetricNodeBase.html">IMetricNodeBase</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Base IMetricNode class to simplify the storage of data obtained from <code><a class="el" href="namespacesmu__server.html#a23038498ffcba3c5453a07ab861d13cf" title="Creates a root node.">smu_server::make_root_node</a></code>  <a href="structsmu__server_1_1IMetricNodeBase.html#details">More...</a><br /></td></tr>
@@ -150,6 +166,12 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a53f3ba249e0d9599285f409d92c37e4f" id="r_a53f3ba249e0d9599285f409d92c37e4f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesmu__server.html#a53f3ba249e0d9599285f409d92c37e4f">abi_get_abi_version</a> (<a class="el" href="structsmu__server_1_1ABI__CONTEXT.html">ABI_CONTEXT</a> *)</td></tr>
+<tr class="memdesc:a53f3ba249e0d9599285f409d92c37e4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">C-callabe function for obtaining the ABI version.  <br /></td></tr>
+<tr class="separator:a53f3ba249e0d9599285f409d92c37e4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9fe52ec6b8691f1aa8bfda6a403c10e7" id="r_a9fe52ec6b8691f1aa8bfda6a403c10e7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesmu__server.html#a9fe52ec6b8691f1aa8bfda6a403c10e7">abi_log</a> (<a class="el" href="structsmu__server_1_1ABI__CONTEXT.html">ABI_CONTEXT</a> *context, int log_type, const char *message)</td></tr>
+<tr class="memdesc:a9fe52ec6b8691f1aa8bfda6a403c10e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">C-callabe function for logging.  <br /></td></tr>
+<tr class="separator:a9fe52ec6b8691f1aa8bfda6a403c10e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a219dae7d70a890e3fb0740451fbf5dbe" id="r_a219dae7d70a890e3fb0740451fbf5dbe"><td class="memTemplParams" colspan="2">template&lt;typename ValueType &gt; </td></tr>
 <tr class="memitem:a219dae7d70a890e3fb0740451fbf5dbe"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacesmu__server.html#a219dae7d70a890e3fb0740451fbf5dbe">make_value_node</a> (const std::string &amp;metric_name, ValueType &amp;&amp;metric_value, const std::string &amp;value_units) -&gt; std::unique_ptr&lt; <a class="el" href="classsmu__server_1_1internals_1_1MetricValueNode.html">internals::MetricValueNode</a> &gt;</td></tr>
 <tr class="memdesc:a219dae7d70a890e3fb0740451fbf5dbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a node with the value.  <br /></td></tr>
@@ -169,11 +191,76 @@ Functions</h2></td></tr>
 <tr class="memitem:a522f05053a18b752356b80c93a5fe53e"><td class="memTemplItemLeft" align="right" valign="top">constexpr void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacesmu__server.html#a522f05053a18b752356b80c93a5fe53e">for_each_tuple</a> (Tuple &amp;&amp;tuple, Function &amp;&amp;function)</td></tr>
 <tr class="memdesc:a522f05053a18b752356b80c93a5fe53e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Iterates over the tuple elements and passes each element to the <code>function</code> function.  <br /></td></tr>
 <tr class="separator:a522f05053a18b752356b80c93a5fe53e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a4c254331db0c72dc1fe2e32ab94ececf" id="r_a4c254331db0c72dc1fe2e32ab94ececf"><td class="memItemLeft" align="right" valign="top">constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesmu__server.html#a4c254331db0c72dc1fe2e32ab94ececf">ABI_VERSION</a> = 1</td></tr>
+<tr class="memdesc:a4c254331db0c72dc1fe2e32ab94ececf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Version of ABI.  <br /></td></tr>
+<tr class="separator:a4c254331db0c72dc1fe2e32ab94ececf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0fee28ffb64000aebdddc5c1afc99d3f" id="r_a0fee28ffb64000aebdddc5c1afc99d3f"><td class="memItemLeft" align="right" valign="top">constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesmu__server.html#a0fee28ffb64000aebdddc5c1afc99d3f">MDTP_VERSION</a> = 1</td></tr>
+<tr class="memdesc:a0fee28ffb64000aebdddc5c1afc99d3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Version of MDTP protocol.  <br /></td></tr>
+<tr class="separator:a0fee28ffb64000aebdddc5c1afc99d3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A global singleton class that helps read and write configurations in files. configuration management. </p>
 <p>GPLv3 LICENSE, Copyright (©) 2025, Maksim Shchavelev <a href="#" onclick="location.href='mai'+'lto:'+'mak'+'si'+'msh'+'ch'+'ave'+'le'+'v@g'+'ma'+'il.'+'co'+'m'; return false;">maksi<span class="obfuscator">.nosp@m.</span>mshc<span class="obfuscator">.nosp@m.</span>havel<span class="obfuscator">.nosp@m.</span>ev@g<span class="obfuscator">.nosp@m.</span>mail.<span class="obfuscator">.nosp@m.</span>com</a> See LICENSE for details </p>
 </div><h2 class="groupheader">Function Documentation</h2>
+<a id="a53f3ba249e0d9599285f409d92c37e4f" name="a53f3ba249e0d9599285f409d92c37e4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53f3ba249e0d9599285f409d92c37e4f">&#9670;&#160;</a></span>abi_get_abi_version()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int smu_server::abi_get_abi_version </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structsmu__server_1_1ABI__CONTEXT.html">ABI_CONTEXT</a> *&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>C-callabe function for obtaining the ABI version. </p>
+
+</div>
+</div>
+<a id="a9fe52ec6b8691f1aa8bfda6a403c10e7" name="a9fe52ec6b8691f1aa8bfda6a403c10e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9fe52ec6b8691f1aa8bfda6a403c10e7">&#9670;&#160;</a></span>abi_log()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void smu_server::abi_log </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structsmu__server_1_1ABI__CONTEXT.html">ABI_CONTEXT</a> *&#160;</td>
+          <td class="paramname"><em>context</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>log_type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>message</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>C-callabe function for logging. </p>
+
+</div>
+</div>
 <a id="a522f05053a18b752356b80c93a5fe53e" name="a522f05053a18b752356b80c93a5fe53e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a522f05053a18b752356b80c93a5fe53e">&#9670;&#160;</a></span>for_each_tuple()</h2>
 
@@ -296,7 +383,7 @@ template&lt;typename... Children&gt; </div>
 </div><div class="memdoc">
 
 <p>Creates a node that contains other nodes. </p>
-<p>A container node can store other container nodes as well as values. Such nodes are assumed to be nested either in other container nodes or in the root node. If you need a <b>root</b> node, use <code><a class="el" href="namespacesmu__server.html#a23038498ffcba3c5453a07ab861d13cf" title="Creates a root node.">smu_server::make_root_node</a></code></p>
+<p>A container node can store other container nodes as well as values. Such nodes are assumed to be nested either in other container nodes or in the root node. If you need a <b>root</b> node, use <code><a class="el" href="namespacesmu__server.html#a23038498ffcba3c5453a07ab861d13cf" title="Creates a root node.">smu_server::make_root_node</a></code>.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">container_name</td><td>Name of container </td></tr>
@@ -314,22 +401,59 @@ template&lt;typename... Children&gt; </div>
 <dl class="section see"><dt>See also</dt><dd><code><a class="el" href="namespacesmu__server.html#a219dae7d70a890e3fb0740451fbf5dbe" title="Creates a node with the value.">make_value_node</a></code> and <code><a class="el" href="namespacesmu__server.html#a23038498ffcba3c5453a07ab861d13cf" title="Creates a root node.">make_root_node</a></code></dd></dl>
 <h1><a class="anchor" id="example_usage"></a>
 Example usage</h1>
-<div class="fragment"><div class="line"><span class="keyword">auto</span> root = <a class="code hl_function" href="namespacesmu__server.html#a0290ea5f19c20a5ad90d4837a627fb88">make_container_node</a>(<span class="stringliteral">&quot;RAM&quot;</span>,</div>
-<div class="line">     <a class="code hl_function" href="namespacesmu__server.html#a219dae7d70a890e3fb0740451fbf5dbe">make_value_node</a>(<span class="stringliteral">&quot;RAM usage&quot;</span>, <span class="stringliteral">&quot;4217&quot;</span>, <span class="stringliteral">&quot;MB&quot;</span>)</div>
-<div class="line">);</div>
-<div class="ttc" id="anamespacesmu__server_html_a0290ea5f19c20a5ad90d4837a627fb88"><div class="ttname"><a href="namespacesmu__server.html#a0290ea5f19c20a5ad90d4837a627fb88">smu_server::make_container_node</a></div><div class="ttdeci">auto make_container_node(const std::string &amp;container_name, Children &amp;&amp;... children) -&gt; std::unique_ptr&lt; internals::MetricContainerNode&lt; Children... &gt; &gt;</div><div class="ttdoc">Creates a node that contains other nodes.</div><div class="ttdef"><b>Definition</b> metric_constructor.hpp:118</div></div>
-<div class="ttc" id="anamespacesmu__server_html_a219dae7d70a890e3fb0740451fbf5dbe"><div class="ttname"><a href="namespacesmu__server.html#a219dae7d70a890e3fb0740451fbf5dbe">smu_server::make_value_node</a></div><div class="ttdeci">auto make_value_node(const std::string &amp;metric_name, ValueType &amp;&amp;metric_value, const std::string &amp;value_units) -&gt; std::unique_ptr&lt; internals::MetricValueNode &gt;</div><div class="ttdoc">Creates a node with the value.</div><div class="ttdef"><b>Definition</b> metric_constructor.hpp:56</div></div>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> cpu = <a class="code hl_function" href="namespacesmu__server.html#a0290ea5f19c20a5ad90d4837a627fb88">make_container_node</a>(<span class="stringliteral">&quot;CPU&quot;</span>,</div>
+<div class="line">     <a class="code hl_function" href="namespacesmu__server.html#a219dae7d70a890e3fb0740451fbf5dbe">make_value_node</a>(<span class="stringliteral">&quot;temperature&quot;</span>, 75, <span class="stringliteral">&quot;C&quot;</span>),</div>
+<div class="line">     <a class="code hl_function" href="namespacesmu__server.html#a219dae7d70a890e3fb0740451fbf5dbe">make_value_node</a>(<span class="stringliteral">&quot;frequency&quot;</span>, <span class="stringliteral">&quot;3.5&quot;</span>, <span class="stringliteral">&quot;GHz&quot;</span>)</div>
+<div class="line">)-&gt;to_json();</div>
+<div class="ttc" id="anamespacesmu__server_html_a0290ea5f19c20a5ad90d4837a627fb88"><div class="ttname"><a href="namespacesmu__server.html#a0290ea5f19c20a5ad90d4837a627fb88">smu_server::make_container_node</a></div><div class="ttdeci">auto make_container_node(const std::string &amp;container_name, Children &amp;&amp;... children) -&gt; std::unique_ptr&lt; internals::MetricContainerNode&lt; Children... &gt; &gt;</div><div class="ttdoc">Creates a node that contains other nodes.</div><div class="ttdef"><b>Definition</b> metric_constructor.hpp:200</div></div>
+<div class="ttc" id="anamespacesmu__server_html_a219dae7d70a890e3fb0740451fbf5dbe"><div class="ttname"><a href="namespacesmu__server.html#a219dae7d70a890e3fb0740451fbf5dbe">smu_server::make_value_node</a></div><div class="ttdeci">auto make_value_node(const std::string &amp;metric_name, ValueType &amp;&amp;metric_value, const std::string &amp;value_units) -&gt; std::unique_ptr&lt; internals::MetricValueNode &gt;</div><div class="ttdoc">Creates a node with the value.</div><div class="ttdef"><b>Definition</b> metric_constructor.hpp:81</div></div>
 </div><!-- fragment --><p>This code gives json fragment:</p>
 <div class="fragment"><div class="line">{</div>
-<div class="line">     &quot;RAM usage&quot;: {</div>
+<div class="line">     &quot;temperature&quot;: {</div>
 <div class="line">         &quot;type&quot;: &quot;value&quot;,</div>
-<div class="line">         &quot;units&quot;: &quot;MB&quot;,</div>
-<div class="line">         &quot;value&quot;: &quot;4217&quot;</div>
+<div class="line">         &quot;units&quot;: &quot;C&quot;,</div>
+<div class="line">         &quot;value&quot;: &quot;75&quot;</div>
 <div class="line">     },</div>
-<div class="line"> </div>
+<div class="line">     &quot;frequency&quot;: {</div>
+<div class="line">         &quot;type&quot;: &quot;value&quot;,</div>
+<div class="line">         &quot;units&quot;: &quot;GHz&quot;,</div>
+<div class="line">         &quot;value&quot;: &quot;3.5&quot;</div>
+<div class="line">     },</div>
 <div class="line">     &quot;type&quot;: &quot;container&quot;</div>
 <div class="line">}</div>
-</div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>The container node does not contain its name inside. The name is only used by higher-level nodes. </dd></dl>
+</div><!-- fragment --><h1><a class="anchor" id="mdtp_protocol"></a>
+MDTP (preferred) — value node encoding</h1>
+<p>Container nodes serialize to MDTP as a single <b>container node</b> block which contains a payload that is the concatenation of serialized child nodes. For example, the <code>cpu</code> container above serializes as:</p>
+<p>Header (container): </p><div class="fragment"><div class="line">00                 // [node type] = 0x00 (container) (1)</div>
+<div class="line">00 00 00 03        // [name length] = 0x00000003 (3 bytes) -&gt; &quot;CPU&quot;</div>
+<div class="line">63 70 75           // [name] = &quot;CPU&quot;</div>
+<div class="line">00 00 00 37        // [payload size] = 0x00000037 (55 bytes)</div>
+<div class="line">                   // (payload follows: child1 (27 bytes) + child2 (28 bytes))</div>
+</div><!-- fragment --><p>Child 1 (temperature, 27 bytes): </p><div class="fragment"><div class="line">01                                 // type = value</div>
+<div class="line">00 00 00 0B                        // name_len = 11 (&quot;temperature&quot;)</div>
+<div class="line">74 65 6D 70 65 72 61 74 75 72 65   // &quot;temperature&quot;</div>
+<div class="line">00 00 00 01                        // units_len = 1</div>
+<div class="line">43                                 // &quot;C&quot;</div>
+<div class="line">00 00 00 02                        // value_len = 2</div>
+<div class="line">37 35                              // &quot;75&quot;</div>
+</div><!-- fragment --><p>Child 2 (frequency, 28 bytes): </p><div class="fragment"><div class="line">01</div>
+<div class="line">00 00 00 09                         // name_len = 9 (&quot;frequency&quot;)</div>
+<div class="line">66 72 65 71 75 65 6E 63 79          // &quot;frequency&quot;</div>
+<div class="line">00 00 00 03                         // units_len = 3 (&quot;GHz&quot;)</div>
+<div class="line">47 48 5A                            // &quot;GHz&quot;</div>
+<div class="line">00 00 00 03                         // value_len = 3 (&quot;3.5&quot;)</div>
+<div class="line">33 2E 35                            // &quot;3.5&quot;</div>
+</div><!-- fragment --><p>Combined container total size = container header (1 + 4 + 3 + 4 = 12 ? careful: see note)</p>
+<dl class="section note"><dt>Note</dt><dd>The container header consists of:<ul>
+<li>1 byte: node type</li>
+<li>4 bytes: name length (N)</li>
+<li>N bytes: name</li>
+<li>4 bytes: payload size (sum of child blocks)</li>
+</ul>
+</dd></dl>
+<p>The <code>payload size</code> above is 55 (0x37) because 27 + 28 = 55.</p>
+<dl class="section note"><dt>Note</dt><dd>For non-root container nodes, MDTP serialization returns exactly the bytes above (container header + concatenated children). For root nodes, a global MDTP frame header is added (see <code>make_root_node</code> documentation).</dd></dl>
+<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000002">Deprecated:</a></b></dt><dd><code>to_json()</code> is deprecated for transport — prefer <code>to_mdtp()</code> / MDTP for efficient binary transport. </dd></dl>
 
 </div>
 </div>
@@ -360,7 +484,7 @@ template&lt;typename... Children&gt; </div>
 </div><div class="memdoc">
 
 <p>Creates a root node. </p>
-<p>Root nodes work the same way as container nodes, but they doesn't store own name</p>
+<p>Root nodes work the same way as container nodes, but they do not store their own name.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">children</td><td>Nested nodes, like <b>container</b> node or <b>value</b> node</td></tr>
@@ -374,14 +498,13 @@ template&lt;typename... Children&gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><code>std::unique_ptr</code> with <code><a class="el" href="classsmu__server_1_1internals_1_1MetricContainerNode.html" title="Implements container with nodes.">internals::MetricContainerNode</a>&lt;...&gt;</code></dd></dl>
-<dl class="section note"><dt>Note</dt><dd>Call <code>to_json</code> on the root node to get the json and, for example, then send it over a websocket connection. However, this applies to all nodes, but it is used much more often with <b>root</b> nodes.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd><code><a class="el" href="namespacesmu__server.html#a219dae7d70a890e3fb0740451fbf5dbe" title="Creates a node with the value.">make_value_node</a></code> and <code><a class="el" href="namespacesmu__server.html#a0290ea5f19c20a5ad90d4837a627fb88" title="Creates a node that contains other nodes.">make_container_node</a></code></dd></dl>
 <h1><a class="anchor" id="example_usage"></a>
 Example usage</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> root = <a class="code hl_function" href="namespacesmu__server.html#a23038498ffcba3c5453a07ab861d13cf">make_root_node</a>(</div>
 <div class="line">     <a class="code hl_function" href="namespacesmu__server.html#a219dae7d70a890e3fb0740451fbf5dbe">make_value_node</a>(<span class="stringliteral">&quot;RAM usage&quot;</span>, <span class="stringliteral">&quot;4217&quot;</span>, <span class="stringliteral">&quot;MB&quot;</span>)</div>
-<div class="line">);</div>
-<div class="ttc" id="anamespacesmu__server_html_a23038498ffcba3c5453a07ab861d13cf"><div class="ttname"><a href="namespacesmu__server.html#a23038498ffcba3c5453a07ab861d13cf">smu_server::make_root_node</a></div><div class="ttdeci">auto make_root_node(Children &amp;&amp;... children) -&gt; std::unique_ptr&lt; internals::MetricContainerNode&lt; Children... &gt; &gt;</div><div class="ttdoc">Creates a root node.</div><div class="ttdef"><b>Definition</b> metric_constructor.hpp:222</div></div>
+<div class="line">)-&gt;to_json();</div>
+<div class="ttc" id="anamespacesmu__server_html_a23038498ffcba3c5453a07ab861d13cf"><div class="ttname"><a href="namespacesmu__server.html#a23038498ffcba3c5453a07ab861d13cf">smu_server::make_root_node</a></div><div class="ttdeci">auto make_root_node(Children &amp;&amp;... children) -&gt; std::unique_ptr&lt; internals::MetricContainerNode&lt; Children... &gt; &gt;</div><div class="ttdoc">Creates a root node.</div><div class="ttdef"><b>Definition</b> metric_constructor.hpp:319</div></div>
 </div><!-- fragment --><p>This code will produce a json of the form:</p>
 <div class="fragment"><div class="line">{</div>
 <div class="line">     &quot;RAM usage&quot;: {</div>
@@ -389,46 +512,54 @@ Example usage</h1>
 <div class="line">         &quot;units&quot;: &quot;MB&quot;,</div>
 <div class="line">         &quot;value&quot;: &quot;4217&quot;</div>
 <div class="line">     },</div>
-<div class="line"> </div>
 <div class="line">     &quot;type&quot;: &quot;container&quot;</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>Consider another code:</p>
-<div class="fragment"><div class="line"><span class="keyword">auto</span> root = <a class="code hl_function" href="namespacesmu__server.html#a23038498ffcba3c5453a07ab861d13cf">make_root_node</a>(</div>
-<div class="line">     <a class="code hl_function" href="namespacesmu__server.html#a0290ea5f19c20a5ad90d4837a627fb88">make_container_node</a>(<span class="stringliteral">&quot;Simple container&quot;</span>,</div>
-<div class="line">          <span class="comment">// The metric value can be either a number or a string, it is</span></div>
-<div class="line">          <span class="comment">// converted to a string if needed</span></div>
-<div class="line">          <a class="code hl_function" href="namespacesmu__server.html#a219dae7d70a890e3fb0740451fbf5dbe">make_value_node</a>(<span class="stringliteral">&quot;Simple value 1&quot;</span>, 12345, <span class="stringliteral">&quot;bytes&quot;</span>),</div>
-<div class="line">          <a class="code hl_function" href="namespacesmu__server.html#a219dae7d70a890e3fb0740451fbf5dbe">make_value_node</a>(<span class="stringliteral">&quot;Simple value 2&quot;</span>, <span class="stringliteral">&quot;42&quot;</span>, <span class="stringliteral">&quot;GB&quot;</span>)</div>
-<div class="line">     ),</div>
-<div class="line"> </div>
-<div class="line">     <a class="code hl_function" href="namespacesmu__server.html#a219dae7d70a890e3fb0740451fbf5dbe">make_value_node</a>(<span class="stringliteral">&quot;RAM usage&quot;</span>, <span class="stringliteral">&quot;4217&quot;</span>, <span class="stringliteral">&quot;MB&quot;</span>)</div>
-<div class="line">);</div>
-</div><!-- fragment --><p>And this code will produce a json of the form:</p>
-<div class="fragment"><div class="line">{</div>
-<div class="line">    &quot;RAM usage&quot;: {</div>
-<div class="line">        &quot;type&quot;: &quot;value&quot;,</div>
-<div class="line">            &quot;units&quot;: &quot;MB&quot;,</div>
-<div class="line">        &quot;value&quot;: &quot;4217&quot;</div>
-<div class="line">    },</div>
-<div class="line"> </div>
-<div class="line">    &quot;Simple container&quot;: {</div>
-<div class="line">        &quot;Simple value 1&quot;: {</div>
-<div class="line">            &quot;type&quot;: &quot;value&quot;,</div>
-<div class="line">            &quot;units&quot;: &quot;bytes&quot;,</div>
-<div class="line">            &quot;value&quot;: &quot;12345&quot;</div>
-<div class="line">        },</div>
-<div class="line">        &quot;Simple value 2&quot;: {</div>
-<div class="line">            &quot;type&quot;: &quot;value&quot;,</div>
-<div class="line">            &quot;units&quot;: &quot;GB&quot;,</div>
-<div class="line">            &quot;value&quot;: &quot;42&quot;</div>
-<div class="line">        },</div>
-<div class="line"> </div>
-<div class="line">        &quot;type&quot;: &quot;container&quot;</div>
-<div class="line">    },</div>
-<div class="line"> </div>
-<div class="line">     &quot;type&quot;: &quot;container&quot;</div>
-<div class="line">}</div>
-</div><!-- fragment --> 
+</div><!-- fragment --><h1><a class="anchor" id="mdtp_protocol"></a>
+MDTP (preferred) — value node encoding</h1>
+<p><b>New behaviour:</b> a root node now emits a <em>full MDTP frame</em> consisting of a short frame header followed <b>directly</b> by the concatenation of children node encodings. Root does <b>not</b> add an extra container header of its own. Each child node already serializes itself as a proper MDTP node (container or value), so the root frame payload is simply the concatenation of those child encodings.</p>
+<p>Frame header format (Big-Endian):</p><ul>
+<li>1 byte : MDTP version (currently <code>0x01</code>)</li>
+<li>4 bytes: frame payload size (uint32 BE) — number of bytes following the frame header</li>
+</ul>
+<p>Important consequences:</p><ul>
+<li>The root does <b>not</b> wrap children into an additional anonymous container.</li>
+<li>The server will send the exact sequence returned by <code>root-&gt;to_mdtp()</code> as-is.</li>
+<li>Use <code>to_mdtp()</code> on root to obtain the ready-to-send MDTP frame.</li>
+</ul>
+<p>Example (two value children):</p><ul>
+<li><code>a = make_value_node("uptime", "1234", "s")</code> -&gt; 24 bytes</li>
+<li><code>b = make_value_node("load", 56, "%")</code> -&gt; 20 bytes</li>
+</ul>
+<p>children concat size = 24 + 20 = 44 bytes (0x2C) (44 bytes)</p>
+<p>Frame header (prefix): </p><div class="fragment"><div class="line">01                                    // [MDTP version] = 0x01 (1)</div>
+<div class="line">00 00 00 2C                           // [frame payload size] = 0x0000002C (44 bytes)</div>
+<div class="line">                                      // frame header total = 1 + 4 = 5 bytes</div>
+</div><!-- fragment --><p>Payload (concatenation of child encodings). Example bytes for the two value nodes:</p>
+<p>Child A ("uptime", "1234", "s") — 24 bytes: </p><div class="fragment"><div class="line">01                                    // [node type] = 0x01 (value)</div>
+<div class="line">00 00 00 06                           // [name length] = 6 (&quot;uptime&quot;)</div>
+<div class="line">75 70 74 69 6D 65                     // &quot;uptime&quot; (6 bytes)</div>
+<div class="line">00 00 00 01                           // [units length] = 1 (&quot;s&quot;)</div>
+<div class="line">73                                    // &quot;s&quot;</div>
+<div class="line">00 00 00 04                           // [value length] = 4 (&quot;1234&quot;)</div>
+<div class="line">31 32 33 34                           // &quot;1234&quot;</div>
+</div><!-- fragment --><p>Child B ("load", 56, "%") — 20 bytes: </p><div class="fragment"><div class="line">01                                    // [node type] = 0x01 (value)</div>
+<div class="line">00 00 00 04                           // [name length] = 4 (&quot;load&quot;)</div>
+<div class="line">6C 6F 61 64                           // &quot;load&quot;</div>
+<div class="line">00 00 00 01                           // [units length] = 1 (&quot;%&quot;)</div>
+<div class="line">25                                    // &quot;%&quot;</div>
+<div class="line">00 00 00 02                           // [value length] = 2 (&quot;56&quot;)</div>
+<div class="line">35 36                                 // &quot;56&quot;</div>
+</div><!-- fragment --><p>Full frame layout (frame header + concatenated children) — total = 5 + 44 = 49 bytes.</p>
+<dl class="section note"><dt>Note</dt><dd>Use <code>to_mdtp()</code> on the root node to obtain the full MDTP frame ready to be written to the network or stored. MDTP is Big-Endian; your sender/receiver must honor endianness.</dd></dl>
+<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000003">Deprecated:</a></b></dt><dd><code>to_json()</code> is deprecated for transport. <code>to_mdtp()</code>/MDTP should be used for binary transport between modules and the server core. <code>to_json()</code> may remain useful for human readable debugging, but it is not recommended for production transport.</dd></dl>
+<h1><a class="anchor" id="examples_more"></a>
+Advanced usage notes</h1>
+<ul>
+<li>If you need human readable output (debug) use <code>to_json()</code> for inspection only.</li>
+<li>If you need compact, fast transport (recommended) use <code>to_mdtp()</code> on the root and send the returned <code>std::vector&lt;uint8_t&gt;</code> over your socket. The first byte is MDTP version which helps future protocol negotiation.</li>
+</ul>
+<dl class="section note"><dt>Note</dt><dd>All length fields in MDTP are counts of bytes <b>without</b> a terminating NUL. Strings are transmitted as raw bytes; they are NOT NUL-terminated in the stream. </dd></dl>
+
 </div>
 </div>
 <a id="a219dae7d70a890e3fb0740451fbf5dbe" name="a219dae7d70a890e3fb0740451fbf5dbe"></a>
@@ -493,16 +624,78 @@ template&lt;typename ValueType &gt; </div>
 <dl class="section see"><dt>See also</dt><dd><code><a class="el" href="namespacesmu__server.html#a0290ea5f19c20a5ad90d4837a627fb88" title="Creates a node that contains other nodes.">make_container_node</a></code> and <code><a class="el" href="namespacesmu__server.html#a23038498ffcba3c5453a07ab861d13cf" title="Creates a root node.">make_root_node</a></code></dd></dl>
 <h1><a class="anchor" id="example_usage"></a>
 Example usage</h1>
-<div class="fragment"><div class="line"><span class="comment">// The metric value can be either a number or a string, it is converted</span></div>
-<div class="line"><span class="comment">// to a string if needed</span></div>
-<div class="line"><span class="keyword">auto</span> node = <a class="code hl_function" href="namespacesmu__server.html#a219dae7d70a890e3fb0740451fbf5dbe">make_value_node</a>(<span class="stringliteral">&quot;RAM usage&quot;</span>, 4217, <span class="stringliteral">&quot;MB&quot;</span>);</div>
+<div class="fragment"><div class="line"><span class="comment">// The metric value can be either a number or a string; it is converted</span></div>
+<div class="line"><span class="comment">// to a string if needed.</span></div>
+<div class="line"><span class="keyword">auto</span> node = <a class="code hl_function" href="namespacesmu__server.html#a219dae7d70a890e3fb0740451fbf5dbe">make_value_node</a>(<span class="stringliteral">&quot;RAM usage&quot;</span>, 4217, <span class="stringliteral">&quot;MB&quot;</span>)-&gt;to_json();</div>
 </div><!-- fragment --><p>This code gives json fragment:</p>
 <div class="fragment"><div class="line">{</div>
 <div class="line">     &quot;type&quot;: &quot;value&quot;,</div>
 <div class="line">     &quot;units&quot;: &quot;MB&quot;,</div>
 <div class="line">     &quot;value&quot;: &quot;4217&quot;</div>
 <div class="line">}</div>
-</div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>The node name is only used if the node is nested in a <b>container node</b> or <b>root node</b>. <b>A value node never contains its own name!</b> </dd></dl>
+</div><!-- fragment --><h1><a class="anchor" id="mdtp_protocol"></a>
+MDTP (preferred) — value node encoding</h1>
+<p>Prefer the binary MDTP format for transport between modules and the server. Value nodes serialize to the MDTP <b>value node</b> format (Big-Endian integer fields). The node produced by <code>make_value_node("load", 56, "%")</code> serializes to the following bytes:</p>
+<div class="fragment"><div class="line">01                   [node type] = 0x01 (value) (1)</div>
+<div class="line">00 00 00 04          [name length] = 0x00000004 (4 bytes)</div>
+<div class="line">6C 6F 61 64          [name] = &quot;load&quot;</div>
+<div class="line">00 00 00 01          [units length] = 0x00000001 (1 byte)</div>
+<div class="line">25                   [units] = &quot;%&quot;</div>
+<div class="line">00 00 00 02          [value length] = 0x00000002 (2 bytes)</div>
+<div class="line">35 36                [value] = &quot;56&quot;</div>
+<div class="line">                     total = 20 bytes</div>
+</div><!-- fragment --><p>Fields are Big-Endian. For non-root nodes MDTP serialization returns the single node block shown above (no global MDTP frame header). For full frames (root nodes) see <code>make_root_node</code> docs below.</p>
+<dl class="section note"><dt>Note</dt><dd>Use <code>to_mdtp()</code> on the returned node to get the binary MDTP representation. The JSON API (<code>to_json()</code>) is considered legacy for transport and is marked as deprecated here: prefer MDTP.</dd></dl>
+<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000001">Deprecated:</a></b></dt><dd><code>to_json()</code> is deprecated for transport purposes; use <code>to_mdtp()</code> and MDTP for serialization. <code>to_json()</code> may still be useful for debug/inspection, but it is not recommended for network transport. </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a4c254331db0c72dc1fe2e32ab94ececf" name="a4c254331db0c72dc1fe2e32ab94ececf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c254331db0c72dc1fe2e32ab94ececf">&#9670;&#160;</a></span>ABI_VERSION</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr int smu_server::ABI_VERSION = 1</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Version of ABI. </p>
+
+</div>
+</div>
+<a id="a0fee28ffb64000aebdddc5c1afc99d3f" name="a0fee28ffb64000aebdddc5c1afc99d3f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0fee28ffb64000aebdddc5c1afc99d3f">&#9670;&#160;</a></span>MDTP_VERSION</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr uint8_t smu_server::MDTP_VERSION = 1</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Version of MDTP protocol. </p>
 
 </div>
 </div>
