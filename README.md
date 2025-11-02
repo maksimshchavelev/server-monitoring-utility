@@ -56,7 +56,7 @@ smu 1.2.3.4
 > A list of built-in modules is provided in the [server documentation](https://maksimshchavelev.github.io/server-monitoring-utility/server/docs/html/index.html)
 
 
-## Building from source
+## Building from source on Linux
 First, you need `libjsoncpp-dev` installed. On Debian-based systems, install this library with the command:
 
 ```bash
@@ -79,9 +79,9 @@ Download the source code from the releases, unzip it somewhere. In the directory
 
 - `cmake --build . --target package-all`.
 
-  
-
+ 
 In the `package` directory, you will see the built packages that you can install using your package manager
+
 
 ## Building of individual parts
 You can change the following flags during the configuration phase:
@@ -109,6 +109,25 @@ After executing the command, look in `build/server-build/sdk-build/` (the detail
 - `smu-server-sdk-dev.deb`
 
 > In fact, no SDK build in the usual sense takes place. The compiled artifacts are downloaded from the SDK repositories and recompiled into two packages.
+
+
+
+## Building on Windows
+
+Only the client component can be built on Windows. **Also note that you must install `JsonCpp` and `OpenSLL`**. After that, download the source code for the release you need, navigate to the root of the source code directory, create a build directory, and navigate to it.
+Run the following commands:
+
+```
+cmake .. -DBUILD_SERVER=OFF -DBUILD_CLI=OFF
+```
+
+Next is the command for building:
+
+```
+cmake --build . --parallel --config Release
+```
+
+If the build was successful, go to `client-build\Release`. You'll find `smu.exe` and the necessary dynamic libraries there. You can start using it.
 
 
 ## License
