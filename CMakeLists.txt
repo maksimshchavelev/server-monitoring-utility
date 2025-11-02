@@ -21,6 +21,12 @@ if(BUILD_SERVER)
     INSTALL_COMMAND ""
     CMAKE_ARGS -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
   )
+  add_custom_target(sdk
+    COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR}/server-build --target sdk
+    DEPENDS server
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+    COMMENT "Building SDK target from server project"
+  )
 endif()
 
 
