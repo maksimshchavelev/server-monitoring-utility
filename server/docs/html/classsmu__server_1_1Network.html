@@ -110,9 +110,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac7ad6d0b434ee2c55d16131009b8169b" id="r_ac7ad6d0b434ee2c55d16131009b8169b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1Network.html#ac7ad6d0b434ee2c55d16131009b8169b">run</a> (uint16_t port, std::function&lt; void()&gt; callback)</td></tr>
 <tr class="memdesc:ac7ad6d0b434ee2c55d16131009b8169b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs network.  <br /></td></tr>
 <tr class="separator:ac7ad6d0b434ee2c55d16131009b8169b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeaee190159a388a6b429ca98bd950fae" id="r_aeaee190159a388a6b429ca98bd950fae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1Network.html#aeaee190159a388a6b429ca98bd950fae">send_everyone</a> (const Json::Value &amp;data)</td></tr>
-<tr class="memdesc:aeaee190159a388a6b429ca98bd950fae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends json data with metrics to all clients.  <br /></td></tr>
-<tr class="separator:aeaee190159a388a6b429ca98bd950fae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abba10e97425d58af9acbf99ed04db3e8" id="r_abba10e97425d58af9acbf99ed04db3e8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1Network.html#abba10e97425d58af9acbf99ed04db3e8">send_everyone</a> (const std::vector&lt; uint8_t &gt; &amp;data)</td></tr>
+<tr class="memdesc:abba10e97425d58af9acbf99ed04db3e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends json data with metrics to all clients.  <br /></td></tr>
+<tr class="separator:abba10e97425d58af9acbf99ed04db3e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8c781fce5a546984215bba51dda11bb0" id="r_a8c781fce5a546984215bba51dda11bb0"><td class="memItemLeft" align="right" valign="top">std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1Network.html#a8c781fce5a546984215bba51dda11bb0">get_connections_count</a> () const noexcept</td></tr>
 <tr class="memdesc:a8c781fce5a546984215bba51dda11bb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns count of connections.  <br /></td></tr>
 <tr class="separator:a8c781fce5a546984215bba51dda11bb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -221,8 +221,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aeaee190159a388a6b429ca98bd950fae" name="aeaee190159a388a6b429ca98bd950fae"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aeaee190159a388a6b429ca98bd950fae">&#9670;&#160;</a></span>send_everyone()</h2>
+<a id="abba10e97425d58af9acbf99ed04db3e8" name="abba10e97425d58af9acbf99ed04db3e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abba10e97425d58af9acbf99ed04db3e8">&#9670;&#160;</a></span>send_everyone()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -230,7 +230,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">void smu_server::Network::send_everyone </td>
           <td>(</td>
-          <td class="paramtype">const Json::Value &amp;&#160;</td>
+          <td class="paramtype">const std::vector&lt; uint8_t &gt; &amp;&#160;</td>
           <td class="paramname"><em>data</em></td><td>)</td>
           <td></td>
         </tr>
@@ -240,7 +240,7 @@ Public Member Functions</h2></td></tr>
 <p>Sends json data with metrics to all clients. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">data</td><td><code>Json::Value</code> with data </td></tr>
+    <tr><td class="paramname">data</td><td><code>std::vector&lt;uint8_t&gt;</code> with data (MDTP protocol) </td></tr>
   </table>
   </dd>
 </dl>

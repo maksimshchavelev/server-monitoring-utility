@@ -49,7 +49,7 @@ class IModule {
 
     /**
      * @brief Method for obtaining module configuration
-     * @return `Json::Value&`
+     * @return `const Config&`
      */
     virtual const Config& get_configuration() const noexcept;
 
@@ -64,8 +64,9 @@ class IModule {
      * @see make_root_node
      * @see make_container_node
      * @see make_value_node
+     * @return `std::optional<std::vector<uint8_t>>` with bytes in MDTP protocol
      */
-    virtual std::optional<Json::Value> get_data() = 0;
+    virtual std::optional<std::vector<uint8_t>> get_data() = 0;
 
 
 

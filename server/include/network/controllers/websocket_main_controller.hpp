@@ -79,9 +79,9 @@ class MainWebsocketController : public drogon::WebSocketController<MainWebsocket
 
     /**
      * @brief Sends json data with metrics to all connected clients
-     * @param data `Json::Value` with data
+     * @param data `std::vector<uint8_t>` with data in MDTP protocol
      */
-    void send_everyone(const Json::Value& data);
+    void send_everyone(const std::vector<uint8_t>& data);
 
 
 

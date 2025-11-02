@@ -12,6 +12,9 @@
 #include "logger/logger.hpp"
 #include "version.hpp"
 #include <cxxopts.hpp>
+#include <external_module_loader/external_module_loader.hpp>
+#include <filesystem>
+#include <sys/stat.h>
 
 
 // Public constructor
@@ -40,8 +43,11 @@ void smu_server::Application::run(int argc, char** argv) {
     }
 
     for (const auto& module_registrar : m_modules_queue) {
-        module_registrar(*this); // register each module
+        module_registrar(*this); // register each built-in module
     }
+
+    // Register dynamic modules
+    register_dynamic_modules(MODULES_CONFIGS_DIR);
 
     // Get port
     auto port = m_server_config.get<int>("port");
@@ -60,79 +66,152 @@ void smu_server::Application::run(int argc, char** argv) {
 
 
 // Public method
-Json::Value smu_server::Application::collect_metrics() {
-    // If the module's poll ratio is greater than 1, the last get_data call must be cached,
-    // otherwise the module data will not reach the user.
-    static std::unordered_map<std::string_view /* module_name */, Json::Value /* cached_data */>
-        poll_ratio_between_get_datas_cache;
+std::vector<uint8_t> smu_server::Application::collect_metrics() {
+    // Between-poll cache for poll_ratio > 1
+    static std::unordered_map<std::string, std::vector<uint8_t>> poll_ratio_between_get_datas_cache;
 
+    // Final MDTP frame: [version:1][payload_size:4] + payload
+    std::vector<uint8_t> frame(5, 0x00);
+    std::vector<uint8_t> payload; // concatenation of per-module named containers
 
-    Json::Value root;
-
-
-    std::lock_guard<std::mutex> lock(m_modules_mutex);
-    for (const auto& module : m_modules) {
-        // Skip module if module is disabled
-        if (!module->is_enabled()) {
-            continue;
+    // Helper: wrap module_frame into a named container with module_name,
+    // stripping the module's own MDTP frame header (5 bytes).
+    auto append_module_as_named_container = [&](const std::vector<uint8_t>& module_frame,
+                                                const std::string&          module_name) {
+        // Expect a full MDTP frame: at least 5 bytes
+        if (module_frame.size() < 5) {
+            logger().log_warning(
+                std::format("Module '{}' returned too small frame ({} bytes) — skip",
+                            module_name,
+                            module_frame.size()));
+            return;
         }
 
-        try {
-            // Need to cache
-            if (module->get_poll_ratio() == 0) {
-                // Try to cache if not cached
-                if (auto iter = m_module_cache.find(module->module_name());
-                    iter == m_module_cache.end()) {
+        // Read declared payload size from module-frame header
+        const uint32_t inner_size = internals::read_uint32_be(module_frame, 1);
+        const size_t   need = static_cast<size_t>(5) + static_cast<size_t>(inner_size);
 
-                    // Cache first call of `module->get_data()`
-                    if (auto module_data = module->get_data(); module_data.has_value()) {
-                        m_module_cache[module->module_name()] = std::move(module_data.value());
+        if (module_frame.size() < need) {
+            logger().log_warning(
+                std::format("Module '{}' returned truncated frame: declared={}, actual={} — skip",
+                            module_name,
+                            inner_size,
+                            module_frame.size()));
+            return;
+        }
+
+        // The module payload is everything after its 5-byte header
+        const uint8_t* inner_begin = module_frame.data() + 5;
+
+        // Build container header:
+        // [node type=0:1][name len:4][name:bytes][payload size:4][payload...]
+        const uint32_t name_len = static_cast<uint32_t>(module_name.size());
+        const size_t   header = 1 + 4 + name_len + 4;
+        const size_t   old_size = payload.size();
+
+        payload.resize(old_size + header + inner_size);
+
+        size_t off = old_size;
+
+        // node type = 0 (container)
+        payload[off++] = 0;
+
+        // node name length (BE)
+        internals::write_uint32_be(payload, off, name_len);
+        off += 4;
+
+        // node name bytes (no terminating zero)
+        std::memcpy(payload.data() + off, module_name.data(), module_name.size());
+        off += module_name.size();
+
+        // payload size (BE) — equal to module's inner payload size
+        internals::write_uint32_be(payload, off, inner_size);
+        off += 4;
+
+        // payload bytes (module payload without frame header)
+        std::memcpy(payload.data() + off, inner_begin, inner_size);
+        // off += inner_size; // not required further
+    };
+
+    std::lock_guard<std::mutex> lock(m_modules_mutex);
+
+    for (const auto& mod_ptr : m_modules) {
+        if (!mod_ptr)
+            continue;
+        auto& module = *mod_ptr;
+
+        if (!module.is_enabled())
+            continue;
+
+        const std::string name{module.module_name()};
+        try {
+            const uint32_t poll_ratio = module.get_poll_ratio();
+
+            // Cache-once modules (poll_ratio == 0)
+            if (poll_ratio == 0) {
+                auto it = m_module_cache.find(name);
+                if (it == m_module_cache.end()) {
+                    if (auto module_data = module.get_data(); module_data.has_value()) {
+                        // Store full module frame
+                        m_module_cache[name] = std::move(module_data.value());
                     } else {
-                        // Failed to cache
                         logger().log_warning(
-                            std::format("Failed to cache data from module {} (marked as cacheable)",
-                                        module->module_name()));
+                            std::format("Failed to cache data from module '{}' (cacheable)", name));
+                        continue;
                     }
                 }
-
-                // Load cache
-                root[module->module_name().data()] =
-                    m_module_cache[module->module_name()]; // There is no `std::move`, as this would
-                                                           // otherwise invalidate the cache.
+                // Wrap cached frame into named container
+                append_module_as_named_container(m_module_cache[name], name);
                 continue;
             }
 
-            // Check necessity of polling uncacheable module
-            if (module->m_poll_counter >= module->get_poll_ratio() - 1) {
-                // Poll uncacheable module
-                if (auto module_data = module->get_data(); module_data.has_value()) {
-                    // Do not move to cache if poll ratio is 1
-                    if (module->get_poll_ratio() == 1) {
-                        root[module->module_name().data()] = std::move(module_data.value());
+            // Pollable modules (poll_ratio >= 1)
+            if (module.m_poll_counter >= (poll_ratio > 0 ? poll_ratio - 1 : 0)) {
+                // Time to poll
+                if (auto module_data = module.get_data(); module_data.has_value()) {
+                    auto bytes = std::move(module_data.value()); // full module frame
+                    if (poll_ratio == 1) {
+                        append_module_as_named_container(bytes, name);
                     } else {
-                        // Otherwise, first to the cache, then to `root`
-                        poll_ratio_between_get_datas_cache[module->module_name()] =
-                            module_data.value();
-                        root[module->module_name().data()] = std::move(module_data.value());
+                        // Keep last result for between-polls
+                        poll_ratio_between_get_datas_cache[name] = std::move(bytes);
+                        append_module_as_named_container(poll_ratio_between_get_datas_cache[name],
+                                                         name);
                     }
-
-                    module->m_poll_counter = 0; // reset poll counter
+                    module.m_poll_counter = 0;
                     continue;
+                } else {
+                    logger().log_warning(
+                        std::format("Failed to poll module '{}' when scheduled", name));
+                    // Fallback to between-polls cache if exists
+                    auto it = poll_ratio_between_get_datas_cache.find(name);
+                    if (it != poll_ratio_between_get_datas_cache.end()) {
+                        append_module_as_named_container(it->second, name);
+                    }
                 }
             } else {
-                // Load from cache instead of calling `get_data` if no necessity
-                root[module->module_name().data()] = poll_ratio_between_get_datas_cache[module->module_name()];
+                // Not time to poll: try between-polls cache
+                auto it = poll_ratio_between_get_datas_cache.find(name);
+                if (it != poll_ratio_between_get_datas_cache.end()) {
+                    append_module_as_named_container(it->second, name);
+                }
             }
 
-            ++module->m_poll_counter; // increase poll counter
+            ++module.m_poll_counter;
 
         } catch (const std::exception& e) {
-            logger().log_warning(std::format(
-                "Failed to get data from module {}, cause: {}", module->module_name(), e.what()));
+            logger().log_warning(
+                std::format("Failed to get data from module '{}', cause: {}", name, e.what()));
         }
     }
 
-    return root;
+    // Write final frame header
+    frame[0] = static_cast<uint8_t>(MDTP_VERSION);
+    internals::write_uint32_be(frame, 1, static_cast<uint32_t>(payload.size()));
+
+    // Append payload
+    frame.insert(frame.end(), payload.begin(), payload.end());
+    return frame;
 }
 
 
@@ -212,6 +291,91 @@ smu_server::Application::Application() :
 smu_server::Application::~Application() {
     if (m_need_save_config_in_destructor) {
         save_configs();
+    }
+}
+
+
+
+
+// Private method
+void smu_server::Application::register_dynamic_modules(const std::string_view modules_directory) {
+    std::lock_guard<std::mutex> lock(m_modules_mutex);
+
+    std::filesystem::directory_entry entry(modules_directory);
+
+    for (const auto& dir : std::filesystem::directory_iterator(entry)) {
+        // If not
+        if (!dir.is_directory()) {
+            continue;
+        }
+
+        auto module_name = dir.path().filename().string();
+        auto so_file = dir.path() / (module_name + ".so");
+
+        // Directory without .so module
+        if (!std::filesystem::exists(so_file)) {
+            continue;
+        }
+
+        // Log registration beginning
+        logger().log_colorless(std::format("Registering an external module with name "
+                                           "\"\033[36m{}\033[0m\"...",
+                                           module_name));
+
+        // If incorrect permissions (must be r-x------)
+        if (auto perms = std::filesystem::status(so_file).permissions();
+            perms != (std::filesystem::perms::owner_read | std::filesystem::perms::owner_exec)) {
+            logger().log_error(std::format(
+                "Incorrect permissions of file {} (module {}). Permissions must be 'r-x------'",
+                so_file.string(),
+                module_name));
+            continue;
+        }
+
+        // If incorrect owner (must be root)
+        {
+            struct stat st;
+            if (stat(so_file.c_str(), &st) != 0) {
+                logger().log_error(std::format("'stat' syscal error, cause: {}", strerror(errno)));
+                continue;
+            }
+
+            // If owner isn't root
+            if (st.st_uid != 0) {
+                logger().log_error(
+                    std::format("Owner of file {} must be 'root'!", so_file.c_str()));
+                continue;
+            }
+        }
+
+        // Load config
+        auto config = Config_IO::instance().get_module_config(module_name);
+
+        // If error
+        if (config.empty()) {
+            logger().log_warning(std::format(
+                "Failed to open config of dynamic module '{}'. Continuing with default values",
+                module_name));
+        }
+
+        if (auto module = ExternalModuleLoader::load(so_file.c_str(), config); module.has_value()) {
+            // Module status (RUNNING / STOPPED)
+            const char* status_string =
+                module.value()->is_enabled() ? "\033[32mRUNNING\033[0m" : "\033[31mSTOPPED\033[0m";
+            // Log success
+            logger().log_colorless(
+                std::format("[MODULE \033[36m{}\033[0m "
+                            "(\"\033[36m{}\033[0m\")] \033[32mRegistered\033[0m ({})\n",
+                            module.value()->module_name(),
+                            module.value()->module_description(),
+                            status_string));
+            // Append module
+            m_modules.push_back(std::move(module.value()));
+        } else {
+            logger().log_error(std::format(
+                "Can't load dynamic module '{}', cause: {}", module_name, module.error()));
+            continue;
+        }
     }
 }
 

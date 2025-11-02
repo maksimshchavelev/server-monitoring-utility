@@ -4,6 +4,22 @@ This component is one of the three parts of **smu** — the server monitoring sy
 
 Check the usage guide [here](#Usage). If you'd like to **contribute to the development** of smu-server, head over [here](for-developers/beginning.md).
 
+## List of external modules
+
+Modules allow you to monitor a specific group of metrics. For example, the CPU module monitors processor parameters. A list of **external** modules is provided below.
+
+| Module | Purpose |
+|--|--|
+| UPTIME | Monitoring system uptime |
+
+
+## List of built-in modules
+
+| Module | Purpose |
+|--|--|
+| RAM | RAM usage monitoring |
+| DMI | Information about the motherboard |
+
 ## How to build smu-server?
 
 First, clone the main repository and navigate to the `server` folder. For convenience, we will build it in a separate `build` directory (you'll need to create it — all commands below should be executed from the `build` directory).
@@ -47,6 +63,22 @@ Now just install the resulting package.
 (**Don't forget to open the firewall port — 5050 by default!**)
 
 > If installed via a package manager, a systemd service script will be installed, systemd will reload, and `smu-server` will start immediately. The service is called `smu-server` (you can manage it via `systemd`).
+
+
+## Building SDK
+
+
+If you want to use external modules, you need to build the SDK. You can do this by running the following command *after building the server part* (everything is built by default, which is also fine):
+```
+cmake --build . --target sdk
+```
+After executing the command, look in `build/sdk-build/` (the detailed path will be specified after executing the command), where you will see two packages (the version will be specified):
+
+- `smu-server-sdk.deb`
+- `smu-server-sdk-dev.deb`
+
+> In fact, no SDK build in the usual sense takes place. The compiled artifacts are downloaded from the SDK repositories and recompiled into two packages.
+
 
 ## Usage
 

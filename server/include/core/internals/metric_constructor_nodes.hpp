@@ -8,11 +8,14 @@
 
 #pragma once
 
+#include "memutils.hpp"
 #include <json/json.h>
 #include <tuple>
 #include <utils/for_each_tuple.hpp>
 
 namespace smu_server {
+
+constexpr uint8_t MDTP_VERSION = 1; ///< Version of MDTP protocol
 
 /**
  * @brief The Base IMetricNode class to simplify the storage of data obtained from
@@ -43,8 +46,23 @@ struct IMetricNodeBase {
      * @warning Do not call this function too often, as it may cause performance degradation
      *
      * @return The generated json
+     *
+     * @deprecated `to_json()` is deprecated for transport. `to_mdtp()`/MDTP should be used for
+     * binary transport between modules and the server core. `to_json()` may remain useful for human
+     * readable debugging, but it is not recommended for production transport.
      */
-    virtual Json::Value to_json() const = 0;
+    [[deprecated("Use to_mdtp() instead")]] virtual Json::Value to_json() const = 0;
+
+
+    /**
+     * @brief Generates binary data in MDTP protocol format.
+     *
+     * See the developer documentation for the MDTP protocol specification and examples.
+     *
+     * @return `std::vector<uint8_t>` with bytes
+     */
+    virtual std::vector<uint8_t> to_mdtp() const = 0;
+
 
     /**
      * @brief Does nothing
@@ -115,8 +133,23 @@ template <typename... Children> class IMetricNode : public IMetricNodeBase {
      * @brief Recursively generates json, preserving the hierarchy
      * of nodes, their types, values and names
      * @return The generated json
+     * @deprecated `to_json()` is deprecated for transport. `to_mdtp()`/MDTP should be used for
+     * binary transport between modules and the server core. `to_json()` may remain useful for human
+     * readable debugging, but it is not recommended for production transport.
      */
-    virtual Json::Value to_json() const = 0;
+    [[deprecated("Use to_mdtp() instead")]] virtual Json::Value to_json() const = 0;
+
+
+
+
+    /**
+     * @brief Generates binary data in MDTP protocol format.
+     *
+     * See the developer documentation for the MDTP protocol specification and examples.
+     *
+     * @return `std::vector<uint8_t>` with bytes
+     */
+    virtual std::vector<uint8_t> to_mdtp() const = 0;
 
 
 
@@ -200,8 +233,11 @@ class MetricValueNode : public IMetricNode<> {
      * @brief Recursively generates json, preserving the hierarchy
      * of nodes, their types, values and names
      * @return The generated json
+     * @deprecated `to_json()` is deprecated for transport. `to_mdtp()`/MDTP should be used for
+     * binary transport between modules and the server core. `to_json()` may remain useful for human
+     * readable debugging, but it is not recommended for production transport.
      */
-    Json::Value to_json() const override {
+    [[deprecated("Use to_mdtp() instead")]] Json::Value to_json() const override {
         Json::Value root;
 
         root["type"] = "value";
@@ -209,6 +245,54 @@ class MetricValueNode : public IMetricNode<> {
         root["units"] = m_units;
 
         return root;
+    }
+
+
+
+
+    /**
+     * @brief Generates binary data in MDTP protocol format.
+     *
+     * See the developer documentation for the MDTP protocol specification and examples.
+     *
+     * @return `std::vector<uint8_t>` with bytes
+     */
+    std::vector<uint8_t> to_mdtp() const override {
+        std::vector<uint8_t> result;
+        result.resize(1 /* node type */ + 4 /* name length */ + m_name.length() /* name */ +
+                          4 /* units length */ + m_units.length() /* units */ +
+                          4 /* value length */ + m_value.length() /* value */,
+                      0x0 /* fill by 0x0 */);
+        std::size_t offset = 0;
+
+        // Write node type (1 is value node)
+        write_ubyte_be(result, offset, 1);
+        ++offset;
+
+        // Write name length
+        write_uint32_be(result, offset, static_cast<uint32_t>(m_name.length()));
+        offset += 4;
+
+        // Write name
+        std::copy(m_name.begin(), m_name.end(), result.data() + offset);
+        offset += m_name.length();
+
+        // Write units length
+        write_uint32_be(result, offset, static_cast<uint32_t>(m_units.length()));
+        offset += 4;
+
+        // Write units
+        std::copy(m_units.begin(), m_units.end(), result.data() + offset);
+        offset += m_units.length();
+
+        // Write value length
+        write_uint32_be(result, offset, static_cast<uint32_t>(m_value.length()));
+        offset += 4;
+
+        // Write value
+        std::copy(m_value.begin(), m_value.end(), result.data() + offset);
+
+        return result;
     }
 };
 
@@ -269,8 +353,11 @@ template <typename... Children> class MetricContainerNode : public IMetricNode<C
      *      }
      * }
      * ```
+     * @deprecated `to_json()` is deprecated for transport. `to_mdtp()`/MDTP should be used for
+     * binary transport between modules and the server core. `to_json()` may remain useful for human
+     * readable debugging, but it is not recommended for production transport.
      */
-    Json::Value to_json() const override {
+    [[deprecated("Use to_mdtp() instead")]] Json::Value to_json() const override {
         Json::Value root;
 
         // We don't need to store the type if we are root node
@@ -278,13 +365,91 @@ template <typename... Children> class MetricContainerNode : public IMetricNode<C
             root["type"] = "container";
         }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
         // Iterate through the descendants and recursively call get_json. The recursion will stop
         // as soon as we reach the node-value. The obtained objects are placed with the desired
         // name in root and return
         for_each_tuple(IMetricNode<Children...>::m_children,
                        [this, &root](auto& child) { root[child->get_name()] = child->to_json(); });
+#pragma GCC diagnostic pop
 
         return root;
+    }
+
+
+
+
+    /**
+     * @brief Generates binary data in MDTP protocol format.
+     *
+     * See the developer documentation for the MDTP protocol specification and examples.
+     *
+     * @note If the node type is **root**, then only the frame header (version and payload size)
+     * will be added.
+     *
+     * @return `std::vector<uint8_t>` with bytes
+     */
+    std::vector<uint8_t> to_mdtp() const override {
+        // 1) Collect children payload (concatenate bytes of all children nodes).
+        //    Each child already knows how to serialize itself (value or container).
+        std::vector<uint8_t> children_payload;
+        children_payload.reserve(128); // small heuristic; optional
+
+        for_each_tuple(IMetricNode<Children...>::m_children, [&](auto& child) {
+            auto bytes = child->to_mdtp();
+            children_payload.insert(children_payload.end(), bytes.begin(), bytes.end());
+        });
+
+        // 2) Root vs non-root behavior.
+        if (IMetricNode<Children...>::m_is_root) {
+            // --- Root node: only MDTP frame header + children payload ---
+            // Frame header: [version:1][payload_size:4]
+            std::vector<uint8_t> result(5, 0x00);
+
+            // write version
+            write_ubyte_be(result, 0, MDTP_VERSION);
+            // write payload size = total bytes of concatenated children
+            write_uint32_be(result, 1, static_cast<uint32_t>(children_payload.size()));
+
+            // append children payload
+            result.insert(result.end(), children_payload.begin(), children_payload.end());
+            return result;
+
+        } else {
+            // --- Regular container: container header + children payload ---
+            // Container header:
+            // [node type=0:1][name length:4][name bytes][payload size:4]
+            const uint32_t name_len =
+                static_cast<uint32_t>(IMetricNode<Children...>::m_name.size());
+
+            std::vector<uint8_t> result;
+            result.resize(1 + 4 + name_len + 4); // header without payload
+
+            size_t off = 0;
+
+            // node type = 0 (container)
+            write_ubyte_be(result, off, 0);
+            ++off;
+
+            // name length (BE)
+            write_uint32_be(result, off, name_len);
+            off += 4;
+
+            // name bytes (no terminating zero)
+            if (name_len) {
+                std::memcpy(result.data() + off, IMetricNode<Children...>::m_name.data(), name_len);
+                off += name_len;
+            }
+
+            // payload size (BE)
+            write_uint32_be(result, off, static_cast<uint32_t>(children_payload.size()));
+            off += 4;
+
+            // append children payload
+            result.insert(result.end(), children_payload.begin(), children_payload.end());
+            return result;
+        }
     }
 };
 

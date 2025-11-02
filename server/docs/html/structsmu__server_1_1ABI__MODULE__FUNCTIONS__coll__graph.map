@@ -1,0 +1,6 @@
+<map id="smu_server::ABI_MODULE_FUNCTIONS" name="smu_server::ABI_MODULE_FUNCTIONS">
+<area shape="rect" id="Node000001" title="Functions of the module that calls the server core." alt="" coords="5,108,197,148"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="212,119,224,128,216,136,198,139,197,134,214,131,219,128,209,124"/>
+<area shape="rect" id="Node000002" href="$structsmu__server_1_1ABI__MODULE__MDTP__DATA.html" title="Struct to storing MDTP data. See documentation for MDTP protocol." alt="" coords="5,5,197,45"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="104,59,104,108,99,108,99,59"/>
+</map>

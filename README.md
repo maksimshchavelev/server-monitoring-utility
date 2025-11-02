@@ -5,6 +5,12 @@ SMU is a Server Monitoring Utility that transmits over a secure websocket connec
 ## Guides
 SMU is represented by three components - [smu-server](server/README.md) (server part), [smu-cli](cli/README.md) (CLI for controlling the server via terminal) and [smu](client/README.md) (client for visualizing and viewing information from the server). The links will take you to the manual for each component
 
+## Documentation
+Documentation for regular users and developers wishing to support the project:
+- [smu-server documentation](https://maksimshchavelev.github.io/server-monitoring-utility/server/docs/html/index.html)
+- [smu-cli documentation](https://maksimshchavelev.github.io/server-monitoring-utility/cli/docs/html/index.html)
+- [smu (client) documentation](https://maksimshchavelev.github.io/server-monitoring-utility/client/docs/html/index.html)
+
 ## Installation
 Download the 3 packages from the releases - `smu`, `smu-server` and `smu-cli` to install. Install them using the package manager. `smu-server` and `smu-cli` should be installed on one machine, and `smu` (client) should be installed on another machine
 
@@ -44,6 +50,10 @@ smu 1.2.3.4
 ```
 
 > For Windows, the instructions are similar, except that a copy of the certificate will be located in `config/certs` next to **smu.exe**, and you do not need to write **sudo** when adding the certificate.
+
+> If you want to install **external modules** for the server, install the `smu-server-linux-amd64-external-modules.deb` and `smu-server-sdk.deb` packages from the page of the release you need. A list of external modules is provided in the [server documentation](https://maksimshchavelev.github.io/server-monitoring-utility/server/docs/html/index.html)
+
+> A list of built-in modules is provided in the [server documentation](https://maksimshchavelev.github.io/server-monitoring-utility/server/docs/html/index.html)
 
 
 ## Building from source
@@ -86,6 +96,19 @@ For example:
 ```bash
 cmake .. -DBUILD_SERVER=OFF
 ```
+
+## Building SDK
+
+If you want to use external modules, you need to build the SDK. You can do this by running the following command *after building the server part* (everything is built by default, which is also fine):
+```
+cmake --build . --target sdk
+```
+After executing the command, look in `build/server-build/sdk-build/` (the detailed path will be specified after executing the command), where you will see two packages (the version will be specified):
+
+- `smu-server-sdk.deb`
+- `smu-server-sdk-dev.deb`
+
+> In fact, no SDK build in the usual sense takes place. The compiled artifacts are downloaded from the SDK repositories and recompiled into two packages.
 
 
 ## License

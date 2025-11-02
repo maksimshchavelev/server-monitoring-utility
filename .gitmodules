@@ -1,3 +1,15 @@
 [submodule "doxygen-awesome-css"]
 	path = doxygen-awesome-css
 	url = https://github.com/jothepro/doxygen-awesome-css.git
+
+[submodule "cli/doxygen-awesome-css"]
+	path = cli/doxygen-awesome-css
+	url = https://github.com/jothepro/doxygen-awesome-css.git
+
+[submodule "client/doxygen-awesome-css"]
+	path = client/doxygen-awesome-css
+	url = https://github.com/jothepro/doxygen-awesome-css.git
+	
+[submodule "server/doxygen-awesome-css"]
+	path = server/doxygen-awesome-css
+	url = https://github.com/jothepro/doxygen-awesome-css.git

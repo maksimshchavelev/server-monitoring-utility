@@ -75,17 +75,6 @@ class Application {
     std::atomic_int  m_return_value{0}; ///< Return value. Use in conjunction with m_exit_request
     std::atomic_bool m_exit_request{false}; ///< When it becomes true, the application exits.
     std::condition_variable cw;             ///< for m_exit_request
-
-
-
-
-    /**
-     * @brief Converts string representation of json to `Json::Value`
-     * @param str String representation of json
-     * @return `std::expected` with `Json::Value` if success and `std::string` if error
-     * @private
-     */
-    std::expected<Json::Value, std::string> json_from_string(const std::string& str) const noexcept;
 };
 
 } // namespace smu

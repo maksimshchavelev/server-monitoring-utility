@@ -1,11 +1,16 @@
 var namespacesmu__server =
 [
     [ "internals", "namespacesmu__server_1_1internals.html", "namespacesmu__server_1_1internals" ],
+    [ "ABI_MODULE_CONTEXT", "structsmu__server_1_1ABI__MODULE__CONTEXT.html", "structsmu__server_1_1ABI__MODULE__CONTEXT" ],
+    [ "ABI_MODULE_FUNCTIONS", "structsmu__server_1_1ABI__MODULE__FUNCTIONS.html", "structsmu__server_1_1ABI__MODULE__FUNCTIONS" ],
+    [ "ABI_MODULE_MDTP_DATA", "structsmu__server_1_1ABI__MODULE__MDTP__DATA.html", "structsmu__server_1_1ABI__MODULE__MDTP__DATA" ],
+    [ "ABI_SERVER_CORE_FUNCTIONS", "structsmu__server_1_1ABI__SERVER__CORE__FUNCTIONS.html", "structsmu__server_1_1ABI__SERVER__CORE__FUNCTIONS" ],
     [ "Application", "classsmu__server_1_1Application.html", "classsmu__server_1_1Application" ],
     [ "CLI", "classsmu__server_1_1CLI.html", "classsmu__server_1_1CLI" ],
     [ "Config", "classsmu__server_1_1Config.html", "classsmu__server_1_1Config" ],
     [ "Config_IO", "classsmu__server_1_1Config__IO.html", "classsmu__server_1_1Config__IO" ],
     [ "DMI", "classsmu__server_1_1DMI.html", "classsmu__server_1_1DMI" ],
+    [ "ExternalModuleLoader", "classsmu__server_1_1ExternalModuleLoader.html", null ],
     [ "IMetricNodeBase", "structsmu__server_1_1IMetricNodeBase.html", "structsmu__server_1_1IMetricNodeBase" ],
     [ "IModule", "classsmu__server_1_1IModule.html", "classsmu__server_1_1IModule" ],
     [ "IPC", "classsmu__server_1_1IPC.html", "classsmu__server_1_1IPC" ],
@@ -14,9 +19,17 @@ var namespacesmu__server =
     [ "MainWebsocketController", "classsmu__server_1_1MainWebsocketController.html", "classsmu__server_1_1MainWebsocketController" ],
     [ "Network", "classsmu__server_1_1Network.html", "classsmu__server_1_1Network" ],
     [ "RAM", "classsmu__server_1_1RAM.html", "classsmu__server_1_1RAM" ],
+    [ "ABI_MODULE_CONTEXT", "namespacesmu__server.html#a6e4290d7256e6cc653dcfa9432021ace", null ],
+    [ "ABI_MODULE_FUNCTIONS", "namespacesmu__server.html#a83ef59cf95fa02cfd3291e1e0aeecea9", null ],
+    [ "ABI_MODULE_MDTP_DATA", "namespacesmu__server.html#a6ecb51133912a7af6b1d5fb36e85afd8", null ],
+    [ "ABI_SERVER_CORE_FUNCTIONS", "namespacesmu__server.html#af3fcd252d7d70819e8703929a9d07c39", null ],
+    [ "abi_get_abi_version", "namespacesmu__server.html#aa8bb1c037696ec7749b7c5a3522767c1", null ],
+    [ "abi_log", "namespacesmu__server.html#a5883310fbf5287e71a3d644853869ddf", null ],
     [ "for_each_tuple", "namespacesmu__server.html#a522f05053a18b752356b80c93a5fe53e", null ],
     [ "logger", "namespacesmu__server.html#ab2324167d7d0ebb73d6f1a85d097d80b", null ],
     [ "make_container_node", "namespacesmu__server.html#a0290ea5f19c20a5ad90d4837a627fb88", null ],
     [ "make_root_node", "namespacesmu__server.html#a23038498ffcba3c5453a07ab861d13cf", null ],
-    [ "make_value_node", "namespacesmu__server.html#a219dae7d70a890e3fb0740451fbf5dbe", null ]
+    [ "make_value_node", "namespacesmu__server.html#a219dae7d70a890e3fb0740451fbf5dbe", null ],
+    [ "ABI_VERSION", "namespacesmu__server.html#a4c254331db0c72dc1fe2e32ab94ececf", null ],
+    [ "MDTP_VERSION", "namespacesmu__server.html#a0fee28ffb64000aebdddc5c1afc99d3f", null ]
 ];

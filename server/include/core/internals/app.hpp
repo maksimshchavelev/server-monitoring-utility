@@ -162,20 +162,21 @@ class Application {
 
     /**
      * @brief Collects all metrics from all modules
-     * @return `Json::Value` with collected metrics
+     * @return `std::vector<uint8_t>` with collected metrics (bytes in MDTP protocol)
      * @note Public, as it is a crutch to make the method friendly
      */
-    Json::Value collect_metrics();
+    std::vector<uint8_t> collect_metrics();
 
 
   private:
     Application();
     ~Application();
 
-    std::mutex                                     m_modules_mutex; ///< To prevent data race with `m_modules`
-    std::vector<std::unique_ptr<IModule>>          m_modules;       ///< `std::vector` with modules
-    std::vector<std::function<void(Application&)>> m_modules_queue; ///< Queue for lazy initialization of modules in `run`
-    Config                                         m_server_config; ///< Config of server
+    std::mutex m_modules_mutex;                      ///< To prevent data race with `m_modules`
+    std::vector<std::unique_ptr<IModule>> m_modules; ///< `std::vector` with modules
+    std::vector<std::function<void(Application&)>>
+           m_modules_queue; ///< Queue for lazy initialization of modules in `run`
+    Config m_server_config; ///< Config of server
 
     friend class CLI; ///< CLI has access to all Application fields and methods
 
@@ -183,19 +184,33 @@ class Application {
 
     Network m_network; ///< For networking
 
-    ///< The flag is needed so that we don't save the config if we started the server with a key that
-    ///< is not supposed to run (such as version or help output). Without this key, the error of
-    ///< saving the config is output in the destructor (because we run without superuser rights).
+    ///< The flag is needed so that we don't save the config if we started the server with a key
+    ///< that is not supposed to run (such as version or help output). Without this key, the error
+    ///< of saving the config is output in the destructor (because we run without superuser rights).
     bool m_need_save_config_in_destructor{true};
 
     ///< If the module's `poll ratio` value is `0`, the data received during the first call to
     ///< `get_data` is cached. Subsequently, the data is loaded from the cache instead of calling
     ///< `get_data`
     ///<
-    ///< Storing `std::string_view` is safe because the module name exists throughout its lifetime and
-    ///< the server core does not delete the module.
-    std::unordered_map<std::string_view /* module name */, Json::Value /* cached data */>
+    ///< Storing `std::string_view` is safe because the module name exists throughout its lifetime
+    ///< and the server core does not delete the module.
+    std::unordered_map<std::string /* module name */, std::vector<uint8_t> /* cached data */>
         m_module_cache;
+
+
+
+
+    /**
+     * @brief Registers dynamic .so modules
+     *
+     * Iteratively goes through the directory and attempts to register each module
+     *
+     * @param modules_directory Directory with modules (default /var/lib/smu-server/modules.d)
+     */
+    void register_dynamic_modules(const std::string_view modules_directory);
+
+
 
 
     /**

@@ -32,11 +32,11 @@ namespace smu_server {
  *
  * @see `make_container_node` and `make_root_node`
  *
- * @section example_usage Example usage
+ * @section example_usage Example usage (JSON)
  * @code{.cpp}
- * // The metric value can be either a number or a string, it is converted
- * // to a string if needed
- * auto node = make_value_node("RAM usage", 4217, "MB");
+ * // The metric value can be either a number or a string; it is converted
+ * // to a string if needed.
+ * auto node = make_value_node("RAM usage", 4217, "MB")->to_json();
  * @endcode
  *
  * This code gives json fragment:
@@ -49,8 +49,33 @@ namespace smu_server {
  * }
  * @endcode
  *
- * @note The node name is only used if the node is nested in a **container node** or **root node**.
- * **A value node never contains its own name!**
+ * @section mdtp_protocol MDTP (preferred) — value node encoding
+ *
+ * Prefer the binary MDTP format for transport between modules and the server. Value nodes serialize
+ * to the MDTP **value node** format (Big-Endian integer fields). The node produced by
+ * `make_value_node("load", 56, "%")` serializes to the following bytes:
+ *
+ * @code{.text}
+ * 01                   [node type] = 0x01 (value) (1)
+ * 00 00 00 04          [name length] = 0x00000004 (4 bytes)
+ * 6C 6F 61 64          [name] = "load"
+ * 00 00 00 01          [units length] = 0x00000001 (1 byte)
+ * 25                   [units] = "%"
+ * 00 00 00 02          [value length] = 0x00000002 (2 bytes)
+ * 35 36                [value] = "56"
+ *                      total = 20 bytes
+ * @endcode
+ *
+ * Fields are Big-Endian. For non-root nodes MDTP serialization returns the single node block shown
+ * above (no global MDTP frame header). For full frames (root nodes) see `make_root_node` docs
+ * below.
+ *
+ * @note Use `to_mdtp()` on the returned node to get the binary MDTP representation. The JSON API
+ * (`to_json()`) is considered legacy for transport and is marked as deprecated here: prefer MDTP.
+ *
+ * @deprecated `to_json()` is deprecated for transport purposes; use `to_mdtp()` and MDTP for
+ * serialization. `to_json()` may still be useful for debug/inspection, but it is not recommended
+ * for network transport.
  */
 template <typename ValueType>
 inline auto make_value_node(const std::string& metric_name,
@@ -79,7 +104,7 @@ inline auto make_value_node(const std::string& metric_name,
  *
  * A container node can store other container nodes as well as values.
  * Such nodes are assumed to be nested either in other container nodes or in the
- * root node. If you need a **root** node, use `smu_server::make_root_node`
+ * root node. If you need a **root** node, use `smu_server::make_root_node`.
  *
  * @param container_name Name of container
  * @param children Nested nodes
@@ -90,30 +115,87 @@ inline auto make_value_node(const std::string& metric_name,
  *
  * @see `make_value_node` and `make_root_node`
  *
- * @section example_usage Example usage
+ * @section example_usage Example usage (JSON)
  * @code{.cpp}
- * auto root = make_container_node("RAM",
- *      make_value_node("RAM usage", "4217", "MB")
- * );
+ * auto cpu = make_container_node("CPU",
+ *      make_value_node("temperature", 75, "C"),
+ *      make_value_node("frequency", "3.5", "GHz")
+ * )->to_json();
  * @endcode
  *
  * This code gives json fragment:
  *
  * @code{.json}
  * {
- *      "RAM usage": {
+ *      "temperature": {
  *          "type": "value",
- *          "units": "MB",
- *          "value": "4217"
+ *          "units": "C",
+ *          "value": "75"
  *      },
- *
+ *      "frequency": {
+ *          "type": "value",
+ *          "units": "GHz",
+ *          "value": "3.5"
+ *      },
  *      "type": "container"
  * }
  * @endcode
  *
- * @note The container node does not contain its name inside. The name is only used by higher-level
- * nodes.
+ * @section mdtp_protocol MDTP (preferred) — container node encoding
+ *
+ * Container nodes serialize to MDTP as a single **container node** block which contains a payload
+ * that is the concatenation of serialized child nodes. For example, the `cpu` container above
+ * serializes as:
+ *
+ * Header (container):
+ * @code{.text}
+ * 00                 // [node type] = 0x00 (container) (1)
+ * 00 00 00 03        // [name length] = 0x00000003 (3 bytes) -> "CPU"
+ * 63 70 75           // [name] = "CPU"
+ * 00 00 00 37        // [payload size] = 0x00000037 (55 bytes)
+ *                    // (payload follows: child1 (27 bytes) + child2 (28 bytes))
+ * @endcode
+ *
+ * Child 1 (temperature, 27 bytes):
+ * @code{.text}
+ * 01                                 // type = value
+ * 00 00 00 0B                        // name_len = 11 ("temperature")
+ * 74 65 6D 70 65 72 61 74 75 72 65   // "temperature"
+ * 00 00 00 01                        // units_len = 1
+ * 43                                 // "C"
+ * 00 00 00 02                        // value_len = 2
+ * 37 35                              // "75"
+ * @endcode
+ *
+ * Child 2 (frequency, 28 bytes):
+ * @code{.text}
+ * 01
+ * 00 00 00 09                         // name_len = 9 ("frequency")
+ * 66 72 65 71 75 65 6E 63 79          // "frequency"
+ * 00 00 00 03                         // units_len = 3 ("GHz")
+ * 47 48 5A                            // "GHz"
+ * 00 00 00 03                         // value_len = 3 ("3.5")
+ * 33 2E 35                            // "3.5"
+ * @endcode
+ *
+ * Combined container total size = container header (1 + 4 + 3 + 4 = 12 ? careful: see note)
+ *
+ * @note The container header consists of:
+ *  - 1 byte: node type
+ *  - 4 bytes: name length (N)
+ *  - N bytes: name
+ *  - 4 bytes: payload size (sum of child blocks)
+ *
+ * The `payload size` above is 55 (0x37) because 27 + 28 = 55.
+ *
+ * @note For non-root container nodes, MDTP serialization returns exactly the bytes above
+ * (container header + concatenated children). For root nodes, a global MDTP frame header is added
+ * (see `make_root_node` documentation).
+ *
+ * @deprecated `to_json()` is deprecated for transport — prefer `to_mdtp()` / MDTP for efficient
+ * binary transport.
  */
+
 template <typename... Children>
 inline auto make_container_node(const std::string& container_name, Children&&... children)
     -> std::unique_ptr<internals::MetricContainerNode<Children...>> {
@@ -130,7 +212,7 @@ inline auto make_container_node(const std::string& container_name, Children&&...
 /**
  * @brief Creates a root node
  *
- * Root nodes work the same way as container nodes, but they doesn't store own name
+ * Root nodes work the same way as container nodes, but they do not store their own name.
  *
  * @param children Nested nodes, like **container** node or **value** node
  *
@@ -138,19 +220,13 @@ inline auto make_container_node(const std::string& container_name, Children&&...
  *
  * @return `std::unique_ptr` with `internals::MetricContainerNode<...>`
  *
- * @note Call `to_json` on the root node to get the json and, for example,
- * then send it over a websocket connection. However, this applies to all nodes, but it is used much
- * more often with **root** nodes.
- *
  * @see `make_value_node` and `make_container_node`
  *
- * @section example_usage Example usage
+ * @section example_usage Example usage (JSON)
  * @code{.cpp}
- *
  * auto root = make_root_node(
  *      make_value_node("RAM usage", "4217", "MB")
- * );
- *
+ * )->to_json();
  * @endcode
  *
  * This code will produce a json of the form:
@@ -162,61 +238,82 @@ inline auto make_container_node(const std::string& container_name, Children&&...
  *          "units": "MB",
  *          "value": "4217"
  *      },
- *
  *      "type": "container"
  * }
- *
  * @endcode
  *
+ * @section mdtp_protocol MDTP (preferred) — full MDTP frame emitted by root
  *
- * Consider another code:
+ * **New behaviour:** a root node now emits a *full MDTP frame* consisting of a short
+ * frame header followed **directly** by the concatenation of children node encodings.
+ * Root does **not** add an extra container header of its own. Each child node already
+ * serializes itself as a proper MDTP node (container or value), so the root frame payload
+ * is simply the concatenation of those child encodings.
  *
- * @code{.cpp}
+ * Frame header format (Big-Endian):
+ * - 1 byte : MDTP version (currently `0x01`)
+ * - 4 bytes: frame payload size (uint32 BE) — number of bytes following the frame header
  *
- * auto root = make_root_node(
- *      make_container_node("Simple container",
- *           // The metric value can be either a number or a string, it is
- *           // converted to a string if needed
- *           make_value_node("Simple value 1", 12345, "bytes"),
- *           make_value_node("Simple value 2", "42", "GB")
- *      ),
+ * Important consequences:
+ * - The root does **not** wrap children into an additional anonymous container.
+ * - The server will send the exact sequence returned by `root->to_mdtp()` as-is.
+ * - Use `to_mdtp()` on root to obtain the ready-to-send MDTP frame.
  *
- *      make_value_node("RAM usage", "4217", "MB")
- * );
+ * Example (two value children):
+ *  - `a = make_value_node("uptime", "1234", "s")` -> 24 bytes
+ *  - `b = make_value_node("load", 56, "%")`       -> 20 bytes
  *
+ * children concat size = 24 + 20 = 44 bytes (0x2C) (44 bytes)
+ *
+ * Frame header (prefix):
+ * @code{.text}
+ * 01                                    // [MDTP version] = 0x01 (1)
+ * 00 00 00 2C                           // [frame payload size] = 0x0000002C (44 bytes)
+ *                                       // frame header total = 1 + 4 = 5 bytes
  * @endcode
  *
+ * Payload (concatenation of child encodings). Example bytes for the two value nodes:
  *
- * And this code will produce a json of the form:
- *
- * @code{.json}
- *
- * {
- *		"RAM usage": {
- *	 		"type": "value",
- * 			"units": "MB",
- *			"value": "4217"
- *		},
- *
- *		"Simple container": {
- *			"Simple value 1": {
- *				"type": "value",
- *				"units": "bytes",
- *				"value": "12345"
- *			},
- *			"Simple value 2": {
- *				"type": "value",
- *				"units": "GB",
- *				"value": "42"
- *			},
- *
- *			"type": "container"
- *		},
- *
- *      "type": "container"
- * }
- *
+ * Child A ("uptime", "1234", "s") — 24 bytes:
+ * @code{.text}
+ * 01                                    // [node type] = 0x01 (value)
+ * 00 00 00 06                           // [name length] = 6 ("uptime")
+ * 75 70 74 69 6D 65                     // "uptime" (6 bytes)
+ * 00 00 00 01                           // [units length] = 1 ("s")
+ * 73                                    // "s"
+ * 00 00 00 04                           // [value length] = 4 ("1234")
+ * 31 32 33 34                           // "1234"
  * @endcode
+ *
+ * Child B ("load", 56, "%") — 20 bytes:
+ * @code{.text}
+ * 01                                    // [node type] = 0x01 (value)
+ * 00 00 00 04                           // [name length] = 4 ("load")
+ * 6C 6F 61 64                           // "load"
+ * 00 00 00 01                           // [units length] = 1 ("%")
+ * 25                                    // "%"
+ * 00 00 00 02                           // [value length] = 2 ("56")
+ * 35 36                                 // "56"
+ * @endcode
+ *
+ * Full frame layout (frame header + concatenated children) — total = 5 + 44 = 49 bytes.
+ *
+ * @note Use `to_mdtp()` on the root node to obtain the full MDTP frame ready to be written
+ * to the network or stored. MDTP is Big-Endian; your sender/receiver must honor endianness.
+ *
+ * @deprecated `to_json()` is deprecated for transport. `to_mdtp()`/MDTP should be used for
+ * binary transport between modules and the server core. `to_json()` may remain useful for human
+ * readable debugging, but it is not recommended for production transport.
+ *
+ * @section examples_more Advanced usage notes
+ *
+ * - If you need human readable output (debug) use `to_json()` for inspection only.
+ * - If you need compact, fast transport (recommended) use `to_mdtp()` on the root and send the
+ *   returned `std::vector<uint8_t>` over your socket. The first byte is MDTP version which helps
+ *   future protocol negotiation.
+ *
+ * @note All length fields in MDTP are counts of bytes **without** a terminating NUL. Strings are
+ * transmitted as raw bytes; they are NOT NUL-terminated in the stream.
  */
 template <typename... Children>
 inline auto make_root_node(Children&&... children)
