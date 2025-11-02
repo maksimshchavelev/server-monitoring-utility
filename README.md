@@ -5,6 +5,12 @@ SMU is a Server Monitoring Utility that transmits over a secure websocket connec
 ## Guides
 SMU is represented by three components - [smu-server](server/README.md) (server part), [smu-cli](cli/README.md) (CLI for controlling the server via terminal) and [smu](client/README.md) (client for visualizing and viewing information from the server). The links will take you to the manual for each component
 
+## Documentation
+Documentation for regular users and developers wishing to support the project:
+- [smu-server documentation](https://maksimshchavelev.github.io/server-monitoring-utility/server/docs/html/index.html)
+- [smu-cli documentation](https://maksimshchavelev.github.io/server-monitoring-utility/cli/docs/html/index.html)
+- [smu (client) documentation](https://maksimshchavelev.github.io/server-monitoring-utility/client/docs/html/index.html)
+
 ## Installation
 Download the 3 packages from the releases - `smu`, `smu-server` and `smu-cli` to install. Install them using the package manager. `smu-server` and `smu-cli` should be installed on one machine, and `smu` (client) should be installed on another machine
 
