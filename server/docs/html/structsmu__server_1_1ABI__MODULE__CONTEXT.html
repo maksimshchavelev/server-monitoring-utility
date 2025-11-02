@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>smu-server: smu_server::ABI_SERVER_CORE_FUNCTIONS Struct Reference</title>
+<title>smu-server: smu_server::ABI_MODULE_CONTEXT Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -64,7 +64,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('structsmu__server_1_1ABI__SERVER__CORE__FUNCTIONS.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('structsmu__server_1_1ABI__MODULE__CONTEXT.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -92,79 +92,59 @@ $(document).ready(function(){initNavTree('structsmu__server_1_1ABI__SERVER__CORE
 <div class="header">
   <div class="summary">
 <a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="structsmu__server_1_1ABI__SERVER__CORE__FUNCTIONS-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">smu_server::ABI_SERVER_CORE_FUNCTIONS Struct Reference</div></div>
+<a href="structsmu__server_1_1ABI__MODULE__CONTEXT-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">smu_server::ABI_MODULE_CONTEXT Struct Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Functions provided by the server for the module.  
- <a href="structsmu__server_1_1ABI__SERVER__CORE__FUNCTIONS.html#details">More...</a></p>
+<p>Context of module.  
+ <a href="structsmu__server_1_1ABI__MODULE__CONTEXT.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="abi_8hpp_source.html">abi/abi.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:ab17b3876159e572c69bef1c09555ba22" id="r_ab17b3876159e572c69bef1c09555ba22"><td class="memItemLeft" align="right" valign="top">uint32_t(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsmu__server_1_1ABI__SERVER__CORE__FUNCTIONS.html#ab17b3876159e572c69bef1c09555ba22">abi_get_abi_version</a> )(const <a class="el" href="structsmu__server_1_1ABI__MODULE__CONTEXT.html">ABI_MODULE_CONTEXT</a> *context)</td></tr>
-<tr class="memdesc:ab17b3876159e572c69bef1c09555ba22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get ABI version.  <br /></td></tr>
-<tr class="separator:ab17b3876159e572c69bef1c09555ba22"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6b13b8b2ef297d03b0212114cf11b137" id="r_a6b13b8b2ef297d03b0212114cf11b137"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsmu__server_1_1ABI__SERVER__CORE__FUNCTIONS.html#a6b13b8b2ef297d03b0212114cf11b137">abi_log</a> )(const <a class="el" href="structsmu__server_1_1ABI__MODULE__CONTEXT.html">ABI_MODULE_CONTEXT</a> *context, int log_type, const char *message)</td></tr>
-<tr class="memdesc:a6b13b8b2ef297d03b0212114cf11b137"><td class="mdescLeft">&#160;</td><td class="mdescRight">Logging function.  <br /></td></tr>
-<tr class="separator:a6b13b8b2ef297d03b0212114cf11b137"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a213bc5a96513c71d8ffa2fd63ddb1145" id="r_a213bc5a96513c71d8ffa2fd63ddb1145"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsmu__server_1_1ABI__MODULE__CONTEXT.html#a213bc5a96513c71d8ffa2fd63ddb1145">module_name</a></td></tr>
+<tr class="memdesc:a213bc5a96513c71d8ffa2fd63ddb1145"><td class="mdescLeft">&#160;</td><td class="mdescRight">Name of module.  <br /></td></tr>
+<tr class="separator:a213bc5a96513c71d8ffa2fd63ddb1145"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c41b22d516db48c85ed75878cbe54ef" id="r_a8c41b22d516db48c85ed75878cbe54ef"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsmu__server_1_1ABI__MODULE__CONTEXT.html#a8c41b22d516db48c85ed75878cbe54ef">module_description</a></td></tr>
+<tr class="memdesc:a8c41b22d516db48c85ed75878cbe54ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Description of module.  <br /></td></tr>
+<tr class="separator:a8c41b22d516db48c85ed75878cbe54ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Functions provided by the server for the module. </p>
-<p>This structure will be passed to the module initialization function.</p>
-<dl class="section note"><dt>Note</dt><dd>This is a packaged structure. </dd></dl>
+<div class="textblock"><p>Context of module. </p>
+<p>The context is needed so that the server core knows what module is accessing it (when calling core functions, for example, logging)</p>
+<dl class="section note"><dt>Note</dt><dd>This is a <b>packaged</b> structure </dd></dl>
 </div><h2 class="groupheader">Member Data Documentation</h2>
-<a id="ab17b3876159e572c69bef1c09555ba22" name="ab17b3876159e572c69bef1c09555ba22"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab17b3876159e572c69bef1c09555ba22">&#9670;&#160;</a></span>abi_get_abi_version</h2>
+<a id="a8c41b22d516db48c85ed75878cbe54ef" name="a8c41b22d516db48c85ed75878cbe54ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c41b22d516db48c85ed75878cbe54ef">&#9670;&#160;</a></span>module_description</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t(* smu_server::ABI_SERVER_CORE_FUNCTIONS::abi_get_abi_version) (const <a class="el" href="structsmu__server_1_1ABI__MODULE__CONTEXT.html">ABI_MODULE_CONTEXT</a> *context)</td>
+          <td class="memname">const char* smu_server::ABI_MODULE_CONTEXT::module_description</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Get ABI version. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">context</td><td>Module context. See <code><a class="el" href="structsmu__server_1_1ABI__MODULE__CONTEXT.html" title="Context of module.">ABI_MODULE_CONTEXT</a></code> </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>ABI version </dd></dl>
+<p>Description of module. </p>
 
 </div>
 </div>
-<a id="a6b13b8b2ef297d03b0212114cf11b137" name="a6b13b8b2ef297d03b0212114cf11b137"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6b13b8b2ef297d03b0212114cf11b137">&#9670;&#160;</a></span>abi_log</h2>
+<a id="a213bc5a96513c71d8ffa2fd63ddb1145" name="a213bc5a96513c71d8ffa2fd63ddb1145"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a213bc5a96513c71d8ffa2fd63ddb1145">&#9670;&#160;</a></span>module_name</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void(* smu_server::ABI_SERVER_CORE_FUNCTIONS::abi_log) (const <a class="el" href="structsmu__server_1_1ABI__MODULE__CONTEXT.html">ABI_MODULE_CONTEXT</a> *context, int log_type, const char *message)</td>
+          <td class="memname">const char* smu_server::ABI_MODULE_CONTEXT::module_name</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Logging function. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">context</td><td>Module context. See <code><a class="el" href="structsmu__server_1_1ABI__MODULE__CONTEXT.html" title="Context of module.">ABI_MODULE_CONTEXT</a></code> </td></tr>
-    <tr><td class="paramname">log_type</td><td>Type of log. Available log types:<ul>
-<li><code>0</code>: White (info) log message</li>
-<li><code>1</code>: Yellow (warning) log message</li>
-<li><code>2</code>: Red (error) log message </li>
-</ul>
-</td></tr>
-    <tr><td class="paramname">message</td><td>Message to log </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Name of module. </p>
 
 </div>
 </div>
@@ -176,7 +156,7 @@ Public Attributes</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="namespacesmu__server.html">smu_server</a></li><li class="navelem"><a class="el" href="structsmu__server_1_1ABI__SERVER__CORE__FUNCTIONS.html">ABI_SERVER_CORE_FUNCTIONS</a></li>
+    <li class="navelem"><a class="el" href="namespacesmu__server.html">smu_server</a></li><li class="navelem"><a class="el" href="structsmu__server_1_1ABI__MODULE__CONTEXT.html">ABI_MODULE_CONTEXT</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>

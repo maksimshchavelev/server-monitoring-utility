@@ -126,21 +126,27 @@ Collaboration diagram for smu_server::internals::ProxyModule:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a8d3bbb4cf03ab16a4624d15b63728410" id="r_a8d3bbb4cf03ab16a4624d15b63728410"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1internals_1_1ProxyModule.html#a8d3bbb4cf03ab16a4624d15b63728410">ProxyModule</a> (void *dl_handle, <a class="el" href="structsmu__server_1_1ABI__MODULE__FUNCTIONS.html">ABI_MODULE_FUNCTIONS</a> module_functions, <a class="el" href="structsmu__server_1_1ABI__CONTEXT.html">ABI_CONTEXT</a> *context, const <a class="el" href="classsmu__server_1_1Config.html">Config</a> &amp;cfg)</td></tr>
-<tr class="memdesc:a8d3bbb4cf03ab16a4624d15b63728410"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a proxy module for an already loaded dynamic module object with module_init executed.  <br /></td></tr>
-<tr class="separator:a8d3bbb4cf03ab16a4624d15b63728410"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f3ffb480fde24494216804cf2a14255" id="r_a3f3ffb480fde24494216804cf2a14255"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1internals_1_1ProxyModule.html#a3f3ffb480fde24494216804cf2a14255">ProxyModule</a> (void *dl_handle, <a class="el" href="structsmu__server_1_1ABI__MODULE__FUNCTIONS.html">ABI_MODULE_FUNCTIONS</a> module_functions, const <a class="el" href="classsmu__server_1_1Config.html">Config</a> &amp;cfg)</td></tr>
+<tr class="memdesc:a3f3ffb480fde24494216804cf2a14255"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a proxy module for an already loaded dynamic module object with module_init executed.  <br /></td></tr>
+<tr class="separator:a3f3ffb480fde24494216804cf2a14255"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a608995fa4ff02a8160cae996d1fae6d9" id="r_a608995fa4ff02a8160cae996d1fae6d9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1internals_1_1ProxyModule.html#a608995fa4ff02a8160cae996d1fae6d9">~ProxyModule</a> () override</td></tr>
 <tr class="memdesc:a608995fa4ff02a8160cae996d1fae6d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys the module and closes the dynamic object.  <br /></td></tr>
 <tr class="separator:a608995fa4ff02a8160cae996d1fae6d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a53b47e1ece4c50bb555ed9bf7a261644" id="r_a53b47e1ece4c50bb555ed9bf7a261644"><td class="memItemLeft" align="right" valign="top">std::optional&lt; std::vector&lt; uint8_t &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1internals_1_1ProxyModule.html#a53b47e1ece4c50bb555ed9bf7a261644">get_data</a> () override</td></tr>
 <tr class="memdesc:a53b47e1ece4c50bb555ed9bf7a261644"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calls <code>module_get_data</code> and obtaining data.  <br /></td></tr>
 <tr class="separator:a53b47e1ece4c50bb555ed9bf7a261644"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e99f7dc5c27b59ece65970b5ac9e6b4" id="r_a9e99f7dc5c27b59ece65970b5ac9e6b4"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classsmu__server_1_1Config.html">Config</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1internals_1_1ProxyModule.html#a9e99f7dc5c27b59ece65970b5ac9e6b4">get_configuration</a> () const noexcept override</td></tr>
+<tr class="memdesc:a9e99f7dc5c27b59ece65970b5ac9e6b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method for obtaining module configuration.  <br /></td></tr>
+<tr class="separator:a9e99f7dc5c27b59ece65970b5ac9e6b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a36b6641cdd0b73a935b6733323d11413" id="r_a36b6641cdd0b73a935b6733323d11413"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1internals_1_1ProxyModule.html#a36b6641cdd0b73a935b6733323d11413">enable</a> () override</td></tr>
 <tr class="memdesc:a36b6641cdd0b73a935b6733323d11413"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables module.  <br /></td></tr>
 <tr class="separator:a36b6641cdd0b73a935b6733323d11413"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad70a569715e34e5fd3042e2d663bbd69" id="r_ad70a569715e34e5fd3042e2d663bbd69"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1internals_1_1ProxyModule.html#ad70a569715e34e5fd3042e2d663bbd69">disable</a> () override</td></tr>
 <tr class="memdesc:ad70a569715e34e5fd3042e2d663bbd69"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disables module.  <br /></td></tr>
 <tr class="separator:ad70a569715e34e5fd3042e2d663bbd69"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a974b6a605ebcae8e4d58b1b4960ab1e1" id="r_a974b6a605ebcae8e4d58b1b4960ab1e1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1internals_1_1ProxyModule.html#a974b6a605ebcae8e4d58b1b4960ab1e1">is_enabled</a> () const override</td></tr>
+<tr class="memdesc:a974b6a605ebcae8e4d58b1b4960ab1e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is module enabled?  <br /></td></tr>
+<tr class="separator:a974b6a605ebcae8e4d58b1b4960ab1e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a994f5b6c31e6dfef129240d955521efd" id="r_a994f5b6c31e6dfef129240d955521efd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1internals_1_1ProxyModule.html#a994f5b6c31e6dfef129240d955521efd">set_poll_ratio</a> (uint32_t poll_ratio) override</td></tr>
 <tr class="memdesc:a994f5b6c31e6dfef129240d955521efd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets poll ratio.  <br /></td></tr>
 <tr class="separator:a994f5b6c31e6dfef129240d955521efd"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -160,12 +166,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae5299077b1fd17f04b94dd57f0efd183 inherit pub_methods_classsmu__server_1_1IModule" id="r_ae5299077b1fd17f04b94dd57f0efd183"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1IModule.html#ae5299077b1fd17f04b94dd57f0efd183">~IModule</a> ()=default</td></tr>
 <tr class="memdesc:ae5299077b1fd17f04b94dd57f0efd183 inherit pub_methods_classsmu__server_1_1IModule"><td class="mdescLeft">&#160;</td><td class="mdescRight">Does nothing.  <br /></td></tr>
 <tr class="separator:ae5299077b1fd17f04b94dd57f0efd183 inherit pub_methods_classsmu__server_1_1IModule"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a95e788d97c1c26e50c7c5c9b2ef78956 inherit pub_methods_classsmu__server_1_1IModule" id="r_a95e788d97c1c26e50c7c5c9b2ef78956"><td class="memItemLeft" align="right" valign="top">virtual const <a class="el" href="classsmu__server_1_1Config.html">Config</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1IModule.html#a95e788d97c1c26e50c7c5c9b2ef78956">get_configuration</a> () const noexcept</td></tr>
-<tr class="memdesc:a95e788d97c1c26e50c7c5c9b2ef78956 inherit pub_methods_classsmu__server_1_1IModule"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method for obtaining module configuration.  <br /></td></tr>
-<tr class="separator:a95e788d97c1c26e50c7c5c9b2ef78956 inherit pub_methods_classsmu__server_1_1IModule"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a785d5aac1d0fcb853440529e25c463d0 inherit pub_methods_classsmu__server_1_1IModule" id="r_a785d5aac1d0fcb853440529e25c463d0"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1IModule.html#a785d5aac1d0fcb853440529e25c463d0">is_enabled</a> () const</td></tr>
-<tr class="memdesc:a785d5aac1d0fcb853440529e25c463d0 inherit pub_methods_classsmu__server_1_1IModule"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is module enabled.  <br /></td></tr>
-<tr class="separator:a785d5aac1d0fcb853440529e25c463d0 inherit pub_methods_classsmu__server_1_1IModule"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -194,8 +194,8 @@ Additional Inherited Members</h2></td></tr>
 <div class="textblock"><p>A proxy module that interacts specifically with ABI, but does not collect any data itself. </p>
 <p>This is necessary so that the server core does not care what module is in front of it. It only works with the module's API. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a8d3bbb4cf03ab16a4624d15b63728410" name="a8d3bbb4cf03ab16a4624d15b63728410"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8d3bbb4cf03ab16a4624d15b63728410">&#9670;&#160;</a></span>ProxyModule()</h2>
+<a id="a3f3ffb480fde24494216804cf2a14255" name="a3f3ffb480fde24494216804cf2a14255"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f3ffb480fde24494216804cf2a14255">&#9670;&#160;</a></span>ProxyModule()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -211,12 +211,6 @@ Additional Inherited Members</h2></td></tr>
           <td></td>
           <td class="paramtype"><a class="el" href="structsmu__server_1_1ABI__MODULE__FUNCTIONS.html">ABI_MODULE_FUNCTIONS</a>&#160;</td>
           <td class="paramname"><em>module_functions</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="structsmu__server_1_1ABI__CONTEXT.html">ABI_CONTEXT</a> *&#160;</td>
-          <td class="paramname"><em>context</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -237,7 +231,6 @@ Additional Inherited Members</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">dl_handle</td><td>Dynamic object descriptor obtained via dlopen </td></tr>
     <tr><td class="paramname">module_functions</td><td>Structure with pointers to module functions </td></tr>
-    <tr><td class="paramname">context</td><td>Module context (name and description) </td></tr>
     <tr><td class="paramname">cfg</td><td>Configuration of module </td></tr>
   </table>
   </dd>
@@ -331,6 +324,36 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
+<a id="a9e99f7dc5c27b59ece65970b5ac9e6b4" name="a9e99f7dc5c27b59ece65970b5ac9e6b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e99f7dc5c27b59ece65970b5ac9e6b4">&#9670;&#160;</a></span>get_configuration()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="classsmu__server_1_1Config.html">Config</a> &amp; smu_server::internals::ProxyModule::get_configuration </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Method for obtaining module configuration. </p>
+<dl class="section return"><dt>Returns</dt><dd><code>const <a class="el" href="classsmu__server_1_1Config.html" title="Thread-safe wrapper for storing Json configs.">Config</a>&amp;</code> </dd></dl>
+
+<p>Reimplemented from <a class="el" href="classsmu__server_1_1IModule.html#a95e788d97c1c26e50c7c5c9b2ef78956">smu_server::IModule</a>.</p>
+
+</div>
+</div>
 <a id="a53b47e1ece4c50bb555ed9bf7a261644" name="a53b47e1ece4c50bb555ed9bf7a261644"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a53b47e1ece4c50bb555ed9bf7a261644">&#9670;&#160;</a></span>get_data()</h2>
 
@@ -388,6 +411,36 @@ Additional Inherited Members</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>Poll ratio </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classsmu__server_1_1IModule.html#aa7b0ea5de8292e4ca388ef37fe12e1f5">smu_server::IModule</a>.</p>
+
+</div>
+</div>
+<a id="a974b6a605ebcae8e4d58b1b4960ab1e1" name="a974b6a605ebcae8e4d58b1b4960ab1e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a974b6a605ebcae8e4d58b1b4960ab1e1">&#9670;&#160;</a></span>is_enabled()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool smu_server::internals::ProxyModule::is_enabled </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Is module enabled? </p>
+<dl class="section return"><dt>Returns</dt><dd><code>true</code> if enabled, otherwise <code>false</code> </dd></dl>
+
+<p>Reimplemented from <a class="el" href="classsmu__server_1_1IModule.html#a785d5aac1d0fcb853440529e25c463d0">smu_server::IModule</a>.</p>
 
 </div>
 </div>

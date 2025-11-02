@@ -93,6 +93,7 @@ $(document).ready(function(){initNavTree('abi_8hpp.html',''); initResizable(); }
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">abi.hpp File Reference</div></div>
@@ -127,11 +128,11 @@ This graph shows which files directly or indirectly include this file:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsmu__server_1_1ABI__CONTEXT.html">smu_server::ABI_CONTEXT</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The context in which the module calls server core functions.  <a href="structsmu__server_1_1ABI__CONTEXT.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsmu__server_1_1ABI__MODULE__MDTP__DATA.html">smu_server::ABI_MODULE_MDTP_DATA</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Struct to storing MDTP data. See documentation for MDTP protocol.  <a href="structsmu__server_1_1ABI__MODULE__MDTP__DATA.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsmu__server_1_1ABI__MDTP__DATA.html">smu_server::ABI_MDTP_DATA</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Struct to storing MDTP data. See documentation for MDTP protocol.  <a href="structsmu__server_1_1ABI__MDTP__DATA.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsmu__server_1_1ABI__MODULE__CONTEXT.html">smu_server::ABI_MODULE_CONTEXT</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Context of module.  <a href="structsmu__server_1_1ABI__MODULE__CONTEXT.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsmu__server_1_1ABI__SERVER__CORE__FUNCTIONS.html">smu_server::ABI_SERVER_CORE_FUNCTIONS</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Functions provided by the server for the module.  <a href="structsmu__server_1_1ABI__SERVER__CORE__FUNCTIONS.html#details">More...</a><br /></td></tr>
@@ -146,14 +147,29 @@ Namespaces</h2></td></tr>
 <tr class="memdesc:namespacesmu__server"><td class="mdescLeft">&#160;</td><td class="mdescRight">A global singleton class that helps read and write configurations in files. configuration management. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a6ecb51133912a7af6b1d5fb36e85afd8" id="r_a6ecb51133912a7af6b1d5fb36e85afd8"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structsmu__server_1_1ABI__MODULE__MDTP__DATA.html">smu_server::ABI_MODULE_MDTP_DATA</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesmu__server.html#a6ecb51133912a7af6b1d5fb36e85afd8">smu_server::ABI_MODULE_MDTP_DATA</a></td></tr>
+<tr class="memdesc:a6ecb51133912a7af6b1d5fb36e85afd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Struct to storing MDTP data. See documentation for MDTP protocol.  <br /></td></tr>
+<tr class="separator:a6ecb51133912a7af6b1d5fb36e85afd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e4290d7256e6cc653dcfa9432021ace" id="r_a6e4290d7256e6cc653dcfa9432021ace"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structsmu__server_1_1ABI__MODULE__CONTEXT.html">smu_server::ABI_MODULE_CONTEXT</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesmu__server.html#a6e4290d7256e6cc653dcfa9432021ace">smu_server::ABI_MODULE_CONTEXT</a></td></tr>
+<tr class="memdesc:a6e4290d7256e6cc653dcfa9432021ace"><td class="mdescLeft">&#160;</td><td class="mdescRight">Context of module.  <br /></td></tr>
+<tr class="separator:a6e4290d7256e6cc653dcfa9432021ace"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3fcd252d7d70819e8703929a9d07c39" id="r_af3fcd252d7d70819e8703929a9d07c39"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structsmu__server_1_1ABI__SERVER__CORE__FUNCTIONS.html">smu_server::ABI_SERVER_CORE_FUNCTIONS</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesmu__server.html#af3fcd252d7d70819e8703929a9d07c39">smu_server::ABI_SERVER_CORE_FUNCTIONS</a></td></tr>
+<tr class="memdesc:af3fcd252d7d70819e8703929a9d07c39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Functions provided by the server for the module.  <br /></td></tr>
+<tr class="separator:af3fcd252d7d70819e8703929a9d07c39"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83ef59cf95fa02cfd3291e1e0aeecea9" id="r_a83ef59cf95fa02cfd3291e1e0aeecea9"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structsmu__server_1_1ABI__MODULE__FUNCTIONS.html">ABI_MODULE_FUNCTIONS</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesmu__server.html#a83ef59cf95fa02cfd3291e1e0aeecea9">smu_server::ABI_MODULE_FUNCTIONS</a></td></tr>
+<tr class="memdesc:a83ef59cf95fa02cfd3291e1e0aeecea9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forward declaration.  <br /></td></tr>
+<tr class="separator:a83ef59cf95fa02cfd3291e1e0aeecea9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a53f3ba249e0d9599285f409d92c37e4f" id="r_a53f3ba249e0d9599285f409d92c37e4f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesmu__server.html#a53f3ba249e0d9599285f409d92c37e4f">smu_server::abi_get_abi_version</a> (<a class="el" href="structsmu__server_1_1ABI__CONTEXT.html">ABI_CONTEXT</a> *)</td></tr>
-<tr class="memdesc:a53f3ba249e0d9599285f409d92c37e4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">C-callabe function for obtaining the ABI version.  <br /></td></tr>
-<tr class="separator:a53f3ba249e0d9599285f409d92c37e4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9fe52ec6b8691f1aa8bfda6a403c10e7" id="r_a9fe52ec6b8691f1aa8bfda6a403c10e7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesmu__server.html#a9fe52ec6b8691f1aa8bfda6a403c10e7">smu_server::abi_log</a> (<a class="el" href="structsmu__server_1_1ABI__CONTEXT.html">ABI_CONTEXT</a> *context, int log_type, const char *message)</td></tr>
-<tr class="memdesc:a9fe52ec6b8691f1aa8bfda6a403c10e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">C-callabe function for logging.  <br /></td></tr>
-<tr class="separator:a9fe52ec6b8691f1aa8bfda6a403c10e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8bb1c037696ec7749b7c5a3522767c1" id="r_aa8bb1c037696ec7749b7c5a3522767c1"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesmu__server.html#aa8bb1c037696ec7749b7c5a3522767c1">smu_server::abi_get_abi_version</a> (const <a class="el" href="structsmu__server_1_1ABI__MODULE__CONTEXT.html">ABI_MODULE_CONTEXT</a> *)</td></tr>
+<tr class="memdesc:aa8bb1c037696ec7749b7c5a3522767c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">C-callabe function for obtaining the ABI version.  <br /></td></tr>
+<tr class="separator:aa8bb1c037696ec7749b7c5a3522767c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5883310fbf5287e71a3d644853869ddf" id="r_a5883310fbf5287e71a3d644853869ddf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesmu__server.html#a5883310fbf5287e71a3d644853869ddf">smu_server::abi_log</a> (const <a class="el" href="structsmu__server_1_1ABI__MODULE__CONTEXT.html">ABI_MODULE_CONTEXT</a> *context, int log_type, const char *message)</td></tr>
+<tr class="memdesc:a5883310fbf5287e71a3d644853869ddf"><td class="mdescLeft">&#160;</td><td class="mdescRight">C-callabe function for logging.  <br /></td></tr>
+<tr class="separator:a5883310fbf5287e71a3d644853869ddf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>

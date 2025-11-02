@@ -9,9 +9,9 @@ var annotated_dup =
         [ "ProxyModule", "classsmu__server_1_1internals_1_1ProxyModule.html", "classsmu__server_1_1internals_1_1ProxyModule" ],
         [ "StringWrapper", "classsmu__server_1_1internals_1_1StringWrapper.html", "classsmu__server_1_1internals_1_1StringWrapper" ]
       ] ],
-      [ "ABI_CONTEXT", "structsmu__server_1_1ABI__CONTEXT.html", "structsmu__server_1_1ABI__CONTEXT" ],
-      [ "ABI_MDTP_DATA", "structsmu__server_1_1ABI__MDTP__DATA.html", "structsmu__server_1_1ABI__MDTP__DATA" ],
+      [ "ABI_MODULE_CONTEXT", "structsmu__server_1_1ABI__MODULE__CONTEXT.html", "structsmu__server_1_1ABI__MODULE__CONTEXT" ],
       [ "ABI_MODULE_FUNCTIONS", "structsmu__server_1_1ABI__MODULE__FUNCTIONS.html", "structsmu__server_1_1ABI__MODULE__FUNCTIONS" ],
+      [ "ABI_MODULE_MDTP_DATA", "structsmu__server_1_1ABI__MODULE__MDTP__DATA.html", "structsmu__server_1_1ABI__MODULE__MDTP__DATA" ],
       [ "ABI_SERVER_CORE_FUNCTIONS", "structsmu__server_1_1ABI__SERVER__CORE__FUNCTIONS.html", "structsmu__server_1_1ABI__SERVER__CORE__FUNCTIONS" ],
       [ "Application", "classsmu__server_1_1Application.html", "classsmu__server_1_1Application" ],
       [ "CLI", "classsmu__server_1_1CLI.html", "classsmu__server_1_1CLI" ],

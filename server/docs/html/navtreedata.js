@@ -25,10 +25,13 @@
 var NAVTREE =
 [
   [ "smu-server", "index.html", [
-    [ "How to build smu-server?", "index.html#autotoc_md32", null ],
-    [ "Usage", "index.html#autotoc_md33", null ],
-    [ "Problems after updating", "index.html#autotoc_md34", null ],
-    [ "Conclusion", "index.html#autotoc_md35", null ],
+    [ "List of external modules", "index.html#autotoc_md32", null ],
+    [ "List of built-in modules", "index.html#autotoc_md33", null ],
+    [ "How to build smu-server?", "index.html#autotoc_md34", null ],
+    [ "Building SDK", "index.html#autotoc_md35", null ],
+    [ "Usage", "index.html#autotoc_md36", null ],
+    [ "Problems after updating", "index.html#autotoc_md37", null ],
+    [ "Conclusion", "index.html#autotoc_md38", null ],
     [ "Developer Guide", "md_for-developers_2beginning.html", null ],
     [ "Developing Your Own Module", "md_for-developers_2modules_21__own__module.html", [
       [ "Getting Started. General Concept", "md_for-developers_2modules_21__own__module.html#autotoc_md3", null ],
@@ -63,7 +66,8 @@ var NAVTREE =
       [ "Namespace Members", "namespacemembers.html", [
         [ "All", "namespacemembers.html", null ],
         [ "Functions", "namespacemembers_func.html", null ],
-        [ "Variables", "namespacemembers_vars.html", null ]
+        [ "Variables", "namespacemembers_vars.html", null ],
+        [ "Typedefs", "namespacemembers_type.html", null ]
       ] ]
     ] ],
     [ "Classes", "annotated.html", [
@@ -91,7 +95,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "abi_8hpp.html",
-"classsmu__server_1_1internals_1_1ProxyModule.html#a36b6641cdd0b73a935b6733323d11413"
+"classsmu__server_1_1internals_1_1MetricValueNode.html#aa4b0cf35997500b03adca3e4597868e1"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -373,7 +373,9 @@ Friends</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Method for obtaining module configuration. </p>
-<dl class="section return"><dt>Returns</dt><dd><code>Json::Value&amp;</code> </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><code>const <a class="el" href="classsmu__server_1_1Config.html" title="Thread-safe wrapper for storing Json configs.">Config</a>&amp;</code> </dd></dl>
+
+<p>Reimplemented in <a class="el" href="classsmu__server_1_1internals_1_1ProxyModule.html#a9e99f7dc5c27b59ece65970b5ac9e6b4">smu_server::internals::ProxyModule</a>.</p>
 
 </div>
 </div>
@@ -407,7 +409,7 @@ Friends</h2></td></tr>
 <a class="el" href="namespacesmu__server.html#a0290ea5f19c20a5ad90d4837a627fb88" title="Creates a node that contains other nodes.">make_container_node</a> </dd>
 <dd>
 <a class="el" href="namespacesmu__server.html#a219dae7d70a890e3fb0740451fbf5dbe" title="Creates a node with the value.">make_value_node</a> </dd></dl>
-<dl class="section return"><dt>Returns</dt><dd><code>std::vector&lt;uint8_t&gt;</code> with bytes in MDTP protocol </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><code>std::optional&lt;std::vector&lt;uint8_t&gt;&gt;</code> with bytes in MDTP protocol </dd></dl>
 
 <p>Implemented in <a class="el" href="classsmu__server_1_1internals_1_1ProxyModule.html#a53b47e1ece4c50bb555ed9bf7a261644">smu_server::internals::ProxyModule</a>, <a class="el" href="classsmu__server_1_1DMI.html#acffc25ae5111d6f71192e6920d385681">smu_server::DMI</a>, and <a class="el" href="classsmu__server_1_1RAM.html#a6af2977519ce7e24319d689382fc7fa9">smu_server::RAM</a>.</p>
 
@@ -469,6 +471,8 @@ Friends</h2></td></tr>
 
 <p>Is module enabled. </p>
 <dl class="section return"><dt>Returns</dt><dd><code>true</code> if module is enabled, otherwise <code>false</code> </dd></dl>
+
+<p>Reimplemented in <a class="el" href="classsmu__server_1_1internals_1_1ProxyModule.html#a974b6a605ebcae8e4d58b1b4960ab1e1">smu_server::internals::ProxyModule</a>.</p>
 
 </div>
 </div>

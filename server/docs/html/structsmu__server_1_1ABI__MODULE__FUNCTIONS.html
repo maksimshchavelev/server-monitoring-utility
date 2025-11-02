@@ -106,86 +106,62 @@ Collaboration diagram for smu_server::ABI_MODULE_FUNCTIONS:</div>
 <div class="dyncontent">
 <div class="center"><img src="structsmu__server_1_1ABI__MODULE__FUNCTIONS__coll__graph.png" border="0" usemap="#asmu__server_1_1ABI__MODULE__FUNCTIONS_coll__map" alt="Collaboration graph"/></div>
 <map name="asmu__server_1_1ABI__MODULE__FUNCTIONS_coll__map" id="asmu__server_1_1ABI__MODULE__FUNCTIONS_coll__map">
-<area shape="rect" title="Functions of the module that calls the server core." alt="" coords="405,63,597,103"/>
-<area shape="rect" href="structsmu__server_1_1ABI__SERVER__CORE__FUNCTIONS.html" title="Functions provided by the server for the module." alt="" coords="19,5,206,45"/>
-<area shape="poly" title=" " alt="" coords="220,37,382,60,405,64,404,69,381,65,219,42"/>
-<area shape="rect" href="structsmu__server_1_1ABI__MDTP__DATA.html" title="Struct to storing MDTP data. See documentation for MDTP protocol." alt="" coords="5,70,220,95"/>
-<area shape="poly" title=" " alt="" coords="234,80,405,80,405,85,234,85"/>
-<area shape="rect" href="structsmu__server_1_1ABI__CONTEXT.html" title="The context in which the module calls server core functions." alt="" coords="14,119,211,145"/>
-<area shape="poly" title=" " alt="" coords="225,119,381,100,404,97,405,102,382,105,226,124"/>
+<area shape="rect" title="Functions of the module that calls the server core." alt="" coords="5,108,197,148"/>
+<area shape="poly" title=" " alt="" coords="212,119,224,128,216,136,198,139,197,134,214,131,219,128,209,124"/>
+<area shape="rect" href="structsmu__server_1_1ABI__MODULE__MDTP__DATA.html" title="Struct to storing MDTP data. See documentation for MDTP protocol." alt="" coords="5,5,197,45"/>
+<area shape="poly" title=" " alt="" coords="104,59,104,108,99,108,99,59"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a03f3adb53aa1b644448d64dce04cfcc9" id="r_a03f3adb53aa1b644448d64dce04cfcc9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structsmu__server_1_1ABI__SERVER__CORE__FUNCTIONS.html">ABI_SERVER_CORE_FUNCTIONS</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsmu__server_1_1ABI__MODULE__FUNCTIONS.html#a03f3adb53aa1b644448d64dce04cfcc9">server_functions</a></td></tr>
-<tr class="separator:a03f3adb53aa1b644448d64dce04cfcc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a29a96182ce00acb288ad49acf3a30a53" id="r_a29a96182ce00acb288ad49acf3a30a53"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structsmu__server_1_1ABI__SERVER__CORE__FUNCTIONS.html">ABI_SERVER_CORE_FUNCTIONS</a> const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsmu__server_1_1ABI__MODULE__FUNCTIONS.html#a29a96182ce00acb288ad49acf3a30a53">json_configuration</a></td></tr>
-<tr class="memdesc:a29a96182ce00acb288ad49acf3a30a53"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes module.  <br /></td></tr>
-<tr class="separator:a29a96182ce00acb288ad49acf3a30a53"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9eb7f4bad55df129f0f7d5a2cef7e93f" id="r_a9eb7f4bad55df129f0f7d5a2cef7e93f"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsmu__server_1_1ABI__MODULE__FUNCTIONS.html#a9eb7f4bad55df129f0f7d5a2cef7e93f">module_destroy</a> )()</td></tr>
-<tr class="memdesc:a9eb7f4bad55df129f0f7d5a2cef7e93f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys module.  <br /></td></tr>
-<tr class="separator:a9eb7f4bad55df129f0f7d5a2cef7e93f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad1ccfd426ed7b9823c89e27ef45b7c67" id="r_ad1ccfd426ed7b9823c89e27ef45b7c67"><td class="memItemLeft" align="right" valign="top">const char *(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsmu__server_1_1ABI__MODULE__FUNCTIONS.html#ad1ccfd426ed7b9823c89e27ef45b7c67">module_get_configuraion</a> )()</td></tr>
-<tr class="memdesc:ad1ccfd426ed7b9823c89e27ef45b7c67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get module json configuration.  <br /></td></tr>
-<tr class="separator:ad1ccfd426ed7b9823c89e27ef45b7c67"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af093509565cd19dc3182bdcfc7e8b625" id="r_af093509565cd19dc3182bdcfc7e8b625"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structsmu__server_1_1ABI__MDTP__DATA.html">ABI_MDTP_DATA</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsmu__server_1_1ABI__MODULE__FUNCTIONS.html#af093509565cd19dc3182bdcfc7e8b625">module_get_data</a> )()</td></tr>
-<tr class="memdesc:af093509565cd19dc3182bdcfc7e8b625"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get MDTP module data.  <br /></td></tr>
-<tr class="separator:af093509565cd19dc3182bdcfc7e8b625"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac99862501d63d336720683ced97ac53a" id="r_ac99862501d63d336720683ced97ac53a"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsmu__server_1_1ABI__MODULE__FUNCTIONS.html#ac99862501d63d336720683ced97ac53a">module_enable</a> )()</td></tr>
-<tr class="memdesc:ac99862501d63d336720683ced97ac53a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables a module.  <br /></td></tr>
-<tr class="separator:ac99862501d63d336720683ced97ac53a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad8af95ef4985464c3f468eafdc6679d7" id="r_ad8af95ef4985464c3f468eafdc6679d7"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsmu__server_1_1ABI__MODULE__FUNCTIONS.html#ad8af95ef4985464c3f468eafdc6679d7">module_disable</a> )()</td></tr>
-<tr class="memdesc:ad8af95ef4985464c3f468eafdc6679d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disables a module.  <br /></td></tr>
-<tr class="separator:ad8af95ef4985464c3f468eafdc6679d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a63c1559e18a44de97b2ccb7b65d84ad2" id="r_a63c1559e18a44de97b2ccb7b65d84ad2"><td class="memItemLeft" align="right" valign="top">bool(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsmu__server_1_1ABI__MODULE__FUNCTIONS.html#a63c1559e18a44de97b2ccb7b65d84ad2">module_is_enabled</a> )()</td></tr>
-<tr class="memdesc:a63c1559e18a44de97b2ccb7b65d84ad2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is module enabled (true/false)  <br /></td></tr>
-<tr class="separator:a63c1559e18a44de97b2ccb7b65d84ad2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a487c2aebb46eceb5d149b6c25086a0b1" id="r_a487c2aebb46eceb5d149b6c25086a0b1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structsmu__server_1_1ABI__MODULE__FUNCTIONS.html">ABI_MODULE_FUNCTIONS</a> *(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsmu__server_1_1ABI__MODULE__FUNCTIONS.html#a487c2aebb46eceb5d149b6c25086a0b1">module_init</a> )(<a class="el" href="structsmu__server_1_1ABI__SERVER__CORE__FUNCTIONS.html">ABI_SERVER_CORE_FUNCTIONS</a> server_functions, const char *json_configuration)</td></tr>
+<tr class="memdesc:a487c2aebb46eceb5d149b6c25086a0b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes module.  <br /></td></tr>
+<tr class="separator:a487c2aebb46eceb5d149b6c25086a0b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7d6f8c71226b7e08d62c01a21479a28" id="r_ad7d6f8c71226b7e08d62c01a21479a28"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsmu__server_1_1ABI__MODULE__FUNCTIONS.html#ad7d6f8c71226b7e08d62c01a21479a28">module_destroy</a> )(void)</td></tr>
+<tr class="memdesc:ad7d6f8c71226b7e08d62c01a21479a28"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys module.  <br /></td></tr>
+<tr class="separator:ad7d6f8c71226b7e08d62c01a21479a28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91f9557fd3bc63de9ad650752cf2fbce" id="r_a91f9557fd3bc63de9ad650752cf2fbce"><td class="memItemLeft" align="right" valign="top">const char *(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsmu__server_1_1ABI__MODULE__FUNCTIONS.html#a91f9557fd3bc63de9ad650752cf2fbce">module_get_configuration</a> )(void)</td></tr>
+<tr class="memdesc:a91f9557fd3bc63de9ad650752cf2fbce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get module json configuration.  <br /></td></tr>
+<tr class="separator:a91f9557fd3bc63de9ad650752cf2fbce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b221c43802f50f9ca7f5cae6f8468a1" id="r_a7b221c43802f50f9ca7f5cae6f8468a1"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structsmu__server_1_1ABI__MODULE__MDTP__DATA.html">ABI_MODULE_MDTP_DATA</a> *(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsmu__server_1_1ABI__MODULE__FUNCTIONS.html#a7b221c43802f50f9ca7f5cae6f8468a1">module_get_data</a> )(void)</td></tr>
+<tr class="memdesc:a7b221c43802f50f9ca7f5cae6f8468a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get MDTP module data.  <br /></td></tr>
+<tr class="separator:a7b221c43802f50f9ca7f5cae6f8468a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe5cf486761613fe4621e6fdbae1dea5" id="r_afe5cf486761613fe4621e6fdbae1dea5"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsmu__server_1_1ABI__MODULE__FUNCTIONS.html#afe5cf486761613fe4621e6fdbae1dea5">module_enable</a> )(void)</td></tr>
+<tr class="memdesc:afe5cf486761613fe4621e6fdbae1dea5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables a module.  <br /></td></tr>
+<tr class="separator:afe5cf486761613fe4621e6fdbae1dea5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3cb745c76bf679170b6a7363a68508ab" id="r_a3cb745c76bf679170b6a7363a68508ab"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsmu__server_1_1ABI__MODULE__FUNCTIONS.html#a3cb745c76bf679170b6a7363a68508ab">module_disable</a> )(void)</td></tr>
+<tr class="memdesc:a3cb745c76bf679170b6a7363a68508ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disables a module.  <br /></td></tr>
+<tr class="separator:a3cb745c76bf679170b6a7363a68508ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0d8e1df3e8a37ecb8ab9f9c136cce13" id="r_ab0d8e1df3e8a37ecb8ab9f9c136cce13"><td class="memItemLeft" align="right" valign="top">uint8_t(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsmu__server_1_1ABI__MODULE__FUNCTIONS.html#ab0d8e1df3e8a37ecb8ab9f9c136cce13">module_is_enabled</a> )(void)</td></tr>
+<tr class="memdesc:ab0d8e1df3e8a37ecb8ab9f9c136cce13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is module enabled (true/false)  <br /></td></tr>
+<tr class="separator:ab0d8e1df3e8a37ecb8ab9f9c136cce13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5151ec5a1bd82443e356a1746205e16" id="r_ab5151ec5a1bd82443e356a1746205e16"><td class="memItemLeft" align="right" valign="top">const char *(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsmu__server_1_1ABI__MODULE__FUNCTIONS.html#ab5151ec5a1bd82443e356a1746205e16">module_get_module_name</a> )(void)</td></tr>
+<tr class="memdesc:ab5151ec5a1bd82443e356a1746205e16"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get module name.  <br /></td></tr>
+<tr class="separator:ab5151ec5a1bd82443e356a1746205e16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08497cce0beda2ed39e8de7f1af75ebe" id="r_a08497cce0beda2ed39e8de7f1af75ebe"><td class="memItemLeft" align="right" valign="top">const char *(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsmu__server_1_1ABI__MODULE__FUNCTIONS.html#a08497cce0beda2ed39e8de7f1af75ebe">module_get_module_description</a> )(void)</td></tr>
+<tr class="memdesc:a08497cce0beda2ed39e8de7f1af75ebe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get module description.  <br /></td></tr>
+<tr class="separator:a08497cce0beda2ed39e8de7f1af75ebe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac23f775550356214ef792eac8b21edfb" id="r_ac23f775550356214ef792eac8b21edfb"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsmu__server_1_1ABI__MODULE__FUNCTIONS.html#ac23f775550356214ef792eac8b21edfb">module_set_poll_ratio</a> )(uint32_t poll_ratio)</td></tr>
-<tr class="memdesc:ac23f775550356214ef792eac8b21edfb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set poll ratio of module.  <br /></td></tr>
+<tr class="memdesc:ac23f775550356214ef792eac8b21edfb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the poll ratio of module.  <br /></td></tr>
 <tr class="separator:ac23f775550356214ef792eac8b21edfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae0043163015664b88ef17d262989ea0d" id="r_ae0043163015664b88ef17d262989ea0d"><td class="memItemLeft" align="right" valign="top">uint32_t(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsmu__server_1_1ABI__MODULE__FUNCTIONS.html#ae0043163015664b88ef17d262989ea0d">module_get_poll_ratio</a> )()</td></tr>
-<tr class="memdesc:ae0043163015664b88ef17d262989ea0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get poll ratio of mobule.  <br /></td></tr>
-<tr class="separator:ae0043163015664b88ef17d262989ea0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8b8415778a86ca21c977ddb4407528e7" id="r_a8b8415778a86ca21c977ddb4407528e7"><td class="memItemLeft" align="right" valign="top">const char *(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsmu__server_1_1ABI__MODULE__FUNCTIONS.html#a8b8415778a86ca21c977ddb4407528e7">module_get_module_name</a> )()</td></tr>
-<tr class="memdesc:a8b8415778a86ca21c977ddb4407528e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get module name.  <br /></td></tr>
-<tr class="separator:a8b8415778a86ca21c977ddb4407528e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8d96857ca995005fb166e0453a181c6a" id="r_a8d96857ca995005fb166e0453a181c6a"><td class="memItemLeft" align="right" valign="top">const char *(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsmu__server_1_1ABI__MODULE__FUNCTIONS.html#a8d96857ca995005fb166e0453a181c6a">module_get_module_description</a> )()</td></tr>
-<tr class="memdesc:a8d96857ca995005fb166e0453a181c6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get module description.  <br /></td></tr>
-<tr class="separator:a8d96857ca995005fb166e0453a181c6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ade2137a821b8d877d842b627d8367616" id="r_ade2137a821b8d877d842b627d8367616"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structsmu__server_1_1ABI__CONTEXT.html">ABI_CONTEXT</a> *(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsmu__server_1_1ABI__MODULE__FUNCTIONS.html#ade2137a821b8d877d842b627d8367616">module_get_context</a> )()</td></tr>
-<tr class="memdesc:ade2137a821b8d877d842b627d8367616"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get context of module. See <code><a class="el" href="structsmu__server_1_1ABI__CONTEXT.html" title="The context in which the module calls server core functions.">ABI_CONTEXT</a></code>  <br /></td></tr>
-<tr class="separator:ade2137a821b8d877d842b627d8367616"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c8a31f0ad8937d173f1f36dec807cc2" id="r_a1c8a31f0ad8937d173f1f36dec807cc2"><td class="memItemLeft" align="right" valign="top">uint32_t(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsmu__server_1_1ABI__MODULE__FUNCTIONS.html#a1c8a31f0ad8937d173f1f36dec807cc2">module_get_poll_ratio</a> )(void)</td></tr>
+<tr class="memdesc:a1c8a31f0ad8937d173f1f36dec807cc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get poll ratio of module.  <br /></td></tr>
+<tr class="separator:a1c8a31f0ad8937d173f1f36dec807cc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Functions of the module that calls the server core. </p>
 <dl class="section warning"><dt>Warning</dt><dd>If functions that return a pointer return <code>NULL</code>, it means that an error has occurred.</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>This is a packaged structure. </dd></dl>
 </div><h2 class="groupheader">Member Data Documentation</h2>
-<a id="a29a96182ce00acb288ad49acf3a30a53" name="a29a96182ce00acb288ad49acf3a30a53"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a29a96182ce00acb288ad49acf3a30a53">&#9670;&#160;</a></span>json_configuration</h2>
+<a id="ad7d6f8c71226b7e08d62c01a21479a28" name="ad7d6f8c71226b7e08d62c01a21479a28"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad7d6f8c71226b7e08d62c01a21479a28">&#9670;&#160;</a></span>module_destroy</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structsmu__server_1_1ABI__SERVER__CORE__FUNCTIONS.html">ABI_SERVER_CORE_FUNCTIONS</a> const char* smu_server::ABI_MODULE_FUNCTIONS::json_configuration</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Initializes module. </p>
-
-</div>
-</div>
-<a id="a9eb7f4bad55df129f0f7d5a2cef7e93f" name="a9eb7f4bad55df129f0f7d5a2cef7e93f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9eb7f4bad55df129f0f7d5a2cef7e93f">&#9670;&#160;</a></span>module_destroy</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void(* smu_server::ABI_MODULE_FUNCTIONS::module_destroy) ()</td>
+          <td class="memname">void(* smu_server::ABI_MODULE_FUNCTIONS::module_destroy) (void)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -194,14 +170,14 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ad8af95ef4985464c3f468eafdc6679d7" name="ad8af95ef4985464c3f468eafdc6679d7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad8af95ef4985464c3f468eafdc6679d7">&#9670;&#160;</a></span>module_disable</h2>
+<a id="a3cb745c76bf679170b6a7363a68508ab" name="a3cb745c76bf679170b6a7363a68508ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3cb745c76bf679170b6a7363a68508ab">&#9670;&#160;</a></span>module_disable</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void(* smu_server::ABI_MODULE_FUNCTIONS::module_disable) ()</td>
+          <td class="memname">void(* smu_server::ABI_MODULE_FUNCTIONS::module_disable) (void)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -210,14 +186,14 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ac99862501d63d336720683ced97ac53a" name="ac99862501d63d336720683ced97ac53a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac99862501d63d336720683ced97ac53a">&#9670;&#160;</a></span>module_enable</h2>
+<a id="afe5cf486761613fe4621e6fdbae1dea5" name="afe5cf486761613fe4621e6fdbae1dea5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe5cf486761613fe4621e6fdbae1dea5">&#9670;&#160;</a></span>module_enable</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void(* smu_server::ABI_MODULE_FUNCTIONS::module_enable) ()</td>
+          <td class="memname">void(* smu_server::ABI_MODULE_FUNCTIONS::module_enable) (void)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -226,14 +202,14 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ad1ccfd426ed7b9823c89e27ef45b7c67" name="ad1ccfd426ed7b9823c89e27ef45b7c67"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad1ccfd426ed7b9823c89e27ef45b7c67">&#9670;&#160;</a></span>module_get_configuraion</h2>
+<a id="a91f9557fd3bc63de9ad650752cf2fbce" name="a91f9557fd3bc63de9ad650752cf2fbce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91f9557fd3bc63de9ad650752cf2fbce">&#9670;&#160;</a></span>module_get_configuration</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const char *(* smu_server::ABI_MODULE_FUNCTIONS::module_get_configuraion) ()</td>
+          <td class="memname">const char *(* smu_server::ABI_MODULE_FUNCTIONS::module_get_configuration) (void)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -242,30 +218,14 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ade2137a821b8d877d842b627d8367616" name="ade2137a821b8d877d842b627d8367616"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ade2137a821b8d877d842b627d8367616">&#9670;&#160;</a></span>module_get_context</h2>
+<a id="a7b221c43802f50f9ca7f5cae6f8468a1" name="a7b221c43802f50f9ca7f5cae6f8468a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b221c43802f50f9ca7f5cae6f8468a1">&#9670;&#160;</a></span>module_get_data</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structsmu__server_1_1ABI__CONTEXT.html">ABI_CONTEXT</a> *(* smu_server::ABI_MODULE_FUNCTIONS::module_get_context) ()</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Get context of module. See <code><a class="el" href="structsmu__server_1_1ABI__CONTEXT.html" title="The context in which the module calls server core functions.">ABI_CONTEXT</a></code> </p>
-
-</div>
-</div>
-<a id="af093509565cd19dc3182bdcfc7e8b625" name="af093509565cd19dc3182bdcfc7e8b625"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af093509565cd19dc3182bdcfc7e8b625">&#9670;&#160;</a></span>module_get_data</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structsmu__server_1_1ABI__MDTP__DATA.html">ABI_MDTP_DATA</a>(* smu_server::ABI_MODULE_FUNCTIONS::module_get_data) ()</td>
+          <td class="memname">const <a class="el" href="structsmu__server_1_1ABI__MODULE__MDTP__DATA.html">ABI_MODULE_MDTP_DATA</a> *(* smu_server::ABI_MODULE_FUNCTIONS::module_get_data) (void)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -274,14 +234,14 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a8d96857ca995005fb166e0453a181c6a" name="a8d96857ca995005fb166e0453a181c6a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8d96857ca995005fb166e0453a181c6a">&#9670;&#160;</a></span>module_get_module_description</h2>
+<a id="a08497cce0beda2ed39e8de7f1af75ebe" name="a08497cce0beda2ed39e8de7f1af75ebe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08497cce0beda2ed39e8de7f1af75ebe">&#9670;&#160;</a></span>module_get_module_description</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const char *(* smu_server::ABI_MODULE_FUNCTIONS::module_get_module_description) ()</td>
+          <td class="memname">const char *(* smu_server::ABI_MODULE_FUNCTIONS::module_get_module_description) (void)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -290,14 +250,14 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a8b8415778a86ca21c977ddb4407528e7" name="a8b8415778a86ca21c977ddb4407528e7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8b8415778a86ca21c977ddb4407528e7">&#9670;&#160;</a></span>module_get_module_name</h2>
+<a id="ab5151ec5a1bd82443e356a1746205e16" name="ab5151ec5a1bd82443e356a1746205e16"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5151ec5a1bd82443e356a1746205e16">&#9670;&#160;</a></span>module_get_module_name</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const char *(* smu_server::ABI_MODULE_FUNCTIONS::module_get_module_name) ()</td>
+          <td class="memname">const char *(* smu_server::ABI_MODULE_FUNCTIONS::module_get_module_name) (void)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -306,30 +266,46 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ae0043163015664b88ef17d262989ea0d" name="ae0043163015664b88ef17d262989ea0d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae0043163015664b88ef17d262989ea0d">&#9670;&#160;</a></span>module_get_poll_ratio</h2>
+<a id="a1c8a31f0ad8937d173f1f36dec807cc2" name="a1c8a31f0ad8937d173f1f36dec807cc2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c8a31f0ad8937d173f1f36dec807cc2">&#9670;&#160;</a></span>module_get_poll_ratio</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t(* smu_server::ABI_MODULE_FUNCTIONS::module_get_poll_ratio) ()</td>
+          <td class="memname">uint32_t(* smu_server::ABI_MODULE_FUNCTIONS::module_get_poll_ratio) (void)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Get poll ratio of mobule. </p>
+<p>Get poll ratio of module. </p>
 
 </div>
 </div>
-<a id="a63c1559e18a44de97b2ccb7b65d84ad2" name="a63c1559e18a44de97b2ccb7b65d84ad2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a63c1559e18a44de97b2ccb7b65d84ad2">&#9670;&#160;</a></span>module_is_enabled</h2>
+<a id="a487c2aebb46eceb5d149b6c25086a0b1" name="a487c2aebb46eceb5d149b6c25086a0b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a487c2aebb46eceb5d149b6c25086a0b1">&#9670;&#160;</a></span>module_init</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool(* smu_server::ABI_MODULE_FUNCTIONS::module_is_enabled) ()</td>
+          <td class="memname"><a class="el" href="structsmu__server_1_1ABI__MODULE__FUNCTIONS.html">ABI_MODULE_FUNCTIONS</a> *(* smu_server::ABI_MODULE_FUNCTIONS::module_init) (<a class="el" href="structsmu__server_1_1ABI__SERVER__CORE__FUNCTIONS.html">ABI_SERVER_CORE_FUNCTIONS</a> server_functions, const char *json_configuration)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initializes module. </p>
+
+</div>
+</div>
+<a id="ab0d8e1df3e8a37ecb8ab9f9c136cce13" name="ab0d8e1df3e8a37ecb8ab9f9c136cce13"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0d8e1df3e8a37ecb8ab9f9c136cce13">&#9670;&#160;</a></span>module_is_enabled</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t(* smu_server::ABI_MODULE_FUNCTIONS::module_is_enabled) (void)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -350,21 +326,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Set poll ratio of module. </p>
-
-</div>
-</div>
-<a id="a03f3adb53aa1b644448d64dce04cfcc9" name="a03f3adb53aa1b644448d64dce04cfcc9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a03f3adb53aa1b644448d64dce04cfcc9">&#9670;&#160;</a></span>server_functions</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structsmu__server_1_1ABI__SERVER__CORE__FUNCTIONS.html">ABI_SERVER_CORE_FUNCTIONS</a> smu_server::ABI_MODULE_FUNCTIONS::server_functions</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
+<p>Set the poll ratio of module. </p>
 
 </div>
 </div>

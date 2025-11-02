@@ -12,6 +12,7 @@ var searchData=
   ['example_203_3a_20complex_20container_20with_20multiple_20subsystems_9',['Example 3: Complex container with multiple subsystems',['../md_for-developers_2modules_24__mdtp.html#autotoc_md30',1,'']]],
   ['example_20usage_10',['Example usage',['../namespacesmu__server_1_1internals.html#example_usage',1,'']]],
   ['examples_11',['Examples',['../md_for-developers_2modules_24__mdtp.html#autotoc_md27',1,'']]],
-  ['external_5fmodule_5floader_2ehpp_12',['external_module_loader.hpp',['../external__module__loader_8hpp.html',1,'']]],
-  ['externalmoduleloader_13',['ExternalModuleLoader',['../classsmu__server_1_1ExternalModuleLoader.html',1,'smu_server']]]
+  ['external_20modules_12',['List of external modules',['../index.html#autotoc_md32',1,'']]],
+  ['external_5fmodule_5floader_2ehpp_13',['external_module_loader.hpp',['../external__module__loader_8hpp.html',1,'']]],
+  ['externalmoduleloader_14',['ExternalModuleLoader',['../classsmu__server_1_1ExternalModuleLoader.html',1,'smu_server']]]
 ];
