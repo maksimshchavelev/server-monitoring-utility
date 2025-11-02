@@ -9,3 +9,17 @@ analyze_cli.sh linguist-vendored
 analyze_client.sh linguist-vendored
 analyze_server.sh linguist-vendored
 server/scripts/build-sdk.sh linguist-vendored
+
+**/debian/** linguist-vendored
+**/scripts/** linguist-vendored
+**/build-scripts/** linguist-vendored
+
+**/postinst linguist-vendored
+**/preinst linguist-vendored
+**/prerm linguist-vendored
+**/postrm linguist-vendored
+**/configure linguist-vendored
+**/config.status linguist-vendored
+
+*.sh linguist-vendored
+*.bash linguist-vendored
