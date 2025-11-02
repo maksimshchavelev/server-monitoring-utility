@@ -48,6 +48,22 @@ Now just install the resulting package.
 
 > If installed via a package manager, a systemd service script will be installed, systemd will reload, and `smu-server` will start immediately. The service is called `smu-server` (you can manage it via `systemd`).
 
+
+## Building SDK
+
+
+If you want to use external modules, you need to build the SDK. You can do this by running the following command *after building the server part* (everything is built by default, which is also fine):
+```
+cmake --build . --target sdk
+```
+After executing the command, look in `build/sdk-build/` (the detailed path will be specified after executing the command), where you will see two packages (the version will be specified):
+
+- `smu-server-sdk.deb`
+- `smu-server-sdk-dev.deb`
+
+> In fact, no SDK build in the usual sense takes place. The compiled artifacts are downloaded from the SDK repositories and recompiled into two packages.
+
+
 ## Usage
 
 > `smu-server` comes with a CLI tool that allows you to configure the server without directly editing config files. This method is preferred (see the CLI documentation for details). Below is a basic overview of the config structure, which is also worth reading.
