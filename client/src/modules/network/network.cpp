@@ -20,7 +20,7 @@ Network::Network(const Settings& settings) : m_settings(settings) {}
 
 
 // Public method
-void Network::run(std::function<void(const std::string&)> on_message,
+void Network::run(std::function<void(const std::vector<uint8_t>&)> on_message,
                   std::function<void(const std::string&)> on_connection_error) {
 
     const std::string path_to_cert =
@@ -47,8 +47,9 @@ void Network::run(std::function<void(const std::string&)> on_message,
 
     m_connection->setOnMessageCallback(
         [on_message, on_connection_error](const ix::WebSocketMessagePtr& msg) {
-            if (msg->type == ix::WebSocketMessageType::Message) {
-                on_message(msg->str);
+            if (msg->type == ix::WebSocketMessageType::Message && msg->binary) {
+                const auto& msg_str = msg->str;
+                on_message(std::vector<uint8_t>(msg_str.begin(), msg_str.end()));
             }
             // If connection error
             else if (msg->type == ix::WebSocketMessageType::Error) {

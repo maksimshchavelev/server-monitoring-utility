@@ -78,6 +78,8 @@ class Tabs : public ftxui::ComponentBase {
 
     std::size_t m_first_visible_header{0}; ///< First visible header in visible headers interval
     std::size_t m_last_visible_header{0};  ///< Last visible header in visible headers interval
+
+    bool m_focus_on_content{false}; /// If true, events go to right pane (tab content)
 };
 
 
