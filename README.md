@@ -53,6 +53,8 @@ smu 1.2.3.4
 
 > If you want to install **external modules** for the server, install the `smu-server-linux-amd64-external-modules.deb` and `smu-server-sdk.deb` packages from the page of the release you need. A list of external modules is provided in the [server documentation](https://maksimshchavelev.github.io/server-monitoring-utility/server/docs/html/index.html)
 
+> A list of built-in modules is provided in the [server documentation](https://maksimshchavelev.github.io/server-monitoring-utility/server/docs/html/index.html)
+
 
 ## Building from source
 First, you need `libjsoncpp-dev` installed. On Debian-based systems, install this library with the command:
