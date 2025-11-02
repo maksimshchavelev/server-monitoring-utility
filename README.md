@@ -93,6 +93,19 @@ For example:
 cmake .. -DBUILD_SERVER=OFF
 ```
 
+## Building SDK
+
+If you want to use external modules, you need to build the SDK. You can do this by running the following command *after building the server part* (everything is built by default, which is also fine):
+```
+cmake --build . --target sdk
+```
+After executing the command, look in `build/server-build/sdk-build/` (the detailed path will be specified after executing the command), where you will see two packages (the version will be specified):
+
+- `smu-server-sdk.deb`
+- `smu-server-sdk-dev.deb`
+
+> In fact, no SDK build in the usual sense takes place. The compiled artifacts are downloaded from the SDK repositories and recompiled into two packages.
+
 
 ## License
 
