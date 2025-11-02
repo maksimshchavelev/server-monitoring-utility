@@ -4,6 +4,22 @@ This component is one of the three parts of **smu** — the server monitoring sy
 
 Check the usage guide [here](#Usage). If you'd like to **contribute to the development** of smu-server, head over [here](for-developers/beginning.md).
 
+## List of external modules
+
+Modules allow you to monitor a specific group of metrics. For example, the CPU module monitors processor parameters. A list of **external** modules is provided below.
+
+| Module | Purpose |
+|--|--|
+| UPTIME | Monitoring system uptime |
+
+
+## List of built-in modules
+
+| Module | Purpose |
+|--|--|
+| RAM | RAM usage monitoring |
+| DMI | Information about the motherboard |
+
 ## How to build smu-server?
 
 First, clone the main repository and navigate to the `server` folder. For convenience, we will build it in a separate `build` directory (you'll need to create it — all commands below should be executed from the `build` directory).
