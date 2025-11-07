@@ -1,118 +1,67 @@
 cmake_minimum_required(VERSION 3.28 FATAL_ERROR)
 
-
 set(PROJECT_NAME smu)
 set(CMAKE_CXX_STANDARD 23)
-project(${PROJECT_NAME} NONE)
+project(${PROJECT_NAME} VERSION 1.0.0 LANGUAGES CXX)
 
+set(SDK_VERSION 1.0.0)
 
+# Build options
 option(BUILD_SERVER "Need to build server part?" ON)
 option(BUILD_CLIENT "Need to build client part?" ON)
 option(BUILD_CLI "Need to build CLI part?" ON)
 
+# Include packaging helpers and checks (do NOT initialize CPack yet)
+include(cmake/packaging.cmake)
+check_packaging_dependencies()
 
-include(ExternalProject)
+# Include other helpers
+include(cmake/compiler_options.cmake)
+include(cmake/dependencies.cmake)
 
-
+# Add subprojects
 if(BUILD_SERVER)
-  ExternalProject_Add(server
-    SOURCE_DIR ${CMAKE_SOURCE_DIR}/server
-    BINARY_DIR ${CMAKE_BINARY_DIR}/server-build
-    INSTALL_COMMAND ""
-    CMAKE_ARGS -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
-  )
-  add_custom_target(sdk
-    COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR}/server-build --target sdk
-    DEPENDS server
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    COMMENT "Building SDK target from server project"
-  )
-endif()
-
-
-if(BUILD_CLI)
-ExternalProject_Add(cli
-  SOURCE_DIR ${CMAKE_SOURCE_DIR}/cli
-  BINARY_DIR ${CMAKE_BINARY_DIR}/cli-build
-  INSTALL_COMMAND ""
-  CMAKE_ARGS -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
-)
-endif()
-
-
-if(BUILD_CLIENT)
-ExternalProject_Add(client
-  SOURCE_DIR ${CMAKE_SOURCE_DIR}/client
-  BINARY_DIR ${CMAKE_BINARY_DIR}/client-build
-  INSTALL_COMMAND ""
-  CMAKE_ARGS -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
-)
-endif()
-
-
-add_custom_target(build-all)
-
-
-if(BUILD_SERVER)
-    add_dependencies(build-all server)
+  add_subdirectory(server)
 endif()
 
 if(BUILD_CLI)
-    add_dependencies(build-all cli)
+  add_subdirectory(cli)
 endif()
 
 if(BUILD_CLIENT)
-    add_dependencies(build-all client)
+  add_subdirectory(client)
 endif()
 
 
+# Configure components for packaging — use component ids that match install(... COMPONENT ...)
+set(ALL_PACKAGE_COMPONENTS "")
 
-# Packaging settings
-set(PACKAGE_OUTPUT_DIR ${CMAKE_BINARY_DIR}/packages)
-file(MAKE_DIRECTORY ${PACKAGE_OUTPUT_DIR})
-
-add_custom_target(package-all
-  COMMENT "Building and collecting packages for server, cli and client"
-)
-
-
-function(add_subproject_package_target name)
-  set(build_dir ${CMAKE_BINARY_DIR}/${name}-build)
-
-  add_custom_target(${name}-package
-    COMMAND ${CMAKE_COMMAND} --build ${build_dir} --target package
-    COMMENT "Packaging ${name}"
-    WORKING_DIRECTORY ${build_dir}
-  )
-
-  add_custom_command(
-    TARGET ${name}-package POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different ${build_dir}/*.deb ${PACKAGE_OUTPUT_DIR}
-    COMMENT "Copying ${name} package to ${PACKAGE_OUTPUT_DIR}"
-  )
-
-  add_custom_target(${name}-all
-    DEPENDS ${name}-package
-  )
-
-  add_dependencies(package-all ${name}-all)
-endfunction()
-
-
-
+# Init packaging system
+initialize_packaging_system()
 
 if(BUILD_SERVER)
-  add_subproject_package_target(server)
+  list(APPEND ALL_PACKAGE_COMPONENTS "server")
+  if(BUILD_EXTERNAL_MODULES)
+    list(APPEND ALL_PACKAGE_COMPONENTS "external_modules")
+  endif()
 endif()
-
-
-if(BUILD_CLIENT)
-  add_subproject_package_target(client)
-endif()
-
 
 if(BUILD_CLI)
-  add_subproject_package_target(cli)
+  list(APPEND ALL_PACKAGE_COMPONENTS "smu-cli")
+endif()
+
+if(BUILD_CLIENT)
+  list(APPEND ALL_PACKAGE_COMPONENTS "smu")
 endif()
 
 
+# Create individual package targets with proper versions
+create_individual_package_targets(${ALL_PACKAGE_COMPONENTS})
+
+# Setup SDK packaging
+setup_sdk_packaging(${CMAKE_SOURCE_DIR}/server/scripts/build-sdk.sh ${SDK_VERSION})
+
+# Create final package-all target
+create_final_package_all()
+
+message(STATUS "Project configuration complete. Package targets: ${ALL_PACKAGE_COMPONENTS}")

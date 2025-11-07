@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 3.28 FATAL_ERROR)
 
 project(smu-server VERSION 1.0.0 LANGUAGES CXX)
-set(CMAKE_CXX_STANDARD 23)
 
 set(CMAKE_INSTALL_PREFIX /usr)
 
@@ -49,9 +48,6 @@ configure_file(
   @ONLY
 )
 
-include(FetchContent)
-
-message(STATUS "${PROJECT_NAME}: finding source files...")
 
 file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS
     ${CMAKE_CURRENT_LIST_DIR}/src/*.cpp
@@ -61,85 +57,24 @@ file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS
 list(LENGTH SOURCES SOURCES_SIZE)
 message(STATUS "${PROJECT_NAME}: found ${SOURCES_SIZE} sources")
 
-find_package(jsoncpp REQUIRED)
 
-message(STATUS "${PROJECT_NAME}: configuring Drogon...")
-
-# Disable uneccessary things for Drogon
-set(BUILD_CTL OFF)
-set(BUILD_EXAMPLES OFF)
-set(BUILD_SHARED_LIBS OFF)
-set(BUILD_ORM FALSE)
-set(DROGON_BUILD_STATIC ON)
-set(USE_STATIC_LIBS_ONLY TRUE)
-set(BUILD_POSTGRESQL FALSE)
-set(LIBPQ_BATCH_MODE FALSE)
-set(BUILD_MYSQL FALSE)
-set(BUILD_SQLITE FALSE)
-set(BUILD_REDIS FALSE)
-set(USE_SPDLOG FALSE)
-
-FetchContent_Declare(drogon
-    GIT_REPOSITORY https://github.com/drogonframework/drogon.git
-    GIT_TAG v1.9.11
-    EXCLUDE_FROM_ALL
-)
-FetchContent_Populate(drogon)
-add_subdirectory(${drogon_SOURCE_DIR} ${drogon_BINARY_DIR} EXCLUDE_FROM_ALL)
-
-message(STATUS "${PROJECT_NAME}: Configuration of Drogon is complete")
-message(STATUS "${PROJECT_NAME}: Configuring cxxopts...")
-
-FetchContent_Declare(
-  cxxopts
-  GIT_REPOSITORY https://github.com/jarro2783/cxxopts.git
-  GIT_TAG v3.3.1
-)
-FetchContent_Populate(cxxopts)
-add_subdirectory(${cxxopts_SOURCE_DIR} ${cxxopts_BINARY_DIR} EXCLUDE_FROM_ALL)
-
-message(STATUS "${PROJECT_NAME}: Configuration of cxxopts is complete")
-message(STATUS "${PROJECT_NAME}: Configuring target and includes...")
-
+# Setup target
 add_executable(${PROJECT_NAME} ${SOURCES})
-target_include_directories(${PROJECT_NAME} PRIVATE include)
+include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 target_link_libraries(${PROJECT_NAME} PRIVATE
     drogon
     jsoncpp_static
     cxxopts
 )
 
-target_compile_options(${PROJECT_NAME} PRIVATE
-  -pedantic
-  -Wall -Wextra
-  -Wnon-virtual-dtor
-  -Wold-style-cast
-  -Wcast-align
-  -Wunused
-  -Woverloaded-virtual
-  -Wpedantic
-  -Wconversion
-  -Wsign-conversion
-  -Wlogical-op
-  -Wuseless-cast
-)
+# Configuring dependencies
+find_package(jsoncpp REQUIRED)
+load_drogon()
+load_cxxopts()
 
-if(CMAKE_BUILD_TYPE STREQUAL "Release")
-  message(STATUS "Setting O3 optimization")
-  target_compile_options(${PROJECT_NAME} PRIVATE $<$<CONFIG:Release>:-O3>)
-endif()
+# Setup compiler
+target_setup_compiler_options(${PROJECT_NAME})
 
-# Enable sanitizers if Debug
-if((CMAKE_CXX_COMPILER_ID MATCHES "Clang|GNU") AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
-    message(STATUS "${PROJECT_NAME}: Using GCC/Clang sanitizer configuration")
-
-    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -Wextra -Wpedantic -g")
-    add_compile_definitions(_GLIBCXX_DEBUG)
-
-    set(SANITIZER_FLAGS "-fsanitize=address,undefined,leak -fno-omit-frame-pointer")
-    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} ${SANITIZER_FLAGS}")
-    set(CMAKE_EXE_LINKER_FLAGS_DEBUG "${CMAKE_EXE_LINKER_FLAGS_DEBUG} ${SANITIZER_FLAGS}")
-endif()
 
 # ========================== CONFIGURING EXTERNAL MODULES ==========================
 
@@ -217,6 +152,7 @@ if(BUILD_EXTERNAL_MODULES)
     )
   endforeach()
 endif()
+
 # ==================================================================================
 
 
@@ -264,97 +200,39 @@ configure_file(
   @ONLY
 )
 
-# Installation rules
-install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION bin COMPONENT server)
 
-# Install config files with proper component handling
+# Component packaging setup
+setup_server_component_packaging()
+
+# Installation with components
+install(TARGETS ${PROJECT_NAME}
+    RUNTIME DESTINATION bin
+    COMPONENT server
+)
+
+# Install config files
 install(
-  DIRECTORY config/
-  DESTINATION ${CONFIGS_DIR}
-  COMPONENT server
-  PATTERN "*"
+    DIRECTORY config/
+    DESTINATION ${CONFIGS_DIR}
+    COMPONENT server
 )
 
-install(FILES systemd/smu-server.service DESTINATION "/etc/systemd/system" COMPONENT server)
-
-# For drogon tmp files
-install(
-  DIRECTORY
-  DESTINATION ${SMU_UPLOAD_PATH}
-  COMPONENT server
-  DIRECTORY_PERMISSIONS
-    OWNER_WRITE OWNER_READ OWNER_EXECUTE
-    GROUP_READ GROUP_EXECUTE
-    WORLD_READ WORLD_EXECUTE
+# Install systemd service
+install(FILES systemd/smu-server.service
+    DESTINATION "/etc/systemd/system"
+    COMPONENT server
 )
 
-# Configuring CPack
-include(InstallRequiredSystemLibraries)
-set(CPACK_GENERATOR "DEB")
-
-set(CPACK_PACKAGE_VENDOR "maksimshchavelev")
-set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Server part (1 of 3 components) of server monitoring utility")
-set(CPACK_PACKAGE_VERSION "${PROJECT_VERSION}")
-set(CPACK_PACKAGE_NAME ${PROJECT_NAME})
-set(CPACK_PACKAGE_CONTACT "Maksim Shchavelev <maksimshchavelev@gmail.com>")
-
-set(CPACK_DEBIAN_PACKAGE_MAINTAINER "${CPACK_PACKAGE_CONTACT}")
-set(CPACK_DEBIAN_PACKAGE_SECTION "utils")
-set(CPACK_DEBIAN_ARCHITECTURE "amd64")
-set(CPACK_DEBIAN_PACKAGE_PRIORITY "optional")
-set(CPACK_DEBIAN_PACKAGE_HOMEPAGE "https://github.com/maksimshchavelev/server-monitoring-utility")
-set(CPACK_DEBIAN_PACKAGE_CONTROL_EXTRA
-    "${CMAKE_CURRENT_SOURCE_DIR}/packaging/postinst;${CMAKE_CURRENT_SOURCE_DIR}/packaging/prerm"
-)
-set(CPACK_PACKAGE_FILE_NAME "${PROJECT_NAME}-${PROJECT_VERSION}-linux-${CPACK_DEBIAN_ARCHITECTURE}")
-
-# Component-based packaging setup
-set(CPACK_COMPONENTS_ALL server)
+# Install external modules with component
 if(BUILD_EXTERNAL_MODULES)
-  list(APPEND CPACK_COMPONENTS_ALL external_modules)
+    foreach(MOD_TARGET ${SMU_MODULE_TARGETS})
+        install(
+            FILES "$<TARGET_FILE:${MOD_TARGET}>"
+            DESTINATION "${CONFIGS_DIR}/modules.d/${MOD_TARGET}"
+            PERMISSIONS OWNER_READ OWNER_EXECUTE GROUP_READ GROUP_EXECUTE
+            COMPONENT external_modules
+        )
+    endforeach()
 endif()
-
-set(CPACK_DEB_COMPONENT_INSTALL ON)
-
-# Server package settings
-set(CPACK_DEBIAN_SERVER_PACKAGE_NAME "${PROJECT_NAME}")
-set(CPACK_DEBIAN_SERVER_PACKAGE_DESCRIPTION "${CPACK_PACKAGE_DESCRIPTION_SUMMARY}")
-
-# External modules package settings
-set(CPACK_DEBIAN_EXTERNAL_MODULES_PACKAGE_NAME "${PROJECT_NAME}-external-modules")
-set(CPACK_DEBIAN_EXTERNAL_MODULES_PACKAGE_DESCRIPTION "External modules for ${PROJECT_NAME}")
-set(CPACK_DEBIAN_EXTERNAL_MODULES_PACKAGE_DEPENDS "${PROJECT_NAME} (>= ${PROJECT_VERSION})")
-
-# Set component display names
-set(CPACK_COMPONENT_SERVER_DISPLAY_NAME "SMU Server")
-set(CPACK_COMPONENT_EXTERNAL_MODULES_DISPLAY_NAME "External Modules")
-set(CPACK_COMPONENT_EXTERNAL_MODULES_DESCRIPTION "External modules for SMU Server")
-
-# Set file names for component packages
-set(CPACK_DEBIAN_SERVER_FILE_NAME "${PROJECT_NAME}-${PROJECT_VERSION}-linux-${CPACK_DEBIAN_ARCHITECTURE}.deb")
-set(CPACK_DEBIAN_EXTERNAL_MODULES_FILE_NAME "${PROJECT_NAME}-${PROJECT_VERSION}-linux-${CPACK_DEBIAN_ARCHITECTURE}-external-modules.deb")
-
-# Add custom targets for package building
-add_custom_target(package_server
-  COMMAND ${CMAKE_CPACK_COMMAND} -D CPACK_COMPONENTS_ALL=server
-  COMMENT "Building server package"
-  DEPENDS ${PROJECT_NAME}
-)
-
-if(BUILD_EXTERNAL_MODULES)
-  add_custom_target(package_external_modules
-    COMMAND ${CMAKE_CPACK_COMMAND} -D CPACK_COMPONENTS_ALL=external_modules
-    COMMENT "Building external modules package"
-    DEPENDS ${SMU_MODULE_TARGETS}
-  )
-
-  add_custom_target(package_all
-    COMMAND ${CMAKE_CPACK_COMMAND}
-    COMMENT "Building all packages"
-    DEPENDS ${PROJECT_NAME} ${SMU_MODULE_TARGETS}
-  )
-endif()
-
-include(CPack)
 
 message(STATUS "${PROJECT_NAME}: CONFIGURATION IS COMPLETE")

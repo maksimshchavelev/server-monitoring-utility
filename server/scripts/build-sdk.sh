@@ -38,10 +38,10 @@ BUILD_DIR="$(pwd)/sdk-build"
 RUNTIME_DIR="${BUILD_DIR}/runtime"
 DEV_DIR="${BUILD_DIR}/dev"
 
-mkdir -p "${RUNTIME_DIR}" "${DEV_DIR}"
+mkdir -p "${RUNTIME_DIR}" "${DEV_DIR}" "${BUILD_DIR}/tmp"
 
 # Clean previous contents
-rm -rf "${RUNTIME_DIR:?}/*" "${DEV_DIR:?}/*"
+rm -rf "${RUNTIME_DIR:?}/*" "${DEV_DIR:?}/*" "${BUILD_DIR}/tmp/*"
 
 # Iterate over repositories
 for repo_url in "${REPOS[@]}"; do
@@ -62,10 +62,10 @@ for repo_url in "${REPOS[@]}"; do
     echo "$assets"
 
     while IFS= read -r asset_url; do
-        echo "Downloading $asset_url..."
-        curl -L -O "$asset_url"
+        deb_file="${BUILD_DIR}/tmp/$(basename "$asset_url")"
 
-        deb_file=$(basename "$asset_url")
+        echo "Downloading $asset_url..."
+        curl -L -o "${deb_file}" "$asset_url"
 
         if [[ "$deb_file" == *"dev"* ]]; then
             echo "Copying $deb_file into DEV_DIR"
