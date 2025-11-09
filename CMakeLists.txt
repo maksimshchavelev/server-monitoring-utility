@@ -19,6 +19,7 @@ check_packaging_dependencies()
 include(cmake/compiler_options.cmake)
 include(cmake/dependencies.cmake)
 
+
 # Add subprojects
 if(BUILD_SERVER)
   add_subdirectory(server)
@@ -54,6 +55,9 @@ if(BUILD_CLIENT)
   list(APPEND ALL_PACKAGE_COMPONENTS "smu")
 endif()
 
+# After subprojects are added (so BUILD_CLIENT and other variables are available)
+# Include windows deps helper (it will be a no-op unless USING_MINGW is set)
+#include(cmake/windows_deps.cmake)
 
 # Create individual package targets with proper versions
 create_individual_package_targets(${ALL_PACKAGE_COMPONENTS})

@@ -1,0 +1,210 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# -----------------------------------------------------------------------------
+# configure.sh
+#
+# - Must be run from a directory named "build".
+# - Modes:
+#     * host (default): run cmake for the host (Linux or other). Use --components
+#       and --build-type to control component flags and build type.
+#     * x86-64-windows: require MinGW in PATH, download+build OpenSSL with MinGW
+#       into ./_deps/openssl/install (skipped if already present), then invoke cmake
+#       with OpenSSL paths and the provided toolchain file.
+# -----------------------------------------------------------------------------
+
+print_help() {
+    cat <<EOF
+Usage: $0 [--platform=<platform>] [--components=<components>] [--build-type=<Debug|Release>] [--help]
+
+Options:
+  --platform     Target platform: host (default) or x86-64-windows
+  --components   Comma-separated list of components to enable (server,cli,client).
+                 Default: server,cli,client
+  --build-type   CMake build type: Debug or Release (default: Release)
+  --help         Show this help message
+EOF
+}
+
+# Defaults
+PLATFORM="host"
+COMPONENTS=""
+BUILD_TYPE="Release"
+JOBS="$(nproc)"
+
+# OpenSSL settings
+OPENSSL_VERSION="3.0.13"
+OPENSSL_SRC_DIR="./_deps/openssl"            # sources and build dir
+OPENSSL_INSTALL_DIR="./_deps/openssl/install" # expected install prefix
+
+# Parse args
+for arg in "$@"; do
+    case $arg in
+        --platform=*)
+            PLATFORM="${arg#*=}"
+            shift
+            ;;
+        --components=*)
+            COMPONENTS="${arg#*=}"
+            shift
+            ;;
+        --build-type=*)
+            BUILD_TYPE="${arg#*=}"
+            shift
+            ;;
+        --help)
+            print_help
+            exit 0
+            ;;
+        *)
+            echo "Error: unknown option: $arg"
+            print_help
+            exit 1
+            ;;
+    esac
+done
+
+# Default components
+if [[ -z "$COMPONENTS" ]]; then
+    COMPONENTS="server,cli,client"
+fi
+
+# Ensure we run from 'build' directory
+CUR_DIR_NAME=$(basename "$PWD")
+if [[ "$CUR_DIR_NAME" != "build" ]]; then
+    printf "\e[31mError: configure.sh must be run from the 'build' directory (current: %s)\e[0m\n" "$PWD"
+    exit 1
+fi
+
+# Normalize platform aliases
+if [[ "$PLATFORM" == "x86_64-windows" ]]; then
+    PLATFORM="x86-64-windows"
+fi
+
+# Detect host OS
+HOST_UNAME="$(uname -s || echo unknown)"
+
+# If platform is host and host is Windows-like, force client-only
+if [[ "$PLATFORM" == "host" ]] && \
+   ( [[ "$HOST_UNAME" == MINGW* ]] || [[ "$HOST_UNAME" == MSYS* ]] || [[ "$HOST_UNAME" == CYGWIN* ]] || [[ "$HOST_UNAME" == "Windows_NT" ]] ); then
+    echo "Host detected as Windows (${HOST_UNAME}) -> forcing components to: client"
+    COMPONENTS="client"
+fi
+
+# Helper: generate CMake -DBUILD_* flags from COMPONENTS
+generate_build_flags() {
+    local comps="$1"
+    local out=()
+    for comp in server cli client; do
+        if [[ ",$comps," == *",$comp,"* ]]; then
+            out+=("-DBUILD_${comp^^}=ON")
+        else
+            out+=("-DBUILD_${comp^^}=OFF")
+        fi
+    done
+    printf '%s\n' "${out[@]}"
+}
+
+# ---------- Windows-target flow ----------
+if [[ "$PLATFORM" == "x86-64-windows" ]]; then
+    # Validate components: only client allowed
+    for comp in ${COMPONENTS//,/ }; do
+        if [[ "$comp" != "client" ]]; then
+            # EXACT printf as requested
+            printf "\e[31mError: Only 'client' component can be built for platform x86-64-windows (use --components=client)\e[0m\n" "$comp"
+            exit 1
+        fi
+    done
+
+    # Check MinGW availability
+    if ! command -v x86_64-w64-mingw32-gcc >/dev/null 2>&1; then
+        printf "\e[31mError: MinGW compiler 'x86_64-w64-mingw32-gcc' not found in PATH. Install mingw-w64 or add it to PATH.\e[0m\n"
+        exit 1
+    fi
+
+    # Prepare OpenSSL: skip build if already present (headers + lib)
+    echo "Checking for existing OpenSSL install at ${OPENSSL_INSTALL_DIR}..."
+    OPENSSL_ABS_INSTALL=""
+    openssl_present=false
+    if [[ -f "${OPENSSL_INSTALL_DIR}/include/openssl/ssl.h" ]]; then
+        if [[ -f "${OPENSSL_INSTALL_DIR}/lib/libssl.a" ]] || [[ -f "${OPENSSL_INSTALL_DIR}/lib64/libssl.a" ]]; then
+            openssl_present=true
+            OPENSSL_ABS_INSTALL="$(cd "${OPENSSL_INSTALL_DIR}" && pwd)"
+        fi
+    fi
+
+    if $openssl_present; then
+        echo "OpenSSL already present at ${OPENSSL_ABS_INSTALL}, skipping download/build."
+    else
+        echo "OpenSSL not found; downloading and building OpenSSL ${OPENSSL_VERSION} with MinGW..."
+        rm -rf "${OPENSSL_SRC_DIR}"
+        mkdir -p "${OPENSSL_SRC_DIR}"
+        mkdir -p "${OPENSSL_INSTALL_DIR}"
+
+        TARPATH="${OPENSSL_SRC_DIR}/openssl-${OPENSSL_VERSION}.tar.gz"
+        if [[ ! -f "${TARPATH}" ]]; then
+            echo "Downloading OpenSSL ${OPENSSL_VERSION}..."
+            curl -L -o "${TARPATH}" "https://www.openssl.org/source/openssl-${OPENSSL_VERSION}.tar.gz"
+        else
+            echo "OpenSSL tarball already present: ${TARPATH}"
+        fi
+
+        echo "Extracting OpenSSL..."
+        tar -xzf "${TARPATH}" -C "${OPENSSL_SRC_DIR}" --strip-components=1
+
+        pushd "${OPENSSL_SRC_DIR}" > /dev/null
+
+        echo "Configuring OpenSSL for mingw64 (cross-build)..."
+        OSSL_CC="$(command -v x86_64-w64-mingw32-gcc)"
+        export RC="$(command -v x86_64-w64-mingw32-windres || true)"
+
+        INSTALL_ABS="$(pwd)/install"
+        mkdir -p "${INSTALL_ABS}"
+
+        perl Configure mingw64 no-shared --prefix="${INSTALL_ABS}" CC="${OSSL_CC}"
+        echo "Running: make -j\"${JOBS}\""
+        make -j"${JOBS}"
+        echo "Running: make install_sw"
+        make install_sw
+
+        popd > /dev/null
+
+        # leave install where OpenSSL put it (no moves)
+        OPENSSL_ABS_INSTALL="$(cd "${OPENSSL_SRC_DIR}/install" && pwd)"
+        echo "OpenSSL built and installed to: ${OPENSSL_ABS_INSTALL}"
+    fi
+
+    # Prepare CMake invocation
+    OPENSSL_ABS_INCLUDE="${OPENSSL_ABS_INSTALL}/include"
+    echo "Running cmake for Windows target..."
+    cmake .. \
+        -DOPENSSL_ROOT_DIR="${OPENSSL_ABS_INSTALL}" \
+        -DOPENSSL_INCLUDE_DIR="${OPENSSL_ABS_INCLUDE}" \
+        -DBUILD_SERVER=OFF \
+        -DBUILD_CLI=OFF \
+        -DBUILD_CLIENT=ON \
+        -DCMAKE_TOOLCHAIN_FILE="cmake/toolchains/x86-64-windows.cmake" \
+        -DCMAKE_BUILD_TYPE="${BUILD_TYPE}"
+
+    echo "Windows configuration complete."
+    exit 0
+fi
+
+# ---------- Host flow ----------
+if [[ "$PLATFORM" == "host" ]]; then
+    echo "Configuring for host platform..."
+    # Generate build flags
+    mapfile -t BUILD_FLAGS < <(generate_build_flags "${COMPONENTS}")
+
+    echo "Components: ${COMPONENTS}"
+    echo "Build type: ${BUILD_TYPE}"
+
+    cmake .. "${BUILD_FLAGS[@]}" -DCMAKE_BUILD_TYPE="${BUILD_TYPE}"
+
+    echo "Host configuration complete."
+    exit 0
+fi
+
+# Unknown platform
+printf "\e[31mError: unknown platform '%s'\e[0m\n" "$PLATFORM"
+exit 1
