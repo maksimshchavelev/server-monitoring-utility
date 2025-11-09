@@ -73,7 +73,7 @@ sudo apt install libssl-dev
 
 Download the source code from the releases, unzip it somewhere. In the directory with sources create `build` directory and go to it. From now on, all commands will be executed from the build directory. Execute the following commands:
 
-- `cmake ..`
+- `../configure`
 
 - `cmake --build . --parallel`
 
@@ -84,18 +84,20 @@ In the `package` directory, you will see the built packages that you can install
 
 
 ## Building of individual parts
-You can change the following flags during the configuration phase:
+You can use the `components` parameter when calling `../configure`. For example, the following command will configure the `client` and `server` components:
 
-| Flag | Effect | Default |
-|-|-|-|
-| -DBUILD_SERVER | Does the server part need to be built | ON |
-| -DBUILD_CLIENT | Does the client part need to be built | ON |
-| -DBUILD_CLI | Does the CLI part need to be built | ON |
-
-For example:
-```bash
-cmake .. -DBUILD_SERVER=OFF
+```{.bash}
+../configure --components=client,server
 ```
+
+By default (if `components` is not specified), all components are configured. Here is a list of components:
+
+| Component | Effect |
+|-|-|
+| server | The `server` component will be built  |
+| cli | The `cli` component will be built  |
+| client | The `client` component will be built  |
+
 
 ## Building SDK
 
@@ -112,22 +114,35 @@ After executing the command, look in `build/server-build/sdk-build/` (the detail
 
 
 
-## Building on Windows
+## Cross-platform build for Windows under Linux
 
-Only the client component can be built on Windows. **Also note that you must install `JsonCpp` and `OpenSLL`**. After that, download the source code for the release you need, navigate to the root of the source code directory, create a build directory, and navigate to it.
-Run the following commands:
+Only the `client` component can be built on Windows. You will need to install some dependencies using the command:
+
+```{.bash}
+sudo apt install -y build-essential zlib1g-dev wget curl mingw-w64 gcc perl
+```
+
+Then download the source code for the release you need, navigate to the root of the source code directory, create a `build` directory, and navigate to it. Run the following commands:
 
 ```
-cmake .. -DBUILD_SERVER=OFF -DBUILD_CLI=OFF
+../configure --platform=x86-64-windows --components=client 
 ```
 
 Next is the command for building:
 
 ```
-cmake --build . --parallel --config Release
+cmake --build . --parallel
 ```
 
-If the build was successful, go to `client-build\Release`. You'll find `smu.exe` and the necessary dynamic libraries there. You can start using it.
+If the build was successful, go to `client`. You'll find `smu.exe` and the necessary dynamic libraries there. You can start using it.
+
+
+## Configure script
+
+You can get help with configuration by running:
+```{.bash}
+../configure --help
+```
 
 
 ## License
