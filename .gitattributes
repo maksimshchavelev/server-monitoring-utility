@@ -23,3 +23,7 @@ server/scripts/build-sdk.sh linguist-vendored
 
 *.sh linguist-vendored
 *.bash linguist-vendored
+
+./configure linguist-vendored
+./cmake/ linguist-vendored
+./cmake/* linguist-vendored
