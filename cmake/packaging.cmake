@@ -46,15 +46,31 @@ function(initialize_packaging_system)
   set(CPACK_DEBIAN_PACKAGE_MAINTAINER "${CPACK_PACKAGE_CONTACT}" CACHE STRING "Debian maintainer")
   set(CPACK_PACKAGE_VERSION "${PROJECT_VERSION}" CACHE STRING "Package version")
 
-  # Architecture
+  # Architecture normalization:
+  # Map common platform name "x86_64" (and "x86-64") -> "amd64" for Debian packages,
+  # but do not modify CMAKE_SYSTEM_PROCESSOR itself.
   if(NOT DEFINED CPACK_DEBIAN_PACKAGE_ARCHITECTURE)
     string(TOLOWER "${CMAKE_SYSTEM_PROCESSOR}" _arch_lower)
-    set(CPACK_DEBIAN_PACKAGE_ARCHITECTURE "${_arch_lower}" CACHE STRING "Debian architecture")
+  else()
+    # If user already set CPACK_DEBIAN_PACKAGE_ARCHITECTURE, respect it but normalize case.
+    string(TOLOWER "${CPACK_DEBIAN_PACKAGE_ARCHITECTURE}" _arch_lower)
   endif()
+
+  if(_arch_lower MATCHES "^(x86_64|x86-64)$")
+    set(_arch_normalized "amd64")
+  else()
+    set(_arch_normalized "${_arch_lower}")
+  endif()
+
+  # Save normalized arch into CPACK_DEBIAN_PACKAGE_ARCHITECTURE so CPack writes correct control field.
+  set(CPACK_DEBIAN_PACKAGE_ARCHITECTURE "${_arch_normalized}" CACHE STRING "Debian architecture" FORCE)
 
   # Make sure file name default is defined (we override it per-component later)
   if(NOT DEFINED CPACK_PACKAGE_FILE_NAME)
-    string(TOLOWER "${CMAKE_PROJECT_NAME}-${PROJECT_VERSION}-${CMAKE_SYSTEM_NAME}-${CMAKE_SYSTEM_PROCESSOR}" _fname)
+    # Use the normalized architecture string in the filename as well.
+    string(TOLOWER "${CMAKE_PROJECT_NAME}-${PROJECT_VERSION}-${CMAKE_SYSTEM_NAME}" _fname_base)
+    string(TOLOWER "${_arch_normalized}" _fname_arch)
+    string(CONCAT _fname "${_fname_base}" "-" "${_fname_arch}")
     set(CPACK_PACKAGE_FILE_NAME "${_fname}" CACHE STRING "Default package filename")
   endif()
 
@@ -85,7 +101,8 @@ function(create_individual_package_targets)
     string(TOLOWER "${comp}" comp_lower)
     string(TOLOWER "${PROJECT_VERSION}" version_lower)
     string(TOLOWER "${CMAKE_SYSTEM_NAME}" sys_lower)
-    string(TOLOWER "${CMAKE_SYSTEM_PROCESSOR}" arch_lower)
+    # Use normalized CPACK_DEBIAN_PACKAGE_ARCHITECTURE (already set in initialize_packaging_system)
+    string(TOLOWER "${CPACK_DEBIAN_PACKAGE_ARCHITECTURE}" arch_lower)
     set(filename_base "${comp_lower}-${version_lower}-${sys_lower}-${arch_lower}")
 
     # Build variable name for CPACK_DEBIAN_<COMP>_FILE_NAME
@@ -195,3 +212,4 @@ function(create_final_package_all)
     COMMENT "Collected packages into ${CMAKE_BINARY_DIR}/packages"
   )
 endfunction()
+
