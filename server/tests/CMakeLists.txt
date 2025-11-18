@@ -40,6 +40,8 @@ target_link_libraries(tests PRIVATE
     smu-server-libary)
 target_include_directories(tests PRIVATE ${CMAKE_SOURCE_DIR}/include)
 
-
+# Tests must know the paths to sample files
+# UNIT_TESTS_SAMPLES_DIR - Path to the directory with samples for unit tests
+target_compile_definitions(tests PRIVATE UNIT_TESTS_SAMPLES_DIR="${CMAKE_CURRENT_SOURCE_DIR}/unit/samples")
 
 gtest_discover_tests(tests)
