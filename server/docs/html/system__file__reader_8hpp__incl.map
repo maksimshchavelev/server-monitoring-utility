@@ -1,0 +1,9 @@
+<map id="include/core/internals/system_file_reader.hpp" name="include/core/internals/system_file_reader.hpp">
+<area shape="rect" id="Node000001" title="File with a class containing helper methods for reading and processing data from files in directories..." alt="" coords="53,5,230,45"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,93,88,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="120,48,73,86,70,82,117,43"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="112,93,171,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="144,46,144,79,139,79,139,46"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="195,93,258,119"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="164,44,206,82,202,86,160,48"/>
+</map>

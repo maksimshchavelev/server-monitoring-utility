@@ -29,6 +29,7 @@ var hierarchy =
     [ "smu_server::internals::ModuleRegistrar< ModuleType, module_name >", "structsmu__server_1_1internals_1_1ModuleRegistrar.html", null ],
     [ "smu_server::Network", "classsmu__server_1_1Network.html", null ],
     [ "smu_server::internals::StringWrapper< N >", "classsmu__server_1_1internals_1_1StringWrapper.html", null ],
+    [ "smu_server::SystemFileReader", "classsmu__server_1_1SystemFileReader.html", null ],
     [ "drogon::WebSocketController", null, [
       [ "smu_server::MainWebsocketController", "classsmu__server_1_1MainWebsocketController.html", null ]
     ] ]

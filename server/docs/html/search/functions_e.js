@@ -6,5 +6,6 @@ var searchData=
   ['set_3',['set',['../classsmu__server_1_1Config.html#ab6a96866f5eb401124e17144d7eb24c7',1,'smu_server::Config']]],
   ['set_5fpoll_5fratio_4',['set_poll_ratio',['../classsmu__server_1_1IModule.html#a844f0b53bfcb56be8ae9636012fbaa6b',1,'smu_server::IModule::set_poll_ratio()'],['../classsmu__server_1_1internals_1_1ProxyModule.html#a994f5b6c31e6dfef129240d955521efd',1,'smu_server::internals::ProxyModule::set_poll_ratio()']]],
   ['size_5',['size',['../classsmu__server_1_1Config.html#a5687bcd35dce87a9cbb2b4a03193f061',1,'smu_server::Config']]],
-  ['stringwrapper_6',['StringWrapper',['../classsmu__server_1_1internals_1_1StringWrapper.html#ac100a87a07c37ea605ae92be5a08c6fa',1,'smu_server::internals::StringWrapper']]]
+  ['split_5fstring_6',['split_string',['../classsmu__server_1_1SystemFileReader.html#a25aa6da570d336ff3427cf60f15821e0',1,'smu_server::SystemFileReader']]],
+  ['stringwrapper_7',['StringWrapper',['../classsmu__server_1_1internals_1_1StringWrapper.html#ac100a87a07c37ea605ae92be5a08c6fa',1,'smu_server::internals::StringWrapper']]]
 ];

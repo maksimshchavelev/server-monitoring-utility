@@ -95,7 +95,8 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "abi_8hpp.html",
-"classsmu__server_1_1internals_1_1MetricValueNode.html#aa4b0cf35997500b03adca3e4597868e1"
+"classsmu__server_1_1internals_1_1IMetricNode.html#af9ffcf89e9d9a23ae652ac967d516015",
+"websocket__main__controller_8hpp_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -26,6 +26,7 @@ var annotated_dup =
       [ "Logger", "classsmu__server_1_1Logger.html", "classsmu__server_1_1Logger" ],
       [ "MainWebsocketController", "classsmu__server_1_1MainWebsocketController.html", "classsmu__server_1_1MainWebsocketController" ],
       [ "Network", "classsmu__server_1_1Network.html", "classsmu__server_1_1Network" ],
-      [ "RAM", "classsmu__server_1_1RAM.html", "classsmu__server_1_1RAM" ]
+      [ "RAM", "classsmu__server_1_1RAM.html", "classsmu__server_1_1RAM" ],
+      [ "SystemFileReader", "classsmu__server_1_1SystemFileReader.html", "classsmu__server_1_1SystemFileReader" ]
     ] ]
 ];

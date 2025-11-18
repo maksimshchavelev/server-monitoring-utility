@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['stop_0',['STOP',['../classsmu__server_1_1IPC.html#acb16f6685fbd659bc87d15236c72c501a615a46af313786fc4e349f34118be111',1,'smu_server::IPC']]],
-  ['success_1',['SUCCESS',['../classsmu__server_1_1Logger.html#a41aafc267cf295e67590b6534067a8e3ad0749aaba8b833466dfcbb0428e4f89c',1,'smu_server::Logger']]]
+  ['ok_0',['OK',['../classsmu__server_1_1SystemFileReader.html#aa3027dd1a98db3cedebdb9d152dd8971ae0aa021e21dddbd6d8cecec71e9cf564',1,'smu_server::SystemFileReader']]]
 ];

@@ -19,6 +19,7 @@ var namespacesmu__server =
     [ "MainWebsocketController", "classsmu__server_1_1MainWebsocketController.html", "classsmu__server_1_1MainWebsocketController" ],
     [ "Network", "classsmu__server_1_1Network.html", "classsmu__server_1_1Network" ],
     [ "RAM", "classsmu__server_1_1RAM.html", "classsmu__server_1_1RAM" ],
+    [ "SystemFileReader", "classsmu__server_1_1SystemFileReader.html", "classsmu__server_1_1SystemFileReader" ],
     [ "ABI_MODULE_CONTEXT", "namespacesmu__server.html#a6e4290d7256e6cc653dcfa9432021ace", null ],
     [ "ABI_MODULE_FUNCTIONS", "namespacesmu__server.html#a83ef59cf95fa02cfd3291e1e0aeecea9", null ],
     [ "ABI_MODULE_MDTP_DATA", "namespacesmu__server.html#a6ecb51133912a7af6b1d5fb36e85afd8", null ],
