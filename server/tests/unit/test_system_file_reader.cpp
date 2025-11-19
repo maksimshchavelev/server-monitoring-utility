@@ -288,3 +288,75 @@ TEST(system_file_reader, token_after_empty_delimiter_undefined_behavior) {
         (void)r;
     });
 }
+
+
+// ====================== TOLOWER ======================
+
+TEST(system_file_reader, tolower_basic) {
+    EXPECT_EQ(SystemFileReader::tolower("ABC"), "abc");
+}
+
+TEST(system_file_reader, tolower_mixed_case) {
+    EXPECT_EQ(SystemFileReader::tolower("HeLLo"), "hello");
+}
+
+TEST(system_file_reader, tolower_already_lower) {
+    EXPECT_EQ(SystemFileReader::tolower("world"), "world");
+}
+
+TEST(system_file_reader, tolower_digits_and_symbols) {
+    EXPECT_EQ(SystemFileReader::tolower("123_+=!@#"), "123_+=!@#");
+}
+
+TEST(system_file_reader, tolower_empty_string) {
+    EXPECT_EQ(SystemFileReader::tolower(""), "");
+}
+
+TEST(system_file_reader, tolower_long_string) {
+    std::string input = "ThIs_Is_A_LoNg_StRiNg_123!!!";
+    std::string expected = "this_is_a_long_string_123!!!";
+
+    EXPECT_EQ(SystemFileReader::tolower(input), expected);
+}
+
+
+
+// ====================== CONVERT_UNITS ======================
+
+using SizeUnit = Reader::SizeUnit;
+
+TEST(system_file_reader, convert_units_basic)
+{
+    EXPECT_EQ(Reader::convert_units("b", SizeUnit::BYTES, 123), 123);
+    EXPECT_EQ(Reader::convert_units("bytes", SizeUnit::BYTES, 999), 999);
+}
+
+TEST(system_file_reader, convert_units_kb_to_bytes)
+{
+    EXPECT_EQ(Reader::convert_units("KB", SizeUnit::BYTES, 1), 1024);
+    EXPECT_EQ(Reader::convert_units("kilobytes", SizeUnit::BYTES, 2), 2048);
+}
+
+TEST(system_file_reader, convert_units_mb_to_kb)
+{
+    EXPECT_EQ(Reader::convert_units("MB", SizeUnit::KBYTES, 1), 1024);
+    EXPECT_EQ(Reader::convert_units("megabytes", SizeUnit::KBYTES, 3), 3 * 1024);
+}
+
+TEST(system_file_reader, convert_units_gb_to_mb)
+{
+    EXPECT_EQ(Reader::convert_units("GB", SizeUnit::MBYTES, 1), 1024);
+}
+
+TEST(system_file_reader, convert_units_smaller_to_larger)
+{
+    EXPECT_EQ(Reader::convert_units("bytes", SizeUnit::KBYTES, 1024), 1);
+    EXPECT_EQ(Reader::convert_units("KB", SizeUnit::MBYTES, 1024), 1);
+}
+
+TEST(system_file_reader, convert_units_unknown_unit)
+{
+    // Unknown - treat as bytes
+    EXPECT_EQ(Reader::convert_units("banana", SizeUnit::KBYTES, 2048), 2);
+}
+
