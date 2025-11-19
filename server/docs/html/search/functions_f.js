@@ -4,5 +4,6 @@ var searchData=
   ['to_5fmdtp_1',['to_mdtp',['../structsmu__server_1_1IMetricNodeBase.html#a3622a36cc18b2ec5c10342083c7fa261',1,'smu_server::IMetricNodeBase::to_mdtp()'],['../classsmu__server_1_1internals_1_1IMetricNode.html#a10c6d9c928b656329a1b983a227a0725',1,'smu_server::internals::IMetricNode::to_mdtp()'],['../classsmu__server_1_1internals_1_1MetricValueNode.html#a9d3b66a9b25084f4f69d112a9a554f0d',1,'smu_server::internals::MetricValueNode::to_mdtp()'],['../classsmu__server_1_1internals_1_1MetricContainerNode.html#a6a3e432a6bbf33b29699cf8d731e0693',1,'smu_server::internals::MetricContainerNode::to_mdtp()']]],
   ['token_5fafter_2',['token_after',['../classsmu__server_1_1SystemFileReader.html#a05d45f494228ca9b5e86aea6c902110b',1,'smu_server::SystemFileReader']]],
   ['token_5fbefore_3',['token_before',['../classsmu__server_1_1SystemFileReader.html#a2f7a461a4166e9622405bb39b8091bc5',1,'smu_server::SystemFileReader']]],
-  ['trim_4',['trim',['../classsmu__server_1_1SystemFileReader.html#a1f7d814d491ca341c3a792921f39b0d1',1,'smu_server::SystemFileReader']]]
+  ['tolower_4',['tolower',['../classsmu__server_1_1SystemFileReader.html#a4023402e4d5dcbae687be88ca2056010',1,'smu_server::SystemFileReader']]],
+  ['trim_5',['trim',['../classsmu__server_1_1SystemFileReader.html#a1f7d814d491ca341c3a792921f39b0d1',1,'smu_server::SystemFileReader']]]
 ];

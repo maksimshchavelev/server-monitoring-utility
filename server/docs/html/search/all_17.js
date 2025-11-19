@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['value_20node_0',['Example 1: A simple value node',['../md_for-developers_2modules_24__mdtp.html#autotoc_md28',1,'']]],
-  ['value_20node_20encoding_1',['value node encoding',['../namespacesmu__server.html#mdtp_protocol',1,'MDTP (preferred) — value node encoding'],['../deprecated.html#_deprecated000001',1,'MDTP (preferred) — value node encoding']]],
-  ['version_2ehpp_2',['version.hpp',['../version_8hpp.html',1,'']]]
+  ['updating_0',['Problems after updating',['../index.html#autotoc_md37',1,'']]],
+  ['usage_1',['usage',['../namespacesmu__server_1_1internals.html#example_usage',1,'Example usage'],['../index.html#autotoc_md36',1,'Usage']]],
+  ['usage_20notes_2',['Advanced usage notes',['../namespacesmu__server.html#examples_more',1,'']]]
 ];

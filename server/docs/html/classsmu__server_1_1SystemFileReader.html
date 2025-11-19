@@ -117,6 +117,13 @@ Public Types</h2></td></tr>
  }</td></tr>
 <tr class="memdesc:aa3027dd1a98db3cedebdb9d152dd8971"><td class="mdescLeft">&#160;</td><td class="mdescRight">Error codes that may occur when calling various methods of this class.  <a href="classsmu__server_1_1SystemFileReader.html#aa3027dd1a98db3cedebdb9d152dd8971">More...</a><br /></td></tr>
 <tr class="separator:aa3027dd1a98db3cedebdb9d152dd8971"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1827cb914857fa1095f95ec84ba68399" id="r_a1827cb914857fa1095f95ec84ba68399"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1SystemFileReader.html#a1827cb914857fa1095f95ec84ba68399">SizeUnit</a> { <a class="el" href="classsmu__server_1_1SystemFileReader.html#a1827cb914857fa1095f95ec84ba68399a9f1908a641ea399fd2e76f0905c88fcf">BYTES</a>
+, <a class="el" href="classsmu__server_1_1SystemFileReader.html#a1827cb914857fa1095f95ec84ba68399aa71323125e86c0042e3531cf1b5efdb9">KBYTES</a>
+, <a class="el" href="classsmu__server_1_1SystemFileReader.html#a1827cb914857fa1095f95ec84ba68399a92e84c9ca4fe8706d5c0a636c4eaf310">MBYTES</a>
+, <a class="el" href="classsmu__server_1_1SystemFileReader.html#a1827cb914857fa1095f95ec84ba68399aba03749fb44ee22821f831b232acbc5c">GBYTES</a>
+ }</td></tr>
+<tr class="memdesc:a1827cb914857fa1095f95ec84ba68399"><td class="mdescLeft">&#160;</td><td class="mdescRight">Units of measurement for information volume.  <a href="classsmu__server_1_1SystemFileReader.html#a1827cb914857fa1095f95ec84ba68399">More...</a><br /></td></tr>
+<tr class="separator:a1827cb914857fa1095f95ec84ba68399"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -138,6 +145,12 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a05d45f494228ca9b5e86aea6c902110b" id="r_a05d45f494228ca9b5e86aea6c902110b"><td class="memItemLeft" align="right" valign="top">static std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1SystemFileReader.html#a05d45f494228ca9b5e86aea6c902110b">token_after</a> (std::string_view str, const std::string_view delimiter)</td></tr>
 <tr class="memdesc:a05d45f494228ca9b5e86aea6c902110b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the substring located after the <b>first occurrence of the delimiter</b>.  <br /></td></tr>
 <tr class="separator:a05d45f494228ca9b5e86aea6c902110b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4023402e4d5dcbae687be88ca2056010" id="r_a4023402e4d5dcbae687be88ca2056010"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1SystemFileReader.html#a4023402e4d5dcbae687be88ca2056010">tolower</a> (const std::string_view str)</td></tr>
+<tr class="memdesc:a4023402e4d5dcbae687be88ca2056010"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts all characters in the string to lowercase.  <br /></td></tr>
+<tr class="separator:a4023402e4d5dcbae687be88ca2056010"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab078e9dcd9b94443b598135ce4f2f642" id="r_ab078e9dcd9b94443b598135ce4f2f642"><td class="memItemLeft" align="right" valign="top">static std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmu__server_1_1SystemFileReader.html#ab078e9dcd9b94443b598135ce4f2f642">convert_units</a> (const std::string_view source_units, <a class="el" href="classsmu__server_1_1SystemFileReader.html#a1827cb914857fa1095f95ec84ba68399">SizeUnit</a> target_units, std::size_t value)</td></tr>
+<tr class="memdesc:ab078e9dcd9b94443b598135ce4f2f642"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a numeric value from one textual unit to another SizeUnit.  <br /></td></tr>
+<tr class="separator:ab078e9dcd9b94443b598135ce4f2f642"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A class with helper methods for reading and processing data from files in directories such as <code>/sys</code> and <code>/proc</code>. This class is very useful for collecting metrics that are represented as files in <code>/proc</code> or <code>/sys</code>. </p>
@@ -181,7 +194,118 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a1827cb914857fa1095f95ec84ba68399" name="a1827cb914857fa1095f95ec84ba68399"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1827cb914857fa1095f95ec84ba68399">&#9670;&#160;</a></span>SizeUnit</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="classsmu__server_1_1SystemFileReader.html#a1827cb914857fa1095f95ec84ba68399">smu_server::SystemFileReader::SizeUnit</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Units of measurement for information volume. </p>
+<dl class="section note"><dt>Note</dt><dd>To convert units of measurement, use the <code><a class="el" href="classsmu__server_1_1SystemFileReader.html#ab078e9dcd9b94443b598135ce4f2f642" title="Convert a numeric value from one textual unit to another SizeUnit.">SystemFileReader::convert_units</a></code> method. </dd></dl>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a1827cb914857fa1095f95ec84ba68399a9f1908a641ea399fd2e76f0905c88fcf" name="a1827cb914857fa1095f95ec84ba68399a9f1908a641ea399fd2e76f0905c88fcf"></a>BYTES&#160;</td><td class="fielddoc"><p>Bytes. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a1827cb914857fa1095f95ec84ba68399aa71323125e86c0042e3531cf1b5efdb9" name="a1827cb914857fa1095f95ec84ba68399aa71323125e86c0042e3531cf1b5efdb9"></a>KBYTES&#160;</td><td class="fielddoc"><p>Kilobytes. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a1827cb914857fa1095f95ec84ba68399a92e84c9ca4fe8706d5c0a636c4eaf310" name="a1827cb914857fa1095f95ec84ba68399a92e84c9ca4fe8706d5c0a636c4eaf310"></a>MBYTES&#160;</td><td class="fielddoc"><p>Megabytes. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a1827cb914857fa1095f95ec84ba68399aba03749fb44ee22821f831b232acbc5c" name="a1827cb914857fa1095f95ec84ba68399aba03749fb44ee22821f831b232acbc5c"></a>GBYTES&#160;</td><td class="fielddoc"><p>Gigabytes. </p>
+</td></tr>
+</table>
+
+</div>
+</div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="ab078e9dcd9b94443b598135ce4f2f642" name="ab078e9dcd9b94443b598135ce4f2f642"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab078e9dcd9b94443b598135ce4f2f642">&#9670;&#160;</a></span>convert_units()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static std::size_t smu_server::SystemFileReader::convert_units </td>
+          <td>(</td>
+          <td class="paramtype">const std::string_view&#160;</td>
+          <td class="paramname"><em>source_units</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classsmu__server_1_1SystemFileReader.html#a1827cb914857fa1095f95ec84ba68399">SizeUnit</a>&#160;</td>
+          <td class="paramname"><em>target_units</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Convert a numeric value from one textual unit to another SizeUnit. </p>
+<p>This function accepts a string describing the source units (<b>case-insensitive</b>), such as:</p><ul>
+<li>"b", "byte", "bytes"</li>
+<li>"kb", "kbyte", "kbytes", "kilobyte", "kilobytes"</li>
+<li>"mb", "mbyte", "mbytes", "megabyte", "megabytes"</li>
+<li>"gb", "gbyte", "gbytes", "gigabyte", "gigabytes"</li>
+</ul>
+<dl class="section note"><dt>Note</dt><dd>Any unknown unit is treated as bytes.</dd></dl>
+<p>The conversion is binary-based (1 KB = 1024 bytes, 1 MB = 1024 KB, etc.).</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">source_units</td><td>Textual representation of the source units (case-insensitive). </td></tr>
+    <tr><td class="paramname">target_units</td><td>Target SizeUnit enumeration value. </td></tr>
+    <tr><td class="paramname">value</td><td>The original numeric value to convert. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Converted value represented in target_units.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The function uses binary shifts, meaning all conversions are powers of two.</dd></dl>
+<h1><a class="anchor" id="example_usage"></a>
+Example usage</h1>
+<div class="fragment"><div class="line">std::size_t r1 = <a class="code hl_function" href="classsmu__server_1_1SystemFileReader.html#ab078e9dcd9b94443b598135ce4f2f642">SystemFileReader::convert_units</a>(<span class="stringliteral">&quot;KB&quot;</span>, <a class="code hl_enumvalue" href="classsmu__server_1_1SystemFileReader.html#a1827cb914857fa1095f95ec84ba68399a9f1908a641ea399fd2e76f0905c88fcf">SizeUnit::BYTES</a>, 1);</div>
+<div class="line"><span class="comment">// r1 == 1024</span></div>
+<div class="line"> </div>
+<div class="line">std::size_t r2 = <a class="code hl_function" href="classsmu__server_1_1SystemFileReader.html#ab078e9dcd9b94443b598135ce4f2f642">SystemFileReader::convert_units</a>(<span class="stringliteral">&quot;mb&quot;</span>, <a class="code hl_enumvalue" href="classsmu__server_1_1SystemFileReader.html#a1827cb914857fa1095f95ec84ba68399aa71323125e86c0042e3531cf1b5efdb9">SizeUnit::KBYTES</a>, 1);</div>
+<div class="line"><span class="comment">// r2 == 1024</span></div>
+<div class="line"> </div>
+<div class="line">std::size_t r3 = <a class="code hl_function" href="classsmu__server_1_1SystemFileReader.html#ab078e9dcd9b94443b598135ce4f2f642">SystemFileReader::convert_units</a>(<span class="stringliteral">&quot;bytes&quot;</span>, <a class="code hl_enumvalue" href="classsmu__server_1_1SystemFileReader.html#a1827cb914857fa1095f95ec84ba68399a92e84c9ca4fe8706d5c0a636c4eaf310">SizeUnit::MBYTES</a>, 1048576);</div>
+<div class="line"><span class="comment">// r3 == 1</span></div>
+<div class="ttc" id="aclasssmu__server_1_1SystemFileReader_html_a1827cb914857fa1095f95ec84ba68399a92e84c9ca4fe8706d5c0a636c4eaf310"><div class="ttname"><a href="classsmu__server_1_1SystemFileReader.html#a1827cb914857fa1095f95ec84ba68399a92e84c9ca4fe8706d5c0a636c4eaf310">smu_server::SystemFileReader::SizeUnit::MBYTES</a></div><div class="ttdeci">@ MBYTES</div><div class="ttdoc">Megabytes.</div></div>
+<div class="ttc" id="aclasssmu__server_1_1SystemFileReader_html_a1827cb914857fa1095f95ec84ba68399a9f1908a641ea399fd2e76f0905c88fcf"><div class="ttname"><a href="classsmu__server_1_1SystemFileReader.html#a1827cb914857fa1095f95ec84ba68399a9f1908a641ea399fd2e76f0905c88fcf">smu_server::SystemFileReader::SizeUnit::BYTES</a></div><div class="ttdeci">@ BYTES</div><div class="ttdoc">Bytes.</div></div>
+<div class="ttc" id="aclasssmu__server_1_1SystemFileReader_html_a1827cb914857fa1095f95ec84ba68399aa71323125e86c0042e3531cf1b5efdb9"><div class="ttname"><a href="classsmu__server_1_1SystemFileReader.html#a1827cb914857fa1095f95ec84ba68399aa71323125e86c0042e3531cf1b5efdb9">smu_server::SystemFileReader::SizeUnit::KBYTES</a></div><div class="ttdeci">@ KBYTES</div><div class="ttdoc">Kilobytes.</div></div>
+<div class="ttc" id="aclasssmu__server_1_1SystemFileReader_html_ab078e9dcd9b94443b598135ce4f2f642"><div class="ttname"><a href="classsmu__server_1_1SystemFileReader.html#ab078e9dcd9b94443b598135ce4f2f642">smu_server::SystemFileReader::convert_units</a></div><div class="ttdeci">static std::size_t convert_units(const std::string_view source_units, SizeUnit target_units, std::size_t value)</div><div class="ttdoc">Convert a numeric value from one textual unit to another SizeUnit.</div></div>
+</div><!-- fragment --> 
+</div>
+</div>
 <a id="a2d16dd1142c2129afa12ab8b9cf7b185" name="a2d16dd1142c2129afa12ab8b9cf7b185"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2d16dd1142c2129afa12ab8b9cf7b185">&#9670;&#160;</a></span>error_description()</h2>
 
@@ -470,6 +594,41 @@ Example usage</h1>
 <div class="line"><span class="comment">// t == &quot;hello&quot;</span></div>
 <div class="ttc" id="aclasssmu__server_1_1SystemFileReader_html_a2f7a461a4166e9622405bb39b8091bc5"><div class="ttname"><a href="classsmu__server_1_1SystemFileReader.html#a2f7a461a4166e9622405bb39b8091bc5">smu_server::SystemFileReader::token_before</a></div><div class="ttdeci">static std::string_view token_before(std::string_view str, const std::string_view delimiter)</div><div class="ttdoc">Returns the substring located before the first occurrence of the delimiter.</div></div>
 </div><!-- fragment --> </dd></dl>
+
+</div>
+</div>
+<a id="a4023402e4d5dcbae687be88ca2056010" name="a4023402e4d5dcbae687be88ca2056010"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4023402e4d5dcbae687be88ca2056010">&#9670;&#160;</a></span>tolower()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static std::string smu_server::SystemFileReader::tolower </td>
+          <td>(</td>
+          <td class="paramtype">const std::string_view&#160;</td>
+          <td class="paramname"><em>str</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Converts all characters in the string to lowercase. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">str</td><td>String to convert </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Copy of the string in lowercase </dd></dl>
 
 </div>
 </div>

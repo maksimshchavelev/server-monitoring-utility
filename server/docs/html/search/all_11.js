@@ -1,10 +1,11 @@
 var searchData=
 [
-  ['of_20built_20in_20modules_0',['List of built-in modules',['../index.html#autotoc_md33',1,'']]],
-  ['of_20external_20modules_1',['List of external modules',['../index.html#autotoc_md32',1,'']]],
-  ['of_20mdtp_2',['Internal structure of MDTP',['../md_for-developers_2modules_24__mdtp.html#autotoc_md26',1,'']]],
-  ['ok_3',['OK',['../classsmu__server_1_1SystemFileReader.html#aa3027dd1a98db3cedebdb9d152dd8971ae0aa021e21dddbd6d8cecec71e9cf564',1,'smu_server::SystemFileReader']]],
-  ['operator_3d_4',['operator=',['../classsmu__server_1_1Config.html#a0440fe08cc61ead28f9b588c13238971',1,'smu_server::Config::operator=(const Config &amp;other)'],['../classsmu__server_1_1Config.html#af2101d0495a6978394783da8e38dc474',1,'smu_server::Config::operator=(Config &amp;&amp;other)']]],
-  ['operator_3d_3d_5',['operator==',['../classsmu__server_1_1Config.html#a2fdcf1e9fd8a484fbcc0158faf6174c0',1,'smu_server::Config']]],
-  ['own_20module_6',['Developing Your Own Module',['../md_for-developers_2modules_21__own__module.html',1,'']]]
+  ['nested_20nodes_0',['Example 2: Container with nested nodes',['../md_for-developers_2modules_24__mdtp.html#autotoc_md29',1,'']]],
+  ['network_1',['network',['../classsmu__server_1_1Network.html',1,'smu_server::Network'],['../classsmu__server_1_1Network.html#a4191628d19ac5e71d5b4178e65b9f76a',1,'smu_server::Network::Network()']]],
+  ['network_2ehpp_2',['network.hpp',['../network_8hpp.html',1,'']]],
+  ['node_3',['Example 1: A simple value node',['../md_for-developers_2modules_24__mdtp.html#autotoc_md28',1,'']]],
+  ['node_20encoding_4',['node encoding',['../namespacesmu__server.html#mdtp_protocol',1,'MDTP (preferred) — value node encoding'],['../deprecated.html#_deprecated000001',1,'MDTP (preferred) — value node encoding']]],
+  ['nodes_5',['Example 2: Container with nested nodes',['../md_for-developers_2modules_24__mdtp.html#autotoc_md29',1,'']]],
+  ['none_6',['NONE',['../classsmu__server_1_1Logger.html#a41aafc267cf295e67590b6534067a8e3ab50339a10e1de285ac99d4c3990b8693',1,'smu_server::Logger']]],
+  ['notes_7',['Advanced usage notes',['../namespacesmu__server.html#examples_more',1,'']]]
 ];

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['cli_0',['cli',['../classsmu__server_1_1Application.html#a4c65eb115c3fcb233198a28ea61f3038',1,'smu_server::Application::CLI'],['../classsmu__server_1_1CLI.html#a071ff1a177446a661f9a65ac717c9e58',1,'smu_server::CLI::CLI()'],['../classsmu__server_1_1CLI.html',1,'smu_server::CLI']]],
+  ['cli_0',['cli',['../classsmu__server_1_1CLI.html',1,'smu_server::CLI'],['../classsmu__server_1_1Application.html#a4c65eb115c3fcb233198a28ea61f3038',1,'smu_server::Application::CLI'],['../classsmu__server_1_1CLI.html#a071ff1a177446a661f9a65ac717c9e58',1,'smu_server::CLI::CLI()']]],
   ['cli_2ehpp_1',['cli.hpp',['../cli_8hpp.html',1,'']]],
   ['collect_5fmetrics_2',['collect_metrics',['../classsmu__server_1_1Application.html#a9b8103af49a022f890fa7c9a77ea0616',1,'smu_server::Application']]],
   ['command_3',['Command',['../classsmu__server_1_1IPC.html#acb16f6685fbd659bc87d15236c72c501',1,'smu_server::IPC']]],
@@ -8,7 +8,7 @@ var searchData=
   ['complex_20container_20with_20multiple_20subsystems_5',['Example 3: Complex container with multiple subsystems',['../md_for-developers_2modules_24__mdtp.html#autotoc_md30',1,'']]],
   ['concept_6',['concept',['../md_for-developers_2modules_21__own__module.html#autotoc_md3',1,'Getting Started. General Concept'],['../md_for-developers_2modules_24__mdtp.html#autotoc_md25',1,'MDTP concept']]],
   ['conclusion_7',['Conclusion',['../index.html#autotoc_md38',1,'']]],
-  ['config_8',['config',['../classsmu__server_1_1Config.html#ad6f481d418e66ee35eb8fc63e607da28',1,'smu_server::Config::Config(const Config &amp;other)'],['../classsmu__server_1_1Config.html#a02482f1f6f6d89eea6fa8ea31bf3de07',1,'smu_server::Config::Config(Config &amp;&amp;other)'],['../classsmu__server_1_1Config.html#ae4008f023a7b4dbe6ffc75c3eb5a1ef3',1,'smu_server::Config::Config(Json::Value json)'],['../classsmu__server_1_1Config.html#ab20f355361632ed64d85968791161a6c',1,'smu_server::Config::Config()'],['../classsmu__server_1_1Config.html',1,'smu_server::Config']]],
+  ['config_8',['config',['../classsmu__server_1_1Config.html#a02482f1f6f6d89eea6fa8ea31bf3de07',1,'smu_server::Config::Config(Config &amp;&amp;other)'],['../classsmu__server_1_1Config.html#ad6f481d418e66ee35eb8fc63e607da28',1,'smu_server::Config::Config(const Config &amp;other)'],['../classsmu__server_1_1Config.html#ab20f355361632ed64d85968791161a6c',1,'smu_server::Config::Config()'],['../classsmu__server_1_1Config.html',1,'smu_server::Config'],['../classsmu__server_1_1Config.html#ae4008f023a7b4dbe6ffc75c3eb5a1ef3',1,'smu_server::Config::Config()']]],
   ['config_2ehpp_9',['config.hpp',['../config_8hpp.html',1,'']]],
   ['config_5fio_10',['Config_IO',['../classsmu__server_1_1Config__IO.html',1,'smu_server']]],
   ['config_5fio_2ehpp_11',['config_io.hpp',['../config__io_8hpp.html',1,'']]],
@@ -18,8 +18,9 @@ var searchData=
   ['container_20with_20multiple_20subsystems_15',['Example 3: Complex container with multiple subsystems',['../md_for-developers_2modules_24__mdtp.html#autotoc_md30',1,'']]],
   ['container_20with_20nested_20nodes_16',['Example 2: Container with nested nodes',['../md_for-developers_2modules_24__mdtp.html#autotoc_md29',1,'']]],
   ['contains_5fsubstring_17',['contains_substring',['../namespacesmu__server_1_1internals.html#ac6001815b6a093112dcdabc7ba1744f8',1,'smu_server::internals']]],
-  ['core_2ehpp_18',['core.hpp',['../core_8hpp.html',1,'']]],
-  ['creating_20modules_19',['Storing the entire JSON tree when creating modules',['../md_for-developers_2modules_23__storing__json__tree.html',1,'']]],
-  ['creating_20modules_20with_20static_20data_20',['Creating modules with static data',['../md_for-developers_2modules_22__static__data__modules.html',1,'']]],
-  ['creation_21',['Module creation',['../md_for-developers_2beginning.html#autotoc_md1',1,'']]]
+  ['convert_5funits_18',['convert_units',['../classsmu__server_1_1SystemFileReader.html#ab078e9dcd9b94443b598135ce4f2f642',1,'smu_server::SystemFileReader']]],
+  ['core_2ehpp_19',['core.hpp',['../core_8hpp.html',1,'']]],
+  ['creating_20modules_20',['Storing the entire JSON tree when creating modules',['../md_for-developers_2modules_23__storing__json__tree.html',1,'']]],
+  ['creating_20modules_20with_20static_20data_21',['Creating modules with static data',['../md_for-developers_2modules_22__static__data__modules.html',1,'']]],
+  ['creation_22',['Module creation',['../md_for-developers_2beginning.html#autotoc_md1',1,'']]]
 ];

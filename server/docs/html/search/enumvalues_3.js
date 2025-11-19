@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['list_0',['LIST',['../classsmu__server_1_1IPC.html#acb16f6685fbd659bc87d15236c72c501a298cb25408234de02baf2085803a464a',1,'smu_server::IPC']]]
+  ['gbytes_0',['GBYTES',['../classsmu__server_1_1SystemFileReader.html#a1827cb914857fa1095f95ec84ba68399aba03749fb44ee22821f831b232acbc5c',1,'smu_server::SystemFileReader']]]
 ];
