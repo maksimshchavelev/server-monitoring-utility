@@ -37,6 +37,17 @@ class SystemFileReader {
     };
 
     /**
+     * @brief Units of measurement for information volume.
+     * @note To convert units of measurement, use the `SystemFileReader::convert_units` method.
+     */
+    enum class SizeUnit {
+        BYTES,  ///< Bytes
+        KBYTES, ///< Kilobytes
+        MBYTES, ///< Megabytes
+        GBYTES  ///< Gigabytes
+    };
+
+    /**
      * @brief Return a human-readable description for an `ErrorCode`.
      *
      * This function returns a constant `std::string_view` describing the given
@@ -103,8 +114,7 @@ class SystemFileReader {
      *
      * As a result, `tokens` will contain `{"word1", "word2", "word3"}`.
      */
-    static std::vector<std::string_view> split_string(std::string_view       str,
-                                                      const std::string_view delimiter = " ");
+    static std::vector<std::string_view> split_string(std::string_view str, const std::string_view delimiter = " ");
 
     /**
      * @brief Removes leading and trailing whitespace characters from the given string view.
@@ -241,6 +251,48 @@ class SystemFileReader {
      * @endcode
      */
     static std::string_view token_after(std::string_view str, const std::string_view delimiter);
+
+    /**
+     * @brief Converts all characters in the string to lowercase.
+     * @param str String to convert
+     * @return Copy of the string in lowercase
+     */
+    static std::string tolower(const std::string_view str);
+
+    /**
+     * @brief Convert a numeric value from one textual unit to another SizeUnit.
+     *
+     * This function accepts a string describing the source units (**case-insensitive**),
+     * such as:
+     *   - "b", "byte", "bytes"
+     *   - "kb", "kbyte", "kbytes", "kilobyte", "kilobytes"
+     *   - "mb", "mbyte", "mbytes", "megabyte", "megabytes"
+     *   - "gb", "gbyte", "gbytes", "gigabyte", "gigabytes"
+     *
+     * @note Any unknown unit is treated as bytes.
+     *
+     * The conversion is binary-based (1 KB = 1024 bytes, 1 MB = 1024 KB, etc.).
+     *
+     * @param source_units Textual representation of the source units (case-insensitive).
+     * @param target_units Target SizeUnit enumeration value.
+     * @param value The original numeric value to convert.
+     * @return Converted value represented in target_units.
+     *
+     * @note The function uses binary shifts, meaning all conversions are powers of two.
+     *
+     * @section example_usage Example usage
+     * @code{.cpp}
+     * std::size_t r1 = SystemFileReader::convert_units("KB", SizeUnit::BYTES, 1);
+     * // r1 == 1024
+     *
+     * std::size_t r2 = SystemFileReader::convert_units("mb", SizeUnit::KBYTES, 1);
+     * // r2 == 1024
+     *
+     * std::size_t r3 = SystemFileReader::convert_units("bytes", SizeUnit::MBYTES, 1048576);
+     * // r3 == 1
+     * @endcode
+     */
+    static std::size_t convert_units(const std::string_view source_units, SizeUnit target_units, std::size_t value);
 };
 
 }; // namespace smu_server

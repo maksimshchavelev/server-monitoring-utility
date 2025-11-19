@@ -7,7 +7,8 @@
  * directories such as `/sys` and `/proc`.
  */
 
-#include <cerrno> // for errno
+#include <algorithm> // for std::transform
+#include <cerrno>    // for errno
 #include <core/internals/system_file_reader.hpp>
 #include <fcntl.h>    // for open
 #include <ranges>     // for std::views::split
@@ -39,8 +40,7 @@ const std::string_view SystemFileReader::error_description(ErrorCode error) {
 
 
 // Public method
-std::expected<std::string, SystemFileReader::ErrorCode> SystemFileReader::read_text_file(
-    const std::string_view path) {
+std::expected<std::string, SystemFileReader::ErrorCode> SystemFileReader::read_text_file(const std::string_view path) {
 
     // Open file
     int fd = ::open(path.data(), O_RDONLY);
@@ -105,8 +105,7 @@ std::expected<std::string, SystemFileReader::ErrorCode> SystemFileReader::read_t
 
 
 // Public method
-std::vector<std::string_view> SystemFileReader::split_string(std::string_view       str,
-                                                             const std::string_view delimiter) {
+std::vector<std::string_view> SystemFileReader::split_string(std::string_view str, const std::string_view delimiter) {
     if (str.empty()) {
         return std::vector<std::string_view>();
     }
@@ -140,8 +139,7 @@ std::string_view SystemFileReader::trim(std::string_view str) {
 
 
 // Public method
-std::string_view SystemFileReader::token_before(std::string_view       str,
-                                                const std::string_view delimiter) {
+std::string_view SystemFileReader::token_before(std::string_view str, const std::string_view delimiter) {
     auto end = str.find_first_of(delimiter);
 
     if (end == std::string_view::npos) {
@@ -153,8 +151,7 @@ std::string_view SystemFileReader::token_before(std::string_view       str,
 
 
 // Public method
-std::string_view SystemFileReader::token_after(std::string_view       str,
-                                               const std::string_view delimiter) {
+std::string_view SystemFileReader::token_after(std::string_view str, const std::string_view delimiter) {
     auto begin = str.find(delimiter);
 
     if (begin == std::string_view::npos) {
@@ -162,6 +159,74 @@ std::string_view SystemFileReader::token_after(std::string_view       str,
     }
 
     return str.substr(begin + delimiter.size(), str.size() - begin + 1);
+}
+
+
+// Public method
+std::string SystemFileReader::tolower(const std::string_view str) {
+    std::string output;
+    output.resize(str.size());
+
+    std::transform(str.begin(), str.end(), output.begin(), [](char c) { return std::tolower(c); });
+
+    return output;
+}
+
+
+// Public method
+std::size_t SystemFileReader::convert_units(const std::string_view source_units,
+                                            SizeUnit               target_units,
+                                            std::size_t            value) {
+    // Convert input units to lowercase string
+    std::string units = tolower(source_units);
+
+    // Normalize units into SizeUnit enum
+    auto to_enum = [](const std::string& u) -> SizeUnit {
+        if (u == "b" || u == "byte" || u == "bytes") {
+            return SizeUnit::BYTES;
+        }
+        if (u == "kb" || u == "kbyte" || u == "kbytes" || u == "kilobyte" || u == "kilobytes") {
+            return SizeUnit::KBYTES;
+        }
+        if (u == "mb" || u == "mbyte" || u == "mbytes" || u == "megabyte" || u == "megabytes") {
+            return SizeUnit::MBYTES;
+        }
+        if (u == "gb" || u == "gbyte" || u == "gbytes" || u == "gigabyte" || u == "gigabytes") {
+            return SizeUnit::GBYTES;
+        }
+
+        // Unknown unit → treat as bytes, but you may throw if desired
+        return SizeUnit::BYTES;
+    };
+
+    SizeUnit from = to_enum(units);
+
+    // Step difference between enum values
+    auto unit_order = [](SizeUnit u) {
+        switch (u) {
+        case SizeUnit::BYTES:
+            return 0;
+        case SizeUnit::KBYTES:
+            return 1;
+        case SizeUnit::MBYTES:
+            return 2;
+        case SizeUnit::GBYTES:
+            return 3;
+        }
+        return 0;
+    };
+
+    int diff = unit_order(from) - unit_order(target_units);
+
+    if (diff == 0) {
+        return value;
+    } else if (diff > 0) {
+        // Convert larger → smaller (e.g. MB → B)
+        return value << (10 * diff);
+    } else {
+        // Convert smaller → larger (e.g. B → KB)
+        return value >> (10 * (-diff));
+    }
 }
 
 
