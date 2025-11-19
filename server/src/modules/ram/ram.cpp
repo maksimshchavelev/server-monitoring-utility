@@ -68,12 +68,12 @@ std::optional<std::vector<uint8_t>> RAM::get_data() {
     // Ram info
     const std::size_t totalram_mb = meminfo["MemTotal"] / 1024 / 1024;
     const std::size_t usedram_mb = totalram_mb - meminfo["MemAvailable"] / 1024 / 1024;
-    const std::size_t usedram_percents = usedram_mb * 100 / totalram_mb;
+    const std::size_t usedram_percents = totalram_mb == 0 ? 0 : usedram_mb * 100 / totalram_mb;
 
     // Swap info
     const std::size_t totalswap_mb = meminfo["SwapTotal"] / 1024 / 1024;
     const std::size_t usedswap_mb = totalswap_mb - meminfo["SwapFree"] / 1024 / 1024;
-    const std::size_t usedswap_percents = usedswap_mb * 100 / totalswap_mb;
+    const std::size_t usedswap_percents = totalswap_mb == 0 ? 0 : usedswap_mb * 100 / totalswap_mb;
 
 
     auto root = make_root_node(make_container_node("RAM info",
