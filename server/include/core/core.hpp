@@ -12,3 +12,4 @@
 #include "internals/module_registrar.hpp"
 #include "internals/app.hpp"
 #include "internals/metric_constructor.hpp"
+#include "internals/system_file_reader.hpp"
