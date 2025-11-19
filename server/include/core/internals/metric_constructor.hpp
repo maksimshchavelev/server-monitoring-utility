@@ -86,7 +86,7 @@ inline auto make_value_node(const std::string& metric_name,
     std::string l_metric_value;
 
     // If ValueType is a number, convert it to a string
-    if constexpr (std::is_arithmetic_v<ValueType>) {
+    if constexpr (std::is_arithmetic_v<std::remove_cvref_t<ValueType>>) {
         l_metric_value = std::to_string(metric_value);
     } else {
         l_metric_value = std::forward<ValueType>(metric_value);
